@@ -1,0 +1,105 @@
+{
+  "version": "v1",
+  "config": {
+    "visState": {
+      "layers": [
+        {
+          "id": "ct-replacement-rate",
+          "type": "geojson",
+          "config": {
+            "dataId": "ct_factor_diagnostics_kepler_2026-03-06",
+            "label": "CT Replacement Rate (2019+)",
+            "color": [34, 138, 230],
+            "columns": {
+              "geojson": "_geojson"
+            },
+            "isVisible": true,
+            "visConfig": {
+              "opacity": 0.72,
+              "thickness": 0.5,
+              "strokeColor": [40, 50, 70],
+              "colorRange": {
+                "name": "Global Warming",
+                "type": "sequential",
+                "category": "Uber",
+                "colors": ["#5A1846", "#900C3F", "#C70039", "#E3611C", "#F1920E", "#FFC300"]
+              },
+              "strokeColorRange": {
+                "name": "Global Warming",
+                "type": "sequential",
+                "category": "Uber",
+                "colors": ["#5A1846", "#900C3F", "#C70039", "#E3611C", "#F1920E", "#FFC300"]
+              },
+              "radius": 10,
+              "sizeRange": [0, 10],
+              "radiusRange": [0, 50],
+              "heightRange": [0, 500],
+              "elevationScale": 1,
+              "enableElevationZoomFactor": true,
+              "stroked": true,
+              "filled": true,
+              "enable3d": false,
+              "wireframe": false
+            },
+            "textLabel": [
+              {
+                "field": null,
+                "color": [255, 255, 255],
+                "size": 18,
+                "offset": [0, 0],
+                "anchor": "start",
+                "alignment": "center"
+              }
+            ]
+          },
+          "visualChannels": {
+            "colorField": {
+              "name": "replacement_rate",
+              "type": "real"
+            },
+            "colorScale": "quantile"
+          }
+        }
+      ],
+      "interactionConfig": {
+        "tooltip": {
+          "fieldsToShow": {
+            "ct_factor_diagnostics_kepler_2026-03-06": [
+              "ct_uid_code",
+              "active_lead_count",
+              "replaced_since_2019",
+              "replacement_rate",
+              "impacted_people_est",
+              "impacted_children_0_14_est",
+              "tenure_renter_pct",
+              "lim_at_prevalence_pct",
+              "unemployment_rate_pct",
+              "geometry_match_type"
+            ]
+          },
+          "enabled": true
+        }
+      }
+    },
+    "mapState": {
+      "bearing": 0,
+      "dragRotate": false,
+      "latitude": 50.45,
+      "longitude": -104.62,
+      "pitch": 0,
+      "zoom": 11
+    },
+    "mapStyle": {
+      "styleType": "dark",
+      "visibleLayerGroups": {
+        "label": true,
+        "road": true,
+        "border": false,
+        "building": true,
+        "water": true,
+        "land": true,
+        "3d building": false
+      }
+    }
+  }
+}
