@@ -1,10 +1,17 @@
 {
-  "generated_at": "2026-03-06T02:11:07.376489Z",
-  "current_count": 1000,
+  "generated_at": "2026-03-06T04:59:01.248598+00:00",
+  "current_count": 98976,
   "snapshot_count": 89327,
-  "inferred_count": 133,
+  "common_gisid_count": 86893,
+  "inferred_count_broad": 3928,
+  "inferred_count_strict": 1349,
+  "reason_counts": {
+    "material_changed_from_lead": 1349,
+    "lead_with_updated_record": 2579
+  },
   "notes": [
-    "Inferred replacements are derived from snapshot vs current GISID material/date changes.",
-    "This is an inferred analytic, not an official replacement-event ledger."
+    "Broad inferred set includes lead_with_updated_record for legacy continuity.",
+    "Strict inferred set includes only snapshot lead -> current non-lead material changes.",
+    "This is inferred analytics, not an official city replacement-event ledger."
   ]
 }

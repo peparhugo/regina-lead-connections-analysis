@@ -1,0 +1,8 @@
+year,city_reported_replacements,strict_inferred_replacements,delta_strict_minus_city,coverage_note
+2017,109,44,-65,full_year
+2018,144,62,-82,full_year
+2019,180,93,-87,full_year
+2020,118,185,67,full_year
+2021,193,162,-31,full_year
+2022,233,78,-155,full_year
+2023,207,133,-74,first_7_months

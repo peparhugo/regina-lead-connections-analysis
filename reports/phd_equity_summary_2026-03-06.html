@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Regina Lead Connections — Equity & Prioritization Research Brief</title>
+  <style>
+    body { font-family: Inter, system-ui, Arial, sans-serif; margin: 0; background: #0b1220; color: #e6edf3; }
+    main { max-width: 980px; margin: 0 auto; padding: 20px; }
+    .card { background: #121c2e; border: 1px solid #24324a; border-radius: 10px; padding: 14px; margin-bottom: 14px; }
+    code { color: #cde7ff; }
+    a { color: #7cc4ff; }
+    h1, h2 { margin: 0 0 10px 0; }
+    ul { margin-top: 6px; }
+    .small { opacity: .85; font-size: .92rem; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Regina Lead Connections — Equity & Prioritization Research Brief</h1>
+  <p class="small">Date: 2026-03-06 • Status: Phase 1 quantitative baseline (preliminary, reproducible)</p>
+
+  <section class="card">
+    <h2>Executive summary</h2>
+    <ul>
+      <li>We now publish two GIS metrics: <strong>Strict inferred replacements</strong> (Pb→non-Pb only) and <strong>Broad inferred activity</strong> (includes lead records with update changes).</li>
+      <li>Current strict inferred total is <strong>1,349</strong>, broadly consistent in scale with city-reported progress context.</li>
+      <li>At area-level, strict inferred replacement rate is <strong>positively associated</strong> with lead burden (higher lead% areas show higher replacement rates in this snapshot).</li>
+      <li>This does <strong>not</strong> prove causal fairness; it is an observational signal from public layer states.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>What we tested today</h2>
+    <ul>
+      <li>Joined strict inferred replacements by area to City LeadConnectionAreas burden fields.</li>
+      <li>Computed area metric: <code>strict_replacements / current_lead_total</code>.</li>
+      <li>Assessed relationship against area lead burden (<code>Lead_Per</code>).</li>
+    </ul>
+    <p><strong>Results (n=14 areas):</strong><br/>
+      Pearson r ≈ <strong>0.574</strong><br/>
+      Spearman ρ ≈ <strong>0.714</strong>
+    </p>
+    <p class="small">Interpretation: in this snapshot, replacement activity appears concentrated more in higher-burden areas, not lower-burden areas.</p>
+  </section>
+
+  <section class="card">
+    <h2>Priority concerns requested by Pepar (active workstream)</h2>
+    <ul>
+      <li>Renter vs homeowner patterns</li>
+      <li>Demographic differences (including Indigenous identity indicators where available at aggregate geography)</li>
+      <li>Income gradients and potential affluent-area priority effects</li>
+      <li>Program structure confounders (city-owned vs private-side replacement pathways)</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Data limitations (current)</h2>
+    <ul>
+      <li>No direct owner/renter flag in the public lead service line layer used for strict counts.</li>
+      <li>No person-level demographic data should be used; all equity work must stay at aggregate census geography.</li>
+      <li>City-reported annual totals are the official program metric; GIS-derived counts are analytic estimates.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Next research steps (P0)</h2>
+    <ol>
+      <li>Build CT/DA panel with replacement intensity + census covariates (tenure, income, low-income, Indigenous identity where public aggregate tables permit).</li>
+      <li>Run significance tests and model checks (rank tests + robust regression with uncertainty notes).</li>
+      <li>Publish methods + reproducibility appendix and a plain-language equity summary page.</li>
+    </ol>
+    <p class="small">Derived artifact for this step: <code>data/derived/area_priority_signals.csv</code></p>
+  </section>
+
+  <section class="card small">
+    Sources: City LeadConnectionAreas map service, inferred replacement artifacts in this repo,
+    and city benchmark table <code>data/derived/city_reported_replacements_annual.csv</code>.
+  </section>
+</main>
+</body>
+</html>
