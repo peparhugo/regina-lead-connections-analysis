@@ -1,0 +1,9 @@
+priority,topic,indicator_name,status,source_surface,endpoint_or_catalogue,geography_target,notes
+P0,tenure,Owner vs renter households,pending_table_pin,StatsCan Data Catalogue,https://www150.statcan.gc.ca/n1/en/type/data,"CT, DA",Pin exact table IDs/variable IDs during extraction pass
+P0,income,Median after-tax household income,pending_table_pin,StatsCan Data Catalogue,https://www150.statcan.gc.ca/n1/en/type/data,"CT, DA",Prefer same census year as tenure variables
+P0,income,Low-income counts/rates,pending_table_pin,StatsCan Data Catalogue,https://www150.statcan.gc.ca/n1/en/type/data,"CT, DA",Keep denominator columns for rate calculations
+P0,indigenous,Indigenous identity aggregate indicator(s),pending_table_pin,StatsCan Data Catalogue,https://www150.statcan.gc.ca/n1/en/type/data,"CT, DA",Aggregate-only usage; no person-level inference
+P1,demographics,Age structure controls,pending_table_pin,StatsCan Data Catalogue,https://www150.statcan.gc.ca/n1/en/type/data,"CT, DA",Optional control variables for robustness
+P1,housing,Dwelling counts/structure,pending_table_pin,StatsCan Data Catalogue,https://www150.statcan.gc.ca/n1/en/type/data,"CT, DA",Useful as scaling controls
+Existing scaffold,profile API,CR2016Geo geography listing,available,StatsCan REST,https://www12.statcan.gc.ca/rest/census-recensement/CR2016Geo.json,CT,Used in legacy scaffold script
+Existing scaffold,profile API,CPR2016 profile pull by DGUID,available,StatsCan REST,https://www12.statcan.gc.ca/rest/census-recensement/CPR2016.json,CT,Used in legacy scaffold script

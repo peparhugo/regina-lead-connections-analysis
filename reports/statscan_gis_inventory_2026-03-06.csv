@@ -1,0 +1,7 @@
+priority,asset,status,source,url,geography,format_or_access,notes
+P0,CT boundary files (catalogue),available,StatsCan,https://www150.statcan.gc.ca/n1/en/catalogue/92-168-X,CT,Catalogue page,Includes links to census-year-specific boundary downloads
+P0,CT boundaries 2021 landing,available,StatsCan,https://www12.statcan.gc.ca/census-recensement/2021/geo/sip-pis/boundary-limites/index-eng.cfm,CT,Download page,Use for latest CT boundary reference
+P0,CT boundaries 2016 landing,available,StatsCan,https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/bound-limit-eng.cfm,CT,Download page,Legacy link used by catalogue entry
+P0,StatsCan ArcGIS geometry service (used in scaffold),available,StatsCan GeoProd,https://geoprod.statcan.gc.ca/arcgis/rest/services/MD2DM2016_2021/MapServer/11/query,CT,ArcGIS REST query,Used in prior script to fetch geometry by DGUID
+P1,DA boundaries,pending_pin,StatsCan catalogue,https://www150.statcan.gc.ca/n1/en/type/data,DA,Catalogue discovery,Pin exact DA boundary product URL in extraction step
+P1,Coordinate reference metadata,available,StatsCan,https://www150.statcan.gc.ca/n1/en/catalogue/92-168-X,CT,Documentation,Notes Lambert conformal conic / NAD83 context
