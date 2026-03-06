@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Regina Lead Service Connections — Analysis Map</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    body { font-family: Inter, system-ui, Arial, sans-serif; margin: 0; background: #0b1220; color: #e6edf3; }
+    header { padding: 16px 20px; border-bottom: 1px solid #233047; }
+    .container { display: grid; grid-template-columns: 1.2fr 1fr; gap: 14px; padding: 14px; }
+    .panel { background: #121c2e; border: 1px solid #24324a; border-radius: 10px; padding: 12px; }
+    #map { height: 72vh; border-radius: 8px; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 10px; }
+    .card { background:#0f1726; border:1px solid #24324a; border-radius:8px; padding:10px; }
+    .v { font-size: 1.4rem; font-weight:700; }
+    .k { color:#9bb1cf; font-size:.86rem; }
+    a { color: #7cc4ff; }
+    @media (max-width: 1000px) { .container { grid-template-columns: 1fr; } .cards { grid-template-columns: 1fr 1fr; } }
+  </style>
+</head>
+<body>
+<header>
+  <h2 style="margin:0">Regina Lead Service Connections — Public Analysis Map</h2>
+  <div style="opacity:.85;font-size:.9rem">Created by OpenClaw • Data: Regina ArcGIS/OpenGIS</div>
+</header>
+<div class="container">
+  <section class="panel">
+    <div id="map"></div>
+  </section>
+  <section class="panel">
+    <div class="cards">
+      <div class="card"><div class="k">Community Areas</div><div class="v" id="areas">-</div></div>
+      <div class="card"><div class="k">Total Connections</div><div class="v" id="total">-</div></div>
+      <div class="card"><div class="k">Lead Connections</div><div class="v" id="lead">-</div></div>
+    </div>
+    <canvas id="timeline" height="170"></canvas>
+    <p style="font-size:.85rem;opacity:.86">
+      <strong>Map source:</strong> <a target="_blank" href="https://opengis.regina.ca/arcgis/rest/services/CGISViewer/LeadConnectionAreas/MapServer/0">LeadConnectionAreas/0</a><br/>
+      <strong>City page:</strong> <a target="_blank" href="https://www.regina.ca/home-property/water/water/lead-service-connections/">Lead Service Connections</a>
+    </p>
+  </section>
+</div>
+<script>
+const map = L.map('map').setView([50.4452, -104.6189], 11);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap contributors' }).addTo(map);
+
+const geoUrl = 'https://opengis.regina.ca/arcgis/rest/services/CGISViewer/LeadConnectionAreas/MapServer/0/query?where=1%3D1&outFields=NAME%2CWC_Total%2CLead_Total%2CLead_Per&f=geojson';
+
+function color(p){
+  return p > 15 ? '#7f1d1d' : p > 10 ? '#b91c1c' : p > 7 ? '#dc2626' : p > 5 ? '#f97316' : p > 3 ? '#f59e0b' : '#22c55e';
+}
+
+fetch(geoUrl)
+  .then(r => r.json())
+  .then(g => {
+    let total=0, lead=0;
+    g.features.forEach(f => { total += Number(f.properties.WC_Total||0); lead += Number(f.properties.Lead_Total||0); });
+    document.getElementById('areas').textContent = g.features.length;
+    document.getElementById('total').textContent = total.toLocaleString();
+    document.getElementById('lead').textContent = lead.toLocaleString();
+
+    L.geoJSON(g, {
+      style: f => ({ color:'#334155', weight:1, fillColor: color(Number(f.properties.Lead_Per||0)), fillOpacity:.70 }),
+      onEachFeature: (f,l) => {
+        l.bindPopup(`<b>${f.properties.NAME}</b><br/>Lead %: ${Number(f.properties.Lead_Per||0).toFixed(2)}%<br/>Lead: ${f.properties.Lead_Total||0}<br/>Total: ${f.properties.WC_Total||0}`)
+      }
+    }).addTo(map);
+  });
+
+new Chart(document.getElementById('timeline'), {
+  type: 'line',
+  data: {
+    labels: ['2019 discovery', '2021 revised plan', '2025 reported remaining'],
+    datasets: [{
+      label: 'City-owned lead connections (reported milestones)',
+      data: [3600, 3600, 2400],
+      borderColor: '#60a5fa', backgroundColor: 'rgba(96,165,250,.2)', tension:.25
+    }]
+  },
+  options: {
+    plugins: { legend: { labels: { color: '#dbeafe' } } },
+    scales: { x: { ticks: { color:'#94a3b8' } }, y: { ticks: { color:'#94a3b8' } } }
+  }
+});
+</script>
+</body>
+</html>
