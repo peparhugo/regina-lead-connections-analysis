@@ -1,0 +1,1181 @@
+{
+  "query": "childhood lead exposure long-term cognitive cardiovascular kidney outcomes economic cost",
+  "generated_at": "2026-03-06T03:58:45.570065+00:00",
+  "papers": [
+    {
+      "source": "openalex",
+      "title": "Global, regional, and national incidence, prevalence, and years lived with disability for 328 diseases and injuries for 195 countries, 1990–2016: a systematic analysis for the Global Burden of Disease Study 2016",
+      "authors": [
+        "Theo Vos",
+        "Amanuel Alemu Abajobir",
+        "Kalkidan Hassen Abate",
+        "Cristiana Abbafati",
+        "Kaja Abbas",
+        "Foad Abd-Allah",
+        "Rizwan Suliankatchi Abdulkader",
+        "Abdishakur Abdulle",
+        "Teshome Abuka Abebo",
+        "Semaw Ferede Abera",
+        "Victor Aboyans",
+        "Laith J. Abu‐Raddad",
+        "Ilana N. Ackerman",
+        "Abdu A. Adamu",
+        "Olatunji Adetokunboh",
+        "Mohsen Afarideh",
+        "Ashkan Afshin",
+        "Sanjay Agarwal",
+        "Rakesh Aggarwal",
+        "Anurag Agrawal",
+        "Sutapa Agrawal",
+        "Hamid Ahmadieh",
+        "Muktar Beshir Ahmed",
+        "Miloud Taki Eddine Aichour",
+        "Amani Nidhal Aichour",
+        "Ibtihel Aichour",
+        "Sneha Aiyar",
+        "Rufus Akinyemi",
+        "Nadia Akseer",
+        "Faris Lami",
+        "Fares Alahdab",
+        "Ziyad Al‐Aly",
+        "Khurshid Alam",
+        "Noore Alam",
+        "Shazia Alam",
+        "Deena Alasfoor",
+        "Kefyalew Addis Alene",
+        "Raghib Ali",
+        "Reza Alizadeh‐Navaei",
+        "Ala’a Alkerwi",
+        "François Alla",
+        "Peter Allebeck",
+        "Christine A. Allen",
+        "Fatma Al‐Maskari",
+        "Rajaa Al‐Raddadi",
+        "Ubai Alsharif",
+        "Shirina Alsowaidi",
+        "Khalid A Altirkawi",
+        "Azmeraw T. Amare",
+        "Erfan Amini",
+        "Walid Ammar",
+        "Yaw Ampem Amoako",
+        "Hjalte Holm Andersen",
+        "Carl Abelardo T. Antonio",
+        "Palwasha Anwari",
+        "Johan Ärnlöv",
+        "Al Artaman",
+        "Krishna Kumar Aryal",
+        "Hamid Asayesh",
+        "Solomon Weldegebreal Asgedom",
+        "Reza Assadi",
+        "Tesfay Mehari Atey",
+        "Niguse Tadele Atnafu",
+        "Sachin Atre",
+        "Leticia Ávila‐Burgos",
+        "Euripide Frinel G Arthur Avokphako",
+        "Ashish Awasthi",
+        "Umar Bacha",
+        "Alaa Badawi",
+        "Kalpana Balakrishnan",
+        "Amitava Banerjee",
+        "Marlena S. Bannick",
+        "Aleksandra Barać",
+        "Ryan M Barber",
+        "Suzanne Barker‐Collo",
+        "Till Bärnighausen",
+        "Sı́món Barquera",
+        "Lars Barregård",
+        "Lope H. Barrero",
+        "Sanjay Basu",
+        "Bob Battista",
+        "Katherine E. Battle",
+        "Bernhard T. Baune",
+        "Shahrzad Bazargan‐Hejazi",
+        "Justin Beardsley",
+        "Neeraj Bedi",
+        "Ettore Beghi",
+        "Yannick Béjot",
+        "Bayu Begashaw Bekele",
+        "Michelle L. Bell",
+        "Derrick Bennett",
+        "Isabela M. Benseñor",
+        "Jennifer Benson",
+        "Adugnaw Berhane",
+        "Derbew Fikadu Berhe",
+        "Eduardo Bernabé",
+        "Balem Demtsu Betsu",
+        "Mircea Beuran",
+        "Addisu Shunu Beyene",
+        "Neeraj Bhala"
+      ],
+      "year": 2017,
+      "doi": "10.1016/s0140-6736(17)32154-2",
+      "doi_url": "https://doi.org/10.1016/s0140-6736(17)32154-2",
+      "url": "https://doi.org/10.1016/s0140-6736(17)32154-2",
+      "abstract": null,
+      "citation_count": 13350,
+      "oa": {
+        "openalex": {
+          "is_oa": true,
+          "landing_page": "https://doi.org/10.1016/s0140-6736(17)32154-2",
+          "pdf_url": "http://www.thelancet.com/article/S0140673617321542/pdf"
+        }
+      }
+    },
+    {
+      "source": "openalex",
+      "title": "European Guidelines on cardiovascular disease prevention in clinical practice (version 2012): The Fifth Joint Task Force of the European Society of Cardiology and Other Societies on Cardiovascular Disease Prevention in Clinical Practice (constituted by representatives of nine societies and by invited experts) * Developed with the special contribution of the European Association for Cardiovascular Prevention &amp; Rehabilitation (EACPR)",
+      "authors": [
+        "Joep Perk",
+        "Guy De Backer",
+        "H. Gohlke",
+        "Ian Graham",
+        "Željko Reiner",
+        "Monique Verschuren",
+        "Christian Albus",
+        "Pascale Benlian",
+        "G. Boysen",
+        "Renata Cífková",
+        "Christi Deaton",
+        "S. Ebrahim",
+        "Michael Fisher",
+        "Giuseppe Germanò",
+        "Richard Hobbs",
+        "A. Hoes",
+        "S. Karadeniz",
+        "Alessandro Mezzani",
+        "Eva Prescott",
+        "Lars Rydén",
+        "M. Scherer",
+        "Mikko Syvänne",
+        "Wilma J.M. Scholte op Reimer",
+        "Christian Vrints",
+        "David Wood",
+        "José Luis Zamorano",
+        "F Zannad",
+        "Marie Therese Cooney",
+        "Jeroen J. Bax",
+        "H. Baumgartner",
+        "Claudio Ceconi",
+        "V. Dean",
+        "Christi Deaton",
+        "Robert Fagard",
+        "Christian Funck‐Brentano",
+        "David Hasdai",
+        "A. Hoes",
+        "Paulus Kirchhof",
+        "Juhani Knuuti",
+        "Philippe Kolh",
+        "Theresa A. McDonagh",
+        "Bruno Moulin",
+        "Bogdan A. Popescu",
+        "Z. Reiner",
+        "U Sechtem",
+        "P. A. Sirnes",
+        "Michał Tendera",
+        "Adam Torbicki",
+        "A. Vahanian",
+        "Stephan Windecker",
+        "Christian Funck‐Brentano",
+        "P. A. Sirnes",
+        "Victor Aboyans",
+        "Eduardo Alegría Ezquerra",
+        "Colin Baigent",
+        "Carlos Brotons",
+        "G. Burell",
+        "Antonio Ceriello",
+        "Johan De Sutter",
+        "J. Deckers",
+        "Stefano Del Prato",
+        "H.‐C. Diener",
+        "Donna Fitzsimons",
+        "Zlatko Fras",
+        "Rainer Hambrecht",
+        "Piotr Jankowski",
+        "U Keil",
+        "Mike Kirby",
+        "Mogens Lytken Larsen",
+        "Giuseppe Mancia",
+        "Athanasios Manolis",
+        "John J.V. McMurray",
+        "A. Pajak",
+        "Alexander Parkhomenko",
+        "Loukianos Rallidis",
+        "Fausto Rigo",
+        "Evangelista Rocha",
+        "Luís M. Ruilope",
+        "Enno T. van der Velde",
+        "Diego Vanuzzo",
+        "Margus Viigimaa",
+        "Massimo Volpe",
+        "Olov Wiklund",
+        "Christian Wolpert",
+        "M. Volpe",
+        "O. Wiklund",
+        "C. Wolpert"
+      ],
+      "year": 2012,
+      "doi": "10.1093/eurheartj/ehs092",
+      "doi_url": "https://doi.org/10.1093/eurheartj/ehs092",
+      "url": "https://doi.org/10.1093/eurheartj/ehs092",
+      "abstract": null,
+      "citation_count": 8496,
+      "oa": {
+        "openalex": {
+          "is_oa": true,
+          "landing_page": "https://doi.org/10.1093/eurheartj/ehs092",
+          "pdf_url": "https://academic.oup.com/eurheartj/article-pdf/33/13/1635/17893548/ehs092.pdf"
+        }
+      }
+    },
+    {
+      "source": "openalex",
+      "title": "Standards of Medical Care in Diabetes—2013",
+      "authors": [],
+      "year": 2012,
+      "doi": "10.2337/dc13-s011",
+      "doi_url": "https://doi.org/10.2337/dc13-s011",
+      "url": "https://doi.org/10.2337/dc13-s011",
+      "abstract": null,
+      "citation_count": 4419,
+      "oa": {
+        "openalex": {
+          "is_oa": true,
+          "landing_page": "https://doi.org/10.2337/dc13-s011",
+          "pdf_url": "https://care.diabetesjournals.org/content/diacare/36/Supplement_1/S11.full.pdf"
+        }
+      }
+    },
+    {
+      "source": "openalex",
+      "title": "ESC/EAS Guidelines for the management of dyslipidaemias: The Task Force for the management of dyslipidaemias of the European Society of Cardiology (ESC) and the European Atherosclerosis Society (EAS)",
+      "authors": [
+        "Željko Reiner",
+        "Alberico L. Catapano",
+        "Guy De Backer",
+        "Ian Graham",
+        "Marja‐Riitta Taskinen",
+        "Olov Wiklund",
+        "Stefan Agewall",
+        "E Alegría",
+        "M. John Chapman",
+        "Paul N. Durrington",
+        "Serap Erdine",
+        "Julian Halcox",
+        "Richard Hobbs",
+        "John Kjekshus",
+        "Pasquale Perrone Filardi",
+        "Gabriele Riccardi",
+        "Robert F. Storey",
+        "David M. Wood",
+        "Jeroen J. Bax",
+        "A. Vahanian",
+        "A Auricchio",
+        "Helmut Baumgartner",
+        "Claudio Ceconi",
+        "V. Dean",
+        "Christi Deaton",
+        "Robert Fagard",
+        "Gerasimos Filippatos",
+        "Christian Funck‐Brentano",
+        "David Hasdai",
+        "Richard Hobbs",
+        "Arno W. Hoes",
+        "Patricia M. Kearney",
+        "Juhani Knuuti",
+        "Philippe Kolh",
+        "T. McDonagh",
+        "Bruno Moulin",
+        "D Poldermans",
+        "Bogdan A. Popescu",
+        "Željko Reiner",
+        "Udo Sechtem",
+        "P. A. Sirnes",
+        "Michał Tendera",
+        "Adam Torbicki",
+        "P. Vardas",
+        "P. Widimsky",
+        "Stephan Windecker",
+        "Document Reviewers",
+        "Christian Funck‐Brentano",
+        "D Poldermans",
+        "G. Berkenboom",
+        "Jacqueline de Graaf",
+        "Olivier Descamps",
+        "Nina Gotcheva",
+        "K. Griffith",
+        "Giuseppe Guida",
+        "Sadi Güleç",
+        "Y Henkin",
+        "Kurt Huber",
+        "Y. Antero Kesäniemi",
+        "J. Lekakis",
+        "Athanasios Manolis",
+        "Pedro Marques‐Vidal",
+        "L. Masana",
+        "John J.V. McMurray",
+        "Eugénia Mendes",
+        "Zurab Pagava",
+        "Terje Pedersen",
+        "Eva Prescott",
+        "Quitéria Rato",
+        "Giuseppe Rosano",
+        "Susana Sans",
+        "A. Stalenhoef",
+        "Lâle Tokgözoğlu",
+        "Margus Viigimaa",
+        "M. E. Wittekoek",
+        "José Luis Zamorano",
+        "J. L. Zamorano"
+      ],
+      "year": 2011,
+      "doi": "10.1093/eurheartj/ehr158",
+      "doi_url": "https://doi.org/10.1093/eurheartj/ehr158",
+      "url": "https://doi.org/10.1093/eurheartj/ehr158",
+      "abstract": null,
+      "citation_count": 3527,
+      "oa": {
+        "openalex": {
+          "is_oa": true,
+          "landing_page": "https://doi.org/10.1093/eurheartj/ehr158",
+          "pdf_url": "https://academic.oup.com/eurheartj/article-pdf/32/14/1769/17892982/ehr158.pdf"
+        }
+      }
+    },
+    {
+      "source": "openalex",
+      "title": "Global strategy for asthma management and prevention: GINA executive summary",
+      "authors": [
+        "Eric D. Bateman",
+        "Suzanne S. Hurd",
+        "Peter J. Barnes",
+        "Jean Bousquet",
+        "Jeffrey M. Drazen",
+        "Mark Fitzgerald",
+        "Peter G. Gibson",
+        "K. Ohta",
+        "Paul M. O’Byrne",
+        "Søren Pedersen",
+        "Emílio Pizzichini",
+        "Sharon Sullivan-Rubin",
+        "Sally E. Wenzel",
+        "Heather J. Zar"
+      ],
+      "year": 2007,
+      "doi": "10.1183/09031936.00138707",
+      "doi_url": "https://doi.org/10.1183/09031936.00138707",
+      "url": "https://doi.org/10.1183/09031936.00138707",
+      "abstract": null,
+      "citation_count": 3210,
+      "oa": {
+        "openalex": {
+          "is_oa": true,
+          "landing_page": "https://doi.org/10.1183/09031936.00138707",
+          "pdf_url": "https://erj.ersjournals.com/content/erj/31/1/143.full.pdf"
+        }
+      }
+    },
+    {
+      "source": "openalex",
+      "title": "Interventions for preventing obesity in children",
+      "authors": [
+        "Tamara Brown",
+        "Theresa HM Moore",
+        "Lee Hooper",
+        "Yang Gao",
+        "Amir Zayegh",
+        "Sharea Ijaz",
+        "Martha Elwenspoek",
+        "Sophie C Foxen",
+        "Lucia Magee",
+        "Claire O’Malley",
+        "Elizabeth Waters",
+        "Carolyn Summerbell"
+      ],
+      "year": 2019,
+      "doi": "10.1002/14651858.cd001871.pub4",
+      "doi_url": "https://doi.org/10.1002/14651858.cd001871.pub4",
+      "url": "https://doi.org/10.1002/14651858.cd001871.pub4",
+      "abstract": null,
+      "citation_count": 3005,
+      "oa": {
+        "openalex": {
+          "is_oa": true,
+          "landing_page": "https://doi.org/10.1002/14651858.cd001871.pub4",
+          "pdf_url": "https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD001871.pub4/pdf/full"
+        }
+      }
+    },
+    {
+      "source": "openalex",
+      "title": "Standards of Medical Care in Diabetes—2011",
+      "authors": [],
+      "year": 2010,
+      "doi": "10.2337/dc11-s011",
+      "doi_url": "https://doi.org/10.2337/dc11-s011",
+      "url": "https://doi.org/10.2337/dc11-s011",
+      "abstract": null,
+      "citation_count": 2878,
+      "oa": {
+        "openalex": {
+          "is_oa": true,
+          "landing_page": "https://doi.org/10.2337/dc11-s011",
+          "pdf_url": "https://diabetesjournals.org/care/article-pdf/34/Supplement_1/S11/477902/zdc10111000s11.pdf"
+        }
+      }
+    },
+    {
+      "source": "openalex",
+      "title": "Racism as a Determinant of Health: A Systematic Review and Meta-Analysis",
+      "authors": [
+        "Yin Paradies",
+        "Jehonathan Ben",
+        "Nida Denson",
+        "Amanuel Elias",
+        "Naomi Priest",
+        "Alex L. Pieterse",
+        "Arpana Gupta",
+        "Margaret Kelaher",
+        "Gilbert C. Gee"
+      ],
+      "year": 2015,
+      "doi": "10.1371/journal.pone.0138511",
+      "doi_url": "https://doi.org/10.1371/journal.pone.0138511",
+      "url": "https://doi.org/10.1371/journal.pone.0138511",
+      "abstract": null,
+      "citation_count": 2499,
+      "oa": {
+        "openalex": {
+          "is_oa": true,
+          "landing_page": "https://doi.org/10.1371/journal.pone.0138511",
+          "pdf_url": "https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0138511&type=printable"
+        }
+      }
+    },
+    {
+      "source": "crossref",
+      "title": "Unilateral multicystic dysplastic kidney: long term outcomes",
+      "authors": [
+        "M Aslam"
+      ],
+      "year": 2006,
+      "doi": "10.1136/adc.2006.095786",
+      "doi_url": "https://doi.org/10.1136/adc.2006.095786",
+      "url": "https://doi.org/10.1136/adc.2006.095786",
+      "abstract": null,
+      "citation_count": 133,
+      "oa": {
+        "openalex": {
+          "is_oa": true,
+          "landing_page": "https://doi.org/10.1136/adc.2006.095786",
+          "pdf_url": "https://adc.bmj.com/content/archdischild/91/10/820.full.pdf"
+        }
+      }
+    },
+    {
+      "source": "crossref",
+      "title": "Long Reach of Lead: Early Childhood Lead Exposure and Cognitive Ability Later-in-Life",
+      "authors": [
+        "Christopher  James Keyes",
+        "Sammy Zahran",
+        "David Mushinski"
+      ],
+      "year": 2023,
+      "doi": "10.2139/ssrn.4462722",
+      "doi_url": "https://doi.org/10.2139/ssrn.4462722",
+      "url": "https://doi.org/10.2139/ssrn.4462722",
+      "abstract": null,
+      "citation_count": 1,
+      "oa": {
+        "openalex": {
+          "is_oa": true,
+          "landing_page": "http://dx.doi.org/10.2139/ssrn.4462722",
+          "pdf_url": null
+        }
+      }
+    },
+    {
+      "source": "europe_pmc",
+      "title": "Global Burden of Lead Exposure: Integrating Epidemiology, Molecular Mechanisms, and Mitigation Approaches",
+      "authors": [
+        "Bereda G."
+      ],
+      "year": 2026,
+      "doi": null,
+      "doi_url": null,
+      "url": null,
+      "abstract": null,
+      "citation_count": null,
+      "oa": {}
+    },
+    {
+      "source": "europe_pmc",
+      "title": "Unsafe drinking water and human health: A global umbrella review of disease outcomes, intervention effectiveness, and policy implications.",
+      "authors": [
+        "Li S",
+        "Wei Y",
+        "Zhou J",
+        "Li Y",
+        "Qiao L",
+        "You D",
+        "Jiang Y",
+        "Jiang Z",
+        "Wei X",
+        "Ma X."
+      ],
+      "year": 2026,
+      "doi": "10.1016/j.xcrm.2026.102588",
+      "doi_url": "https://doi.org/10.1016/j.xcrm.2026.102588",
+      "url": "41643660",
+      "abstract": null,
+      "citation_count": null,
+      "oa": {
+        "openalex": {
+          "is_oa": true,
+          "landing_page": "https://doi.org/10.1016/j.xcrm.2026.102588",
+          "pdf_url": null
+        }
+      }
+    },
+    {
+      "source": "europe_pmc",
+      "title": "Impact of Vaccines Across the Lifespan: A New Perspective in Public Health-Conclusions of an Expert Panel-Part 1.",
+      "authors": [
+        "Debbag R",
+        "Ávila-Agüero ML",
+        "Brea J",
+        "Espinal C",
+        "Romero-Feregrino R",
+        "Torres JR",
+        "Vázquez H",
+        "Cuadros R",
+        "Lazo-Páez G",
+        "Schilling A",
+        "Bonvehí P",
+        "Kairalla M",
+        "Rodríguez-Morales AJ."
+      ],
+      "year": 2026,
+      "doi": "10.3390/vaccines14020183",
+      "doi_url": "https://doi.org/10.3390/vaccines14020183",
+      "url": "41746103",
+      "abstract": null,
+      "citation_count": null,
+      "oa": {
+        "openalex": {
+          "is_oa": true,
+          "landing_page": "https://doi.org/10.3390/vaccines14020183",
+          "pdf_url": "https://www.mdpi.com/2076-393X/14/2/183/pdf?version=1771157654"
+        }
+      }
+    },
+    {
+      "source": "europe_pmc",
+      "title": "Analysis of the relationship between early adverse childhood experiences and late-life health poverty vulnerability among rural middle-aged and elderly people in Ningxia: the mediating effect of chronic diseases and their comorbidities.",
+      "authors": [
+        "Chang J",
+        "Zhang F",
+        "Yang J",
+        "Meng H",
+        "Qiao H",
+        "Xie Y."
+      ],
+      "year": 2026,
+      "doi": "10.1186/s12889-026-26298-4",
+      "doi_url": "https://doi.org/10.1186/s12889-026-26298-4",
+      "url": "41572229",
+      "abstract": null,
+      "citation_count": null,
+      "oa": {
+        "openalex": {
+          "is_oa": true,
+          "landing_page": "https://doi.org/10.1186/s12889-026-26298-4",
+          "pdf_url": null
+        }
+      }
+    },
+    {
+      "source": "zenodo",
+      "title": "Effect of Lead Mining on the Arterial Blood Pressure of Mining Workers in Ameka Ezza South, Ebonyi State",
+      "authors": [
+        "Okike P.I",
+        "Edebiri O.E",
+        "Ozor M.O",
+        "Azunna U",
+        "Otoikhila O.C",
+        "Nze P.O."
+      ],
+      "year": 2026,
+      "doi": "10.5281/zenodo.18630453",
+      "doi_url": "https://doi.org/10.5281/zenodo.18630453",
+      "url": null,
+      "abstract": "<p><em><span lang=\"EN-US\">This study examines the arterial blood pressure effects of lead exposure on workers in the lead mining industry particularly in Ameka Ezza South, Ebonyi State. Lead, a toxic metal, has been linked to various health complications, particularly cardiovascular issues. This research aims to assess the impact of lead mining on the heart health of workers by analyzing the relationship between blood lead levels (BLLs) and cardiovascular conditions. A cross-sectional study was conducted at lead mining site in Ameka Ezza South Local Government Area, Ebonyi State involving both current and former workers with varying exposure durations. Blood lead concentrations were measured using atomic absorption spectrometry, while cardiovascular health was assessed through automatic sphygmomanometer, stethoscope, metallic jelly. Additionally, workers completed questionnaires regarding their work history and health status. Statistical analysis was performed to identify correlations between lead exposure and cardiovascular health outcomes. The results indicate a strong link between higher lead exposure and an increased risk of cardiovascular problems such as hypertension, increased atherosclerosis, endothelial dysfunction and arrhythmias. These findings highlight the need for enhanced safety protocols in lead mining operations to reduce workers' exposure and prevent long-term cardiovascular health risks. Regular health monitoring and protective measures are crucial to safeguard workers&rsquo; well-being.</span></em></p>",
+      "citation_count": null,
+      "oa": {
+        "openalex": {
+          "is_oa": true,
+          "landing_page": "https://doi.org/10.5281/zenodo.18630453",
+          "pdf_url": null
+        }
+      }
+    },
+    {
+      "source": "europe_pmc",
+      "title": "Environmental lead risk in the 21st century.",
+      "authors": [
+        "Chen M",
+        "Gazze L",
+        "DiTraglia FJ",
+        "Das R",
+        "Nriagu J",
+        "Erel Y",
+        "Boyle EA",
+        "Taylor CM",
+        "Weiss D."
+      ],
+      "year": 2025,
+      "doi": "10.1038/s43247-025-02735-x",
+      "doi_url": "https://doi.org/10.1038/s43247-025-02735-x",
+      "url": "41040643",
+      "abstract": null,
+      "citation_count": null,
+      "oa": {
+        "openalex": {
+          "is_oa": true,
+          "landing_page": "https://doi.org/10.1038/s43247-025-02735-x",
+          "pdf_url": null
+        }
+      }
+    },
+    {
+      "source": "europe_pmc",
+      "title": "Extreme weather and climate-related adverse childhood experiences are a humanitarian crisis during the 21st century.",
+      "authors": [
+        "Thapa S",
+        "Giri S",
+        "Ross AG."
+      ],
+      "year": 2025,
+      "doi": "10.1038/s43856-025-01089-x",
+      "doi_url": "https://doi.org/10.1038/s43856-025-01089-x",
+      "url": "40826225",
+      "abstract": null,
+      "citation_count": null,
+      "oa": {
+        "openalex": {
+          "is_oa": true,
+          "landing_page": "https://doi.org/10.1038/s43856-025-01089-x",
+          "pdf_url": "https://www.nature.com/articles/s43856-025-01089-x.pdf"
+        }
+      }
+    },
+    {
+      "source": "europe_pmc",
+      "title": "Beyond Calories: Addressing Micronutrient Deficiencies in the World's Most Vulnerable Communities-A Review.",
+      "authors": [
+        "Elegbeleye JA",
+        "Fayemi OE",
+        "Agbemavor WSK",
+        "Krishnamoorthy S",
+        "Adebowale OJ",
+        "Adeyanju AA",
+        "Mkhabela B",
+        "Bamidele OP."
+      ],
+      "year": 2025,
+      "doi": "10.3390/nu17243960",
+      "doi_url": "https://doi.org/10.3390/nu17243960",
+      "url": "41470905",
+      "abstract": null,
+      "citation_count": null,
+      "oa": {
+        "openalex": {
+          "is_oa": true,
+          "landing_page": "https://doi.org/10.3390/nu17243960",
+          "pdf_url": "https://www.mdpi.com/2072-6643/17/24/3960/pdf?version=1766067352"
+        }
+      }
+    },
+    {
+      "source": "europe_pmc",
+      "title": "Climate, Health, and Urban Green Infrastructure: The Evidence Base and Implications for Urban Policy and Spatial Planning.",
+      "authors": [
+        "Jia Y",
+        "Turcu C."
+      ],
+      "year": 2025,
+      "doi": "10.3390/ijerph22121842",
+      "doi_url": "https://doi.org/10.3390/ijerph22121842",
+      "url": "41464475",
+      "abstract": null,
+      "citation_count": null,
+      "oa": {
+        "openalex": {
+          "is_oa": true,
+          "landing_page": "https://doi.org/10.3390/ijerph22121842",
+          "pdf_url": "https://www.mdpi.com/1660-4601/22/12/1842/pdf?version=1765296531"
+        }
+      }
+    },
+    {
+      "source": "ncbi_pubmed",
+      "title": "Global age-sex-specific all-cause mortality and life expectancy estimates for 204 countries and territories and 660 subnational locations, 1950-2023: a demographic analysis for the Global Burden of Disease Study 2023.",
+      "authors": [
+        "GBD 2023 Demographics Collaborators"
+      ],
+      "year": 2025,
+      "doi": "10.1016/s0140-6736(25)01330-3",
+      "doi_url": "https://doi.org/10.1016/s0140-6736(25)01330-3",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/41092927/",
+      "abstract": null,
+      "citation_count": null,
+      "oa": {
+        "openalex": {
+          "is_oa": true,
+          "landing_page": "https://doi.org/10.1016/s0140-6736(25)01330-3",
+          "pdf_url": null
+        }
+      }
+    },
+    {
+      "source": "ncbi_pubmed",
+      "title": "Burden of 375 diseases and injuries, risk-attributable burden of 88 risk factors, and healthy life expectancy in 204 countries and territories, including 660 subnational locations, 1990-2023: a systematic analysis for the Global Burden of Disease Study 2023.",
+      "authors": [
+        "GBD 2023 Disease and Injury and Risk Factor Collaborators"
+      ],
+      "year": 2025,
+      "doi": "10.1016/s0140-6736(25)01637-x",
+      "doi_url": "https://doi.org/10.1016/s0140-6736(25)01637-x",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/41092926/",
+      "abstract": null,
+      "citation_count": null,
+      "oa": {
+        "openalex": {
+          "is_oa": true,
+          "landing_page": "https://doi.org/10.1016/s0140-6736(25)01637-x",
+          "pdf_url": null
+        }
+      }
+    },
+    {
+      "source": "zenodo",
+      "title": "Chronic Kidney Disease: Epidemiology, diagnosis, management and prevention strategies",
+      "authors": [
+        "Ullah, M.I."
+      ],
+      "year": 2025,
+      "doi": "10.5281/zenodo.15163152",
+      "doi_url": "https://doi.org/10.5281/zenodo.15163152",
+      "url": null,
+      "abstract": "<p>ABSTRACT<br>Chronic Kidney Disease (CKD) is a long-term condition characterized by the gradual loss of kidney function over time. Globally, over 850 million people are affected by this disease. Uncontrolled diabetes and hypertension are recognized as leading causes of CKD worldwide. Additionally, the consumption of contaminated water, excessive use of pesticides in agriculture, and chemical fertilizers further increase the risk of kidney disease. In particular, exposure to pesticides in India and the use of arsenic-contaminated water in certain regions of Bangladesh are contributing to a disproportionate rise in the prevalence of CKD. One of the major challenges in treating CKD is the lack of access to adequate healthcare and the high cost of treatment. If kidney disease is not addressed promptly, it can progress to complete kidney failure, leaving dialysis as the only treatment option. However, in poorer countries, there is a severe shortage of dialysis centers, and even when available, the long-term cost of treatment is often unaffordable for most individuals. Adopting a healthy lifestyle, improving environmental conditions, avoiding smoking, and managing diabetes and hypertension can play a crucial role in preventing kidney disease. Furthermore, the use of certain modern medications can help delay the progression of kidney disease and reduce the risk of cardiovascular complications. To mitigate this growing global public health crisis, international collaboration in high-prevalence regions, along with the development of low-cost diagnostic and treatment solutions, is essential. These efforts can significantly address the burden of CKD and improve outcomes for affected populations worldwide.<br>Keywords: Chronic Kidney Disease, CKD, Contaminated Water, Arsenic, Pesticide, Environmental Pollution, New treatment of CKD</p>",
+      "citation_count": null,
+      "oa": {
+        "openalex": {
+          "is_oa": true,
+          "landing_page": "https://doi.org/10.5281/zenodo.15163152",
+          "pdf_url": null
+        }
+      }
+    },
+    {
+      "source": "crossref",
+      "title": "",
+      "authors": [],
+      "year": 2024,
+      "doi": "10.58275/aha.24pre1022654.pc.gr.190680",
+      "doi_url": "https://doi.org/10.58275/aha.24pre1022654.pc.gr.190680",
+      "url": "https://doi.org/10.58275/aha.24pre1022654.pc.gr.190680",
+      "abstract": null,
+      "citation_count": null,
+      "oa": {
+        "openalex_error": "HTTP Error 404: Not Found"
+      }
+    },
+    {
+      "source": "zenodo",
+      "title": "Compare the Effectiveness of Deflazacort and Prednisolone in Idiopathic Nephrotic Syndrome in Children",
+      "authors": [
+        "Smita Kumari Gupta",
+        "Anil Kumar",
+        "Mahima Singh",
+        "Vijay Kumar Singh",
+        "Shalini Singh"
+      ],
+      "year": 2024,
+      "doi": "10.5281/zenodo.14515650",
+      "doi_url": "https://doi.org/10.5281/zenodo.14515650",
+      "url": null,
+      "abstract": "<p><strong>Background:&nbsp;</strong>Nephrotic syndrome is a manifestation of glomerular disease characterized by sever proteinuria, hypoalbuminemia and hyperlipidemia. It affects numerous children globally with idiopathic syndrome being the most common form in pediatric population. The therapeutic effectiveness and safety profiles of prednisolone and deflazacort in treating this condition necessitate further examination.&nbsp;<strong>Methodology:&nbsp;</strong>100 patients were enrolled in this study between 1 to 10 years old who were diagnosed with idiopathic nephrotic syndrome. This study was conducted at BRD Medical College, Gorakhpur, for six months. Patients were randomly registered to receive either deflazacort of prednisolone.&nbsp;<strong>Results:&nbsp;</strong>Both treatments were effective in inducing remission with deflazacort, showing a slightly higher remission rate but no significant differences were found in growth parameters between the groups. Although, deflazacort was associated with some complications and adverse effects as compared to prednisolone. Both drugs significantly improved laboratory values such as ESR and protein/creatinine ratio with notable reductions in plasma urea and creatinine.&nbsp;<strong>Conclusion:&nbsp;</strong>Deflazacot may be considered as more favorable with efficacy and safety in the treatment of pediatric idiopathic nephrotic syndrome as compared to prednisolone.</p>\n<p>&nbsp;</p>\n<div>&nbsp;</div>",
+      "citation_count": null,
+      "oa": {
+        "openalex": {
+          "is_oa": true,
+          "landing_page": "https://doi.org/10.5281/zenodo.14515650",
+          "pdf_url": null
+        }
+      }
+    },
+    {
+      "source": "zenodo",
+      "title": "Incidence of Acute Kidney Injury in Patients with Acute Myocardial Infarction",
+      "authors": [
+        "Amit Malakar",
+        "Shiv Charan Jelia",
+        "Saurabh Soni",
+        "Banwari Lal",
+        "Rima Biswas",
+        "Sakshi Apurva"
+      ],
+      "year": 2023,
+      "doi": "10.5281/zenodo.11248321",
+      "doi_url": "https://doi.org/10.5281/zenodo.11248321",
+      "url": null,
+      "abstract": "<p><strong>Background:</strong>&nbsp;The purpose of this study is to evaluate the incidence of&nbsp; Acute Kidney Injury, as defined by the KDIGO, in the acute phase of a myocardial infarction, thereby making vigorous efforts to preserve renal function as we attempt to salvage and protect cardiac muscle.&nbsp;<strong>Methods:</strong>&nbsp;Cohort study was conducted on patients admitted with Acute Myocardial Infarction in Government Medical College and Associate group of Hospital, KOTA (Rajasthan).&nbsp;<strong>Results:&nbsp;</strong>The incidence of Acute Kidney Injury in hospitalized patients presenting with Acute myocardial Infarction is 29%. Development of AKI is associated with poor outcome in terms of in hospital mortality of acute MI patients, with p= 0.001.&nbsp;<strong>Conclusion:</strong>&nbsp;Acute Kidney injury is an important and common complication occurring in acute MI patients. All the more, there is an increase need for more prospective studies to document the incidence of acute renal insufficiency occurring during critical illness such as MI, and the associated comorbidities so that the treatment modalities can be altered accordingly so as to prevent further damage to the kidneys during the acute phase of illness, and by educating the patient to be on long term follow up to identify early before these acutely injured pair of kidneys fail irreversibly so that necessary measures can be initiated to ensure better quality of life in such patients.</p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>\n<div>&nbsp;</div>",
+      "citation_count": null,
+      "oa": {
+        "openalex": {
+          "is_oa": true,
+          "landing_page": "https://doi.org/10.5281/zenodo.11248321",
+          "pdf_url": null
+        }
+      }
+    },
+    {
+      "source": "crossref",
+      "title": "The long-term cost of childhood conduct problems",
+      "authors": [],
+      "year": 2022,
+      "doi": "10.13056/acamh.19121",
+      "doi_url": "https://doi.org/10.13056/acamh.19121",
+      "url": "https://doi.org/10.13056/acamh.19121",
+      "abstract": null,
+      "citation_count": 0,
+      "oa": {
+        "openalex": {
+          "is_oa": false,
+          "landing_page": "https://doi.org/10.13056/acamh.19121",
+          "pdf_url": null
+        }
+      }
+    },
+    {
+      "source": "arxiv",
+      "title": "The long-term effect of childhood exposure to technology using surrogates",
+      "authors": [
+        "Sylvia Klosin",
+        "Nicolaj Søndergaard Mühlbach"
+      ],
+      "year": 2022,
+      "doi": null,
+      "doi_url": null,
+      "url": "http://arxiv.org/abs/2212.03351v2",
+      "abstract": "We study how childhood exposure to technology at ages 5-15 via the occupation of the parents affects the ability to climb the social ladder in terms of income at ages 45-49 using the Danish micro data from years 1961-2019. Our measure of technology exposure covers the degree to which using computers (hardware and software) is required to perform an occupation, and it is created by merging occupational codes with detailed data from O*NET. The challenge in estimating this effect is that long-term outcome is observed over a different time horizon than our treatment of interest. We therefore adapt the surrogate index methodology, linking the effect of our childhood treatment on intermediate surrogates, such as income and education at ages 25-29, to the effect on adulthood income. We estimate that a one standard error increase in exposure to technology increases the income rank by 2\\%-points, which is economically and statistically significant and robust to cluster-correlation within families. The derived policy recommendation is to update the educational curriculum to expose children to computers to a higher degree, which may then act as a social leveler.",
+      "citation_count": null,
+      "oa": {}
+    },
+    {
+      "source": "arxiv",
+      "title": "Boundary-Aware Network for Kidney Parsing",
+      "authors": [
+        "Shishuai Hu",
+        "Yiwen Ye",
+        "Zehui Liao",
+        "Yong Xia"
+      ],
+      "year": 2022,
+      "doi": null,
+      "doi_url": null,
+      "url": "http://arxiv.org/abs/2208.13338v1",
+      "abstract": "Kidney structures segmentation is a crucial yet challenging task in the computer-aided diagnosis of surgery-based renal cancer. Although numerous deep learning models have achieved remarkable success in many medical image segmentation tasks, accurate segmentation of kidney structures on computed tomography angiography (CTA) images remains challenging, due to the variable sizes of kidney tumors and the ambiguous boundaries between kidney structures and their surroundings. In this paper, we propose a boundary-aware network (BA-Net) to segment kidneys, kidney tumors, arteries, and veins on CTA scans. This model contains a shared encoder, a boundary decoder, and a segmentation decoder. The multi-scale deep supervision strategy is adopted on both decoders, which can alleviate the issues caused by variable tumor sizes. The boundary probability maps produced by the boundary decoder at each scale are used as attention to enhance the segmentation feature maps. We evaluated the BA-Net on the Kidney PArsing (KiPA) Challenge dataset and achieved an average Dice score of 89.65$\\%$ for kidney structure segmentation on CTA scans using 4-fold cross-validation. The results demonstrate the effectiveness of the BA-Net.",
+      "citation_count": null,
+      "oa": {}
+    },
+    {
+      "source": "arxiv",
+      "title": "Leveraging Clinical Characteristics for Improved Deep Learning-Based Kidney Tumor Segmentation on CT",
+      "authors": [
+        "Christina B. Lund",
+        "Bas H. M. van der Velden"
+      ],
+      "year": 2021,
+      "doi": null,
+      "doi_url": null,
+      "url": "http://arxiv.org/abs/2109.05816v1",
+      "abstract": "This paper assesses whether using clinical characteristics in addition to imaging can improve automated segmentation of kidney cancer on contrast-enhanced computed tomography (CT). A total of 300 kidney cancer patients with contrast-enhanced CT scans and clinical characteristics were included. A baseline segmentation of the kidney cancer was performed using a 3D U-Net. Input to the U-Net were the contrast-enhanced CT images, output were segmentations of kidney, kidney tumors, and kidney cysts. A cognizant sampling strategy was used to leverage clinical characteristics for improved segmentation. To this end, a Least Absolute Shrinkage and Selection Operator (LASSO) was used. Segmentations were evaluated using Dice and Surface Dice. Improvement in segmentation was assessed using Wilcoxon signed rank test. The baseline 3D U-Net showed a segmentation performance of 0.90 for kidney and kidney masses, i.e., kidney, tumor, and cyst, 0.29 for kidney masses, and 0.28 for kidney tumor, while the 3D U-Net trained with cognizant sampling enhanced the segmentation performance and reached Dice scores of 0.90, 0.39, and 0.38 respectively. To conclude, the cognizant sampling strategy leveraging the clinical characteristics significantly improved kidney cancer segmentation.",
+      "citation_count": null,
+      "oa": {}
+    },
+    {
+      "source": "zenodo",
+      "title": "A systematic review on the association between total and cardiopulmonary mortality/morbidity or cardiovascular risk factors with long-term exposure to increased or decreased ambient temperature",
+      "authors": [
+        "Sofia Zafeiratou",
+        "Evangelia Samoli",
+        "Konstantina Dimakopoulou",
+        "Sophia Rodopoulou",
+        "Antonis Analitis",
+        "Antonio Gasparrini",
+        "Massimo Stafoggia",
+        "Francesca De' Donato",
+        "Shilpa Rao",
+        "Ana Monteiro",
+        "Masna Rai",
+        "Siqi Zhang",
+        "Susanne Breitner",
+        "Kristin Aunan",
+        "Alexandra Schneider",
+        "Klea Katsouyanni"
+      ],
+      "year": 2021,
+      "doi": "10.1016/j.scitotenv.2021.145383",
+      "doi_url": "https://doi.org/10.1016/j.scitotenv.2021.145383",
+      "url": null,
+      "abstract": "<p>Abstract</p>\n\n<p>Abstract The health effects of acute exposure to temperature extremes are established; those of long-term exposure only recently received attention. We performed a systematic review to assess the associations of long-term (&gt;3 months) exposure to higher or lower temperature on total and cardiopulmonary mortality and morbidity, screening 3455 studies and selecting 34. The studies were classified in those observing associations within a population over years with changing annual temperature indices and those comparing areas with a different climate. We also assessed the risk of bias, adapting appropriately an instrument developed by the World Health Organization for air pollution. Studies reported that annual temperature indices for extremes and variability were associated with annual increases in mortality, indicating that effects of temperature extremes cannot be attributed only to short-term mortality displacement. Studies on cardiovascular mortality indicated stronger associations with cold rather than hot temperature, whilst those on respiratory outcomes reported effects of both heat and cold but were few and used diverse health outcomes. Interactions with air pollution were not generally assessed. The few studies investigating effect modification showed stronger effects among the elderly and those socially deprived. Comparisons of health outcome prevalence between areas reported lower blood pressure and a tendency for higher obesity in populations living in warmer climates. Our review indicated interesting associations between long-term exposure to unusual temperature levels in specific areas and differences in health outcomes and cardiovascular risk factors between geographical locations with different climate, but the number of studies by design and health outcome was small. Risk of bias was identified because of the use of crude exposure assessment and inadequate adjustment for confounding. More and better designed studies, including the investigation of effect modifiers, are needed.</p>",
+      "citation_count": null,
+      "oa": {
+        "openalex": {
+          "is_oa": true,
+          "landing_page": "https://doi.org/10.1016/j.scitotenv.2021.145383",
+          "pdf_url": "https://www.sciencedirect.com/science/article/pii/S0048969721004514"
+        }
+      }
+    },
+    {
+      "source": "arxiv",
+      "title": "Is It Safe Living in the Vicinity of Cellular Towers? Analysis of Long-Term Human EMF Exposure at Population Scale",
+      "authors": [
+        "Luca Chiaraviglio",
+        "Cristian Di Paolo",
+        "Giuseppe Bianchi",
+        "Nicola Blefari-Melazzi"
+      ],
+      "year": 2020,
+      "doi": null,
+      "doi_url": null,
+      "url": "http://arxiv.org/abs/2002.00910v2",
+      "abstract": "We focus on the ElectroMagnetic Field (EMF) exposure safety for people living in the vicinity of cellular towers. To this aim, we analyze a large dataset of long-term EMF measurements collected over almost 20 years in more than 2000 measurement points spread over an Italian region. We evaluate the relationship between EMF exposure and the following factors: (i) distance from the closest installation(s), (ii) type of EMF sources in the vicinity, (iii) Base Station (BS) technology, and (iv) EMF regulation updates. Overall, the exposure levels from BSs in the vicinity are below the Italian EMF limits, thus ensuring safety for the population. Moreover, BSs represent the lowest exposure compared to Radio/TV repeaters and other EMF sources. However, the BS EMF exposure in proximity to users exhibits an increasing trend over the last years, which is likely due to the pervasive deployment of multiple technologies and to the EMF regulation updates. As a side consideration, if the EMF levels continue to increase with the current trends, the EMF exposure in proximity to BSs will saturate to the maximum EMF limit by the next 20 years at a distance of 30 meters from the closest BS.",
+      "citation_count": null,
+      "oa": {}
+    },
+    {
+      "source": "zenodo",
+      "title": "Decline in kidney function over the course of adulthood and cognitive function in midlife",
+      "authors": [
+        "Sedaghat S.",
+        "Sorond F.",
+        "Yaffe K.",
+        "Sidney S.",
+        "Kramer H.J.",
+        "Jacobs D.R.",
+        "Launer L.J.",
+        "Carnethon M.R."
+      ],
+      "year": 2020,
+      "doi": "10.1212/wnl.0000000000010631",
+      "doi_url": "https://doi.org/10.1212/wnl.0000000000010631",
+      "url": null,
+      "abstract": "Objective To test the hypothesis that end-stage renal disease (ESRD) risk exposure during young adulthood is related to worse cognitive performance in midlife.MethodsWe included 2,604 participants from the population-based Coronary Artery Risk Development in Young Adults (CARDIA) Study (mean age 35 years, 54% women, 45% Black). Estimated glomerular filtration rate and albumin-to-creatinine ratio were measured every 5 years at year (Y) 10 through Y30. At each visit, moderate/high risk of ESRD according to the Kidney Disease: Improving Global Outcomes guidelines (estimated glomerular filtration rate &lt;60 mL/min/1.73 m2 or albumin-to-creatinine ratio &gt;30 mg/g) was defined, totaled over examinations, and categorized into 0 episodes, 1 episode, and &gt;1 episodes of ESRD risk. At Y30, participants underwent global and multidomain cognitive assessment. We used analysis of covariance to assess the association of ESRD risk categories with cognitive function, controlling for cardiovascular risk factors.ResultsOver the course of 20 years, 427 participants (16% of the study population) had ≥1 episodes of ESRD risk exposure. Individuals with more risk episodes had lower composite cognitive function (p &lt; 0.001), psychomotor speed (p &lt; 0.001), and executive function (p = 0.007). All these associations were independent of sociodemographic status and cardiovascular risk factors.ConclusionsIn this population-based longitudinal study, we show that episodes of decline in kidney function over the young-adulthood course are associated with worse cognitive performance at midlife. Preserving kidney function in young age needs to be investigated as a potential strategy to preserve cognitive function in midlife.",
+      "citation_count": null,
+      "oa": {
+        "openalex": {
+          "is_oa": true,
+          "landing_page": "https://doi.org/10.1212/wnl.0000000000010631",
+          "pdf_url": null
+        }
+      }
+    },
+    {
+      "source": "zenodo",
+      "title": "Long-Term Maternal Cardiovascular Sequelae After Preeclampsia: A Five-Year Cohort Study at a Tertiary Hospital in Accra, Ghana",
+      "authors": [
+        "Asante, Kwame"
+      ],
+      "year": 2020,
+      "doi": "10.5281/zenodo.18526911",
+      "doi_url": "https://doi.org/10.5281/zenodo.18526911",
+      "url": null,
+      "abstract": "<p>**Abstract**\n\nPreeclampsia is a leading cause of maternal morbidity and mortality in sub-Saharan Africa and a recognised risk factor for future cardiovascular disease. However, prospective data on the long-term cardiovascular trajectories of affected women in populations such as Ghana are scarce. This prospective cohort study aimed to determine the incidence of long-term maternal cardiovascular sequelae in Ghanaian women with a history of preeclampsia and compare their cardiovascular risk profiles to women with prior normotensive pregnancies. Participants were enrolled at delivery from a tertiary hospital in Accra and followed annually for five years. A comparison cohort with normotensive pregnancies was similarly followed. Assessments comprised annual clinical evaluations, blood pressure monitoring, and metabolic and echocardiographic analyses at the five-year endpoint. Women with prior preeclampsia demonstrated a significantly higher prevalence of chronic hypertension (38.2% vs. 12.1%) and metabolic syndrome compared to the normotensive group. They also exhibited higher mean arterial pressures and increased left ventricular mass indices. This study provides robust, prospective evidence that a history of preeclampsia is associated with a substantially elevated risk of chronic hypertension and adverse cardiovascular remodelling within five years postpartum in a Ghanaian population. These findings identify this group as requiring targeted, long-term cardiovascular surveillance to mitigate future disease risk.\n\n**Keywords:** Preeclampsia, cardiovascular disease, hypertension, cohort study, maternal health, Ghana, sub-Saharan Africa</p>",
+      "citation_count": null,
+      "oa": {
+        "openalex": {
+          "is_oa": true,
+          "landing_page": "https://doi.org/10.5281/zenodo.18526911",
+          "pdf_url": null
+        }
+      }
+    },
+    {
+      "source": "crossref",
+      "title": "Hidden epidemic? Childhood concussion may lead to long term cognitive and behavioural problems",
+      "authors": [
+        "Mark Linden",
+        "Ann Glang",
+        "Audrey McKinlay"
+      ],
+      "year": 2019,
+      "doi": "10.64628/ab.a5cugc9en",
+      "doi_url": "https://doi.org/10.64628/ab.a5cugc9en",
+      "url": "https://doi.org/10.64628/ab.a5cugc9en",
+      "abstract": null,
+      "citation_count": 0,
+      "oa": {
+        "openalex": {
+          "is_oa": false,
+          "landing_page": "https://doi.org/10.64628/ab.a5cugc9en",
+          "pdf_url": null
+        }
+      }
+    },
+    {
+      "source": "arxiv",
+      "title": "3D Kidneys and Kidney Tumor Semantic Segmentation using Boundary-Aware Networks",
+      "authors": [
+        "Andriy Myronenko",
+        "Ali Hatamizadeh"
+      ],
+      "year": 2019,
+      "doi": null,
+      "doi_url": null,
+      "url": "http://arxiv.org/abs/1909.06684v1",
+      "abstract": "Automated segmentation of kidneys and kidney tumors is an important step in quantifying the tumor's morphometrical details to monitor the progression of the disease and accurately compare decisions regarding the kidney tumor treatment. Manual delineation techniques are often tedious, error-prone and require expert knowledge for creating unambiguous representation of kidneys and kidney tumors segmentation. In this work, we propose an end-to-end boundary aware fully Convolutional Neural Networks (CNNs) for reliable kidney and kidney tumor semantic segmentation from arterial phase abdominal 3D CT scans. We propose a segmentation network consisting of an encoder-decoder architecture that specifically accounts for organ and tumor edge information by devising a dedicated boundary branch supervised by edge-aware loss terms. We have evaluated our model on 2019 MICCAI KiTS Kidney Tumor Segmentation Challenge dataset and our method has achieved dice scores of 0.9742 and 0.8103 for kidney and tumor repetitively and an overall composite dice score of 0.8923.",
+      "citation_count": null,
+      "oa": {}
+    },
+    {
+      "source": "arxiv",
+      "title": "End-to-End Cascaded U-Nets with a Localization Network for Kidney Tumor Segmentation",
+      "authors": [
+        "Minh H. Vu",
+        "Guus Grimbergen",
+        "Attila Simkó",
+        "Tufve Nyholm",
+        "Tommy Löfstedt"
+      ],
+      "year": 2019,
+      "doi": null,
+      "doi_url": null,
+      "url": "http://arxiv.org/abs/1910.07521v1",
+      "abstract": "Kidney tumor segmentation emerges as a new frontier of computer vision in medical imaging. This is partly due to its challenging manual annotation and great medical impact. Within the scope of the Kidney Tumor Segmentation Challenge 2019, that is aiming at combined kidney and tumor segmentation, this work proposes a novel combination of 3D U-Nets---collectively denoted TuNet---utilizing the resulting kidney masks for the consecutive tumor segmentation. The proposed method achieves a Sørensen-Dice coefficient score of 0.902 for the kidney, and 0.408 for the tumor segmentation, computed from a five-fold cross-validation on the 210 patients available in the data.",
+      "citation_count": null,
+      "oa": {}
+    },
+    {
+      "source": "arxiv",
+      "title": "Inequality, mobility and the financial accumulation process: A computational economic analysis",
+      "authors": [
+        "Simone Righi",
+        "Yuri Biondi"
+      ],
+      "year": 2019,
+      "doi": null,
+      "doi_url": null,
+      "url": "http://arxiv.org/abs/1901.03951v1",
+      "abstract": "Our computational economic analysis investigates the relationship between inequality, mobility and the financial accumulation process. Extending the baseline model by Levy et al., we characterise the economic process through stylised return structures generating alternative evolutions of income and wealth through time. First, we explore the limited heuristic contribution of one and two factors models comprising one single stock (capital wealth) and one single flow factor (labour) as pure drivers of income and wealth generation and allocation over time. Second, we introduce heuristic modes of taxation in line with the baseline approach. Our computational economic analysis corroborates that the financial accumulation process featuring compound returns plays a significant role as source of inequality, while institutional arrangements including taxation play a significant role in framing and shaping the aggregate economic process that evolves over socioeconomic space and time.",
+      "citation_count": null,
+      "oa": {}
+    },
+    {
+      "source": "crossref",
+      "title": "Long-term outcomes",
+      "authors": [],
+      "year": 2018,
+      "doi": "10.1093/med/9780198784906.003.0178_update_001",
+      "doi_url": "https://doi.org/10.1093/med/9780198784906.003.0178_update_001",
+      "url": "https://doi.org/10.1093/med/9780198784906.003.0178_update_001",
+      "abstract": null,
+      "citation_count": 0,
+      "oa": {
+        "openalex": {
+          "is_oa": false,
+          "landing_page": "https://doi.org/10.1093/med/9780198784906.003.0178_update_001",
+          "pdf_url": null
+        }
+      }
+    },
+    {
+      "source": "crossref",
+      "title": "Long-term Differences in Language and Cognitive Function After Childhood Exposure to Anesthesia",
+      "authors": [],
+      "year": 2012,
+      "doi": "10.1542/peds.2011-3822d",
+      "doi_url": "https://doi.org/10.1542/peds.2011-3822d",
+      "url": "https://doi.org/10.1542/peds.2011-3822d",
+      "abstract": null,
+      "citation_count": 0,
+      "oa": {
+        "openalex": {
+          "is_oa": false,
+          "landing_page": "https://doi.org/10.1542/peds.2011-3822d",
+          "pdf_url": null
+        }
+      }
+    },
+    {
+      "source": "arxiv",
+      "title": "Cognition and Emotion: Perspectives of a Closing Gap",
+      "authors": [
+        "Claudius Gros"
+      ],
+      "year": 2010,
+      "doi": null,
+      "doi_url": null,
+      "url": "http://arxiv.org/abs/1002.3035v1",
+      "abstract": "The primary tasks of a cognitive system is to survive and to maximize a life-long utility function, like the number of offsprings. A direct computational maximization of life-long utility is however not possible in complex environments, especially in the context, of real-world time constraints. The central role of emotions is to serve as an intermediate layer in the space of policies available to agents and animals, leading to a large dimensional reduction of complexity.\n  We review our current understanding of the functional role of emotions, stressing the role of the neuromodulators mediating emotions for the diffusive homeostatic control system of the brain. We discuss a recent proposal, that emotional diffusive control is characterized, in contrast to neutral diffusive control, by interaction effects, viz by interferences between emotional arousal and reward signaling. Several proposals for the realization of synthetic emotions are discussed in this context, together with key open issues regarding the interplay between emotional motivational drives and diffusive control.",
+      "citation_count": null,
+      "oa": {}
+    }
+  ],
+  "source_stats": {
+    "openalex": {
+      "ok": true,
+      "count": 8,
+      "seconds": 1.347
+    },
+    "semantic_scholar": {
+      "ok": false,
+      "count": 0,
+      "seconds": 0.206,
+      "error": "HTTP Error 429: "
+    },
+    "crossref": {
+      "ok": true,
+      "count": 8,
+      "seconds": 0.997
+    },
+    "arxiv": {
+      "ok": true,
+      "count": 8,
+      "seconds": 0.047
+    },
+    "europe_pmc": {
+      "ok": true,
+      "count": 8,
+      "seconds": 0.136
+    },
+    "ncbi_pubmed": {
+      "ok": true,
+      "count": 2,
+      "seconds": 0.905
+    },
+    "core": {
+      "ok": true,
+      "count": 0,
+      "seconds": 0.0
+    },
+    "openaire": {
+      "ok": false,
+      "count": 0,
+      "seconds": 0.599,
+      "error": "'list' object has no attribute 'get'"
+    },
+    "zenodo": {
+      "ok": true,
+      "count": 8,
+      "seconds": 2.523
+    }
+  },
+  "counts": {
+    "raw": 42,
+    "deduped": 42,
+    "returned": 40
+  }
+}

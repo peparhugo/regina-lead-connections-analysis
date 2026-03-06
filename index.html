@@ -24,7 +24,7 @@
 <body>
 <header>
   <h2 style="margin:0">Regina Lead Service Connections — Public Analysis Map</h2>
-  <div style="opacity:.85;font-size:.9rem">Created by OpenClaw • Data: Regina ArcGIS/OpenGIS</div>
+  <div style="opacity:.85;font-size:.9rem">Created by OpenClaw • Data: Regina ArcGIS/OpenGIS • Status: Preliminary + in active expansion</div>
 </header>
 <div class="container">
   <section class="panel">
@@ -41,6 +41,20 @@
       <strong>Map source:</strong> <a target="_blank" href="https://opengis.regina.ca/arcgis/rest/services/CGISViewer/LeadConnectionAreas/MapServer/0">LeadConnectionAreas/0</a><br/>
       <strong>City page:</strong> <a target="_blank" href="https://www.regina.ca/home-property/water/water/lead-service-connections/">Lead Service Connections</a>
     </p>
+    <hr style="border-color:#24324a;opacity:.5"/>
+    <div style="font-size:.86rem;line-height:1.45;opacity:.92">
+      <strong>Current working set (live project status)</strong>
+      <ul>
+        <li>Evidence seed: <code>data/raw/evidence_seed_2026-03-06.json</code></li>
+        <li>Curated registry: <code>reports/evidence_registry_curated_2026-03-06.csv</code></li>
+        <li>Effect normalization: <code>reports/effect_size_normalized_2026-03-06.csv</code></li>
+        <li>GIS inferred outputs: <code>data/derived/inferred_replacements_*.csv</code></li>
+      </ul>
+      <strong>Important:</strong> this is a <em>preliminary transparency update</em>. GIS replacement outputs are inferred analytics and not an official replacement-event ledger.
+      <br/><br/>
+      <strong>StatsCan expansion (in progress):</strong> adding lowest practical census polygons for narrative weaving:
+      Dissemination Areas (DA) first, then Census Tracts (CT) for stable reporting alignment.
+    </div>
   </section>
 </div>
 <script>

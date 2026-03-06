@@ -1,0 +1,4 @@
+scenario,discount_rate,exposure_band,population,annual_cost,years,npv
+low,0.015,low,0,0,30,
+base,0.030,medium,0,0,30,
+high,0.050,high,0,0,30,

@@ -1,0 +1,12 @@
+id,title,year,source,relevance,priority_score,outcome_tags,doi,url
+6,Interventions for preventing obesity in children,2019,openalex,medium,20,unspecified,10.1002/14651858.cd001871.pub4,https://doi.org/10.1002/14651858.cd001871.pub4
+10,Long Reach of Lead: Early Childhood Lead Exposure and Cognitive Ability Later-in-Life,2023,crossref,medium,20,cognitive,10.2139/ssrn.4462722,https://doi.org/10.2139/ssrn.4462722
+11,"Global Burden of Lead Exposure: Integrating Epidemiology, Molecular Mechanisms, and Mitigation Approaches",2026,europe_pmc,medium,20,unspecified,,
+14,Analysis of the relationship between early adverse childhood experiences and late-life health poverty vulnerability among rural middle-aged and elderly people in Ningxia: the mediating effect of chronic diseases and their comorbidities.,2026,europe_pmc,medium,20,unspecified,10.1186/s12889-026-26298-4,https://doi.org/10.1186/s12889-026-26298-4
+15,"Effect of Lead Mining on the Arterial Blood Pressure of Mining Workers in Ameka Ezza South, Ebonyi State",2026,zenodo,medium,20,cardiovascular;hypertension,10.5281/zenodo.18630453,https://doi.org/10.5281/zenodo.18630453
+17,Extreme weather and climate-related adverse childhood experiences are a humanitarian crisis during the 21st century.,2025,europe_pmc,medium,20,unspecified,10.1038/s43856-025-01089-x,https://doi.org/10.1038/s43856-025-01089-x
+24,Compare the Effectiveness of Deflazacort and Prednisolone in Idiopathic Nephrotic Syndrome in Children,2024,zenodo,medium,20,unspecified,10.5281/zenodo.14515650,https://doi.org/10.5281/zenodo.14515650
+26,The long-term cost of childhood conduct problems,2022,crossref,medium,20,unspecified,10.13056/acamh.19121,https://doi.org/10.13056/acamh.19121
+27,The long-term effect of childhood exposure to technology using surrogates,2022,arxiv,medium,20,education,,http://arxiv.org/abs/2212.03351v2
+34,Hidden epidemic? Childhood concussion may lead to long term cognitive and behavioural problems,2019,crossref,medium,20,cognitive,10.64628/ab.a5cugc9en,https://doi.org/10.64628/ab.a5cugc9en
+39,Long-term Differences in Language and Cognitive Function After Childhood Exposure to Anesthesia,2012,crossref,medium,20,cognitive,10.1542/peds.2011-3822d,https://doi.org/10.1542/peds.2011-3822d

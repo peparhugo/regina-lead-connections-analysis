@@ -1,0 +1,10 @@
+{
+  "generated_at": "2026-03-06T02:11:07.376489Z",
+  "current_count": 1000,
+  "snapshot_count": 89327,
+  "inferred_count": 133,
+  "notes": [
+    "Inferred replacements are derived from snapshot vs current GISID material/date changes.",
+    "This is an inferred analytic, not an official replacement-event ledger."
+  ]
+}
