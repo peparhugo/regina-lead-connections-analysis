@@ -171,6 +171,7 @@ def main():
                 "geography_level": "CT_official_regina",
                 "ct_dguid": dguid,
                 "ct_uid_code": r.get("geo_id_code", ""),
+                "ct_name": f"CT {r.get('geo_name','').strip()}" if r.get('geo_name') else "",
                 "strict_replaced": f"{strict_proxy:.3f}",
                 "active_lead_count": f"{active_proxy:.3f}",
                 "strict_repl_rate_vs_active_lead": f"{strict_rate:.6f}",
