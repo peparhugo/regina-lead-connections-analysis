@@ -3,80 +3,102 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Regina Lead Connections — Equity & Prioritization Research Brief</title>
+  <title>Regina Lead Connections — Equity Summary (2026-03-06, upgraded)</title>
   <style>
     body { font-family: Inter, system-ui, Arial, sans-serif; margin: 0; background: #0b1220; color: #e6edf3; }
-    main { max-width: 980px; margin: 0 auto; padding: 20px; }
+    main { max-width: 1040px; margin: 0 auto; padding: 20px; }
     .card { background: #121c2e; border: 1px solid #24324a; border-radius: 10px; padding: 14px; margin-bottom: 14px; }
     code { color: #cde7ff; }
     a { color: #7cc4ff; }
     h1, h2 { margin: 0 0 10px 0; }
-    ul { margin-top: 6px; }
-    .small { opacity: .85; font-size: .92rem; }
+    ul, ol { margin-top: 6px; }
+    .small { opacity: .88; font-size: .93rem; }
+    .warn { color: #ffd68a; }
   </style>
 </head>
 <body>
 <main>
-  <h1>Regina Lead Connections — Equity & Prioritization Research Brief</h1>
-  <p class="small">Date: 2026-03-06 • Status: Phase 1 quantitative baseline (preliminary, reproducible)</p>
+  <h1>Regina Lead Connections — Equity Summary (2019+ corrected)</h1>
+  <p class="small">Date: 2026-03-06 • Status: Interim decision-grade update (2019-forward, reproducible, non-causal)</p>
 
   <section class="card">
-    <h2>Executive summary</h2>
+    <h2>2019-forward corrected headline findings</h2>
     <ul>
-      <li>We now publish two GIS metrics: <strong>Strict inferred replacements</strong> (Pb→non-Pb only) and <strong>Broad inferred activity</strong> (includes lead records with update changes).</li>
-      <li>Current strict inferred total is <strong>1,349</strong>, broadly consistent in scale with city-reported progress context.</li>
-      <li>At area-level, strict inferred replacement rate is <strong>positively associated</strong> with lead burden (higher lead% areas show higher replacement rates in this snapshot).</li>
-      <li>This does <strong>not</strong> prove causal fairness; it is an observational signal from public layer states.</li>
+      <li><strong>Known lead service connection baseline (OpenGIS):</strong> <strong>3,637</strong>.</li>
+      <li><strong>Replacements recorded from 2019 onward:</strong> <strong>1,195</strong>.</li>
+      <li><strong>Estimated remaining active lead connections:</strong> <strong>2,442</strong> (baseline minus 2019+ replacements).</li>
+      <li><strong>CT-normalized impact proxies:</strong> impacted people <strong>8,319</strong>, impacted children 0-14 <strong>1,540</strong>.</li>
     </ul>
-  </section>
-
-  <section class="card">
-    <h2>What we tested today</h2>
-    <ul>
-      <li>Joined strict inferred replacements by area to City LeadConnectionAreas burden fields.</li>
-      <li>Computed area metric: <code>strict_replacements / current_lead_total</code>.</li>
-      <li>Assessed relationship against area lead burden (<code>Lead_Per</code>).</li>
-    </ul>
-    <p><strong>Results (n=14 areas):</strong><br/>
-      Pearson r ≈ <strong>0.574</strong><br/>
-      Spearman ρ ≈ <strong>0.714</strong>
+    <p class="small">Detailed method + year-by-year trend:
+      <a target="_blank" href="regina_lead_program_progress_2019_forward_2026-03-06.md">regina_lead_program_progress_2019_forward_2026-03-06.md</a>
     </p>
-    <p class="small">Interpretation: in this snapshot, replacement activity appears concentrated more in higher-burden areas, not lower-burden areas.</p>
+    <p class="small warn">Interpretation guardrail: impacted people/children are inferred proxies, not audited household/person counts.</p>
   </section>
 
   <section class="card">
-    <h2>Priority concerns requested by Pepar (active workstream)</h2>
-    <ul>
-      <li>Renter vs homeowner patterns</li>
-      <li>Demographic differences (including Indigenous identity indicators where available at aggregate geography)</li>
-      <li>Income gradients and potential affluent-area priority effects</li>
-      <li>Program structure confounders (city-owned vs private-side replacement pathways)</li>
-    </ul>
-  </section>
-
-  <section class="card">
-    <h2>Data limitations (current)</h2>
-    <ul>
-      <li>No direct owner/renter flag in the public lead service line layer used for strict counts.</li>
-      <li>No person-level demographic data should be used; all equity work must stay at aggregate census geography.</li>
-      <li>City-reported annual totals are the official program metric; GIS-derived counts are analytic estimates.</li>
-    </ul>
-  </section>
-
-  <section class="card">
-    <h2>Next research steps (P0)</h2>
+    <h2>What was upgraded in this run</h2>
     <ol>
-      <li>Build CT/DA panel with replacement intensity + census covariates (tenure, income, low-income, Indigenous identity where public aggregate tables permit).</li>
-      <li>Run significance tests and model checks (rank tests + robust regression with uncertainty notes).</li>
-      <li>Publish methods + reproducibility appendix and a plain-language equity summary page.</li>
+      <li>Re-scoped replacement progress to <strong>2019 forward</strong> to align with program timeline.</li>
+      <li>Constrained active/replaced aggregates to city-level OpenGIS baseline + monthly replacement series.</li>
+      <li>Rebuilt CT panel with added StatsCan socioeconomic fields (children age bands, immigrant/visible minority, lone-parent, unemployment, education).</li>
+      <li>Published corrected impact snapshot with transparent caveats and method note.</li>
     </ol>
-    <p class="small">Derived artifact for this step: <code>data/derived/area_priority_signals.csv</code></p>
+  </section>
+
+  <section class="card">
+    <h2>Panel structure and scope</h2>
+    <ul>
+      <li><strong>Rows:</strong> 54 Regina CT rows (official StatsCan covariates, inferred lead/replacement allocations normalized to city totals).</li>
+      <li><strong>Replacement metrics:</strong> active lead count, strict replaced (2019+ constrained), replacement rate vs active lead.</li>
+      <li><strong>Socioeconomic covariates:</strong> children age bands, tenure, income/LIM, immigrant/visible minority, lone-parent, unemployment, education, Indigenous identity.</li>
+    </ul>
+    <p class="small">Lead/replacement fields are inferred allocations for tract-level diagnostics; not direct connection-level event logs.</p>
+  </section>
+
+  <section class="card">
+    <h2>Method caveats (important)</h2>
+    <ul>
+      <li>Sample size is small (n=14 DA-proxy areas), so inference is sensitive to outliers and model specification.</li>
+      <li>Proxy geography can induce ecological bias; household-level tenure/demographic effects are unresolved in this run.</li>
+      <li>Regression is descriptive and used as a robustness check only.</li>
+      <li>No claim of causal equity performance is made from these results.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Reproducibility</h2>
+    <p>All outputs are generated via:</p>
+    <p><code>python3 scripts/build_equity_panel_and_tests.py</code></p>
+    <p class="small">Detailed reproducibility notes and assumptions are in:
+      <code>reports/reproducibility_appendix_equity_2026-03-06.md</code>
+    </p>
   </section>
 
   <section class="card small">
-    Sources: City LeadConnectionAreas map service, inferred replacement artifacts in this repo,
-    and city benchmark table <code>data/derived/city_reported_replacements_annual.csv</code>.
+    Sources: <code>data/derived/area_priority_signals.csv</code>, <code>data/derived/strict_replacements_by_area_month.csv</code>,
+    City ArcGIS <code>Neighbourhood_Profile</code> layer for public profile links.
   </section>
+
+
+<!-- AUTONOMOUS_MISSION_UPDATE 2026-03-06T15:53:05 -->
+<section class="card">
+<h2>Autonomous mission update</h2>
+<ul>
+<li>Mission orchestrator active with gates G1-G4.</li>
+<li>Official CT/DA StatsCan pull lane enabled (CT first, DA batched).</li>
+<li>Knowledge-gap fallback lane (JTB) enabled for variable pinning and source ingestion.</li>
+</ul>
+</section>
+
+  <section class="card">
+    <h2>Regina-only rebuild (current mission)</h2>
+    <ul>
+      <li>Regina-only geography filters enforced for StatsCan pulls: CT DGUID prefix <code>2016S0507705</code>, DA GEO_ID prefix <code>4706</code>.</li>
+      <li>New artifacts generated: <code>statscan_ct_equity_vars_2016_regina.csv</code>, <code>statscan_da_equity_vars_2016_regina.csv</code>, and Regina-only CT panel/tests.</li>
+      <li><strong>Official vs inferred guardrail:</strong> CT covariates are official StatsCan CPR values; replacement fields in the CT panel are marked as inferred proxies.</li>
+    </ul>
+  </section>
+
 </main>
 </body>
 </html>
