@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Regina CT Factor Diagnostics (2019+)</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    body { font-family: Inter, system-ui, Arial, sans-serif; margin: 0; background: #0b1220; color: #e6edf3; }
+    header { padding: 12px 16px; border-bottom: 1px solid #24324a; }
+    .wrap { display:grid; grid-template-columns: 1.2fr .8fr; gap:12px; padding:12px; }
+    .panel { background:#121c2e; border:1px solid #24324a; border-radius:10px; padding:10px; }
+    #map { height: 78vh; border-radius:8px; }
+    .small { font-size:.88rem; opacity:.9; }
+    select { background:#0f1726; color:#e6edf3; border:1px solid #334155; border-radius:6px; padding:6px; }
+    table { width:100%; border-collapse: collapse; font-size:.85rem; }
+    th,td { border-bottom:1px solid #24324a; padding:6px; text-align:left; }
+    a { color:#7cc4ff; }
+  </style>
+</head>
+<body>
+<header>
+  <h3 style="margin:0">CT Factor Diagnostics Map (2019+ replacements)</h3>
+  <div class="small">Exploratory view • normalized CT allocations • non-causal ecological analysis</div>
+</header>
+<div class="wrap">
+  <section class="panel"><div id="map"></div></section>
+  <section class="panel">
+    <div class="small"><strong>Choropleth metric</strong></div>
+    <select id="metric">
+      <option value="replacement_rate">Replacement rate vs active</option>
+      <option value="replaced_since_2019">Replaced since 2019</option>
+      <option value="active_lead_count">Active lead count</option>
+      <option value="impacted_children_0_14_est">Impacted children proxy</option>
+      <option value="tenure_renter_pct">Renter %</option>
+      <option value="lim_at_prevalence_pct">LIM-AT %</option>
+      <option value="unemployment_rate_pct">Unemployment %</option>
+    </select>
+    <div class="small" style="margin-top:10px"><strong>Top tracts (by replaced since 2019)</strong></div>
+    <table id="topTable"><thead><tr><th>CT</th><th>Replaced</th><th>Rate</th></tr></thead><tbody></tbody></table>
+    <p class="small">
+      Data: <code>ct_factor_diagnostics_kepler_2026-03-06.geojson</code><br/>
+      Method note: <a target="_blank" href="regina_lead_program_progress_2019_forward_2026-03-06.md">2019+ progress</a><br/>
+      Significance: <a target="_blank" href="ct_factor_significance_2019plus_2026-03-06.md">CT factor scan</a>
+    </p>
+  </section>
+</div>
+<script>
+const map = L.map('map').setView([50.45, -104.62], 11);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap contributors' }).addTo(map);
+let geoLayer, data;
+
+function getColor(v, min, max) {
+  const t = (v - min) / ((max - min) || 1);
+  const c = Math.max(0, Math.min(1, t));
+  const r = Math.round(30 + 200*c);
+  const g = Math.round(140 - 90*c);
+  const b = Math.round(255 - 180*c);
+  return `rgb(${r},${g},${b})`;
+}
+
+function refresh(metric){
+  if(!data) return;
+  const vals = data.features.map(f => Number(f.properties[metric] || 0));
+  const min = Math.min(...vals), max=Math.max(...vals);
+
+  if (geoLayer) geoLayer.remove();
+  geoLayer = L.geoJSON(data, {
+    style: f => ({
+      color:'#223047', weight:1,
+      fillColor:getColor(Number(f.properties[metric]||0),min,max), fillOpacity:0.75
+    }),
+    onEachFeature: (f,l) => {
+      const p=f.properties;
+      l.bindPopup(`<b>CT ${p.ct_uid_code}</b><br/>Active: ${Number(p.active_lead_count).toFixed(1)}<br/>Replaced 2019+: ${Number(p.replaced_since_2019).toFixed(1)}<br/>Rate: ${Number(p.replacement_rate).toFixed(3)}<br/>Impacted people: ${Number(p.impacted_people_est).toFixed(1)}<br/>Impacted children: ${Number(p.impacted_children_0_14_est).toFixed(1)}<br/>Renter %: ${Number(p.tenure_renter_pct).toFixed(2)}<br/>LIM-AT %: ${Number(p.lim_at_prevalence_pct).toFixed(2)}`);
+    }
+  }).addTo(map);
+
+  const top=[...data.features].sort((a,b)=>Number(b.properties.replaced_since_2019)-Number(a.properties.replaced_since_2019)).slice(0,10);
+  const tb=document.querySelector('#topTable tbody'); tb.innerHTML='';
+  top.forEach(f=>{
+    const p=f.properties;
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td>${p.ct_uid_code}</td><td>${Number(p.replaced_since_2019).toFixed(1)}</td><td>${Number(p.replacement_rate).toFixed(3)}</td>`;
+    tb.appendChild(tr);
+  });
+}
+
+fetch('../data/derived/ct_factor_diagnostics_kepler_2026-03-06.geojson')
+  .then(r=>r.json())
+  .then(g=>{ data=g; refresh('replacement_rate'); map.fitBounds(L.geoJSON(g).getBounds()); });
+
+document.getElementById('metric').addEventListener('change', e=>refresh(e.target.value));
+</script>
+</body>
+</html>
