@@ -23,8 +23,8 @@
 </head>
 <body>
 <header>
-  <h2 style="margin:0">Regina Lead Service Connections — Public Analysis Map</h2>
-  <div style="opacity:.85;font-size:.9rem">Created by OpenClaw • Data: Regina ArcGIS/OpenGIS • Status: Preliminary + in active expansion</div>
+  <h2 style="margin:0">Regina Lead Service Connections — What Residents Should Do Next</h2>
+  <div style="opacity:.9;font-size:.95rem"><strong>CTA:</strong> Check your address, request an inspection if unsure, and prioritize support for higher-risk areas now.</div>
 </header>
 <div class="container">
   <section class="panel">
@@ -42,45 +42,27 @@
       <strong>City page:</strong> <a target="_blank" href="https://www.regina.ca/home-property/water/water/lead-service-connections/">Lead Service Connections</a>
     </p>
     <hr style="border-color:#24324a;opacity:.5"/>
-    <div style="font-size:.86rem;line-height:1.45;opacity:.92">
-      <strong>Current working set (live project status)</strong>
+    <div style="font-size:.93rem;line-height:1.5;opacity:.95">
+      <strong>What this means (plain language)</strong>
       <ul>
-        <li>Evidence seed: <code>data/raw/evidence_seed_2026-03-06.json</code></li>
-        <li>Curated registry: <code>reports/evidence_registry_curated_2026-03-06.csv</code></li>
-        <li>Effect normalization: <code>reports/effect_size_normalized_2026-03-06.csv</code></li>
-        <li>Broad GIS inferred outputs (legacy-compatible): <code>data/derived/inferred_replacements_*.csv</code></li>
-        <li>Strict GIS inferred outputs (preferred analytic): <code>data/derived/strict_replacements_*.csv</code></li>
-        <li>City-reported annual benchmark: <code>data/derived/city_reported_replacements_annual.csv</code></li>
+        <li>Some Regina areas still show a higher share of lead service connections.</li>
+        <li>This map helps identify where replacement efforts likely matter most.</li>
+        <li>Findings are for planning priority, not individual health diagnosis.</li>
       </ul>
-      <strong>Metric clarity:</strong><br/>
-      <span style="color:#cfe3ff">Official program metric</span> = City-reported annual replacements/removals.<br/>
-      <span style="color:#cfe3ff">Inferred GIS metrics</span> = reproducible estimates from layer state changes (not an official replacement-event ledger).
-      <br/><br/>
-      <strong>New:</strong> equity and prioritization research summary (owner/renter, demographics, Indigenous, income):
-      <a target="_blank" href="reports/phd_equity_summary_2026-03-06.html">open research brief</a>.
-      <br/>
-      <strong>2019+ corrected progress snapshot:</strong>
-      <a target="_blank" href="reports/regina_lead_program_progress_2019_forward_2026-03-06.md">method note + yearly progress</a>.
-      <br/>
-      <strong>CT factor significance scan:</strong>
-      <a target="_blank" href="reports/ct_factor_significance_2019plus_2026-03-06.md">statistical screening results (2019+ replacements)</a>.
-      <br/>
-      <strong>Factor Diagnostics map tab:</strong>
-      <a target="_blank" href="reports/factor_diagnostics_map_2026-03-06.html">interactive CT choropleth + top tracts</a>.
-      <br/>
-      <strong>Kepler Phase A quickstart:</strong>
-      <a target="_blank" href="reports/kepler_phase_a_quickstart_2026-03-06.md">Kepler-ready dataset + configuration steps</a>.
-      <br/>
-      <strong>Kepler reproducible config:</strong>
-      <a target="_blank" href="reports/kepler_config_phase_a_2026-03-06.json">phase A config JSON</a>.
-      <br/>
-      <strong>Analytical mapping options:</strong>
-      <a target="_blank" href="reports/analytical_mapping_options_2026-03-06.md">Kepler.gl/deck.gl/MapLibre publication plan</a>.
-      <br/>
-      <strong>Mission closeout:</strong> <a target="_blank" href="reports/final_synthesis_2026-03-06.md">final synthesis (methods, outputs, next gaps)</a>.
-      <br/><br/>
-      <strong>StatsCan expansion (in progress):</strong> adding lowest practical census polygons for narrative weaving:
-      Dissemination Areas (DA) first, then Census Tracts (CT) for stable reporting alignment.
+
+      <div style="background:#0f1726;border:1px solid #334155;border-radius:8px;padding:10px;margin:10px 0;">
+        <strong style="color:#cfe3ff">Clear call to action</strong><br/>
+        <span>Check your address, request a line inspection if unsure, and prioritize support for highest-risk areas first.</span>
+        <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:8px;">
+          <a target="_blank" href="https://www.regina.ca/home-property/water/water/lead-service-connections/" style="background:#2563eb;color:#fff;padding:7px 10px;border-radius:6px;text-decoration:none;">Check City lead-service page</a>
+          <a target="_blank" href="reports/phd_equity_summary_2026-03-06.html" style="background:#1d4ed8;color:#fff;padding:7px 10px;border-radius:6px;text-decoration:none;">Read 3-minute research summary</a>
+          <a target="_blank" href="reports/final_synthesis_2026-03-06.md" style="background:#334155;color:#fff;padding:7px 10px;border-radius:6px;text-decoration:none;">View full methods + evidence</a>
+        </div>
+      </div>
+
+      <strong>Important data note</strong><br/>
+      <span style="color:#cfe3ff">Official metric:</span> city-reported annual replacements/removals.<br/>
+      <span style="color:#cfe3ff">Inferred metric:</span> reproducible estimate from GIS layer changes (not an official replacement-event ledger).
     </div>
   </section>
 </div>

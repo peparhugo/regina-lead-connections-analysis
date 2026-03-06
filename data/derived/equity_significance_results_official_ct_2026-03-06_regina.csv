@@ -1,0 +1,7 @@
+test_id,test_family,n,estimate,p_value,interpretation,caveat
+spearman_perm::income,nonparametric,54,-0.084734,0.530494,Association between income and inferred strict replacements.,Outcome is inferred proxy; directional only.
+ols_slope::income,regression,54,-0.000041,,"Univariate OLS slope, t_stat=-0.5800, se=0.000072",No robust p-value here; screening only.
+spearman_perm::renter_pct,nonparametric,54,0.270288,0.054789,Association between renter_pct and inferred strict replacements.,Outcome is inferred proxy; directional only.
+ols_slope::renter_pct,regression,54,0.142317,,"Univariate OLS slope, t_stat=1.9321, se=0.073660",No robust p-value here; screening only.
+spearman_perm::indigenous_identity_pct,nonparametric,54,-0.083133,0.540892,Association between indigenous_identity_pct and inferred strict replacements.,Outcome is inferred proxy; directional only.
+ols_slope::indigenous_identity_pct,regression,54,0.115933,,"Univariate OLS slope, t_stat=0.5872, se=0.197438",No robust p-value here; screening only.
