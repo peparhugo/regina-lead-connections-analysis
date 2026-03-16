@@ -1,6 +1,6 @@
 # Regina Lead Equity Mission — Final Synthesis
 
-Generated: 2026-03-06T21:08:26
+Generated: 2026-03-09T05:21:07
 
 ## Mission status
 - Status: COMPLETE
@@ -9,7 +9,7 @@ Generated: 2026-03-06T21:08:26
 
 ## Completed artifacts
 - CT vars: `data/derived/statscan_ct_equity_vars_2016_regina.csv` (rows: 54)
-- DA vars: `data/derived/statscan_da_equity_vars_2016_regina.csv` (rows: 150)
+- DA vars: `data/derived/statscan_da_equity_vars_2016_regina.csv` (rows: 20)
 - Official CT panel: `data/derived/ct_equity_panel_official_2026-03-06_regina.csv` (rows: 54)
 - Significance output: `data/derived/equity_significance_results_official_ct_2026-03-06_regina.csv`
 - Public summary: `reports/phd_equity_summary_2026-03-06.html`

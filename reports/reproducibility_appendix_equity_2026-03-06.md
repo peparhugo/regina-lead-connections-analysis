@@ -53,3 +53,57 @@ From `data/derived/equity_significance_results_2026-03-06.csv`:
 - The CT/DA panel here is explicitly a **proxy geography panel** built from LeadConnectionAreas, not an official StatsCan CT/DA spatial join.
 - Tenure and demographic fields are included in schema but remain pending numeric extraction in this run.
 - Public neighbourhood profile links are included to support future extraction and audit trail.
+
+## Phase-3 hardening addendum (2026-03-10)
+
+### A) Uncertainty-explicit scenario envelope (fresh run)
+Command executed:
+```bash
+python3 scripts/run_endpoint_uncertainty_scenarios.py
+```
+Artifacts refreshed:
+- `reports/model_scenario_endpoint_uncertainty_2026-03-06.csv`
+- `reports/model_scenario_endpoint_uncertainty_2026-03-06.md`
+
+Selected P10/P50/P90 values used in public summary hardening:
+- IQ delta (2.4→10 µg/dL): `-4.857 / -3.912 / -2.945`
+- ADHD OR: `1.709 / 2.004 / 2.353`
+- SBP mmHg per lead doubling: `0.689 / 0.908 / 1.113`
+- CKD HR (Q4 vs Q1–Q3): `1.194 / 1.485 / 1.852`
+
+Interpretation rule:
+- These values are uncertainty anchors for planning sensitivity, **not** causal Regina-specific effect estimates.
+
+### B) Inferred replacement divergence context (fresh run)
+Command executed:
+```bash
+python3 scripts/build_replacement_diff.py
+```
+Artifacts refreshed:
+- `data/derived/inferred_replacements_detailed.csv`
+- `data/derived/inferred_replacements_by_area.csv`
+- `data/derived/strict_replacements_by_area.csv`
+- `data/derived/inferred_replacements_meta.json`
+
+Meta summary:
+- Broad inferred count: `3933`
+- Strict inferred count: `1350`
+- Reason split:
+  - `material_changed_from_lead`: `1350`
+  - `lead_with_updated_record`: `2583`
+
+Interpretation rule:
+- Use strict set for conservative replacement interpretation.
+- Broad set is continuity context only; do not treat it as an official replacement event ledger.
+
+### C) Claim-to-artifact traceability map (required for publication)
+| Public claim class | Required artifact(s) |
+|---|---|
+| 2019+ baseline/replaced/remaining counts | `reports/regina_lead_program_progress_2019_forward_2026-03-06.md` |
+| CT-normalized impacted proxies | `reports/regina_lead_program_progress_2019_forward_2026-03-06.md` |
+| CT panel + statistical checks | `data/derived/ct_equity_panel_official_2026-03-06_regina.csv`, `data/derived/equity_significance_results_official_ct_2026-03-06_regina.csv` |
+| Replacement sensitivity (strict vs broad) | `data/derived/strict_replacements_by_area.csv`, `data/derived/inferred_replacements_by_area.csv`, `data/derived/inferred_replacements_meta.json` |
+| Method caveats + execution commands | `reports/reproducibility_appendix_equity_2026-03-06.md` |
+
+Publication gate:
+- If any headline claim cannot be linked to the table above, mark the claim out-of-scope and remove it from public summary.

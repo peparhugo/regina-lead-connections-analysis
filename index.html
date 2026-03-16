@@ -105,10 +105,34 @@
       font-size: .87rem;
     }
 
+    .timeline-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .health-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .tcard {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, .04);
+    }
+    .tcard .year { font-weight: 700; color: var(--brand); margin-bottom: 6px; }
+    .tcard .meta { color: var(--muted); font-size: .85rem; margin-top: 6px; }
+
     @media (max-width: 980px) {
       .grid { grid-template-columns: 1fr; }
       #map { height: 52vh; }
       .kpis { grid-template-columns: 1fr 1fr 1fr; }
+      .timeline-grid { grid-template-columns: 1fr; }
+      .health-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 700px) {
       .kpis { grid-template-columns: 1fr; }
@@ -119,15 +143,19 @@
 <body>
   <main class="wrap">
     <section class="hero">
-      <h1>Regina Lead Service Connections — Clear Public Action Page</h1>
-      <p>This page shows where lead service connection risk appears higher, what residents can do now, and why faster provincial co-funding improves child health outcomes.</p>
+      <h1>Regina Lead Service Connections — What Changed, What Hasn’t, and Why It Matters</h1>
+      <p>City records show the lead-service-line problem was on the formal agenda years ago. This project tracks what officials adopted, what changed over time, and where the gap between recognition and delivered protection still matters.</p>
+      <p style="margin-top:8px">It is a story about infrastructure and delivery — but also about residents, families, child-development risk, and why delay should not be judged only in budget terms.</p>
       <div class="cta">
-        <strong>Do this first:</strong> Check your address, request an inspection if unsure, and prioritize support in higher-risk areas.
+        <strong>Start here:</strong> Read the short public brief first, then use the bundle, tracker, and evidence table if you want the deeper documentary record.
         <div class="btns">
-          <a class="btn primary" target="_blank" href="https://www.regina.ca/home-property/water/water/lead-service-connections/">Check City Lead-Service Page</a>
-          <a class="btn ghost" target="_blank" href="reports/phd_equity_summary_2026-03-06.html">Read 3-Minute Summary</a>
-          <a class="btn ghost" target="_blank" href="reports/socioeconomic_significance_summary_2026-03-06.md">Socioeconomic Significance Summary</a>
-          <a class="btn ghost" target="_blank" href="reports/final_synthesis_2026-03-06.md">Full Methods + Evidence</a>
+          <a class="btn primary" target="_blank" href="reports/regina_public_brief_plain_language_2026-03-12.md">Read the Public Brief</a>
+          <a class="btn ghost" target="_blank" href="reports/regina_journalist_memo_2026-03-16.md">Journalist Memo</a>
+          <a class="btn ghost" target="_blank" href="reports/regina_public_handout_2026-03-16.md">One-Page Handout</a>
+          <a class="btn ghost" target="_blank" href="reports/regina_public_bundle_2026-03-16.pdf">Download Story Bundle (PDF)</a>
+          <a class="btn ghost" target="_blank" href="reports/regina_decision_to_delivery_tracker_2026-03-16.md">Decision / Delivery Tracker</a>
+          <a class="btn ghost" target="_blank" href="reports/regina_claim_evidence_table_primary_2026-03-12.md">Claim / Evidence Table</a>
+          <a class="btn ghost" target="_blank" href="https://www.regina.ca/home-property/water/water/lead-service-connections/">City Lead-Service Page</a>
         </div>
       </div>
     </section>
@@ -164,13 +192,103 @@
         <canvas id="timeline" height="165"></canvas>
 
         <div class="notice">
-          <strong>Action note:</strong> Current evidence supports accelerating replacements in high-burden tracts with provincial co-funding, especially where estimated child impact is highest. Official metric = city-reported annual replacements/removals; inferred metric = estimate from GIS layer changes.
+          <strong>Action note:</strong> Current evidence supports considering faster replacement in higher-burden areas, especially where child-exposure risk may be greater. Official metric = city-reported annual replacements/removals; inferred metric = estimate from GIS layer changes.
         </div>
+        <p class="small" style="margin-top:10px;">Timeline chart below shows selected reported milestones, not a full annual measured series.</p>
 
         <p class="small" style="margin-top:10px;">
           Source map layer: <a target="_blank" href="https://opengis.regina.ca/arcgis/rest/services/CGISViewer/LeadConnectionAreas/MapServer/0">LeadConnectionAreas/0</a>
         </p>
       </aside>
+    </section>
+
+    <section class="card" style="margin-top:14px;">
+      <h2 style="margin:0 0 8px;font-size:1.05rem;">How to read this story</h2>
+      <div class="timeline-grid">
+        <div class="tcard">
+          <div class="year">1. Start with the short brief</div>
+          <div>The plain-language brief gives the core story: what Regina decided, what changed, and what still looks unfinished.</div>
+          <div class="meta"><a target="_blank" href="reports/regina_public_brief_plain_language_2026-03-12.md">Open brief</a></div>
+        </div>
+        <div class="tcard">
+          <div class="year">2. Use the journalist memo or handout</div>
+          <div>The journalist memo and one-page handout are the easiest ways to share the story in a readable public format.</div>
+          <div class="meta">Journalist Memo + One-Page Handout</div>
+        </div>
+        <div class="tcard">
+          <div class="year">3. Use the bundle for the full public case</div>
+          <div>The bundle brings together the timeline, scorecard, watchlist, and appendix-grade burden framing in one place.</div>
+          <div class="meta"><a target="_blank" href="reports/regina_public_bundle_2026-03-16.pdf">Open PDF bundle</a></div>
+        </div>
+        <div class="tcard">
+          <div class="year">4. Check the documentary record</div>
+          <div>The claim/evidence table and tracker show where the narrative is directly anchored in the official record and what still needs monitoring.</div>
+          <div class="meta">Claim / Evidence Table + Decision / Delivery Tracker</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:14px;">
+      <h2 style="margin:0 0 8px;font-size:1.05rem;">Lead Program Timeline</h2>
+      <p class="small">Plain-language timeline of the strongest documentary milestones in the official record.</p>
+      <div class="timeline-grid">
+        <div class="tcard">
+          <div class="year">2019 — Acceleration motion appears</div>
+          <div>MN19-23 puts accelerating the lead-service-connection program into the formal Council record.</div>
+          <div class="meta">Anchor: MN19-23</div>
+        </div>
+        <div class="tcard">
+          <div class="year">2021 — Baseline program adopted</div>
+          <div>CR21-90 approves a 15-year replacement plan to 2036, mandatory private-side replacement rules, financing support, and filter-distribution direction.</div>
+          <div class="meta">Anchor: CR21-90</div>
+        </div>
+        <div class="tcard">
+          <div class="year">2022 — Implementation mechanics move</div>
+          <div>Executive Committee and Council advance bylaw and administration changes tied to the 2021 package.</div>
+          <div class="meta">Anchors: EX22-23 → CR22-31</div>
+        </div>
+        <div class="tcard">
+          <div class="year">2023 — Oversight continues</div>
+          <div>Council keeps the program in view through recurring update/reporting direction.</div>
+          <div class="meta">Anchor: CR23-97</div>
+        </div>
+        <div class="tcard">
+          <div class="year">2025 — Another adjustment package</div>
+          <div>Council approves financing, fee, filter-reimbursement, outreach, and reporting adjustments.</div>
+          <div class="meta">Anchors: EX25-82 → CR25-115</div>
+        </div>
+        <div class="tcard">
+          <div class="year">Current read</div>
+          <div>The record supports incremental policy movement with sustained public pressure in the process — but not a proven one-to-one causal story for any single delegation.</div>
+          <div class="meta">See: Lead Timeline Brief + Claim / Evidence Table</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:14px;">
+      <h2 style="margin:0 0 8px;font-size:1.05rem;">Health Burden Beyond Dollars</h2>
+      <p class="small">Why faster replacement matters in human terms, not only budget terms.</p>
+      <p>Lead service line delay is not only a financing or infrastructure problem. The research base assembled for this project permits a cautious human-impact framing: prolonged exposure is linked in the literature to child-development impacts, ADHD-type burden, and increased later chronic disease risk. That means delay should be understood not only in dollars, but also in terms of development, health, and quality of life.</p>
+      <div class="health-grid">
+        <div class="tcard">
+          <div class="year">Children</div>
+          <div>The strongest evidence in the project points to cognitive and behavioural burden in children, including IQ loss and ADHD-related harms.</div>
+          <div class="meta">Current proxy context: 1,540 children 0–14 in the proxy exposure context (inferred proxy, not audited count)</div>
+        </div>
+        <div class="tcard">
+          <div class="year">Adults</div>
+          <div>The evidence base also supports caution around later chronic disease burden, especially cardiovascular and kidney impacts associated with lead exposure.</div>
+          <div class="meta">See existing CVD and CKD effect anchors in the repo evidence set</div>
+        </div>
+        <div class="tcard">
+          <div class="year">Appendix-only burden work</div>
+          <div>The project includes a conservative technical appendix for the child-cognitive burden lane, but that estimate is supporting context, not the headline public claim.</div>
+          <div class="meta"><a target="_blank" href="reports/regina_health_burden_technical_appendix_2026-03-16.md">Open health burden appendix</a></div>
+        </div>
+      </div>
+      <div class="notice">
+        <strong>Interpretation guardrail:</strong> the current public page supports the human-burden framing, but it does not yet publish a single headline Regina QALY estimate. A full numeric burden model needs endpoint-specific utility mapping, duration assumptions, and anti-double-counting controls.
+      </div>
     </section>
   </main>
 

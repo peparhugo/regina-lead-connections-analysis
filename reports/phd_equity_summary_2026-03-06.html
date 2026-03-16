@@ -66,6 +66,30 @@
   </section>
 
   <section class="card">
+    <h2>Uncertainty envelope (Phase-3 hardening)</h2>
+    <p class="small">Scenario ranges below are from a Monte Carlo uncertainty sweep (5,000 draws/parameter). These values are not causal effects for Regina; they are uncertainty-informed external anchors used for planning sensitivity.</p>
+    <ul>
+      <li><strong>IQ delta (2.4→10 µg/dL):</strong> P10 <code>-4.86</code>, P50 <code>-3.91</code>, P90 <code>-2.95</code>.</li>
+      <li><strong>ADHD odds ratio:</strong> P10 <code>1.71</code>, P50 <code>2.00</code>, P90 <code>2.35</code>.</li>
+      <li><strong>SBP per blood lead doubling (mmHg):</strong> P10 <code>0.689</code>, P50 <code>0.908</code>, P90 <code>1.113</code>.</li>
+      <li><strong>CKD hazard ratio (Q4 vs Q1–Q3):</strong> P10 <code>1.19</code>, P50 <code>1.49</code>, P90 <code>1.85</code>.</li>
+    </ul>
+    <p class="small">Artifact: <code>reports/model_scenario_endpoint_uncertainty_2026-03-06.md</code>.</p>
+  </section>
+
+  <section class="card">
+    <h2>Claim-to-artifact traceability (Phase-3 hardening)</h2>
+    <ul>
+      <li><strong>Headline counts (baseline/replaced/remaining):</strong> `reports/regina_lead_program_progress_2019_forward_2026-03-06.md`</li>
+      <li><strong>CT-normalized impact proxy figures:</strong> `reports/regina_lead_program_progress_2019_forward_2026-03-06.md`</li>
+      <li><strong>Official CT panel + significance outputs:</strong> `data/derived/ct_equity_panel_official_2026-03-06_regina.csv`, `data/derived/equity_significance_results_official_ct_2026-03-06_regina.csv`</li>
+      <li><strong>Replacement sensitivity split (strict vs broad):</strong> `data/derived/strict_replacements_by_area.csv`, `data/derived/inferred_replacements_by_area.csv`, `data/derived/inferred_replacements_meta.json`</li>
+      <li><strong>Method assumptions and commands:</strong> `reports/reproducibility_appendix_equity_2026-03-06.md`</li>
+    </ul>
+    <p class="small warn">Guardrail: if a public claim cannot be mapped to one of the artifacts above, it is out-of-scope and should not be published.</p>
+  </section>
+
+  <section class="card">
     <h2>Reproducibility</h2>
     <p>All outputs are generated via:</p>
     <p><code>python3 scripts/build_equity_panel_and_tests.py</code></p>

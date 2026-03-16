@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-03-06T04:59:01.248598+00:00",
-  "current_count": 98976,
+  "generated_at": "2026-03-10T16:27:46.243000+00:00",
+  "current_count": 98952,
   "snapshot_count": 89327,
-  "common_gisid_count": 86893,
-  "inferred_count_broad": 3928,
-  "inferred_count_strict": 1349,
+  "common_gisid_count": 86891,
+  "inferred_count_broad": 3933,
+  "inferred_count_strict": 1350,
   "reason_counts": {
-    "material_changed_from_lead": 1349,
-    "lead_with_updated_record": 2579
+    "material_changed_from_lead": 1350,
+    "lead_with_updated_record": 2583
   },
   "notes": [
     "Broad inferred set includes lead_with_updated_record for legacy continuity.",
