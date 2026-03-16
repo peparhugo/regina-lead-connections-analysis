@@ -433,6 +433,16 @@
       border: 1px solid rgba(143,45,31,0.08);
     }
 
+    .chart-shell.compact {
+      max-width: 420px;
+    }
+
+    .chart-shell.compact canvas {
+      width: 100% !important;
+      height: 150px !important;
+      display: block;
+    }
+
     .footer-note {
       margin-top: 16px;
       color: var(--muted);
@@ -586,9 +596,9 @@
             <div><span class="dot" style="background:#dc2626"></span>High</div>
             <div><span class="dot" style="background:#7f1d1d"></span>Very high</div>
           </div>
-          <div class="chart-shell">
+          <div class="chart-shell compact">
             <h3 style="margin:0 0 12px;">Selected program milestones</h3>
-            <canvas id="timeline" height="185"></canvas>
+            <canvas id="timeline"></canvas>
           </div>
           <div class="quick-links">
             <a class="quick-link" target="_blank" href="https://www.regina.ca/home-property/water/water/lead-service-connections/"><span>City lead-service page</span><span>Open →</span></a>
