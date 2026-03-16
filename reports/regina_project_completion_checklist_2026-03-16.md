@@ -1,11 +1,18 @@
 # Regina Lead Project — Completion Checklist
 
 Date: 2026-03-16  
-Status: COMPLETE (publication-oriented operating mode)
+Status: COMPLETE (documentary/accountability package) / REPAIRED (current public package)
 
 This checklist treats the Regina lead work as one project with two linked outputs:
 1. Public-facing equity/action page
-2. Investigative narrative on continuity, pressure, and policy movement
+2. Investigative narrative on continuity, pressure, policy movement, and delivery adequacy
+
+## Canonical status note
+This file now reflects the post-review state.
+- The documentary/accountability package is complete and publishable.
+- The broader public package required a repair pass after the 2026-03-16 JTB integrity review.
+- Current claim-control authority now lives in `reports/regina_current_claim_status_2026-03-16.md`.
+- Current package-gate authority now lives in `reports/regina_package_gate_status_2026-03-16.md`.
 
 ## MVP definition (strict)
 - Public page is clear, concise, and understandable to average residents.
@@ -28,28 +35,26 @@ This checklist treats the Regina lead work as one project with two linked output
 | 8 | Produce investigative memo on continuity, pressure, and policy movement | DONE | `reports/regina_investigative_memo_method_evidence_limits_2026-03-12.md` |
 | 9 | Produce plain-language public brief | DONE | `reports/regina_public_brief_plain_language_2026-03-12.md` |
 | 10 | Score whether record shows incremental change vs true policy shift | DONE | `reports/regina_true_policy_shift_scorecard_2026-03-12.md` |
-| 11 | Resolve the main evidence gap around MN19-23 documentary anchoring | DONE | `corpus_docs/raw/regina_jtb_minutes_validation_matrix.md` (P1 accepted using meeting 4648 Type=14 + Type=1 and meeting 5134 Type=12) |
+| 11 | Resolve the main evidence gap around MN19-23 documentary anchoring | DONE | `corpus_docs/raw/regina_jtb_minutes_validation_matrix.md` |
 | 12 | Link investigative outputs from the public page so the package lands coherently | DONE | `index.html` |
-
-## What was completed in this pass
-- Confirmed the project’s remaining work had effectively already been executed across 2026-03-09 to 2026-03-12 artifacts.
-- Confirmed the strongest previously-open issue (`MN19-23` traceability) is now sufficiently anchored for documentary/JTB purposes.
-- Tightened final packaging by linking the investigative outputs directly from the public page.
+| 13 | Run package-wide JTB integrity repair pass for the expanded 2026-03-16 public package | DONE | `reports/regina_jtb_integrity_review_2026-03-16.md`, `reports/regina_current_claim_status_2026-03-16.md`, `reports/regina_package_gate_status_2026-03-16.md` |
 
 ## Final narrative state
-- **Supported:** formal continuity from 2021 to 2025, sustained external pressure in the official process, and incremental policy movement.
+- **Supported:** formal continuity from 2021 to 2025, sustained external pressure in the official process, incremental policy movement, and an open decision-to-delivery question.
 - **Not supported:** strong causal claim that any one delegation directly caused later votes.
-- **Current verdict:** documentary/JTB support for the concern→decision chain is good enough to publish in a careful investigative narrative.
+- **Support-layer only unless revalidated:** endpoint-specific burden claims, healthy-life-years rhetoric, and numeric burden outputs.
+- **Current verdict:** documentary/JTB support for the concern→decision chain is good enough to publish in a careful investigative narrative, and the broader public package is publishable after repair so long as it obeys the current claim-status ledger.
 
 ## Remaining optional upgrades (not blockers)
 - Add a dedicated visual timeline section to the public page.
-- Add downloadable PDF bundle for the public brief + claim table + scorecard.
+- Improve design/UX further without changing the claim envelope.
 - Extend from policy-process narrative into delivery tracking (implementation deadlines, completions, slippage).
 
 ## Done criteria
 The project counts as complete under Pepar’s publish-first rule because:
-- the narrative is clear,
+- the documentary narrative is clear,
 - the package is public-facing,
 - the evidence is primary-record grounded,
 - the main chains are JTB-validated for documentary presence,
-- and unresolved issues are framed as limits instead of hidden.
+- unresolved issues are framed as limits instead of hidden,
+- and the expanded 2026-03-16 package now has a canonical claim-status ledger and package gate.
