@@ -1,5 +1,10 @@
 # Regina Session Switch Summary — 2026-03-16
 
+> **Superseded as live truth on 2026-03-16.** Keep this as a historical handoff note only. Current authority now lives in:
+> - `reports/regina_current_claim_status_2026-03-16.md`
+> - `reports/regina_package_gate_status_2026-03-16.md`
+> - `reports/regina_master_reconciliation_review_2026-03-16.md`
+
 Use this as the restart note for the next session.
 
 ## Current situation

@@ -27,7 +27,7 @@ This pattern is **formal continuity**: decisions were not isolated one-offs. The
 
 This also reflects **practical pressure**: repeated delegations and filed public communications appear in official records at key decision points.
 
-It also matters for a second reason: this is not only a governance or infrastructure story. The project’s research base already supports a broader health framing in which lead exposure is linked with child cognitive harm, ADHD-type burden, and later chronic disease risk. In public terms, that means delay is not only about dollars spent or pipes left in the ground — it is also about quality of life, development, and healthy years put at risk.
+It also matters for a second reason: this is not only a governance or infrastructure story. The support materials justify a cautious human-stakes framing, especially around child-development concern and the consequences of prolonged delay. In public terms, that means the issue should not be judged only by dollars spent or pipes left in the ground.
 
 ## What has not yet been proven in this brief
 - This brief does **not** claim that public delegations directly caused each vote outcome.
