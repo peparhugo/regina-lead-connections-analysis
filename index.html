@@ -3,29 +3,39 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Regina Lead Service Connections — Public Story Hub</title>
-  <meta name="description" content="A public story hub for Regina lead service connections: what the record shows, why it matters, and where to find the supporting evidence." />
+  <title>Regina Lead Service Connections — What the Record Shows</title>
+  <meta name="description" content="A clear public summary of Regina's lead service connection story: what the record shows, what changed, and what still appears unresolved." />
+  <meta name="theme-color" content="#0b1220" />
+  <meta property="og:title" content="Regina Lead Service Connections — What the Record Shows" />
+  <meta property="og:description" content="A clear, evidence-backed public summary of what Regina's lead service connection record shows — and what still appears unresolved." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Regina Lead Service Connections — What the Record Shows" />
+  <meta name="twitter:description" content="A clear, evidence-backed public summary of the Regina lead service connection story." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <style>
     :root {
-      --bg: #f4f1ea;
-      --paper: rgba(255,255,255,0.82);
-      --paper-strong: #ffffff;
-      --ink: #18212b;
-      --muted: #5d6b7b;
-      --line: rgba(24, 33, 43, 0.09);
-      --brand: #8f2d1f;
-      --brand-dark: #5a1d15;
-      --accent: #d97706;
-      --accent-soft: #fff1df;
-      --ok: #1f7a4f;
-      --shadow: 0 24px 60px rgba(37, 29, 18, 0.08);
-      --radius: 22px;
+      --bg: #f6f7fb;
+      --panel: rgba(255,255,255,0.8);
+      --panel-strong: #ffffff;
+      --ink: #101828;
+      --muted: #475467;
+      --line: rgba(16,24,40,0.08);
+      --brand: #b54708;
+      --brand-deep: #7a2e0d;
+      --accent: #1d4ed8;
+      --accent-soft: #eef4ff;
+      --warm: #fff4e8;
+      --ok: #027a48;
+      --danger: #b42318;
+      --shadow: 0 22px 70px rgba(16,24,40,0.08);
+      --radius: 26px;
+      --radius-sm: 18px;
     }
 
     * { box-sizing: border-box; }
@@ -33,20 +43,26 @@
     body {
       margin: 0;
       font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(217, 119, 6, 0.08), transparent 32%),
-        radial-gradient(circle at top right, rgba(143, 45, 31, 0.08), transparent 28%),
-        var(--bg);
       color: var(--ink);
       line-height: 1.6;
+      background:
+        radial-gradient(circle at top left, rgba(29,78,216,0.08), transparent 28%),
+        radial-gradient(circle at top right, rgba(181,71,8,0.1), transparent 30%),
+        linear-gradient(180deg, #fbfcff 0%, #f6f7fb 42%, #eef2f8 100%);
     }
 
     a { color: inherit; }
 
+    a:focus-visible,
+    button:focus-visible {
+      outline: 3px solid rgba(29,78,216,0.42);
+      outline-offset: 3px;
+    }
+
     .wrap {
-      width: min(1180px, calc(100% - 32px));
+      width: min(1220px, calc(100% - 32px));
       margin: 0 auto;
-      padding: 28px 0 56px;
+      padding: 28px 0 60px;
     }
 
     .topbar {
@@ -54,7 +70,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      margin-bottom: 20px;
+      margin-bottom: 14px;
       color: var(--muted);
       font-size: 0.92rem;
     }
@@ -63,161 +79,214 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      padding: 8px 14px;
       border-radius: 999px;
-      background: rgba(255,255,255,0.66);
-      border: 1px solid rgba(24, 33, 43, 0.08);
-      backdrop-filter: blur(12px);
+      padding: 9px 14px;
+      background: rgba(255,255,255,0.76);
+      border: 1px solid rgba(16,24,40,0.06);
+      backdrop-filter: blur(14px);
+      font-weight: 600;
+    }
+
+    .subnav {
+      position: sticky;
+      top: 12px;
+      z-index: 20;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+      padding: 10px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(16,24,40,0.06);
+      box-shadow: 0 16px 40px rgba(16,24,40,0.06);
+      backdrop-filter: blur(16px);
+    }
+
+    .subnav a {
+      text-decoration: none;
+      color: var(--ink);
+      font-weight: 700;
+      font-size: 0.92rem;
+      padding: 10px 13px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.8);
+      border: 1px solid rgba(16,24,40,0.06);
+    }
+
+    .subnav a:hover,
+    .subnav a.active {
+      background: #fff;
+      border-color: rgba(29,78,216,0.16);
+      color: var(--accent);
     }
 
     .hero {
       position: relative;
       overflow: hidden;
-      border-radius: 32px;
-      padding: 38px;
+      border-radius: 34px;
+      padding: 34px;
       background:
-        linear-gradient(135deg, rgba(24, 33, 43, 0.98), rgba(54, 30, 23, 0.94)),
-        #1a2028;
+        linear-gradient(135deg, rgba(11,18,32,0.96), rgba(24,34,56,0.92) 52%, rgba(90,37,15,0.9));
       color: #f8fafc;
       box-shadow: var(--shadow);
       margin-bottom: 24px;
     }
 
+    .hero::before,
     .hero::after {
       content: "";
       position: absolute;
-      inset: auto -80px -120px auto;
-      width: 320px;
-      height: 320px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(217,119,6,0.24), rgba(217,119,6,0));
+      border-radius: 999px;
       pointer-events: none;
+      filter: blur(4px);
+    }
+
+    .hero::before {
+      width: 380px;
+      height: 380px;
+      right: -100px;
+      top: -120px;
+      background: radial-gradient(circle, rgba(96,165,250,0.24), rgba(96,165,250,0));
+    }
+
+    .hero::after {
+      width: 300px;
+      height: 300px;
+      left: -90px;
+      bottom: -120px;
+      background: radial-gradient(circle, rgba(245,158,11,0.2), rgba(245,158,11,0));
     }
 
     .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.55fr) minmax(300px, 0.95fr);
-      gap: 28px;
       position: relative;
       z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(320px, 0.9fr);
+      gap: 26px;
+      align-items: start;
     }
 
-    .hero-copy h1 {
-      margin: 12px 0 16px;
-      font-size: clamp(2.15rem, 5vw, 4rem);
-      line-height: 1.05;
-      letter-spacing: -0.04em;
-      max-width: 12ch;
-    }
-
-    .hero-copy p {
-      margin: 0 0 14px;
-      max-width: 66ch;
-      color: rgba(226, 232, 240, 0.9);
-      font-size: 1.03rem;
-    }
-
-    .hero-badges {
+    .hero-badges,
+    .quick-stat-row,
+    .action-row,
+    .chip-row {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-bottom: 12px;
     }
 
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
+    .badge,
+    .quick-stat,
+    .chip {
       border-radius: 999px;
       padding: 8px 12px;
-      font-size: 0.84rem;
-      color: #e2e8f0;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.85rem;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.09);
+      color: #e5eefc;
     }
 
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 18px;
+    .hero h1 {
+      margin: 14px 0 14px;
+      font-size: clamp(2.5rem, 5.4vw, 4.75rem);
+      line-height: 0.96;
+      letter-spacing: -0.06em;
+      max-width: 10.5ch;
     }
+
+    .hero-lede {
+      max-width: 69ch;
+      color: rgba(226,232,240,0.92);
+      font-size: 1.08rem;
+      margin: 0 0 18px;
+    }
+
+    .action-row { margin-top: 20px; }
 
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      padding: 12px 16px;
-      border-radius: 14px;
+      padding: 13px 17px;
+      border-radius: 15px;
       text-decoration: none;
-      font-weight: 700;
+      font-weight: 800;
       font-size: 0.95rem;
-      transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
       border: 1px solid transparent;
     }
 
     .btn:hover { transform: translateY(-1px); }
     .btn.primary {
-      background: linear-gradient(135deg, #f59e0b, #d97706);
       color: #1f1303;
-      box-shadow: 0 14px 32px rgba(217, 119, 6, 0.28);
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      box-shadow: 0 16px 34px rgba(245,158,11,0.28);
     }
     .btn.secondary {
-      background: rgba(255,255,255,0.08);
       color: #f8fafc;
+      background: rgba(255,255,255,0.08);
       border-color: rgba(255,255,255,0.16);
     }
 
     .hero-side {
       display: grid;
       gap: 14px;
-      align-content: start;
     }
 
-    .hero-panel {
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.11);
-      border-radius: 22px;
-      padding: 18px;
-      backdrop-filter: blur(10px);
+    .glass-card,
+    .section,
+    .content-card,
+    .metric-card,
+    .resource-card,
+    .timeline-card,
+    .insight-card,
+    .map-copy,
+    .map-shell,
+    .mini-card,
+    .findings-banner {
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
     }
 
-    .hero-panel h2,
+    .glass-card {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.12);
+      color: #f8fafc;
+      padding: 20px;
+    }
+
+    .glass-card p,
+    .glass-card li { color: rgba(226,232,240,0.9); }
+
+    .glass-card h2,
     .section-head h2,
-    .story-card h3,
-    .resource-card h3,
+    .content-card h3,
     .metric-card h3,
+    .resource-card h3,
     .timeline-card h3,
+    .insight-card h3,
+    .mini-card h3,
     .map-copy h3,
-    .mini-card h3 {
+    .findings-banner h2 {
       margin: 0 0 10px;
-      line-height: 1.2;
+      line-height: 1.15;
     }
 
-    .hero-panel p,
-    .hero-panel li,
-    .resource-card p,
-    .metric-card p,
-    .timeline-card p,
-    .map-copy p,
-    .mini-card p { color: rgba(226, 232, 240, 0.88); }
-
-    .hero-panel ul {
+    .glass-card ul {
       margin: 0;
       padding-left: 18px;
     }
 
-    .hero-panel li { margin-bottom: 8px; }
+    .glass-card li { margin-bottom: 8px; }
 
     .section {
+      background: rgba(255,255,255,0.72);
+      padding: 28px;
       margin-top: 18px;
-      background: var(--paper);
-      border: 1px solid rgba(255,255,255,0.6);
-      border-radius: 28px;
-      padding: 26px;
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(14px);
     }
 
     .section-head {
@@ -228,175 +297,221 @@
       margin-bottom: 18px;
     }
 
-    .section-head p {
+    .section-head h2 {
+      font-size: clamp(1.4rem, 2vw, 1.95rem);
+      color: var(--ink);
+    }
+
+    .section-head p,
+    .content-card p,
+    .metric-card p,
+    .resource-card p,
+    .timeline-card p,
+    .insight-card p,
+    .mini-card p,
+    .map-copy p,
+    .footer-note,
+    .subtle {
       margin: 0;
       color: var(--muted);
-      max-width: 68ch;
     }
 
-    .section-head h2 {
-      font-size: clamp(1.35rem, 2vw, 1.8rem);
-      color: var(--ink);
+    .findings-banner {
+      padding: 22px;
+      background: linear-gradient(135deg, #fff6ec, #eef4ff);
+      margin-bottom: 18px;
     }
 
-    .metrics {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 14px;
+    .findings-banner p {
+      margin: 0;
+      max-width: 74ch;
+      color: #344054;
+      font-size: 1rem;
     }
 
-    .metric-card {
-      padding: 20px;
-      border-radius: 20px;
-      background: var(--paper-strong);
-      border: 1px solid var(--line);
-      box-shadow: 0 14px 30px rgba(24,33,43,0.05);
-    }
-
-    .metric-card .eyebrow-small {
-      display: inline-block;
-      font-size: 0.76rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--brand);
-      margin-bottom: 8px;
-      font-weight: 700;
-    }
-
-    .metric-value {
-      font-size: clamp(1.8rem, 3vw, 2.5rem);
-      font-weight: 800;
-      line-height: 1;
-      margin-bottom: 8px;
-      color: var(--ink);
-    }
-
-    .story-grid,
-    .resource-grid,
+    .three-up,
+    .metrics,
     .timeline-grid,
-    .map-grid,
     .support-grid,
-    .health-grid {
+    .map-grid,
+    .resource-grid,
+    .insight-grid {
       display: grid;
       gap: 16px;
     }
 
-    .story-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .resource-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .timeline-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .three-up,
+    .timeline-grid,
+    .resource-grid,
+    .insight-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .metrics { grid-template-columns: repeat(4, minmax(0, 1fr)); }
     .support-grid { grid-template-columns: 1.05fr 0.95fr; }
-    .map-grid { grid-template-columns: minmax(320px, 0.9fr) minmax(0, 1.3fr); align-items: stretch; }
-    .health-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .map-grid { grid-template-columns: minmax(330px, 0.95fr) minmax(0, 1.25fr); align-items: stretch; }
 
-    .story-card,
+    .content-card,
+    .metric-card,
     .resource-card,
     .timeline-card,
+    .insight-card,
     .map-copy,
     .map-shell,
     .mini-card {
-      background: var(--paper-strong);
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      padding: 20px;
-      box-shadow: 0 10px 26px rgba(24,33,43,0.045);
+      background: rgba(255,255,255,0.95);
+      padding: 22px;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
     }
 
-    .story-card {
+    .content-card:hover,
+    .metric-card:hover,
+    .resource-card:hover,
+    .timeline-card:hover,
+    .insight-card:hover,
+    .mini-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 26px 54px rgba(16,24,40,0.1);
+      border-color: rgba(29,78,216,0.12);
+    }
+
+    .content-card {
       position: relative;
       overflow: hidden;
     }
 
-    .story-card::before {
+    .content-card::before {
       content: "";
       position: absolute;
       inset: 0 auto 0 0;
-      width: 4px;
+      width: 5px;
       background: linear-gradient(180deg, var(--brand), var(--accent));
     }
 
-    .story-card p,
-    .resource-card p,
-    .timeline-card p,
-    .map-copy p,
-    .mini-card p { color: var(--muted); margin: 0; }
-
-    .story-card strong,
-    .resource-card strong,
-    .timeline-card strong { color: var(--ink); }
-
-    .timeline-card .year {
-      display: inline-flex;
-      align-items: center;
-      padding: 7px 11px;
-      border-radius: 999px;
-      margin-bottom: 12px;
-      background: var(--accent-soft);
-      color: var(--brand-dark);
+    .metric-card .label {
+      display: inline-block;
+      margin-bottom: 8px;
+      font-size: 0.76rem;
       font-weight: 800;
-      font-size: 0.85rem;
-      letter-spacing: 0.01em;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--brand);
     }
 
-    .resource-card a,
-    .mini-card a,
-    .map-copy a { color: var(--brand); font-weight: 700; }
+    .metric-value {
+      font-size: clamp(1.9rem, 3vw, 2.65rem);
+      line-height: 1;
+      font-weight: 900;
+      margin-bottom: 8px;
+      letter-spacing: -0.04em;
+    }
+
+    .key-callout {
+      margin-top: 16px;
+      border-radius: 20px;
+      padding: 16px 18px;
+      background: linear-gradient(135deg, rgba(181,71,8,0.08), rgba(29,78,216,0.08));
+      border: 1px solid rgba(181,71,8,0.12);
+      color: #1d2939;
+      font-weight: 600;
+    }
+
+    .impact-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .impact-pill {
+      border-radius: 20px;
+      padding: 16px 18px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .impact-pill .label {
+      display: inline-block;
+      margin-bottom: 6px;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: #93c5fd;
+    }
+
+    .impact-pill p {
+      margin: 0;
+      color: rgba(226,232,240,0.94);
+      line-height: 1.45;
+      font-weight: 600;
+    }
+
+    .summary-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .summary-item {
+      border-radius: 20px;
+      padding: 16px;
+      background: #f8fafc;
+      border: 1px solid rgba(16,24,40,0.06);
+    }
+
+    .summary-item .kicker {
+      display: inline-block;
+      margin-bottom: 8px;
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
 
     .resource-list,
-    .quick-links {
+    .quick-links,
+    .mini-stack {
       display: grid;
       gap: 10px;
-      margin-top: 12px;
     }
 
     .resource-link,
     .quick-link {
       display: flex;
-      justify-content: space-between;
-      gap: 16px;
       align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-radius: 16px;
+      padding: 13px 14px;
       text-decoration: none;
       color: var(--ink);
-      padding: 12px 14px;
-      border-radius: 16px;
-      background: #faf6f1;
-      border: 1px solid rgba(143,45,31,0.08);
-      font-weight: 600;
+      background: #f8fafc;
+      border: 1px solid rgba(16,24,40,0.06);
+      font-weight: 700;
     }
 
     .resource-link span:last-child,
-    .quick-link span:last-child {
-      color: var(--brand);
-      white-space: nowrap;
-      font-size: 0.88rem;
-    }
+    .quick-link span:last-child { color: var(--brand); font-size: 0.88rem; white-space: nowrap; }
 
-    .quote {
-      margin-top: 18px;
-      padding: 18px 20px;
-      border-radius: 18px;
-      background: linear-gradient(135deg, rgba(143,45,31,0.08), rgba(217,119,6,0.08));
-      border: 1px solid rgba(143,45,31,0.08);
-      color: var(--ink);
-      font-weight: 600;
-    }
-
-    .support-grid .mini-card {
-      display: grid;
-      gap: 14px;
-    }
-
-    .mini-stack {
-      display: grid;
-      gap: 14px;
+    .timeline-card .year {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 7px 11px;
+      margin-bottom: 12px;
+      background: var(--warm);
+      color: var(--brand-deep);
+      font-size: 0.84rem;
+      font-weight: 800;
     }
 
     .notice {
       margin-top: 16px;
-      padding: 16px 18px;
       border-radius: 18px;
-      background: #fff7eb;
-      border: 1px solid #f3d6ac;
-      color: #7a4a05;
+      padding: 16px 18px;
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      color: #9a3412;
       font-size: 0.95rem;
     }
 
@@ -405,8 +520,8 @@
       grid-template-columns: 1fr 1fr;
       gap: 10px;
       margin-top: 18px;
-      font-size: 0.92rem;
       color: var(--muted);
+      font-size: 0.92rem;
     }
 
     .dot {
@@ -418,69 +533,83 @@
       vertical-align: middle;
     }
 
-    #map {
-      height: 560px;
-      border-radius: 18px;
-      border: 1px solid var(--line);
-      overflow: hidden;
-    }
-
     .chart-shell {
       margin-top: 18px;
+      border-radius: 20px;
+      background: #f8fafc;
+      border: 1px solid rgba(16,24,40,0.06);
       padding: 18px;
-      border-radius: 18px;
-      background: #faf6f1;
-      border: 1px solid rgba(143,45,31,0.08);
     }
 
-    .chart-shell.compact {
-      max-width: 420px;
-    }
-
+    .chart-shell.compact { max-width: 430px; }
     .chart-shell.compact canvas {
       width: 100% !important;
       height: 150px !important;
       display: block;
     }
 
+    #map {
+      height: 560px;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      overflow: hidden;
+    }
+
     .footer-note {
       margin-top: 16px;
+      font-size: 0.92rem;
+    }
+
+    .page-footer {
+      margin-top: 22px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 18px;
+      align-items: center;
+      justify-content: space-between;
       color: var(--muted);
       font-size: 0.9rem;
     }
 
     @media (max-width: 1080px) {
       .hero-grid,
-      .map-grid,
-      .support-grid,
-      .story-grid,
-      .resource-grid,
+      .metrics,
+      .three-up,
       .timeline-grid,
-      .health-grid,
-      .metrics {
-        grid-template-columns: 1fr 1fr;
-      }
-      .hero-grid > :first-child { grid-column: 1 / -1; }
-      .map-grid { grid-template-columns: 1fr; }
+      .resource-grid,
+      .insight-grid,
+      .impact-strip { grid-template-columns: 1fr 1fr; }
+      .hero-grid > :first-child,
+      .summary-strip,
+      .map-grid,
+      .support-grid { grid-column: 1 / -1; }
+      .map-grid,
       .support-grid { grid-template-columns: 1fr; }
+      .summary-strip,
+      .impact-strip { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 760px) {
-      .wrap { width: min(100% - 20px, 1180px); padding-top: 18px; }
+      .wrap { width: min(100% - 20px, 1220px); padding-top: 18px; }
       .topbar,
       .section-head { flex-direction: column; align-items: start; }
+      .subnav { top: 8px; padding: 8px; overflow-x: auto; flex-wrap: nowrap; }
+      .subnav a { white-space: nowrap; }
       .hero,
       .section { padding: 20px; border-radius: 24px; }
       .hero-grid,
-      .story-grid,
-      .resource-grid,
+      .metrics,
+      .three-up,
       .timeline-grid,
-      .health-grid,
-      .metrics { grid-template-columns: 1fr; }
-      .hero-copy h1 { max-width: none; }
-      #map { height: 420px; }
-      .hero-actions { flex-direction: column; }
+      .resource-grid,
+      .insight-grid,
+      .summary-strip,
+      .impact-strip { grid-template-columns: 1fr; }
+      .hero h1 { max-width: none; }
+      .action-row { flex-direction: column; }
+      .quick-stat-row { flex-direction: column; align-items: start; }
       .btn { width: 100%; }
+      #map { height: 420px; }
     }
   </style>
 </head>
@@ -491,105 +620,154 @@
       <div>Built from the public package, timeline work, and supporting evidence set</div>
     </div>
 
+    <nav class="subnav" aria-label="Quick page navigation">
+      <a href="#key-findings">Key findings</a>
+      <a href="#what-changed">What changed</a>
+      <a href="#map-context">Map context</a>
+      <a href="#timeline-record">Timeline</a>
+      <a href="#why-it-matters">Why it matters</a>
+      <a href="#evidence">Evidence pack</a>
+    </nav>
+
     <section class="hero">
       <div class="hero-grid">
-        <div class="hero-copy">
+        <div>
           <div class="hero-badges">
-            <span class="badge">Public-facing summary</span>
-            <span class="badge">Story first, evidence available</span>
-            <span class="badge">Appendix-grade burden work kept in support layer</span>
+            <span class="badge">Clear public summary</span>
+            <span class="badge">Evidence-backed</span>
+            <span class="badge">Designed for fast reading</span>
           </div>
-          <h1>Regina recognized the lead-line problem early. The unresolved question is whether the response ever became proportionate to the stakes.</h1>
-          <p>This page is the public version of a simpler and sharper story: Regina knew there was a lead-service-line problem, moved through a series of formal decisions, but still appears to have responded gradually rather than decisively. The strongest current public case is about recognition, policy movement, and the still-open delivery question.</p>
-          <p>Start here if you want the central tension fast: early recognition, staged policy movement, and an open question about whether delivery ever matched the stakes. Use the timeline, handout, bundle, and evidence documents if you want the supporting record.</p>
-          <div class="hero-actions">
-            <a class="btn primary" target="_blank" href="reports/regina_public_brief_plain_language_2026-03-12.md">Read the public brief</a>
-            <a class="btn secondary" href="#findings">See key findings</a>
-            <a class="btn secondary" href="#evidence">Open evidence & downloads</a>
+          <h1>Regina knew the problem. The real question is whether protection followed fast enough.</h1>
+          <p class="hero-lede">The record supports a simple public reading: the lead-service-line issue was officially recognized years ago, the city did make real policy and program moves, and the strongest unresolved issue is whether those moves delivered protection with enough urgency in practice.</p>
+          <div class="quick-stat-row">
+            <span class="quick-stat">Recognition came first</span>
+            <span class="quick-stat">Policy changes followed</span>
+            <span class="quick-stat">Delivery remains the core open question</span>
+          </div>
+          <div class="action-row">
+            <a class="btn primary" target="_blank" href="reports/regina_public_brief_plain_language_2026-03-12.md">Read the 3-minute brief</a>
+            <a class="btn secondary" href="#key-findings">See the findings</a>
+            <a class="btn secondary" href="#evidence">Open the evidence pack</a>
+          </div>
+          <div class="impact-strip" aria-label="Fast summary of the case">
+            <div class="impact-pill">
+              <span class="label">Known</span>
+              <p>The issue had already entered the official record.</p>
+            </div>
+            <div class="impact-pill">
+              <span class="label">Moved</span>
+              <p>Policy and program changes did happen over time.</p>
+            </div>
+            <div class="impact-pill">
+              <span class="label">Unresolved</span>
+              <p>The main question is whether delivery matched the stakes.</p>
+            </div>
           </div>
         </div>
 
         <div class="hero-side">
-          <div class="hero-panel">
-            <h2>What this page is for</h2>
+          <article class="glass-card">
+            <h2>What the findings were</h2>
             <ul>
-              <li>Show readers the core tension without forcing them to decode a research archive first.</li>
-              <li>Make the difference between recognition, policy movement, and delivered protection obvious.</li>
-              <li>Keep the technical support layer available, but stop letting it bury the narrative.</li>
+              <li><strong>The issue was already on the official record.</strong> This was not an invisible problem.</li>
+              <li><strong>The city did move.</strong> Plans, financing changes, filters, outreach, and reporting all appear in the record.</li>
+              <li><strong>The strongest public tension remains delivery.</strong> The record still reads more like staged progress than a decisive, urgency-matched reset.</li>
             </ul>
-          </div>
-          <div class="hero-panel">
-            <h2>Fastest way to use it</h2>
+          </article>
+          <article class="glass-card">
+            <h2>How to use this page</h2>
             <ul>
-              <li><strong>2 minutes:</strong> read the brief and key findings.</li>
-              <li><strong>5 minutes:</strong> add the timeline and handout.</li>
-              <li><strong>Deep read:</strong> open the bundle, tracker, and claim/evidence table.</li>
+              <li><strong>2 minutes:</strong> read the findings and bottom line.</li>
+              <li><strong>5 minutes:</strong> add the timeline and map for context.</li>
+              <li><strong>Deep read:</strong> open the brief, bundle, and claim/evidence table.</li>
             </ul>
-          </div>
+          </article>
         </div>
       </div>
     </section>
 
-    <section class="section" id="findings">
+    <section class="section" id="key-findings">
+      <div class="findings-banner">
+        <h2>The bottom line</h2>
+        <p>This is not a “nothing happened” story. It is a story about early recognition, real but staged movement, and a still-open question about whether protection arrived with the urgency the stakes called for.</p>
+      </div>
+
       <div class="section-head">
         <div>
-          <h2>The short version</h2>
-          <p>The strongest version of this story is not that nothing happened. It is that the city recognized the problem, acted in stages, and may still have moved too slowly and too modestly for the stakes involved.</p>
+          <h2>Three findings readers should understand immediately</h2>
+          <p>This section is the homepage core: fast, plain-language, and explicit about what the record supports.</p>
         </div>
       </div>
-      <div class="story-grid">
-        <article class="story-card">
-          <h3>The issue was already in the official record</h3>
-          <p>Council records show the lead-service-line problem was already in the formal record years ago. The problem was not invisible.</p>
+
+      <div class="three-up">
+        <article class="content-card">
+          <h3>1) The problem was formally recognized early</h3>
+          <p>Council and city records show the lead-service-line issue had already entered the official record years ago. The question is not whether the issue was known, but what followed once it was known.</p>
         </article>
-        <article class="story-card">
-          <h3>Policy moved, but in incremental packages</h3>
-          <p>The record shows real movement through plans, financing changes, filter support, outreach, and reporting — but mostly as incremental adjustment, not as a decisive reset.</p>
+        <article class="content-card">
+          <h3>2) The city did take real action</h3>
+          <p>The record shows meaningful movement: replacement planning, financing changes, private-side rules, filter support, outreach, and continued reporting. That matters and should be stated clearly.</p>
         </article>
-        <article class="story-card">
-          <h3>Delay is not just an infrastructure story</h3>
-          <p>That matters because slow delivery is not just a governance problem. It is also a human one: families live with the delay, and children bear the clearest long-run developmental risk.</p>
+        <article class="content-card">
+          <h3>3) Delivery is still the key unresolved issue</h3>
+          <p>The current public read is still one of incremental progress, not unmistakable urgency. That gap between recognition and fully delivered protection is the main finding this page is built around.</p>
         </article>
       </div>
-      <div class="quote">Bottom line: the interesting story is the gap between early recognition and fully delivered protection.</div>
+
+      <div class="summary-strip">
+        <div class="summary-item">
+          <span class="kicker">What changed</span>
+          <p>The city’s approach evolved through plans, financing, filters, and implementation mechanics.</p>
+        </div>
+        <div class="summary-item">
+          <span class="kicker">What did not become clear enough</span>
+          <p>The record does not cleanly read as a strong, decisive reset that matched the stakes from the start.</p>
+        </div>
+        <div class="summary-item">
+          <span class="kicker">Why readers should care</span>
+          <p>When response speed lags behind known risk, the consequences are lived by households, not just tracked in policy documents.</p>
+        </div>
+      </div>
+
+      <div class="key-callout">Bottom line: the public story is the gap between early recognition and confidence that protection was delivered quickly and strongly enough.</div>
     </section>
 
-    <section class="section">
+    <section class="section" id="what-changed">
       <div class="section-head">
         <div>
-          <h2>What the citywide map suggests</h2>
-          <p>The map adds local shape, but it is not the heart of the narrative. The real public question is whether the city’s response became fast and strong enough after the problem was already known.</p>
+          <h2>What changed — and what still feels unresolved</h2>
+          <p>The record shows real movement after recognition: plans, financing changes, filters, outreach, and reporting. But the strongest unresolved public question is still whether that movement became strong enough, fast enough, in the places and households that needed it.</p>
         </div>
       </div>
       <div class="metrics">
         <article class="metric-card">
-          <span class="eyebrow-small">Community areas</span>
+          <span class="label">Community areas</span>
           <div class="metric-value" id="areas">-</div>
-          <p>Number of areas returned by the city map layer.</p>
+          <p>Areas returned by the live city map layer.</p>
         </article>
         <article class="metric-card">
-          <span class="eyebrow-small">Total connections</span>
+          <span class="label">Total connections</span>
           <div class="metric-value" id="total">-</div>
           <p>Water connections across the returned area set.</p>
         </article>
         <article class="metric-card">
-          <span class="eyebrow-small">Lead connections</span>
+          <span class="label">Lead connections</span>
           <div class="metric-value" id="lead">-</div>
           <p>Lead service connections reported in the live layer.</p>
         </article>
         <article class="metric-card">
-          <span class="eyebrow-small">Why this matters</span>
-          <div class="metric-value">Story</div>
-          <p>The map gives local context; the argument is about pace and delivery.</p>
+          <span class="label">Interpretation</span>
+          <div class="metric-value">Context</div>
+          <p>The map helps orient readers geographically; it does not answer the delivery question by itself.</p>
         </article>
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" id="map-context">
       <div class="map-grid">
         <article class="map-copy">
-          <h3>How to use the map without getting lost in it</h3>
-          <p>Use the map to see where reported lead-connection burden appears higher or lower, then move back to the broader question: what did the city do once the problem was clearly on the record, and was it enough?</p>
+          <h3>How to read the map without losing the plot</h3>
+          <p>Use the map to understand where reported lead-connection burden appears higher or lower. Then return to the bigger public question: once the problem was recognized, did the city’s response become strong enough, fast enough?</p>
           <div class="legend">
             <div><span class="dot" style="background:#22c55e"></span>Very low</div>
             <div><span class="dot" style="background:#f59e0b"></span>Moderate</div>
@@ -597,14 +775,14 @@
             <div><span class="dot" style="background:#7f1d1d"></span>Very high</div>
           </div>
           <div class="chart-shell compact">
-            <h3 style="margin:0 0 12px;">Selected program milestones</h3>
+            <h3 style="margin:0 0 12px;">Selected reported milestones</h3>
             <canvas id="timeline"></canvas>
           </div>
           <div class="quick-links">
             <a class="quick-link" target="_blank" href="https://www.regina.ca/home-property/water/water/lead-service-connections/"><span>City lead-service page</span><span>Open →</span></a>
             <a class="quick-link" target="_blank" href="https://opengis.regina.ca/arcgis/rest/services/CGISViewer/LeadConnectionAreas/MapServer/0"><span>Source GIS layer</span><span>Open →</span></a>
           </div>
-          <div class="notice"><strong>Guardrail:</strong> the chart shows selected reported milestones, not a complete annual measured series. The public argument should not overclaim from a simplified visual.</div>
+          <div class="notice"><strong>Guardrail:</strong> this visual uses selected reported milestones and a live GIS layer for context. It should not be read as a complete annual measured series or as proof of outcomes on its own.</div>
         </article>
         <article class="map-shell">
           <div id="map" aria-label="Map of Regina lead service connection percentages by area"></div>
@@ -612,33 +790,33 @@
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" id="timeline-record">
       <div class="section-head">
         <div>
-          <h2>Timeline of the strongest public record points</h2>
-          <p>This is the backbone of the story: recognition came first, then a sequence of decisions, but the record still reads more like gradual adjustment than urgent transformation.</p>
+          <h2>Timeline of the strongest public-record points</h2>
+          <p>This is the backbone of the page: recognition first, policy movement after, and a still-open delivery question at the end.</p>
         </div>
       </div>
       <div class="timeline-grid">
         <article class="timeline-card">
           <div class="year">2019</div>
           <h3>Acceleration enters the formal record</h3>
-          <p>MN19-23 places acceleration of the lead-service-connection program into the official Council record.</p>
+          <p>MN19-23 puts acceleration of the lead-service-connection program into the official Council record.</p>
         </article>
         <article class="timeline-card">
           <div class="year">2021</div>
-          <h3>The baseline replacement program is adopted</h3>
+          <h3>A baseline replacement program is adopted</h3>
           <p>CR21-90 approves a 15-year replacement plan, private-side replacement rules, financing supports, and filter distribution direction.</p>
         </article>
         <article class="timeline-card">
           <div class="year">2022</div>
-          <h3>Implementation mechanics move</h3>
+          <h3>Implementation mechanics continue moving</h3>
           <p>Executive Committee and Council continue bylaw and administrative changes tied to the adopted package.</p>
         </article>
         <article class="timeline-card">
           <div class="year">2023</div>
-          <h3>Oversight remains active</h3>
-          <p>Recurring updates and reporting directions keep the program visible in the record.</p>
+          <h3>Oversight remains visible</h3>
+          <p>Recurring updates and reporting directions keep the program active in the record.</p>
         </article>
         <article class="timeline-card">
           <div class="year">2025</div>
@@ -647,47 +825,47 @@
         </article>
         <article class="timeline-card">
           <div class="year">Current read</div>
-          <h3>Movement is real, but the delivery story remains the point</h3>
-          <p>The documentary record supports a clear tension: the issue stayed alive, policy did move, and yet the delivery question still does not feel settled.</p>
+          <h3>Real movement, unresolved delivery question</h3>
+          <p>The record supports a clear tension: the issue stayed live, policy did move, and yet the strongest open question is still whether delivery matched the stakes.</p>
         </article>
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" id="why-it-matters">
       <div class="section-head">
         <div>
-          <h2>Why this matters beyond dollars</h2>
-          <p>This matters because a slow response to lead risk should not be judged only as a procedural or budget issue. Human stakes are part of the story, even when the package keeps the more technical burden material in the support layer.</p>
+          <h2>Why this matters beyond policy language</h2>
+          <p>The public story should not stop at procedure and budgets. The reason pace matters is that households live with the consequences of delay.</p>
         </div>
       </div>
-      <div class="health-grid">
-        <article class="story-card">
-          <h3>Children are central to the human-stakes case</h3>
-          <p>The clearest human-stakes lane in the package concerns child-development concern. That is the strongest reason the pace question matters, even though the page avoids turning the support materials into a headline outcome claim.</p>
+      <div class="insight-grid">
+        <article class="insight-card">
+          <h3>Human stakes are part of the story</h3>
+          <p>This is not just an infrastructure-management issue. Once risk is recognized, the speed and strength of follow-through becomes a public-health and household-protection question too.</p>
         </article>
-        <article class="story-card">
-          <h3>Keep broader health detail in the support layer</h3>
-          <p>The wider support materials point to broader concerns, but those details belong in the technical/support layer rather than the headline public framing.</p>
+        <article class="insight-card">
+          <h3>Children remain the clearest public-facing concern</h3>
+          <p>The support layer points most clearly to child-development concern as the strongest plain-language reason the pace question matters.</p>
         </article>
-        <article class="story-card">
-          <h3>Keep the numeric burden work where it belongs</h3>
-          <p>The appendix-grade technical material exists to support the stakes of the story, not to replace the story with technical estimates or expanded burden claims.</p>
+        <article class="insight-card">
+          <h3>Keep technical burden estimates in the support layer</h3>
+          <p>The deeper burden and QALY/DALY materials help explain why the issue matters, but they should support the homepage narrative rather than overwhelm it.</p>
         </article>
       </div>
-      <div class="notice"><strong>Interpretation rule:</strong> this page supports a cautious human-impact framing. It does <em>not</em> turn support-layer burden work into a settled public headline.</div>
+      <div class="notice"><strong>Interpretation rule:</strong> this page uses a cautious human-impact frame. It does not turn the support-layer technical work into a single overclaimed public headline.</div>
     </section>
 
     <section class="section" id="evidence">
       <div class="section-head">
         <div>
           <h2>Evidence, downloads, and shareable materials</h2>
-          <p>The support layer lives here. The page should tell the story clearly first, then let readers inspect the underlying package if they want proof, detail, or reuse.</p>
+          <p>The homepage is meant to be readable first. This section is for readers who want proof, reuse, or the full package behind the summary.</p>
         </div>
       </div>
       <div class="support-grid">
         <article class="resource-card">
-          <h3>Start here</h3>
-          <p>If you only open three things, these are the right three.</p>
+          <h3>Best three starting points</h3>
+          <p>If someone opens only a few documents, these should be the first ones.</p>
           <div class="resource-list">
             <a class="resource-link" target="_blank" href="reports/regina_public_brief_plain_language_2026-03-12.md"><span>Public brief</span><span>Fastest read</span></a>
             <a class="resource-link" target="_blank" href="reports/regina_public_handout_2026-03-16.md"><span>One-page handout</span><span>Shareable</span></a>
@@ -713,12 +891,18 @@
           </article>
         </div>
       </div>
-      <p class="footer-note">Design choice: the homepage should earn attention first, then offer evidence depth. The old artifact-pile feeling was the wrong trade.</p>
+      <p class="footer-note">Design choice: the homepage now leads with the findings, then gives readers controlled access to detail. That is a better public-facing trade than an artifact pile on first view.</p>
+      <div class="page-footer">
+        <span>Public summary page · evidence-linked</span>
+        <span>Built for clear reading first, verification second</span>
+      </div>
     </section>
   </main>
 
 <script>
 const map = L.map('map').setView([50.4452, -104.6189], 11);
+const navLinks = Array.from(document.querySelectorAll('.subnav a[href^="#"]'));
+const sections = navLinks.map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap contributors' }).addTo(map);
 
 const geoUrl = 'https://opengis.regina.ca/arcgis/rest/services/CGISViewer/LeadConnectionAreas/MapServer/0/query?where=1%3D1&outFields=NAME%2CWC_Total%2CLead_Total%2CLead_Per&f=geojson';
@@ -742,10 +926,10 @@ fetch(geoUrl)
 
     L.geoJSON(g, {
       style: f => ({
-        color: '#3a4653',
+        color: '#344054',
         weight: 1,
         fillColor: color(Number(f.properties.Lead_Per || 0)),
-        fillOpacity: 0.74
+        fillOpacity: 0.76
       }),
       onEachFeature: (f, l) => {
         l.bindPopup(
@@ -764,17 +948,33 @@ fetch(geoUrl)
     document.querySelector('.map-copy').appendChild(el);
   });
 
+if (sections.length && 'IntersectionObserver' in window) {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const id = `#${entry.target.id}`;
+      const link = navLinks.find(a => a.getAttribute('href') === id);
+      if (!link) return;
+      if (entry.isIntersecting) {
+        navLinks.forEach(a => a.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-35% 0px -50% 0px', threshold: 0.01 });
+
+  sections.forEach(section => observer.observe(section));
+}
+
 new Chart(document.getElementById('timeline'), {
   type: 'line',
   data: {
-    labels: ['2019 discovery', '2021 revised plan', '2025 reported remaining'],
+    labels: ['2019 recognition', '2021 adopted plan', '2025 reported remaining'],
     datasets: [{
-      label: 'City-owned lead connections (reported milestones)',
+      label: 'Lead connections (selected reported milestones)',
       data: [3600, 3600, 2400],
-      borderColor: '#8f2d1f',
-      backgroundColor: 'rgba(143,45,31,.12)',
-      pointBackgroundColor: '#8f2d1f',
-      pointBorderColor: '#8f2d1f',
+      borderColor: '#b54708',
+      backgroundColor: 'rgba(181,71,8,.12)',
+      pointBackgroundColor: '#b54708',
+      pointBorderColor: '#b54708',
       borderWidth: 3,
       pointRadius: 4,
       tension: .25,
@@ -786,7 +986,7 @@ new Chart(document.getElementById('timeline'), {
     plugins: {
       legend: {
         labels: {
-          color: '#4a5563',
+          color: '#475467',
           usePointStyle: true,
           boxWidth: 10
         }
@@ -794,12 +994,12 @@ new Chart(document.getElementById('timeline'), {
     },
     scales: {
       x: {
-        ticks: { color: '#667281' },
+        ticks: { color: '#667085' },
         grid: { display: false }
       },
       y: {
-        ticks: { color: '#667281' },
-        grid: { color: 'rgba(24,33,43,0.08)' }
+        ticks: { color: '#667085' },
+        grid: { color: 'rgba(16,24,40,0.08)' }
       }
     }
   }
