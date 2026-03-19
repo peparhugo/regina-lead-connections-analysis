@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Regina Lead Service Connections — What the Record Shows</title>
   <meta name="description" content="A clear public summary of Regina's lead service connection story: what the record shows, what changed, and what still appears unresolved." />
-  <meta name="theme-color" content="#0b1220" />
+  <meta name="theme-color" content="#0f4c81" />
   <meta property="og:title" content="Regina Lead Service Connections — What the Record Shows" />
   <meta property="og:description" content="A clear, evidence-backed public summary of what Regina's lead service connection record shows — and what still appears unresolved." />
   <meta property="og:type" content="website" />
@@ -16,901 +16,168 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="styles.css" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <style>
-    :root {
-      --bg: #f6f7fb;
-      --panel: rgba(255,255,255,0.8);
-      --panel-strong: #ffffff;
-      --ink: #101828;
-      --muted: #475467;
-      --line: rgba(16,24,40,0.08);
-      --brand: #b54708;
-      --brand-deep: #7a2e0d;
-      --accent: #1d4ed8;
-      --accent-soft: #eef4ff;
-      --warm: #fff4e8;
-      --ok: #027a48;
-      --danger: #b42318;
-      --shadow: 0 22px 70px rgba(16,24,40,0.08);
-      --radius: 26px;
-      --radius-sm: 18px;
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--ink);
-      line-height: 1.6;
-      background:
-        radial-gradient(circle at top left, rgba(29,78,216,0.08), transparent 28%),
-        radial-gradient(circle at top right, rgba(181,71,8,0.1), transparent 30%),
-        linear-gradient(180deg, #fbfcff 0%, #f6f7fb 42%, #eef2f8 100%);
-    }
-
-    a { color: inherit; }
-
-    a:focus-visible,
-    button:focus-visible {
-      outline: 3px solid rgba(29,78,216,0.42);
-      outline-offset: 3px;
-    }
-
-    .wrap {
-      width: min(1220px, calc(100% - 32px));
-      margin: 0 auto;
-      padding: 28px 0 60px;
-    }
-
-    .topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 14px;
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      border-radius: 999px;
-      padding: 9px 14px;
-      background: rgba(255,255,255,0.76);
-      border: 1px solid rgba(16,24,40,0.06);
-      backdrop-filter: blur(14px);
-      font-weight: 600;
-    }
-
-    .subnav {
-      position: sticky;
-      top: 12px;
-      z-index: 20;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 16px;
-      padding: 10px;
-      border-radius: 20px;
-      background: rgba(255,255,255,0.72);
-      border: 1px solid rgba(16,24,40,0.06);
-      box-shadow: 0 16px 40px rgba(16,24,40,0.06);
-      backdrop-filter: blur(16px);
-    }
-
-    .subnav a {
-      text-decoration: none;
-      color: var(--ink);
-      font-weight: 700;
-      font-size: 0.92rem;
-      padding: 10px 13px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.8);
-      border: 1px solid rgba(16,24,40,0.06);
-    }
-
-    .subnav a:hover,
-    .subnav a.active {
-      background: #fff;
-      border-color: rgba(29,78,216,0.16);
-      color: var(--accent);
-    }
-
-    .hero {
-      position: relative;
-      overflow: hidden;
-      border-radius: 34px;
-      padding: 34px;
-      background:
-        linear-gradient(135deg, rgba(11,18,32,0.96), rgba(24,34,56,0.92) 52%, rgba(90,37,15,0.9));
-      color: #f8fafc;
-      box-shadow: var(--shadow);
-      margin-bottom: 24px;
-    }
-
-    .hero::before,
-    .hero::after {
-      content: "";
-      position: absolute;
-      border-radius: 999px;
-      pointer-events: none;
-      filter: blur(4px);
-    }
-
-    .hero::before {
-      width: 380px;
-      height: 380px;
-      right: -100px;
-      top: -120px;
-      background: radial-gradient(circle, rgba(96,165,250,0.24), rgba(96,165,250,0));
-    }
-
-    .hero::after {
-      width: 300px;
-      height: 300px;
-      left: -90px;
-      bottom: -120px;
-      background: radial-gradient(circle, rgba(245,158,11,0.2), rgba(245,158,11,0));
-    }
-
-    .hero-grid {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      grid-template-columns: minmax(0, 1.5fr) minmax(320px, 0.9fr);
-      gap: 26px;
-      align-items: start;
-    }
-
-    .hero-badges,
-    .quick-stat-row,
-    .action-row,
-    .chip-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .badge,
-    .quick-stat,
-    .chip {
-      border-radius: 999px;
-      padding: 8px 12px;
-      font-size: 0.85rem;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(255,255,255,0.09);
-      color: #e5eefc;
-    }
-
-    .hero h1 {
-      margin: 14px 0 14px;
-      font-size: clamp(2.5rem, 5.4vw, 4.75rem);
-      line-height: 0.96;
-      letter-spacing: -0.06em;
-      max-width: 10.5ch;
-    }
-
-    .hero-lede {
-      max-width: 69ch;
-      color: rgba(226,232,240,0.92);
-      font-size: 1.08rem;
-      margin: 0 0 18px;
-    }
-
-    .action-row { margin-top: 20px; }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 13px 17px;
-      border-radius: 15px;
-      text-decoration: none;
-      font-weight: 800;
-      font-size: 0.95rem;
-      transition: transform .15s ease, background .15s ease, border-color .15s ease;
-      border: 1px solid transparent;
-    }
-
-    .btn:hover { transform: translateY(-1px); }
-    .btn.primary {
-      color: #1f1303;
-      background: linear-gradient(135deg, #fbbf24, #f59e0b);
-      box-shadow: 0 16px 34px rgba(245,158,11,0.28);
-    }
-    .btn.secondary {
-      color: #f8fafc;
-      background: rgba(255,255,255,0.08);
-      border-color: rgba(255,255,255,0.16);
-    }
-
-    .hero-side {
-      display: grid;
-      gap: 14px;
-    }
-
-    .glass-card,
-    .section,
-    .content-card,
-    .metric-card,
-    .resource-card,
-    .timeline-card,
-    .insight-card,
-    .map-copy,
-    .map-shell,
-    .mini-card,
-    .findings-banner {
-      border-radius: var(--radius);
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(16px);
-    }
-
-    .glass-card {
-      background: rgba(255,255,255,0.1);
-      border-color: rgba(255,255,255,0.12);
-      color: #f8fafc;
-      padding: 20px;
-    }
-
-    .glass-card p,
-    .glass-card li { color: rgba(226,232,240,0.9); }
-
-    .glass-card h2,
-    .section-head h2,
-    .content-card h3,
-    .metric-card h3,
-    .resource-card h3,
-    .timeline-card h3,
-    .insight-card h3,
-    .mini-card h3,
-    .map-copy h3,
-    .findings-banner h2 {
-      margin: 0 0 10px;
-      line-height: 1.15;
-    }
-
-    .glass-card ul {
-      margin: 0;
-      padding-left: 18px;
-    }
-
-    .glass-card li { margin-bottom: 8px; }
-
-    .section {
-      background: rgba(255,255,255,0.72);
-      padding: 28px;
-      margin-top: 18px;
-    }
-
-    .section-head {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 18px;
-    }
-
-    .section-head h2 {
-      font-size: clamp(1.4rem, 2vw, 1.95rem);
-      color: var(--ink);
-    }
-
-    .section-head p,
-    .content-card p,
-    .metric-card p,
-    .resource-card p,
-    .timeline-card p,
-    .insight-card p,
-    .mini-card p,
-    .map-copy p,
-    .footer-note,
-    .subtle {
-      margin: 0;
-      color: var(--muted);
-    }
-
-    .findings-banner {
-      padding: 22px;
-      background: linear-gradient(135deg, #fff6ec, #eef4ff);
-      margin-bottom: 18px;
-    }
-
-    .findings-banner p {
-      margin: 0;
-      max-width: 74ch;
-      color: #344054;
-      font-size: 1rem;
-    }
-
-    .three-up,
-    .metrics,
-    .timeline-grid,
-    .support-grid,
-    .map-grid,
-    .resource-grid,
-    .insight-grid {
-      display: grid;
-      gap: 16px;
-    }
-
-    .three-up,
-    .timeline-grid,
-    .resource-grid,
-    .insight-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .metrics { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-    .support-grid { grid-template-columns: 1.05fr 0.95fr; }
-    .map-grid { grid-template-columns: minmax(330px, 0.95fr) minmax(0, 1.25fr); align-items: stretch; }
-
-    .content-card,
-    .metric-card,
-    .resource-card,
-    .timeline-card,
-    .insight-card,
-    .map-copy,
-    .map-shell,
-    .mini-card {
-      background: rgba(255,255,255,0.95);
-      padding: 22px;
-      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-    }
-
-    .content-card:hover,
-    .metric-card:hover,
-    .resource-card:hover,
-    .timeline-card:hover,
-    .insight-card:hover,
-    .mini-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 26px 54px rgba(16,24,40,0.1);
-      border-color: rgba(29,78,216,0.12);
-    }
-
-    .content-card {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .content-card::before {
-      content: "";
-      position: absolute;
-      inset: 0 auto 0 0;
-      width: 5px;
-      background: linear-gradient(180deg, var(--brand), var(--accent));
-    }
-
-    .metric-card .label {
-      display: inline-block;
-      margin-bottom: 8px;
-      font-size: 0.76rem;
-      font-weight: 800;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--brand);
-    }
-
-    .metric-value {
-      font-size: clamp(1.9rem, 3vw, 2.65rem);
-      line-height: 1;
-      font-weight: 900;
-      margin-bottom: 8px;
-      letter-spacing: -0.04em;
-    }
-
-    .key-callout {
-      margin-top: 16px;
-      border-radius: 20px;
-      padding: 16px 18px;
-      background: linear-gradient(135deg, rgba(181,71,8,0.08), rgba(29,78,216,0.08));
-      border: 1px solid rgba(181,71,8,0.12);
-      color: #1d2939;
-      font-weight: 600;
-    }
-
-    .impact-strip {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 20px;
-    }
-
-    .impact-pill {
-      border-radius: 20px;
-      padding: 16px 18px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.12);
-    }
-
-    .impact-pill .label {
-      display: inline-block;
-      margin-bottom: 6px;
-      font-size: 0.72rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      font-weight: 800;
-      color: #93c5fd;
-    }
-
-    .impact-pill p {
-      margin: 0;
-      color: rgba(226,232,240,0.94);
-      line-height: 1.45;
-      font-weight: 600;
-    }
-
-    .summary-strip {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 18px;
-    }
-
-    .summary-item {
-      border-radius: 20px;
-      padding: 16px;
-      background: #f8fafc;
-      border: 1px solid rgba(16,24,40,0.06);
-    }
-
-    .summary-item .kicker {
-      display: inline-block;
-      margin-bottom: 8px;
-      font-size: 0.74rem;
-      font-weight: 800;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--accent);
-    }
-
-    .resource-list,
-    .quick-links,
-    .mini-stack {
-      display: grid;
-      gap: 10px;
-    }
-
-    .resource-link,
-    .quick-link {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      border-radius: 16px;
-      padding: 13px 14px;
-      text-decoration: none;
-      color: var(--ink);
-      background: #f8fafc;
-      border: 1px solid rgba(16,24,40,0.06);
-      font-weight: 700;
-    }
-
-    .resource-link span:last-child,
-    .quick-link span:last-child { color: var(--brand); font-size: 0.88rem; white-space: nowrap; }
-
-    .timeline-card .year {
-      display: inline-flex;
-      align-items: center;
-      border-radius: 999px;
-      padding: 7px 11px;
-      margin-bottom: 12px;
-      background: var(--warm);
-      color: var(--brand-deep);
-      font-size: 0.84rem;
-      font-weight: 800;
-    }
-
-    .notice {
-      margin-top: 16px;
-      border-radius: 18px;
-      padding: 16px 18px;
-      background: #fff7ed;
-      border: 1px solid #fed7aa;
-      color: #9a3412;
-      font-size: 0.95rem;
-    }
-
-    .legend {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 18px;
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
-
-    .dot {
-      display: inline-block;
-      width: 11px;
-      height: 11px;
-      border-radius: 50%;
-      margin-right: 8px;
-      vertical-align: middle;
-    }
-
-    .chart-shell {
-      margin-top: 18px;
-      border-radius: 20px;
-      background: #f8fafc;
-      border: 1px solid rgba(16,24,40,0.06);
-      padding: 18px;
-    }
-
-    .chart-shell.compact { max-width: 430px; }
-    .chart-shell.compact canvas {
-      width: 100% !important;
-      height: 150px !important;
-      display: block;
-    }
-
-    #map {
-      height: 560px;
-      border-radius: 20px;
-      border: 1px solid var(--line);
-      overflow: hidden;
-    }
-
-    .footer-note {
-      margin-top: 16px;
-      font-size: 0.92rem;
-    }
-
-    .page-footer {
-      margin-top: 22px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px 18px;
-      align-items: center;
-      justify-content: space-between;
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-
-    @media (max-width: 1080px) {
-      .hero-grid,
-      .metrics,
-      .three-up,
-      .timeline-grid,
-      .resource-grid,
-      .insight-grid,
-      .impact-strip { grid-template-columns: 1fr 1fr; }
-      .hero-grid > :first-child,
-      .summary-strip,
-      .map-grid,
-      .support-grid { grid-column: 1 / -1; }
-      .map-grid,
-      .support-grid { grid-template-columns: 1fr; }
-      .summary-strip,
-      .impact-strip { grid-template-columns: 1fr; }
-    }
-
-    @media (max-width: 760px) {
-      .wrap { width: min(100% - 20px, 1220px); padding-top: 18px; }
-      .topbar,
-      .section-head { flex-direction: column; align-items: start; }
-      .subnav { top: 8px; padding: 8px; overflow-x: auto; flex-wrap: nowrap; }
-      .subnav a { white-space: nowrap; }
-      .hero,
-      .section { padding: 20px; border-radius: 24px; }
-      .hero-grid,
-      .metrics,
-      .three-up,
-      .timeline-grid,
-      .resource-grid,
-      .insight-grid,
-      .summary-strip,
-      .impact-strip { grid-template-columns: 1fr; }
-      .hero h1 { max-width: none; }
-      .action-row { flex-direction: column; }
-      .quick-stat-row { flex-direction: column; align-items: start; }
-      .btn { width: 100%; }
-      #map { height: 420px; }
-    }
-  </style>
 </head>
 <body>
-  <main class="wrap">
+  <main class="wrap page-shell">
     <div class="topbar">
-      <div class="eyebrow">Regina public story hub · lead service connections</div>
-      <div>Built from the public package, timeline work, and supporting evidence set</div>
+      <div class="pill">Regina public story hub</div>
+      <div>Lead service connections · public summary + evidence pack</div>
     </div>
-
-    <nav class="subnav" aria-label="Quick page navigation">
-      <a href="#key-findings">Key findings</a>
-      <a href="#what-changed">What changed</a>
-      <a href="#map-context">Map context</a>
-      <a href="#timeline-record">Timeline</a>
-      <a href="#why-it-matters">Why it matters</a>
-      <a href="#evidence">Evidence pack</a>
-    </nav>
 
     <section class="hero">
       <div class="hero-grid">
         <div>
-          <div class="hero-badges">
-            <span class="badge">Clear public summary</span>
-            <span class="badge">Evidence-backed</span>
-            <span class="badge">Designed for fast reading</span>
+          <div class="kicker">Main finding</div>
+          <h1>Regina knew the problem. The public question is whether the response moved fast enough.</h1>
+          <p class="lede">The record supports a disciplined, readable story: the lead-service-line issue was recognized years ago, the city did make real policy and program moves, and the strongest unresolved question is whether those moves delivered protection with enough urgency in practice.</p>
+          <div class="stat-row">
+            <span class="stat-chip">Recognition was formal</span>
+            <span class="stat-chip">Policy movement was real</span>
+            <span class="stat-chip">Delivery remains unresolved</span>
           </div>
-          <h1>Regina knew the problem. The real question is whether protection followed fast enough.</h1>
-          <p class="hero-lede">The record supports a simple public reading: the lead-service-line issue was officially recognized years ago, the city did make real policy and program moves, and the strongest unresolved issue is whether those moves delivered protection with enough urgency in practice.</p>
-          <div class="quick-stat-row">
-            <span class="quick-stat">Recognition came first</span>
-            <span class="quick-stat">Policy changes followed</span>
-            <span class="quick-stat">Delivery remains the core open question</span>
-          </div>
-          <div class="action-row">
-            <a class="btn primary" target="_blank" href="reports/regina_public_brief_plain_language_2026-03-12.md">Read the 3-minute brief</a>
-            <a class="btn secondary" href="#key-findings">See the findings</a>
-            <a class="btn secondary" href="#evidence">Open the evidence pack</a>
-          </div>
-          <div class="impact-strip" aria-label="Fast summary of the case">
-            <div class="impact-pill">
-              <span class="label">Known</span>
-              <p>The issue had already entered the official record.</p>
-            </div>
-            <div class="impact-pill">
-              <span class="label">Moved</span>
-              <p>Policy and program changes did happen over time.</p>
-            </div>
-            <div class="impact-pill">
-              <span class="label">Unresolved</span>
-              <p>The main question is whether delivery matched the stakes.</p>
-            </div>
+          <div class="action-row" style="margin-top:18px;">
+            <a class="btn primary" href="#findings">Start with the findings</a>
+            <a class="btn secondary" href="reports/public-brief.html">Read the brief</a>
+            <a class="btn secondary" href="#documents">Open the supporting pages</a>
           </div>
         </div>
-
-        <div class="hero-side">
-          <article class="glass-card">
-            <h2>What the findings were</h2>
-            <ul>
-              <li><strong>The issue was already on the official record.</strong> This was not an invisible problem.</li>
-              <li><strong>The city did move.</strong> Plans, financing changes, filters, outreach, and reporting all appear in the record.</li>
-              <li><strong>The strongest public tension remains delivery.</strong> The record still reads more like staged progress than a decisive, urgency-matched reset.</li>
-            </ul>
-          </article>
-          <article class="glass-card">
-            <h2>How to use this page</h2>
-            <ul>
-              <li><strong>2 minutes:</strong> read the findings and bottom line.</li>
-              <li><strong>5 minutes:</strong> add the timeline and map for context.</li>
-              <li><strong>Deep read:</strong> open the brief, bundle, and claim/evidence table.</li>
-            </ul>
-          </article>
+        <div class="side-panel">
+          <h2>What this page says</h2>
+          <ul>
+            <li><strong>The issue was already on the record.</strong> It was not invisible.</li>
+            <li><strong>The city did act.</strong> Plans, financing changes, filter support, outreach, and reporting appear in official records.</li>
+            <li><strong>The core public tension is pace.</strong> The strongest current reading is still staged progress rather than an unmistakable urgency-matched reset.</li>
+          </ul>
+          <div class="mini-links" style="margin-top:16px;">
+            <a class="resource-link" href="reports/public-handout.html"><span>Public handout</span><span>Shareable</span></a>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="key-findings">
-      <div class="findings-banner">
-        <h2>The bottom line</h2>
-        <p>This is not a “nothing happened” story. It is a story about early recognition, real but staged movement, and a still-open question about whether protection arrived with the urgency the stakes called for.</p>
-      </div>
-
+    <section class="section" id="findings">
+      <div class="callout">This is not a “nothing happened” story. It is a story about early recognition, real but incremental movement, and a still-open question about whether protection arrived with the urgency the stakes called for.</div>
       <div class="section-head">
-        <div>
-          <h2>Three findings readers should understand immediately</h2>
-          <p>This section is the homepage core: fast, plain-language, and explicit about what the record supports.</p>
-        </div>
+        <h2>Three findings that matter most</h2>
+        <p>The page should be understandable in under a minute. These are the three points a public reader should leave with.</p>
       </div>
-
-      <div class="three-up">
-        <article class="content-card">
-          <h3>1) The problem was formally recognized early</h3>
-          <p>Council and city records show the lead-service-line issue had already entered the official record years ago. The question is not whether the issue was known, but what followed once it was known.</p>
+      <div class="grid-3">
+        <article class="grid-card strong">
+          <span class="label">1 · Known</span>
+          <h3>The problem was formally recognized early</h3>
+          <p>Council and city records show the lead-service-line issue was already in the official record years ago.</p>
         </article>
-        <article class="content-card">
-          <h3>2) The city did take real action</h3>
-          <p>The record shows meaningful movement: replacement planning, financing changes, private-side rules, filter support, outreach, and continued reporting. That matters and should be stated clearly.</p>
+        <article class="grid-card strong">
+          <span class="label">2 · Moved</span>
+          <h3>There was real policy and program movement</h3>
+          <p>The record shows replacement planning, financing changes, private-side rules, filters, outreach, and continued reporting.</p>
         </article>
-        <article class="content-card">
-          <h3>3) Delivery is still the key unresolved issue</h3>
-          <p>The current public read is still one of incremental progress, not unmistakable urgency. That gap between recognition and fully delivered protection is the main finding this page is built around.</p>
+        <article class="grid-card strong">
+          <span class="label">3 · Open</span>
+          <h3>Delivery is still the unresolved issue</h3>
+          <p>The strongest read is still incremental progress, not a fully convincing proof that protection arrived quickly enough.</p>
         </article>
       </div>
-
-      <div class="summary-strip">
-        <div class="summary-item">
-          <span class="kicker">What changed</span>
-          <p>The city’s approach evolved through plans, financing, filters, and implementation mechanics.</p>
-        </div>
-        <div class="summary-item">
-          <span class="kicker">What did not become clear enough</span>
-          <p>The record does not cleanly read as a strong, decisive reset that matched the stakes from the start.</p>
-        </div>
-        <div class="summary-item">
-          <span class="kicker">Why readers should care</span>
-          <p>When response speed lags behind known risk, the consequences are lived by households, not just tracked in policy documents.</p>
-        </div>
-      </div>
-
-      <div class="key-callout">Bottom line: the public story is the gap between early recognition and confidence that protection was delivered quickly and strongly enough.</div>
     </section>
 
-    <section class="section" id="what-changed">
+    <section class="section">
       <div class="section-head">
-        <div>
-          <h2>What changed — and what still feels unresolved</h2>
-          <p>The record shows real movement after recognition: plans, financing changes, filters, outreach, and reporting. But the strongest unresolved public question is still whether that movement became strong enough, fast enough, in the places and households that needed it.</p>
-        </div>
+        <h2>What changed — and what did not clearly change enough</h2>
+        <p>The story is stronger when it is precise about both sides: what moved, and what still does not read like a true reset.</p>
       </div>
-      <div class="metrics">
-        <article class="metric-card">
+      <div class="summary-grid">
+        <article class="grid-card">
+          <span class="label">What changed</span>
+          <p>The city’s response evolved through formal decisions, affordability tools, filters, reimbursement, outreach, and reporting direction.</p>
+        </article>
+        <article class="grid-card">
+          <span class="label">What remains unclear</span>
+          <p>The reviewed record does not yet cleanly read as a faster end-state, a codified equity-prioritization rule, or a full urgency-matched delivery reset.</p>
+        </article>
+        <article class="grid-card">
+          <span class="label">Why readers should care</span>
+          <p>When a known risk lingers, the consequences are not just administrative. Households live inside the timeline.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>Quick map context</h2>
+        <p>The map is supporting context, not the main argument. It helps show where reported lead-connection burden appears higher or lower across community areas.</p>
+      </div>
+      <div class="metrics-grid">
+        <article class="grid-card">
           <span class="label">Community areas</span>
           <div class="metric-value" id="areas">-</div>
           <p>Areas returned by the live city map layer.</p>
         </article>
-        <article class="metric-card">
+        <article class="grid-card">
           <span class="label">Total connections</span>
           <div class="metric-value" id="total">-</div>
           <p>Water connections across the returned area set.</p>
         </article>
-        <article class="metric-card">
+        <article class="grid-card">
           <span class="label">Lead connections</span>
           <div class="metric-value" id="lead">-</div>
           <p>Lead service connections reported in the live layer.</p>
         </article>
-        <article class="metric-card">
-          <span class="label">Interpretation</span>
+        <article class="grid-card">
+          <span class="label">Use it for</span>
           <div class="metric-value">Context</div>
-          <p>The map helps orient readers geographically; it does not answer the delivery question by itself.</p>
+          <p>Local shape and orientation — not proof of delivery success.</p>
+        </article>
+      </div>
+      <div class="grid-3" style="margin-top:16px; grid-template-columns: minmax(280px,0.9fr) minmax(0,1.4fr) minmax(260px,0.8fr);">
+        <article class="grid-card">
+          <h3>How to read it</h3>
+          <p>Use the map to see which areas show higher reported lead-connection shares, then return to the bigger public question: once the problem was known, did the response become fast and strong enough?</p>
+          <p class="meta-note" style="margin-top:12px;"><strong>Guardrail:</strong> the live map is current-state context. It is not a complete annual time series or a stand-alone outcome measure.</p>
+        </article>
+        <article class="grid-card" style="padding:0; overflow:hidden;">
+          <div id="map" style="height:460px; border-radius:20px;"></div>
+        </article>
+        <article class="grid-card">
+          <h3>Selected milestones</h3>
+          <canvas id="timeline" style="width:100%; height:220px;"></canvas>
+          <div class="nav-row" style="margin-top:14px;">
+            <a class="resource-link" href="https://www.regina.ca/home-property/water/water/lead-service-connections/" target="_blank"><span>City lead-service page</span><span>Open →</span></a>
+            <a class="resource-link" href="https://opengis.regina.ca/arcgis/rest/services/CGISViewer/LeadConnectionAreas/MapServer/0" target="_blank"><span>Source GIS layer</span><span>Open →</span></a>
+          </div>
         </article>
       </div>
     </section>
 
-    <section class="section" id="map-context">
-      <div class="map-grid">
-        <article class="map-copy">
-          <h3>How to read the map without losing the plot</h3>
-          <p>Use the map to understand where reported lead-connection burden appears higher or lower. Then return to the bigger public question: once the problem was recognized, did the city’s response become strong enough, fast enough?</p>
-          <div class="legend">
-            <div><span class="dot" style="background:#22c55e"></span>Very low</div>
-            <div><span class="dot" style="background:#f59e0b"></span>Moderate</div>
-            <div><span class="dot" style="background:#dc2626"></span>High</div>
-            <div><span class="dot" style="background:#7f1d1d"></span>Very high</div>
-          </div>
-          <div class="chart-shell compact">
-            <h3 style="margin:0 0 12px;">Selected reported milestones</h3>
-            <canvas id="timeline"></canvas>
-          </div>
-          <div class="quick-links">
-            <a class="quick-link" target="_blank" href="https://www.regina.ca/home-property/water/water/lead-service-connections/"><span>City lead-service page</span><span>Open →</span></a>
-            <a class="quick-link" target="_blank" href="https://opengis.regina.ca/arcgis/rest/services/CGISViewer/LeadConnectionAreas/MapServer/0"><span>Source GIS layer</span><span>Open →</span></a>
-          </div>
-          <div class="notice"><strong>Guardrail:</strong> this visual uses selected reported milestones and a live GIS layer for context. It should not be read as a complete annual measured series or as proof of outcomes on its own.</div>
-        </article>
-        <article class="map-shell">
-          <div id="map" aria-label="Map of Regina lead service connection percentages by area"></div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section" id="timeline-record">
+    <section class="section" id="documents">
       <div class="section-head">
-        <div>
-          <h2>Timeline of the strongest public-record points</h2>
-          <p>This is the backbone of the page: recognition first, policy movement after, and a still-open delivery question at the end.</p>
-        </div>
+        <h2>Clean public pages instead of raw Markdown dumps</h2>
+        <p>The key supporting documents are now broken into styled HTML pages so readers do not fall from the homepage into an archive-looking document dump.</p>
       </div>
-      <div class="timeline-grid">
-        <article class="timeline-card">
-          <div class="year">2019</div>
-          <h3>Acceleration enters the formal record</h3>
-          <p>MN19-23 puts acceleration of the lead-service-connection program into the official Council record.</p>
-        </article>
-        <article class="timeline-card">
-          <div class="year">2021</div>
-          <h3>A baseline replacement program is adopted</h3>
-          <p>CR21-90 approves a 15-year replacement plan, private-side replacement rules, financing supports, and filter distribution direction.</p>
-        </article>
-        <article class="timeline-card">
-          <div class="year">2022</div>
-          <h3>Implementation mechanics continue moving</h3>
-          <p>Executive Committee and Council continue bylaw and administrative changes tied to the adopted package.</p>
-        </article>
-        <article class="timeline-card">
-          <div class="year">2023</div>
-          <h3>Oversight remains visible</h3>
-          <p>Recurring updates and reporting directions keep the program active in the record.</p>
-        </article>
-        <article class="timeline-card">
-          <div class="year">2025</div>
-          <h3>Another adjustment package lands</h3>
-          <p>Financing, fee, filter reimbursement, outreach, and reporting changes are approved.</p>
-        </article>
-        <article class="timeline-card">
-          <div class="year">Current read</div>
-          <h3>Real movement, unresolved delivery question</h3>
-          <p>The record supports a clear tension: the issue stayed live, policy did move, and yet the strongest open question is still whether delivery matched the stakes.</p>
-        </article>
+      <div class="resource-grid">
+        <a class="resource-link" href="reports/public-brief.html"><span>Public brief</span><span>Read →</span></a>
+        <a class="resource-link" href="reports/public-handout.html"><span>Public handout</span><span>Read →</span></a>
+        <a class="resource-link" href="reports/journalist-memo.html"><span>Journalist memo</span><span>Read →</span></a>
+        <a class="resource-link" href="reports/claim-evidence.html"><span>Claim / evidence table</span><span>Verify →</span></a>
+        <a class="resource-link" href="reports/delivery-tracker.html"><span>Decision / delivery tracker</span><span>Track →</span></a>
+        <a class="resource-link" href="reports/technical-appendix.html"><span>Technical appendix</span><span>Support →</span></a>
       </div>
-    </section>
-
-    <section class="section" id="why-it-matters">
-      <div class="section-head">
-        <div>
-          <h2>Why this matters beyond policy language</h2>
-          <p>The public story should not stop at procedure and budgets. The reason pace matters is that households live with the consequences of delay.</p>
-        </div>
-      </div>
-      <div class="insight-grid">
-        <article class="insight-card">
-          <h3>Human stakes are part of the story</h3>
-          <p>This is not just an infrastructure-management issue. Once risk is recognized, the speed and strength of follow-through becomes a public-health and household-protection question too.</p>
-        </article>
-        <article class="insight-card">
-          <h3>Children remain the clearest public-facing concern</h3>
-          <p>The support layer points most clearly to child-development concern as the strongest plain-language reason the pace question matters.</p>
-        </article>
-        <article class="insight-card">
-          <h3>Keep technical burden estimates in the support layer</h3>
-          <p>The deeper burden and QALY/DALY materials help explain why the issue matters, but they should support the homepage narrative rather than overwhelm it.</p>
-        </article>
-      </div>
-      <div class="notice"><strong>Interpretation rule:</strong> this page uses a cautious human-impact frame. It does not turn the support-layer technical work into a single overclaimed public headline.</div>
-    </section>
-
-    <section class="section" id="evidence">
-      <div class="section-head">
-        <div>
-          <h2>Evidence, downloads, and shareable materials</h2>
-          <p>The homepage is meant to be readable first. This section is for readers who want proof, reuse, or the full package behind the summary.</p>
-        </div>
-      </div>
-      <div class="support-grid">
-        <article class="resource-card">
-          <h3>Best three starting points</h3>
-          <p>If someone opens only a few documents, these should be the first ones.</p>
-          <div class="resource-list">
-            <a class="resource-link" target="_blank" href="reports/regina_public_brief_plain_language_2026-03-12.md"><span>Public brief</span><span>Fastest read</span></a>
-            <a class="resource-link" target="_blank" href="reports/regina_public_handout_2026-03-16.md"><span>One-page handout</span><span>Shareable</span></a>
-            <a class="resource-link" target="_blank" href="reports/regina_public_bundle_2026-03-16.pdf"><span>Story bundle (PDF)</span><span>Full package</span></a>
-          </div>
-        </article>
-        <div class="mini-stack">
-          <article class="mini-card">
-            <h3>For journalists and public readers</h3>
-            <div class="resource-list">
-              <a class="resource-link" target="_blank" href="reports/regina_journalist_memo_2026-03-16.md"><span>Journalist memo</span><span>Open →</span></a>
-              <a class="resource-link" target="_blank" href="reports/regina_media_pitch_note_2026-03-16.md"><span>Media pitch note</span><span>Open →</span></a>
-              <a class="resource-link" target="_blank" href="reports/regina_criticism_preemption_note_2026-03-16.md"><span>Criticism-preemption note</span><span>Open →</span></a>
-            </div>
-          </article>
-          <article class="mini-card">
-            <h3>For documentary verification</h3>
-            <div class="resource-list">
-              <a class="resource-link" target="_blank" href="reports/regina_claim_evidence_table_primary_2026-03-12.md"><span>Claim / evidence table</span><span>Verify claims</span></a>
-              <a class="resource-link" target="_blank" href="reports/regina_decision_to_delivery_tracker_2026-03-16.md"><span>Decision / delivery tracker</span><span>Track follow-through</span></a>
-              <a class="resource-link" target="_blank" href="reports/regina_health_burden_technical_appendix_2026-03-16.md"><span>Health burden appendix</span><span>Support layer</span></a>
-            </div>
-          </article>
-        </div>
-      </div>
-      <p class="footer-note">Design choice: the homepage now leads with the findings, then gives readers controlled access to detail. That is a better public-facing trade than an artifact pile on first view.</p>
-      <div class="page-footer">
-        <span>Public summary page · evidence-linked</span>
-        <span>Built for clear reading first, verification second</span>
+      <div class="site-footer">
+        <span>Public summary first. Verification one click away.</span>
+        <span>Live package built for readability, not archive spelunking.</span>
       </div>
     </section>
   </main>
 
 <script>
 const map = L.map('map').setView([50.4452, -104.6189], 11);
-const navLinks = Array.from(document.querySelectorAll('.subnav a[href^="#"]'));
-const sections = navLinks.map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap contributors' }).addTo(map);
-
 const geoUrl = 'https://opengis.regina.ca/arcgis/rest/services/CGISViewer/LeadConnectionAreas/MapServer/0/query?where=1%3D1&outFields=NAME%2CWC_Total%2CLead_Total%2CLead_Per&f=geojson';
-
 function color(p) {
   return p > 15 ? '#7f1d1d' : p > 10 ? '#dc2626' : p > 5 ? '#f59e0b' : '#22c55e';
 }
-
 fetch(geoUrl)
   .then(r => r.json())
   .then(g => {
@@ -919,51 +186,27 @@ fetch(geoUrl)
       total += Number(f.properties.WC_Total || 0);
       lead += Number(f.properties.Lead_Total || 0);
     });
-
     document.getElementById('areas').textContent = g.features.length;
     document.getElementById('total').textContent = total.toLocaleString();
     document.getElementById('lead').textContent = lead.toLocaleString();
-
     L.geoJSON(g, {
       style: f => ({
-        color: '#344054',
+        color: '#475569',
         weight: 1,
         fillColor: color(Number(f.properties.Lead_Per || 0)),
         fillOpacity: 0.76
       }),
       onEachFeature: (f, l) => {
-        l.bindPopup(
-          `<b>${f.properties.NAME}</b><br/>` +
-          `Lead %: ${Number(f.properties.Lead_Per || 0).toFixed(2)}%<br/>` +
-          `Lead: ${f.properties.Lead_Total || 0}<br/>` +
-          `Total: ${f.properties.WC_Total || 0}`
-        );
+        l.bindPopup(`<b>${f.properties.NAME}</b><br/>Lead %: ${Number(f.properties.Lead_Per || 0).toFixed(2)}%<br/>Lead: ${f.properties.Lead_Total || 0}<br/>Total: ${f.properties.WC_Total || 0}`);
       }
     }).addTo(map);
   })
   .catch(() => {
-    const el = document.createElement('div');
-    el.className = 'notice';
-    el.innerHTML = '<strong>Map load issue:</strong> Could not load live data right now. Please refresh in a minute.';
-    document.querySelector('.map-copy').appendChild(el);
+    const note = document.createElement('div');
+    note.className = 'callout';
+    note.textContent = 'Map load issue: the live GIS layer could not be loaded right now. Please try refreshing.';
+    document.querySelector('#documents').before(note);
   });
-
-if (sections.length && 'IntersectionObserver' in window) {
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      const id = `#${entry.target.id}`;
-      const link = navLinks.find(a => a.getAttribute('href') === id);
-      if (!link) return;
-      if (entry.isIntersecting) {
-        navLinks.forEach(a => a.classList.remove('active'));
-        link.classList.add('active');
-      }
-    });
-  }, { rootMargin: '-35% 0px -50% 0px', threshold: 0.01 });
-
-  sections.forEach(section => observer.observe(section));
-}
-
 new Chart(document.getElementById('timeline'), {
   type: 'line',
   data: {
@@ -971,13 +214,12 @@ new Chart(document.getElementById('timeline'), {
     datasets: [{
       label: 'Lead connections (selected reported milestones)',
       data: [3600, 3600, 2400],
-      borderColor: '#b54708',
-      backgroundColor: 'rgba(181,71,8,.12)',
-      pointBackgroundColor: '#b54708',
-      pointBorderColor: '#b54708',
+      borderColor: '#0f4c81',
+      backgroundColor: 'rgba(15,76,129,0.10)',
+      pointBackgroundColor: '#0f4c81',
       borderWidth: 3,
       pointRadius: 4,
-      tension: .25,
+      tension: 0.25,
       fill: true
     }]
   },
@@ -985,22 +227,12 @@ new Chart(document.getElementById('timeline'), {
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        labels: {
-          color: '#475467',
-          usePointStyle: true,
-          boxWidth: 10
-        }
+        labels: { color: '#475569', usePointStyle: true, boxWidth: 10 }
       }
     },
     scales: {
-      x: {
-        ticks: { color: '#667085' },
-        grid: { display: false }
-      },
-      y: {
-        ticks: { color: '#667085' },
-        grid: { color: 'rgba(16,24,40,0.08)' }
-      }
+      x: { ticks: { color: '#64748b' }, grid: { display: false } },
+      y: { ticks: { color: '#64748b' }, grid: { color: 'rgba(15,23,42,0.08)' } }
     }
   }
 });
