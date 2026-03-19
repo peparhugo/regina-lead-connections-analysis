@@ -142,7 +142,9 @@
         </article>
         <article class="grid-card">
           <h3>Selected milestones</h3>
-          <canvas id="timeline" style="width:100%; height:220px;"></canvas>
+          <div style="position:relative; height:220px; width:100%; overflow:hidden;">
+            <canvas id="timeline"></canvas>
+          </div>
           <div class="nav-row" style="margin-top:14px;">
             <a class="resource-link" href="https://www.regina.ca/home-property/water/water/lead-service-connections/" target="_blank"><span>City lead-service page</span><span>Open →</span></a>
             <a class="resource-link" href="https://opengis.regina.ca/arcgis/rest/services/CGISViewer/LeadConnectionAreas/MapServer/0" target="_blank"><span>Source GIS layer</span><span>Open →</span></a>
