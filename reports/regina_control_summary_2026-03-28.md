@@ -25,6 +25,7 @@ Purpose: combine Dream/DMG audit state with GitHub history state and PR workflow
 - repo-history ingest is live and hardened enough to distinguish:
   - real zero PR state
   - fetch failure fallback
+<<<<<<< HEAD
 - Regina no longer sits at zero-PR governance theory only
 - the first material governance PR now exists in GitHub history artifacts
 
@@ -32,6 +33,13 @@ Purpose: combine Dream/DMG audit state with GitHub history state and PR workflow
 - `pull_request_count = 1`
 - `merge_count` depends on merge refresh timing and should be rechecked after merge finalization if still zero
 - contributor profiles now include PR-derived participation beyond local git-only state
+=======
+- current Regina repo truth is:
+  - no PRs
+  - no merges
+  - no releases
+  - local git history present
+>>>>>>> origin/main
 
 ### Relevant artifacts
 - `reports/regina_github_history_refresh_hardening_2026-03-28.md`
@@ -44,19 +52,26 @@ Purpose: combine Dream/DMG audit state with GitHub history state and PR workflow
 - stronger PR template is installed
 - branch naming contract is defined
 - review gate checklist is defined
+<<<<<<< HEAD
 - the first real Regina PR has been opened under the new discipline
+=======
+>>>>>>> origin/main
 
 ### Relevant artifacts
 - `.github/pull_request_template.md`
 - `reports/regina_git_pr_workflow_contract_2026-03-28.md`
 - `reports/regina_pr_review_gate_checklist_2026-03-28.md`
+<<<<<<< HEAD
 - `reports/regina_first_pr_review_note_2026-03-28.md`
+=======
+>>>>>>> origin/main
 
 ## 4. Gate linkage
 Most relevant gate now:
 - `G5_GIT_DISCIPLINE_READY`
 
 Interpretation:
+<<<<<<< HEAD
 - the contract/checklist layer exists
 - the workflow is now behaviorally adopted at least once
 - stronger confidence will come from repeated PR/review/merge use, not more documentation alone
@@ -74,3 +89,21 @@ The Regina control plane is now materially real:
 - repo-history zero states are trustworthy
 - PR discipline is documented
 - and at least one real PR now exists for the GitHub audit lane to track
+=======
+- the contract/checklist layer now exists
+- but the repo still needs real branch/PR usage for this gate to become operationally proven rather than merely documented
+
+## 5. Next operator move
+Best next move:
+- use the new branch/PR contract on the next material Regina implementation change
+- then rerun repo-history ingest after real PR activity exists
+- then regenerate control summary with live PR/review/merge state
+
+## 6. Blunt conclusion
+The Regina control plane is now materially more real:
+- Dream/DMG runs are audit-shaped
+- repo-history zero states are trustworthy
+- PR discipline is documented
+
+What is still missing is lived GitHub review behavior, not more control documentation.
+>>>>>>> origin/main
