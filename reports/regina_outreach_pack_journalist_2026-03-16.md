@@ -1,54 +1,65 @@
-# Regina Lead Service Connections — Outreach Pack (Journalist)
+# Regina lead-service-line record — Outreach Pack (Journalist)
 
-Date: 2026-03-16
+Date: 2026-03-19
 Audience: Journalists, editors, producers
 
 ## Purpose
-This pack is the fastest route into the Regina lead story for a reporter or editor.
+This is the fastest route into the merged Regina story for a reporter or editor.
 
 It is designed to answer:
 - what the story is,
-- why it matters,
-- what the documentary record supports,
-- and what this package is *not* claiming.
+- what the official record supports,
+- where the delivery question remains open,
+- and what this package is explicitly not claiming.
 
 ---
 
 ## Safest lead line
-Regina had the lead-service-line problem on the formal agenda years ago — the documentary record shows real policy movement, but still points to a long gap between recognition and fully delivered protection.
+Regina recognized the lead-service-line issue years ago. The official record shows real policy movement, but the strongest current reading still leaves an open question about whether delivery ever became fast and strong enough to match the stakes.
 
 ---
 
 ## Recommended order to send/read
-1. `reports/regina_media_pitch_note_2026-03-16.md`
-2. `reports/regina_journalist_memo_2026-03-16.md`
-3. `reports/regina_public_bundle_2026-03-16.pdf`
-4. `reports/regina_claim_evidence_table_primary_2026-03-12.md`
-5. `reports/regina_decision_to_delivery_tracker_2026-03-16.md`
+1. `reports/regina_merged_narrative_rewrite_draft_2026-03-19.md`
+2. `reports/regina_public_bundle_2026-03-16.html`
+3. `reports/regina_claim_evidence_table_primary_2026-03-12.md`
+4. `reports/regina_decision_to_delivery_tracker_2026-03-16.md`
+5. `reports/regina_true_policy_shift_scorecard_2026-03-12.md`
 6. `reports/regina_criticism_preemption_note_2026-03-16.md`
 
 ---
 
 ## Cover note
-This package tracks Regina’s lead-service-line issue through official records and supporting public-health framing. The strongest claim is documentary: the issue was recognized, policy moved in stages, and the delivery picture still raises serious questions. The package avoids the weakest overclaims and keeps the burden estimate in an appendix role rather than using it as the headline.
+This package tracks Regina’s lead-service-line issue through official records, claim-control review, and a cautious human-stakes frame. The strongest public claim is documentary and accountability-focused: the issue was recognized, policy moved in stages, and the delivery picture still raises serious questions. The package avoids the weakest overclaims, keeps burden estimates in a support layer, and treats household-testing gaps as a follow-up evidence lane rather than a settled headline claim.
 
 ---
 
 ## Best angles for this audience
 - accountability / delay story
 - policy movement vs true delivery shift
+- structured city framework vs proven delivery
 - public-health significance without overclaim
-- how a technical infrastructure issue became a family-impact issue
+- how a technical infrastructure issue became a family-impact story
+
+---
+
+## Best next reporting questions
+1. Did later Council-directed reporting and outreach actually happen in practice?
+2. Did financing and reimbursement changes materially improve uptake and access?
+3. Has the practical replacement pace changed enough to alter the real completion story?
+4. What household-testing or verification records exist beyond the current package?
 
 ---
 
 ## Do / Don’t
 ### Do
-- lead with the documentary timeline
-- use the claim/evidence table for verification
-- treat the bundle as the main public-facing pack
+- lead with the documentary timeline and delivery question
+- use the claim/evidence table and tracker for verification
+- treat the merged bundle as the main public-facing pack
+- keep the testing lane framed as unresolved follow-up unless source-backed
 
 ### Don’t
-- lead with the appendix burden number
+- lead with appendix burden numbers
 - frame the story as one delegation causing one vote
-- collapse official and inferred evidence together
+- imply delivery success is already proven
+- turn the unresolved household-testing question into a settled public claim

@@ -9,7 +9,7 @@ Regina had the lead-service-line problem on the formal agenda years ago. Officia
 ---
 
 ## Nut graph
-This project began as a documentary review of Regina’s lead service connection problem: what city records show, what Council and committee actually adopted, what changed over time, and what still appears incomplete. The evidence does **not** support a simplistic claim that one delegation directly caused one later vote. It **does** support a clearer public story: Regina did not ignore the issue entirely, but the record suggests a long, incremental process rather than a rapid, decisive delivery response. That matters because lead service connection delay is not only a pipe-replacement issue. It also has human stakes, especially where child-development concern and prolonged delay overlap.
+This project began as a documentary review of Regina’s lead service connection problem: what city records show, what Council and committee actually adopted, what changed over time, and what still appears incomplete. The evidence does **not** support a simplistic claim that one delegation directly caused one later vote. It **does** support a clearer public story: Regina did not ignore the issue entirely, but the record suggests a long, incremental process rather than a rapid, decisive delivery response. That matters because lead service connection delay is not only a pipe-replacement issue. It also has human stakes, especially where child-development concern and prolonged delay overlap in the support layer.
 
 ---
 
@@ -49,11 +49,11 @@ This is why the project’s scorecard reads the story as **real movement, but st
 ## Why this matters beyond procedure
 A lead-service-line story can be told as an infrastructure or administrative story. But that is too narrow.
 
-The project’s support materials justify a more human reading. They support cautious discussion of child-development concern and the broader consequences of prolonged delay. That does **not** mean the project claims all exposed children are clinically affected, or that it has fully measured Regina’s total population burden. It does mean delay should not be judged only in budget terms.
+The project’s support materials justify a more human reading. They support cautious discussion of child-development concern, broader long-run health risk, and the consequences of prolonged delay. That does **not** mean the project claims all exposed children are clinically affected, or that it has fully measured Regina’s total population burden. It does mean delay should not be judged only in budget terms.
 
 If protection is delayed, the consequences are not only administrative. They may also affect families and children in ways that deserve public attention, even when the package keeps the more technical burden work in a support layer.
 
-That is why the project includes a technical appendix on the child-cognitive burden lane. That appendix is intentionally cautious and is not the project’s headline claim. It exists to support the broader point that the human cost of delay belongs in the public conversation.
+That is why the project includes a technical appendix on the child-cognitive burden lane. That appendix is intentionally cautious, treats M4 as a bounded inherited modeled estimate rather than a settled burden total, and is not the project’s headline claim. It exists to support the broader point that the human cost of delay belongs in the public conversation.
 
 ---
 

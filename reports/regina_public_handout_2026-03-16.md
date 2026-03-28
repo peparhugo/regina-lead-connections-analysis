@@ -17,7 +17,7 @@ Council and committee records from 2021 to 2025 show financing, filter, reimburs
 The reviewed record does not yet clearly show a fully accelerated completion path, a codified equity-prioritization rule, or a true delivery reset.
 
 ### 4) This is not only about pipes or budgets
-Lead exposure is linked in the literature to child-development impacts and later health risks. That means delay should be understood in human terms too.
+Lead exposure concern is linked in the literature to child-development impacts and broader long-run health risk. That means delay should be understood in human terms too, while keeping the health lane broad and non-numeric in the public-facing package.
 
 ### 5) The story is strongest when told carefully
 This project does **not** claim that one delegation caused one later vote. It does show a long-running public issue, formal policy movement, and a serious delivery question that remains open.
