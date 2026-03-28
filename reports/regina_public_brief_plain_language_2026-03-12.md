@@ -4,9 +4,9 @@ Date: 2026-03-12
 Audience: Public-facing (plain language)
 
 ## Bottom line
-Regina did not stand still on lead service connections. Council made a sequence of formal decisions from 2021 to 2025 that expanded replacement rules, financing access, and filter support. That is real policy movement.  
+Regina recognized the lead-service-line issue years ago, and Council made a sequence of formal decisions from 2021 to 2025 that expanded replacement rules, financing access, filter support, and later affordability / reimbursement / outreach changes. That is real policy movement.  
 
-But the movement is mostly **incremental** (program design and implementation changes), not a full strategy reset.
+But the strongest current reading is still **incremental** movement, not a full strategy reset, and the main accountability question now is whether delivery became fast and strong enough to match the stakes.
 
 ## What the record clearly shows
 
@@ -27,7 +27,7 @@ This pattern is **formal continuity**: decisions were not isolated one-offs. The
 
 This also reflects **practical pressure**: repeated delegations and filed public communications appear in official records at key decision points.
 
-It also matters for a second reason: this is not only a governance or infrastructure story. The support materials justify a cautious human-stakes framing, especially around child-development concern and the consequences of prolonged delay. In public terms, that means the issue should not be judged only by dollars spent or pipes left in the ground.
+It also matters for a second reason: this is not only a governance or infrastructure story. The support materials justify a cautious human-stakes framing, especially around child-development concern and the broader consequences of prolonged delay. In public terms, that means the issue should not be judged only by dollars spent or pipes left in the ground.
 
 ## What has not yet been proven in this brief
 - This brief does **not** claim that public delegations directly caused each vote outcome.
