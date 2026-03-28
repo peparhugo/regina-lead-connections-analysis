@@ -25,7 +25,7 @@ The top-layer package no longer leads with:
 Those remain support-layer / appendix material unless explicitly revalidated.
 
 ## Canonical truth files
-These files now outrank older continuity notes:
+These files now outrank older continuity notes for the current claim envelope, while package merge/reconciliation remains open:
 1. `reports/regina_current_claim_status_2026-03-16.md`
 2. `reports/regina_package_gate_status_2026-03-16.md`
 3. `reports/regina_jtb_integrity_review_2026-03-16.md`

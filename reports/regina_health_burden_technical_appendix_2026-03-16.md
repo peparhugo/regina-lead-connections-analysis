@@ -15,10 +15,14 @@ This appendix is intentionally narrow and should be read as a bounded technical 
 ---
 
 ## Appendix bottom line
-Using a conservative mild developmental-burden crosswalk, a low assumed burden share, and a medium persistence horizon, the **child-cognitive lane alone** produces the following base-case model output under the appendix assumptions:
+Using the current March 23 inherited-uncertainty posture, the **child-cognitive lane alone** is best read as a bounded inherited modeled estimate rather than a single settled burden number.
 
-# **3.696 YLD-equivalent units**
+Current modeled outputs under the accepted smaller-family-only denominator lock:
+- central modeled estimate: **3.696 YLD-equivalent units**
+- preferred bounded working range: **1.848 to 5.544**
+- wider stress envelope: **0.693 to 11.088**
 
+These are modeled scenario outputs, not confidence intervals.
 This is a technical appendix estimate only.
 
 ---
@@ -26,15 +30,24 @@ This is a technical appendix estimate only.
 ## What is included
 This appendix includes only:
 - the **child cognitive / developmental burden lane**,
-- a **proxy child exposure-context denominator** already used in the project,
+- an **inherited M3 proxy child denominator** already used in the project,
 - a **conservative disability-weight-equivalent crosswalk**,
-- and a **medium-run duration assumption**.
+- a **medium-run duration assumption**,
+- and an explicit bounded-range reading of the result.
 
 ### Fixed base-case inputs
-- proxy child context: **1,540 children 0–14**
+- inherited proxy child context: **~1,540 children 0–14**
 - incremental burden share: **3%**
-- annual disability-weight-equivalent: **0.010**
-- duration: **8 years**
+- accepted annual disability-weight-equivalent base coefficient: **0.010**
+- duration base case: **8 years**
+
+### Governing inheritance rule
+The denominator here is not a fresh audited child count.
+It inherits the Regina M3 uncertainty contract:
+- smaller accepted denominator family only,
+- proxy-based / CT-normalized / strict-replacement frame,
+- not an audited household/person/child headcount,
+- and barred from switching to the larger historical family.
 
 ### Base-case formula
 `1,540 × 0.03 × 0.010 × 8 = 3.696`
@@ -53,8 +66,8 @@ That phrasing is deliberate. It does **not** claim that Regina children in the p
 
 ---
 
-## Why the estimate is conservative
-This appendix is conservative in several ways:
+## Why the estimate is bounded
+This appendix is bounded in several ways:
 
 1. It uses only the **child cognitive** lane.
 2. It does **not** stack ADHD burden into the same total.
@@ -62,12 +75,16 @@ This appendix is conservative in several ways:
 4. It does **not** include mortality or life-expectancy burden.
 5. It uses a **low burden-share assumption** rather than applying burden to the full denominator.
 6. It uses a **medium-run duration** instead of a lifetime annualized burden assumption.
+7. It now reports a **central estimate, bounded working range, and stress envelope** rather than presenting the base case as if it were the whole story.
+8. The visible spread is driven mainly by the modeled **duration** and **weight/crosswalk** assumptions.
 
 ---
 
 ## What this does not mean
 This appendix estimate does **not** mean:
 - Regina has a settled attributable burden of exactly **3.696 YLDs**,
+- the **1.848 to 5.544** working range is a formal confidence interval,
+- the **0.693 to 11.088** stress envelope is a validated citywide burden bracket,
 - **3%** of Regina children are confirmed clinically affected,
 - the project has identified all impacted families,
 - the child proxy denominator is an audited harmed cohort,
@@ -81,15 +98,16 @@ It also does **not** mean that this estimate should be added directly to separat
 The right reading is:
 
 - the current Regina evidence base supports a non-zero child-development burden concern,
-- that burden can be translated into a cautious technical envelope,
-- and under conservative assumptions the child-cognitive lane alone produces a non-zero burden estimate that is material enough to document in a technical appendix.
+- that concern can be translated into a cautious inherited technical envelope,
+- and the child-cognitive lane now carries a bounded modeled output centered on **3.696**, with a preferred working range of **1.848 to 5.544** and a wider stress envelope of **0.693 to 11.088**.
 
 The wrong reading is:
 
 - “Regina definitively lost 3.696 YLDs,”
+- “the appendix proves a citywide burden total,”
 - or “this is the final total human cost.”
 
-It is neither of those things.
+It is none of those things.
 
 ---
 
@@ -121,5 +139,11 @@ Use this appendix as:
 - a technical note,
 - a burden-method appendix,
 - or an operator-facing support artifact.
+
+If this lane is referenced outside the appendix, the safe summary is:
+- M4 is a **bounded inherited modeled estimate**,
+- centered on about **3.696**,
+- with most visible uncertainty driven by modeled duration and weighting assumptions,
+- and it is **not** a measured or validated citywide burden total.
 
 Do not use it as a stand-alone headline or as proof that Regina-specific child clinical surveillance has already been completed.
