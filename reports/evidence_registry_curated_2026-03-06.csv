@@ -10,3 +10,13 @@ id,title,year,source,relevance,priority_score,outcome_tags,doi,url
 27,The long-term effect of childhood exposure to technology using surrogates,2022,arxiv,medium,20,education,,http://arxiv.org/abs/2212.03351v2
 34,Hidden epidemic? Childhood concussion may lead to long term cognitive and behavioural problems,2019,crossref,medium,20,cognitive,10.64628/ab.a5cugc9en,https://doi.org/10.64628/ab.a5cugc9en
 39,Long-term Differences in Language and Cognitive Function After Childhood Exposure to Anesthesia,2012,crossref,medium,20,cognitive,10.1542/peds.2011-3822d,https://doi.org/10.1542/peds.2011-3822d
+40,Lanphear et al. 2005 pooled analysis,2005,tier_ab_triage,high,94,iq,10.1289/ehp.7688,https://pmc.ncbi.nlm.nih.gov/articles/PMC1257652/
+41,Needleman et al. 1990,1990,tier_ab_triage,high,93,iq,,https://pubmed.ncbi.nlm.nih.gov/2136923/
+42,Heidari et al. 2022,2022,tier_ab_triage,high,92,iq,10.1186/s13643-022-01963-y,https://pubmed.ncbi.nlm.nih.gov/35637522/
+43,Goodlad et al. 2013,2013,tier_ab_triage,high,91,adhd,10.1016/j.cpr.2013.01.009,https://pubmed.ncbi.nlm.nih.gov/23419800/
+44,Dimitrov et al. 2024,2024,tier_ab_triage,high,90,adhd,10.1007/s11121-023-01617-z,https://pubmed.ncbi.nlm.nih.gov/38108946/
+45,Navas-Acien et al. 2007,2007,tier_ab_triage,high,89,cvd,10.1289/ehp.9785,https://pmc.ncbi.nlm.nih.gov/articles/PMC1849948/
+46,van der Voet et al. 2018 review,2018,tier_ab_triage,high,88,ckd,10.1007/s40572-018-0212-1,https://pmc.ncbi.nlm.nih.gov/articles/PMC6590508/
+47,Harari et al. 2018,2018,tier_ab_triage,high,87,ckd,10.1053/j.ajkd.2018.02.358,https://pubmed.ncbi.nlm.nih.gov/29699886/
+48,Halabicky et al. 2023,2023,tier_ab_triage,high,86,iq,10.1038/s41370-022-00450-9,https://pubmed.ncbi.nlm.nih.gov/35750750/
+49,Nehri et al. 2016,2016,tier_ab_triage,high,85,adhd,10.15296/ijwhr.2016.01,https://pmc.ncbi.nlm.nih.gov/articles/PMC4888135/
