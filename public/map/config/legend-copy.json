@@ -1,0 +1,9 @@
+{
+  "confidence_labels": {
+    "observed": "Observed — direct area-level source backbone / replacement counts"
+  },
+  "scene1_observed": {
+    "title": "Observed area replacements, 2019–2025",
+    "copy": "This view shows observed area-level replacement progress from the area/month source backbone. It is the strongest direct replacement map surface currently approved."
+  }
+}

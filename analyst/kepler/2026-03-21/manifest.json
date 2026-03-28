@@ -1,0 +1,53 @@
+{
+  "package_name": "regina-kepler-analyst-package",
+  "package_version": "2026-03-21",
+  "generated_at": "2026-03-21T23:56:18.780295+00:00",
+  "kepler_config_file": "kepler_config.json",
+  "datasets": [
+    {
+      "id": "area_observed_2019_2025",
+      "path": "datasets/area_observed_2019_2025.geojson",
+      "confidence_class": "observed",
+      "feature_count": 14
+    },
+    {
+      "id": "area_inferred_broad",
+      "path": "datasets/area_inferred_broad.geojson",
+      "confidence_class": "inferred",
+      "feature_count": 14
+    },
+    {
+      "id": "ct_estimated_context",
+      "path": "datasets/ct_estimated_context.geojson",
+      "confidence_class": "estimated",
+      "feature_count": 54
+    }
+  ],
+  "source_files": [
+    "public/data/scene1_observed_area_replacements_2019_2025.geojson",
+    "data/derived/inferred_replacements_by_area.csv",
+    "data/derived/inferred_replacements_meta.json",
+    "data/derived/ct_factor_diagnostics_kepler_2026-03-06.geojson",
+    "reports/kepler_config_phase_a_2026-03-06.json"
+  ],
+  "confidence_taxonomy": [
+    "observed",
+    "inferred",
+    "estimated",
+    "unsupported"
+  ],
+  "restrictions": [
+    "Not a public approval artifact by itself",
+    "2026 promoted counts are excluded",
+    "GTLO/My Maps excluded as validation backbone",
+    "Unsupported layers not included in this package version"
+  ],
+  "warnings": [
+    "Analyst package contains support-only and estimated layers.",
+    "CT estimated context is allocation-based, not direct tract replacement truth.",
+    "Use observed area data as the default first view."
+  ],
+  "join_notes": {
+    "unmatched_inferred_area_names": []
+  }
+}
