@@ -1,0 +1,17 @@
+{
+  "scenes": [
+    {
+      "scene_id": "scene1_observed_area_replacements_2019_2025",
+      "title": "Scene 1 — Observed Program Progress",
+      "layer_id": "obs_area_replacements_2019_2025",
+      "data_path": "../data/scene1_observed_area_replacements_2019_2025.geojson",
+      "confidence_class": "observed",
+      "default_visible": true,
+      "time_window": {
+        "start": "2019-01-01",
+        "end": "2025-12-31"
+      },
+      "panel_copy_key": "scene1_observed"
+    }
+  ]
+}

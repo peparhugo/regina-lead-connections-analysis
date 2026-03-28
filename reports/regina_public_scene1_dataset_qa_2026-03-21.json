@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "issues": [],
+  "feature_count": 14,
+  "sum_observed_replacements_2019_2025": 1146,
+  "meta_path": "public/data/scene1_observed_area_replacements_2019_2025.meta.json",
+  "geojson_path": "public/data/scene1_observed_area_replacements_2019_2025.geojson",
+  "join_qa_path": "reports/regina_public_scene1_join_qa_2026-03-21.json"
+}

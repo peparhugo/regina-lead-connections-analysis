@@ -1,0 +1,108 @@
+{
+  "version": "v1",
+  "config": {
+    "visState": {
+      "layers": [
+        {
+          "id": "area-observed-2019-2025",
+          "type": "geojson",
+          "config": {
+            "dataId": "area_observed_2019_2025",
+            "label": "Observed Area Replacements (2019–2025)",
+            "color": [12, 108, 196],
+            "columns": { "geojson": "_geojson" },
+            "isVisible": true,
+            "visConfig": {
+              "opacity": 0.72,
+              "thickness": 0.5,
+              "strokeColor": [28, 60, 88],
+              "stroked": true,
+              "filled": true,
+              "colorRange": {
+                "name": "Global Warming",
+                "type": "sequential",
+                "category": "Uber",
+                "colors": ["#deebf7", "#9ecae1", "#3182bd", "#08519c"]
+              }
+            }
+          },
+          "visualChannels": {
+            "colorField": { "name": "observed_replacements_2019_2025", "type": "integer" },
+            "colorScale": "quantile"
+          }
+        },
+        {
+          "id": "area-inferred-broad",
+          "type": "geojson",
+          "config": {
+            "dataId": "area_inferred_broad",
+            "label": "Inferred Area Continuity (Broad)",
+            "color": [103, 114, 229],
+            "columns": { "geojson": "_geojson" },
+            "isVisible": false,
+            "visConfig": {
+              "opacity": 0.5,
+              "thickness": 0.5,
+              "strokeColor": [67, 56, 202],
+              "stroked": true,
+              "filled": true
+            }
+          },
+          "visualChannels": {
+            "colorField": { "name": "inferred_replacements_broad", "type": "integer" },
+            "colorScale": "quantile"
+          }
+        },
+        {
+          "id": "ct-estimated-context",
+          "type": "geojson",
+          "config": {
+            "dataId": "ct_estimated_context",
+            "label": "CT Estimated Context",
+            "color": [34, 138, 230],
+            "columns": { "geojson": "_geojson" },
+            "isVisible": false,
+            "visConfig": {
+              "opacity": 0.58,
+              "thickness": 0.5,
+              "strokeColor": [40, 50, 70],
+              "stroked": true,
+              "filled": true,
+              "colorRange": {
+                "name": "Global Warming",
+                "type": "sequential",
+                "category": "Uber",
+                "colors": ["#5A1846", "#900C3F", "#C70039", "#E3611C", "#F1920E", "#FFC300"]
+              }
+            }
+          },
+          "visualChannels": {
+            "colorField": { "name": "replacement_rate", "type": "real" },
+            "colorScale": "quantile"
+          }
+        }
+      ],
+      "interactionConfig": {
+        "tooltip": {
+          "enabled": true,
+          "fieldsToShow": {
+            "area_observed_2019_2025": ["confidence_class", "area_name", "observed_replacements_2019_2025", "lead_connections_total", "observed_replacement_share_of_lead"],
+            "area_inferred_broad": ["confidence_class", "area_name", "inferred_replacements_broad", "method_note"],
+            "ct_estimated_context": ["confidence_class", "ct_uid_code", "replaced_since_2019", "replacement_rate", "impacted_people_est", "impacted_children_0_14_est", "geometry_match_type", "notes"]
+          }
+        }
+      }
+    },
+    "mapState": {
+      "bearing": 0,
+      "dragRotate": false,
+      "latitude": 50.45,
+      "longitude": -104.62,
+      "pitch": 0,
+      "zoom": 11
+    },
+    "mapStyle": {
+      "styleType": "dark"
+    }
+  }
+}

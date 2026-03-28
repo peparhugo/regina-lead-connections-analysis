@@ -1,0 +1,30 @@
+{
+  "generated_at": "2026-03-21T00:00:00Z",
+  "status": "PASS",
+  "scene_id": "scene1_observed_area_replacements_2019_2025",
+  "area_geometry_source_mode": "live",
+  "feature_count": 14,
+  "matched_area_count": 13,
+  "unmatched_area_names": [],
+  "duplicate_matches": [],
+  "zero_observation_area_names": [
+    "NORTHEAST"
+  ],
+  "sum_observed_replacements_2019_2025": 1146,
+  "monthly_window_summary": {
+    "source_file": "data/derived/strict_replacements_by_area_month.csv",
+    "total_all_rows": 1350,
+    "total_window_rows": 1146,
+    "pre_window_rows": 154,
+    "post_window_rows": 50,
+    "unknown_month_rows": 0,
+    "unknown_area_rows": 1
+  },
+  "checks": {
+    "uses_area_geography_only": true,
+    "bounded_to_2019_2025": true,
+    "confidence_class_observed_only": true,
+    "forbidden_public_fields_present": false,
+    "deterministic_feature_sort": true
+  }
+}

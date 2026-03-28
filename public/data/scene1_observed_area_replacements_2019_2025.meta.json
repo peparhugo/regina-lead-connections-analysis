@@ -1,0 +1,33 @@
+{
+  "scene_id": "scene1_observed_area_replacements_2019_2025",
+  "layer_id": "obs_area_replacements_2019_2025",
+  "confidence_class": "observed",
+  "time_window": {
+    "start": "2019-01-01",
+    "end": "2025-12-31"
+  },
+  "source_files": [
+    "OpenGIS LeadConnectionAreas service",
+    "data/cache/LeadConnectionAreas.geojson",
+    "data/derived/strict_replacements_by_area_month.csv",
+    "data/derived/strict_replacements_by_area.csv"
+  ],
+  "build_script": "scripts/build_public_scene1_dataset.py",
+  "generated_at": "2026-03-21T00:00:00Z",
+  "area_geometry_source_mode": "live",
+  "feature_count": 14,
+  "sum_observed_replacements_2019_2025": 1146,
+  "join_validation": {
+    "matched_area_count": 13,
+    "unmatched_area_names": [],
+    "duplicate_matches": [],
+    "zero_observation_area_names": [
+      "NORTHEAST"
+    ]
+  },
+  "notes": [
+    "Scene 1 is area-native and observed.",
+    "This file does not encode tract-level replacement truth.",
+    "2026 is intentionally excluded."
+  ]
+}
