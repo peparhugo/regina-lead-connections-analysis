@@ -27,32 +27,24 @@
   .slide.active { display: flex; flex-direction: column; }
   .slide-inner { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 60px 100px; }
 
-  /* Progress bar */
   .progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--accent); transition: width 0.4s ease; z-index: 100; }
-
-  /* Slide counter */
   .counter { position: fixed; bottom: 32px; right: 48px; font-size: 14px; color: var(--dim); font-weight: 500; font-variant-numeric: tabular-nums; }
 
-  /* Typography */
   .eyebrow { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 20px; }
   .eyebrow-accent { color: var(--accent); }
   .eyebrow-cyan { color: var(--cyan); }
   .eyebrow-red { color: var(--red); }
   .eyebrow-green { color: var(--green); }
+  .eyebrow-amber { color: var(--amber); }
 
   h1 { font-size: 56px; font-weight: 800; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 20px; }
   h1 .gradient { background: linear-gradient(135deg, var(--accent) 0%, var(--cyan) 50%, var(--green) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
   h1 .red-gradient { background: linear-gradient(135deg, var(--red) 0%, var(--amber) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-
+  h2 { font-size: 24px; font-weight: 700; margin-bottom: 12px; }
   .lead { font-size: 22px; color: var(--dim); line-height: 1.5; max-width: 680px; margin-bottom: 48px; }
 
-  /* Diagram — the core visual */
   .pipeline { display: flex; align-items: center; justify-content: center; gap: 0; margin: 40px 0; }
-  .pipe-node { 
-    padding: 20px 28px; border-radius: 14px; font-size: 15px; font-weight: 600; 
-    text-align: center; min-width: 140px; position: relative; line-height: 1.3;
-    border: 1.5px solid var(--border);
-  }
+  .pipe-node { padding: 20px 28px; border-radius: 14px; font-size: 15px; font-weight: 600; text-align: center; min-width: 140px; position: relative; line-height: 1.3; border: 1.5px solid var(--border); }
   .pipe-node small { display: block; font-size: 12px; font-weight: 400; color: var(--dim); margin-top: 4px; }
   .pipe-arrow { width: 48px; height: 2px; background: var(--border); position: relative; flex-shrink: 0; }
   .pipe-arrow::after { content: ''; position: absolute; right: -1px; top: -5px; border: 6px solid transparent; border-left-color: var(--border); }
@@ -63,16 +55,14 @@
   .n-output { background: rgba(74,222,128,0.08); border-color: rgba(74,222,128,0.25); color: var(--green); }
   .n-red { background: rgba(248,113,113,0.08); border-color: rgba(248,113,113,0.25); color: var(--red); }
 
-  /* Worker pills — compact grid */
   .pill-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
-  .pill { 
-    padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 600;
-    background: var(--surface); border: 1px solid var(--border); white-space: nowrap;
-  }
+  .pill { padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; background: var(--surface); border: 1px solid var(--border); white-space: nowrap; }
   .pill-accent { border-color: rgba(129,140,248,0.3); color: var(--accent); }
   .pill-red { border-color: rgba(248,113,113,0.3); color: var(--red); }
+  .pill-green { border-color: rgba(74,222,128,0.3); color: var(--green); }
+  .pill-amber { border-color: rgba(251,191,36,0.3); color: var(--amber); }
+  .pill-cyan { border-color: rgba(34,211,238,0.3); color: var(--cyan); }
 
-  /* Big stats */
   .stats-row { display: flex; gap: 64px; margin: 40px 0; }
   .stat { text-align: left; }
   .stat-num { font-size: 56px; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; }
@@ -81,50 +71,45 @@
   .stat-num.green { color: var(--green); }
   .stat-num.red { color: var(--red); }
   .stat-num.amber { color: var(--amber); }
-  .stat-label { font-size: 14px; color: var(--dim); margin-top: 6px; font-weight: 500; }
+  .stat-label { font-size: 14px; color: var(--dim); margin-top: 4px; }
 
-  /* Two-column */
-  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 32px; }
-  .col-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 32px; }
-  .col-card h2 { font-size: 24px; font-weight: 700; margin-bottom: 12px; }
-  .col-card .desc { font-size: 15px; color: var(--dim); line-height: 1.5; margin-bottom: 20px; }
+  .cols { display: flex; gap: 32px; }
+  .col-card { flex: 1; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
+  .col-card .desc { font-size: 14px; color: var(--dim); line-height: 1.5; margin-top: 8px; }
 
-  /* Cycle diagram */
-  .cycle { display: flex; align-items: center; justify-content: center; gap: 0; margin: 48px 0 24px; }
-  .cycle-node { 
-    width: 120px; height: 120px; border-radius: 50%; display: flex; flex-direction: column;
-    align-items: center; justify-content: center; font-size: 14px; font-weight: 600;
-    border: 2px solid var(--border); text-align: center; line-height: 1.3;
-  }
-  .cycle-node small { font-size: 11px; font-weight: 400; color: var(--dim); }
-  .cycle-arrow { width: 36px; text-align: center; font-size: 18px; color: var(--dim); flex-shrink: 0; }
+  .bottom-bar { padding: 16px 100px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .author { font-size: 13px; color: var(--dim); }
 
-  /* Feedback loop arrow */
-  .feedback-bar { 
-    width: 80%; margin: 0 auto; height: 2px; background: var(--border); position: relative;
-    border-radius: 0 0 12px 12px; margin-top: -12px;
-  }
-  .feedback-bar::before { content: '↩ each cycle sharpens'; position: absolute; bottom: -22px; left: 50%; transform: translateX(-50%); font-size: 12px; color: var(--dim); white-space: nowrap; }
+  .cycle { display: flex; align-items: center; justify-content: center; gap: 0; margin: 40px auto; }
+  .cycle-node { padding: 16px; border-radius: 14px; font-size: 14px; font-weight: 600; text-align: center; min-width: 90px; line-height: 1.2; border: 1.5px solid var(--border); }
+  .cycle-node small { display: block; font-size: 11px; font-weight: 400; color: var(--dim); margin-top: 2px; }
+  .cycle-arrow { padding: 0 6px; font-size: 20px; color: var(--border); }
 
-  /* Bottom bar */
-  .bottom-bar { 
-    position: absolute; bottom: 0; left: 0; right: 0; 
-    padding: 16px 48px; display: flex; justify-content: space-between; align-items: center;
-    border-top: 1px solid rgba(255,255,255,0.04);
-  }
-  .bottom-bar .author { font-size: 13px; color: var(--dim); font-weight: 500; }
+  /* Severity badges */
+  .sev { display: inline-block; padding: 3px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+  .sev-critical { background: rgba(248,113,113,0.15); color: var(--red); }
+  .sev-major { background: rgba(251,191,36,0.15); color: var(--amber); }
+  .sev-minor { background: rgba(129,140,248,0.15); color: var(--accent); }
+  .sev-info { background: rgba(74,222,128,0.15); color: var(--green); }
 
-  /* Transitions */
-  .slide { animation: fadeIn 0.3s ease; }
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  /* About me */
+  .about-grid { display: flex; gap: 40px; align-items: flex-start; margin-top: 32px; }
+  .about-photo { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent); flex-shrink: 0; }
+  .about-bio { flex: 1; }
+  .about-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .about-tag { padding: 4px 12px; border-radius: 6px; font-size: 11px; font-weight: 600; background: var(--surface); border: 1px solid var(--border); color: var(--dim); }
+
+  /* Architecture diagram for anime.js */
+  .arch-box { padding: 12px 16px; border-radius: 10px; font-size: 13px; font-weight: 600; text-align: center; border: 1px solid var(--border); }
+  .arch-box small { display: block; font-size: 11px; font-weight: 400; color: var(--dim); margin-top: 2px; }
+  .arch-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 16px 0; }
 </style>
 </head>
 <body>
-
 <div class="progress" id="progress"></div>
-<div class="counter" id="counter"></div>
+<div class="counter" id="counter">1 / 9</div>
 
-<!-- ========== SLIDE 1: THE IDEA ========== -->
+<!-- ========== SLIDE 1: TITLE ========== -->
 <div class="slide active" id="s1">
   <div class="slide-inner">
     <div class="eyebrow eyebrow-accent">Dream Lab / OpenClaw</div>
@@ -132,22 +117,64 @@
     <p class="lead">Same architecture. Same worker swarm. Same review pipeline.<br>Two completely different domains — one system.</p>
   </div>
   <div class="bottom-bar">
-    <span class="author">Pepar · ChaosClaw · April 2026</span>
+    <span class="author">Thomas (Pepar) Hugo · ChaosClaw · April 2026</span>
   </div>
 </div>
 
-<!-- ========== SLIDE 2: THE INSPIRATION ========== -->
+<!-- ========== SLIDE 2: ABOUT ME ========== -->
 <div class="slide" id="s2">
+  <div class="slide-inner">
+    <div class="eyebrow eyebrow-accent">The Builder</div>
+    <h1>Why I Built This</h1>
+
+    <div class="about-grid">
+      <img class="about-photo" src="../assets/pepar-headshot.jpg" alt="Thomas Hugo" onerror="this.style.background='var(--surface)';this.style.display='flex';">
+      <div class="about-bio">
+        <h2 style="font-size: 22px; color: var(--text);">Thomas Jay Pepar Hugo</h2>
+        <p style="font-size: 15px; color: var(--dim); line-height: 1.6; margin-top: 8px;">
+          13 years building data &amp; AI platforms across investment management, energy, telecom, health, and geospatial systems.
+          This tool is the culmination of every hat I've ever worn — data engineering, ML, optimization algorithms, GenAI agentic workflows, solution architecture, and team leadership — compressed into one system that can investigate anything.
+        </p>
+        <p style="font-size: 14px; color: var(--accent); margin-top: 12px; font-weight: 600;">It may be my life's work at the moment.</p>
+
+        <div style="display: flex; gap: 48px; margin-top: 20px;">
+          <div>
+            <div style="font-size: 12px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px;">Where the pieces come from</div>
+            <div class="about-tags">
+              <span class="about-tag" style="border-color: rgba(129,140,248,0.3); color: var(--accent);">GenAI Agents @ Capital Group</span>
+              <span class="about-tag" style="border-color: rgba(34,211,238,0.3); color: var(--cyan);">MILP/MPC Optimization @ Zerofy</span>
+              <span class="about-tag" style="border-color: rgba(251,191,36,0.3); color: var(--amber);">Big Data @ XGen AI</span>
+              <span class="about-tag" style="border-color: rgba(74,222,128,0.3); color: var(--green);">ML/Classification @ Corel</span>
+              <span class="about-tag" style="border-color: rgba(248,113,113,0.3); color: var(--red);">Health Data @ eHealth SK</span>
+              <span class="about-tag" style="border-color: rgba(244,114,182,0.3); color: var(--pink);">Self-Driving Cars @ Udacity</span>
+            </div>
+          </div>
+          <div>
+            <div style="font-size: 12px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px;">Education</div>
+            <div class="about-tags">
+              <span class="about-tag">MSc Financial Engineering (in progress)</span>
+              <span class="about-tag">GenAI Pinnacle Program</span>
+              <span class="about-tag">BSc Economics + Physics</span>
+              <span class="about-tag">Self-Driving Car Nanodegree</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== SLIDE 3: THE INSPIRATION ========== -->
+<div class="slide" id="s3">
   <div class="slide-inner">
     <div class="eyebrow eyebrow-accent">The Idea Behind It</div>
     <h1>World Models<br><span class="gradient">→ Belief Models</span></h1>
-    <p class="lead">In 2018, Ha &amp; Schmidhuber showed agents can learn inside their own dreams — building compressed world models, then training on predictions from those models instead of reality.</p>
+    <p class="lead">In 2018, Ha &amp; Schmidhuber showed agents can learn inside their own dreams — building compressed world models, then training on predictions.</p>
 
-    <div class="cols" style="margin-top: 32px;">
+    <div class="cols" style="margin-top: 24px;">
       <div class="col-card" style="border-color: rgba(129,140,248,0.2);">
         <div class="eyebrow eyebrow-accent">World Models (Ha &amp; Schmidhuber 2018)</div>
         <h2 style="font-size: 20px;">Agent learns inside its own dream</h2>
-
         <div class="pipeline" style="margin: 20px 0; justify-content: flex-start;">
           <div class="pipe-node n-source" style="min-width: 80px; padding: 14px 16px;">V<small>observe</small></div>
           <div class="pipe-arrow" style="width: 32px;"></div>
@@ -155,14 +182,12 @@
           <div class="pipe-arrow" style="width: 32px;"></div>
           <div class="pipe-node n-output" style="min-width: 80px; padding: 14px 16px;">C<small>decide</small></div>
         </div>
-
-        <p style="font-size: 14px; color: var(--dim); line-height: 1.5;">Compress observations → build a predictive model → train a controller entirely inside the model's generated environment. Add noise to prevent the agent from exploiting imperfections in its own dream.</p>
+        <p style="font-size: 14px; color: var(--dim); line-height: 1.5;">Compress observations → build a predictive model → train inside the model. Add noise to prevent exploiting imperfections.</p>
       </div>
 
       <div class="col-card" style="border-color: rgba(248,113,113,0.2);">
-        <div class="eyebrow eyebrow-red">Dream Lab / JTB (our adaptation)</div>
+        <div class="eyebrow eyebrow-red">Dream Lab / JVB (our adaptation)</div>
         <h2 style="font-size: 20px;">System learns by attacking its own beliefs</h2>
-
         <div class="pipeline" style="margin: 20px 0; justify-content: flex-start;">
           <div class="pipe-node n-source" style="min-width: 80px; padding: 14px 16px;">📥<small>observe</small></div>
           <div class="pipe-arrow" style="width: 32px;"></div>
@@ -172,21 +197,19 @@
           <div class="pipe-arrow" style="width: 32px;"></div>
           <div class="pipe-node n-output" style="min-width: 80px; padding: 14px 16px;">✅<small>know</small></div>
         </div>
-
-        <p style="font-size: 14px; color: var(--dim); line-height: 1.5;">Workers generate candidate beliefs from data → a counterargument agent stress-tests them inside the belief model → JTB review adjudicates what survives. The "noise" is adversarial scrutiny.</p>
+        <p style="font-size: 14px; color: var(--dim); line-height: 1.5;">Workers generate beliefs → counterargument agent stress-tests them → JVB review adjudicates what survives. The "noise" is adversarial scrutiny.</p>
       </div>
     </div>
 
-    <p style="margin-top: 24px; font-size: 15px; color: var(--dim); text-align: center;">
-      <span style="color: var(--accent);">The parallel:</span> 
-      World Models add noise to prevent dream exploitation. We add a counterargument monkey to prevent belief exploitation.
-      <br><span style="color: var(--dim); font-size: 13px;">worldmodels.github.io · Ha &amp; Schmidhuber, 2018</span>
+    <p style="margin-top: 20px; font-size: 14px; color: var(--dim); text-align: center;">
+      <span style="color: var(--accent);">The parallel:</span> World Models add noise to prevent dream exploitation. We add a counterargument monkey to prevent belief exploitation.
+      <br><span style="font-size: 12px;">worldmodels.github.io · Ha &amp; Schmidhuber, 2018</span>
     </p>
   </div>
 </div>
 
-<!-- ========== SLIDE 3: HOW IT WORKS ========== -->
-<div class="slide" id="s3">
+<!-- ========== SLIDE 4: ARCHITECTURE ========== -->
+<div class="slide" id="s4">
   <div class="slide-inner">
     <div class="eyebrow eyebrow-accent">Architecture</div>
     <h1>The Pipeline</h1>
@@ -195,30 +218,31 @@
     <div class="pipeline">
       <div class="pipe-node n-source">📥 Data Source<small>Repo / PostGIS / Web</small></div>
       <div class="pipe-arrow"></div>
-      <div class="pipe-node n-worker">🐒 Worker Swarm<small>3-11 specialists</small></div>
+      <div class="pipe-node n-worker">🐒 Worker Swarm<small>3–11 specialists</small></div>
       <div class="pipe-arrow"></div>
       <div class="pipe-node n-red">⚔️ Counterargument<small>attack own claims</small></div>
       <div class="pipe-arrow"></div>
-      <div class="pipe-node n-review">⚖️ JTB Review<small>justified true belief</small></div>
+      <div class="pipe-node n-review">⚖️ JVB Review<small>justified revisable belief</small></div>
       <div class="pipe-arrow"></div>
       <div class="pipe-node n-output">✅ Knowledge<small>promoted claims</small></div>
     </div>
 
     <div style="display:flex; gap: 48px; margin-top: 40px;">
       <div>
-        <div class="eyebrow eyebrow-cyan" style="margin-bottom: 10px;">GitHub Workers</div>
+        <div class="eyebrow eyebrow-cyan" style="margin-bottom: 10px;">GitHub Workers (genetic algorithm)</div>
+        <div style="font-size: 12px; color: var(--dim); margin-bottom: 8px;">🎯 Required = selection pressure &nbsp;&nbsp; 🎲 Random = mutation/exploration</div>
         <div class="pill-grid">
-          <span class="pill pill-accent">Question</span>
-          <span class="pill pill-accent">Mutation</span>
-          <span class="pill pill-accent">Linkage</span>
-          <span class="pill pill-accent">Learning</span>
-          <span class="pill pill-accent">Debt</span>
-          <span class="pill pill-accent">Risk</span>
-          <span class="pill pill-accent">Architecture</span>
-          <span class="pill pill-accent">Security</span>
-          <span class="pill pill-accent">Ownership</span>
-          <span class="pill pill-accent">Contributor</span>
-          <span class="pill pill-accent">Review Cov.</span>
+          <span class="pill pill-accent">🎯 Question</span>
+          <span class="pill pill-accent">🎯 Mutation</span>
+          <span class="pill pill-accent">🎯 Linkage</span>
+          <span class="pill pill-accent">🎯 Risk</span>
+          <span class="pill pill-accent">🎯 Security</span>
+          <span class="pill" style="border-color: rgba(129,140,248,0.15); color: var(--dim);">🎲 Learning</span>
+          <span class="pill" style="border-color: rgba(129,140,248,0.15); color: var(--dim);">🎲 Debt</span>
+          <span class="pill" style="border-color: rgba(129,140,248,0.15); color: var(--dim);">🎲 Architecture</span>
+          <span class="pill" style="border-color: rgba(129,140,248,0.15); color: var(--dim);">🎲 Ownership</span>
+          <span class="pill" style="border-color: rgba(129,140,248,0.15); color: var(--dim);">🎲 Contributor</span>
+          <span class="pill" style="border-color: rgba(129,140,248,0.15); color: var(--dim);">🎲 Review Cov.</span>
         </div>
       </div>
       <div>
@@ -238,8 +262,100 @@
   </div>
 </div>
 
-<!-- ========== SLIDE 4: TWO APPLICATIONS ========== -->
-<div class="slide" id="s4">
+<!-- ========== SLIDE 5: LIVE DEMO — ANIME.JS ========== -->
+<div class="slide" id="s5">
+  <div class="slide-inner">
+    <div class="eyebrow eyebrow-cyan">Live Demo — GitHub Analyzer</div>
+    <h1>Anime.js v4<br><span class="gradient">Deep Analysis</span></h1>
+    <p style="font-size: 16px; color: var(--dim); margin-bottom: 24px;">456 files · 60 JS source files · ~10K LOC · 12 subsystems identified · 2 cycles, 16 worker findings</p>
+
+    <div style="display: flex; gap: 24px;">
+      <!-- Architecture map -->
+      <div style="flex: 1;">
+        <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--cyan); margin-bottom: 10px;">Auto-discovered Architecture</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px;">
+          <div class="arch-box n-source">Engine<small>181 LOC · tick loop</small></div>
+          <div class="arch-box n-worker">Animation<small>747 LOC · keyframes</small></div>
+          <div class="arch-box n-review">Timeline<small>362 LOC · sequencing</small></div>
+          <div class="arch-box n-red" style="grid-column: span 1;">Layout<small>1,607 LOC · FLIP ⚠️</small></div>
+          <div class="arch-box n-red">Draggable<small>1,286 LOC · interaction</small></div>
+          <div class="arch-box n-red">Scroll<small>986 LOC · linked anim</small></div>
+          <div class="arch-box" style="background: rgba(129,140,248,0.06);">Easings<small>7 families incl. spring</small></div>
+          <div class="arch-box" style="background: rgba(129,140,248,0.06);">WAAPI Bridge<small>hardware accel</small></div>
+          <div class="arch-box" style="background: rgba(129,140,248,0.06);">Text · SVG<small>split + morph + path</small></div>
+        </div>
+      </div>
+
+      <!-- Findings -->
+      <div style="flex: 1;">
+        <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--amber); margin-bottom: 10px;">Classified Findings</div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="padding: 10px 14px; background: var(--surface); border-radius: 10px; border: 1px solid var(--border);">
+            <span class="sev sev-critical">CRITICAL</span>
+            <span style="font-size: 13px; margin-left: 8px;">Core timing regressions invisible to unit tests</span>
+          </div>
+          <div style="padding: 10px 14px; background: var(--surface); border-radius: 10px; border: 1px solid var(--border);">
+            <span class="sev sev-critical">CRITICAL</span>
+            <span style="font-size: 13px; margin-left: 8px;">JSDoc-only type safety with no runtime validation</span>
+          </div>
+          <div style="padding: 10px 14px; background: var(--surface); border-radius: 10px; border: 1px solid var(--border);">
+            <span class="sev sev-major">MAJOR</span>
+            <span style="font-size: 13px; margin-left: 8px;">Bus-factor 1 — entire library = one maintainer</span>
+          </div>
+          <div style="padding: 10px 14px; background: var(--surface); border-radius: 10px; border: 1px solid var(--border);">
+            <span class="sev sev-major">MAJOR</span>
+            <span style="font-size: 13px; margin-left: 8px;">No visual regression testing for animation correctness</span>
+          </div>
+          <div style="padding: 10px 14px; background: var(--surface); border-radius: 10px; border: 1px solid var(--border);">
+            <span class="sev sev-minor">MINOR</span>
+            <span style="font-size: 13px; margin-left: 8px;">DOM injection risk via unsanitized selector inputs</span>
+          </div>
+        </div>
+        <p style="font-size: 12px; color: var(--dim); margin-top: 8px;">Spring physics adapted from Apple WebKit · WAAPI bridge for compositor-thread performance</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== SLIDE 6: LEARNING FROM SQ ========== -->
+<div class="slide" id="s6">
+  <div class="slide-inner">
+    <div class="eyebrow eyebrow-green">Cross-Repo Learning</div>
+    <h1>System Learns<br><span class="gradient">From What It Reads</span></h1>
+    <p style="font-size: 16px; color: var(--dim); margin-bottom: 24px;">After analyzing SonarQube (8,800 files, 15-year codebase), the system extracted design patterns and applied them to itself.</p>
+
+    <div style="display: flex; gap: 24px;">
+      <div class="col-card" style="flex:1; border-color: rgba(34,211,238,0.2); padding: 20px;">
+        <div class="eyebrow eyebrow-cyan">Read from SonarQube</div>
+        <div style="font-size: 14px; color: var(--dim); line-height: 1.7;">
+          <div>✅ Per-condition gate evaluation with actual values</div>
+          <div>✅ Typed severity classification (BLOCKER→INFO)</div>
+          <div>✅ Profile-level worker activation</div>
+          <div>✅ Missing-measure handling</div>
+          <div>✅ Built-in sensible defaults</div>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; font-size: 32px; color: var(--accent);">→</div>
+      <div class="col-card" style="flex:1; border-color: rgba(74,222,128,0.2); padding: 20px;">
+        <div class="eyebrow eyebrow-green">Applied to Dream Lab</div>
+        <div style="font-size: 14px; color: var(--dim); line-height: 1.7;">
+          <div>✅ JVB bridge now tracks 8 conditions with values</div>
+          <div>✅ Workers output severity + impact + effort</div>
+          <div>✅ Profiles declare required + random workers</div>
+          <div>✅ Graceful handling of missing evidence</div>
+          <div>✅ Role-specific classification defaults</div>
+        </div>
+      </div>
+    </div>
+
+    <p style="margin-top: 24px; font-size: 15px; color: var(--dim); text-align: center;">
+      <span style="color: var(--accent); font-weight: 600;">The system reverse-engineered a Toyota factory to improve its own assembly line.</span>
+    </p>
+  </div>
+</div>
+
+<!-- ========== SLIDE 7: TWO DOMAINS ========== -->
+<div class="slide" id="s7">
   <div class="slide-inner">
     <div class="eyebrow eyebrow-green">Results</div>
     <h1>One System, Two Domains</h1>
@@ -280,17 +396,14 @@
   </div>
 </div>
 
-<!-- ========== SLIDE 5: TECH STACK ========== -->
-<div class="slide" id="s5">
+<!-- ========== SLIDE 8: TECH STACK ========== -->
+<div class="slide" id="s8">
   <div class="slide-inner">
     <div class="eyebrow eyebrow-cyan">Infrastructure</div>
     <h1>Tech Stack</h1>
 
     <div style="display: flex; gap: 24px; margin-top: 32px;">
-
-      <!-- Left: layered stack -->
       <div style="flex: 1; display: flex; flex-direction: column; gap: 2px;">
-        
         <div style="background: rgba(74,222,128,0.08); border: 1px solid rgba(74,222,128,0.2); border-radius: 12px 12px 4px 4px; padding: 20px 24px; text-align: center;">
           <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--green); margin-bottom: 6px;">Presentation Layer</div>
           <div class="pill-grid" style="justify-content: center;">
@@ -300,7 +413,6 @@
             <span class="pill" style="font-size: 12px;">Vanilla JS</span>
           </div>
         </div>
-
         <div style="background: rgba(129,140,248,0.08); border: 1px solid rgba(129,140,248,0.2); border-radius: 4px; padding: 20px 24px; text-align: center;">
           <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 6px;">Orchestration Layer</div>
           <div class="pill-grid" style="justify-content: center;">
@@ -310,17 +422,15 @@
             <span class="pill" style="font-size: 12px;">Subagent Swarm</span>
           </div>
         </div>
-
         <div style="background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.2); border-radius: 4px; padding: 20px 24px; text-align: center;">
           <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--amber); margin-bottom: 6px;">Intelligence Layer</div>
           <div class="pill-grid" style="justify-content: center;">
             <span class="pill" style="font-size: 12px;">GPT-5 Mini</span>
             <span class="pill" style="font-size: 12px;">Claude</span>
-            <span class="pill" style="font-size: 12px;">JTB Review (n8n)</span>
+            <span class="pill" style="font-size: 12px;">JVB Review (n8n)</span>
             <span class="pill" style="font-size: 12px;">Counterargument Monkey</span>
           </div>
         </div>
-
         <div style="background: rgba(34,211,238,0.08); border: 1px solid rgba(34,211,238,0.2); border-radius: 4px 4px 12px 12px; padding: 20px 24px; text-align: center;">
           <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--cyan); margin-bottom: 6px;">Data Layer</div>
           <div class="pill-grid" style="justify-content: center;">
@@ -332,47 +442,32 @@
             <span class="pill" style="font-size: 12px;">SearXNG</span>
           </div>
         </div>
-
       </div>
 
-      <!-- Right: key details -->
       <div style="flex: 0.6; display: flex; flex-direction: column; gap: 16px;">
-
         <div class="col-card" style="padding: 20px; border-color: var(--border);">
           <h2 style="font-size: 16px; color: var(--accent); margin-bottom: 8px;">Orchestration</h2>
-          <p style="font-size: 13px; color: var(--dim); line-height: 1.5;">
-            OpenClaw spawns agents as subprocesses. Each worker is a structured prompt dispatched to a dedicated LLM agent (<code style="color:var(--cyan);">mini-dreamer</code>). Workers run in batches of 3 to prevent output drops.
-          </p>
+          <p style="font-size: 13px; color: var(--dim); line-height: 1.5;">OpenClaw spawns agents as subprocesses. Workers run in batches of 3. Profile-driven activation: 5 required + 3 random per cycle (genetic algorithm pattern).</p>
         </div>
-
         <div class="col-card" style="padding: 20px; border-color: var(--border);">
-          <h2 style="font-size: 16px; color: var(--amber); margin-bottom: 8px;">JTB Pipeline</h2>
-          <p style="font-size: 13px; color: var(--dim); line-height: 1.5;">
-            3 n8n workflows chain: <code style="color:var(--amber);">intake</code> → <code style="color:var(--amber);">build-claim-batch</code> → <code style="color:var(--amber);">review-and-revise</code>. Connected via a Python bridge with fail-closed normalization.
-          </p>
+          <h2 style="font-size: 16px; color: var(--amber); margin-bottom: 8px;">JVB Pipeline</h2>
+          <p style="font-size: 13px; color: var(--dim); line-height: 1.5;">3 n8n workflows: <code style="color:var(--amber);">intake</code> → <code style="color:var(--amber);">build-claim-batch</code> → <code style="color:var(--amber);">review-and-revise</code>. Per-condition gate evaluation with fail-closed normalization.</p>
         </div>
-
         <div class="col-card" style="padding: 20px; border-color: var(--border);">
           <h2 style="font-size: 16px; color: var(--cyan); margin-bottom: 8px;">Data</h2>
-          <p style="font-size: 13px; color: var(--dim); line-height: 1.5;">
-            PostGIS: 22 tables + 15 materialized views. 87K address points, 1.1K replacement events, child harm / QALY / cost models per census tract. All geometry in EPSG:4326.
-          </p>
+          <p style="font-size: 13px; color: var(--dim); line-height: 1.5;">PostGIS: 22 tables + 15 materialized views. 87K address points, 1.1K replacement events, child harm / QALY / cost models per census tract.</p>
         </div>
-
         <div class="col-card" style="padding: 20px; border-color: var(--border);">
           <h2 style="font-size: 16px; color: var(--green); margin-bottom: 8px;">Hosting</h2>
-          <p style="font-size: 13px; color: var(--dim); line-height: 1.5;">
-            VPS (Linux). Docker containers for PostGIS, Neo4j, n8n, VictoriaMetrics. GitHub Pages for public site. Everything runs on one box.
-          </p>
+          <p style="font-size: 13px; color: var(--dim); line-height: 1.5;">Single VPS. Docker containers for PostGIS, Neo4j, n8n, VictoriaMetrics. GitHub Pages for public site. Everything on one box.</p>
         </div>
-
       </div>
     </div>
   </div>
 </div>
 
-<!-- ========== SLIDE 6: THE LOOP ========== -->
-<div class="slide" id="s6">
+<!-- ========== SLIDE 9: THE LOOP ========== -->
+<div class="slide" id="s9">
   <div class="slide-inner" style="align-items: center; text-align: center;">
     <div class="eyebrow eyebrow-green">The Key Insight</div>
     <h1>It Gets Sharper<br>Every Cycle</h1>
