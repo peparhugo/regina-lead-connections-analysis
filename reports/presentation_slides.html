@@ -407,9 +407,8 @@
 
 <script src="../assets/anime.min.js"></script>
 <script>
-// Anime.js v4 compat: anime.animate() not anime(), _stagger() stays
 const _animate = anime.animate.bind(anime);
-const _stagger = _stagger.bind(anime);
+const _stagger = anime.stagger.bind(anime);
 </script>
 <script>
 // --- Floating particles ---
