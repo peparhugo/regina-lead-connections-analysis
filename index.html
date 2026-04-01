@@ -3,344 +3,473 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Regina Lead Service Connections — Recognition, staged movement, open delivery question</title>
-  <meta name="description" content="A claim-controlled public summary of Regina's lead service connection record: early recognition, staged policy movement from 2021 through 2025, and the unresolved question of whether delivery became fast and strong enough to match the stakes." />
-  <meta name="theme-color" content="#0f4c81" />
-  <meta property="og:title" content="Regina Lead Service Connections — Recognition, staged movement, open delivery question" />
-  <meta property="og:description" content="Regina recognized the lead-service-line issue years ago, moved policy in stages, and still leaves an open public question about whether delivery became fast and strong enough to match the stakes." />
+  <title>Regina's Children Are Drinking Lead</title>
+  <meta name="description" content="A public-interest investigation into Regina's lead service connections, the children exposed, the cost already locked in, and the political choices that slowed action." />
+  <meta name="theme-color" content="#0a0c10" />
+  <meta property="og:title" content="Regina's Children Are Drinking Lead" />
+  <meta property="og:description" content="1,089 active lead service connections. ~1,540 children in affected census tracts. $39.6M in realized healthcare cost already locked in." />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Regina Lead Service Connections — Recognition, staged movement, open delivery question" />
-  <meta name="twitter:description" content="A public-interest summary centered on documentary continuity, incremental movement, and unresolved delivery adequacy." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
   <link rel="stylesheet" href="styles.css" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body>
-  <main class="wrap page-shell">
-    <div class="topbar">
-      <div class="pill">Regina lead service connections</div>
-      <div>Public-interest summary · claim-controlled · plain language first</div>
-    </div>
+  <div class="site-shell">
+    <header class="topbar">
+      <a class="brand" href="#hero">REGINA LEAD INVESTIGATION</a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="site-nav" class="site-nav">
+        <a href="#map-section">Map</a>
+        <a href="#harm">The Harm</a>
+        <a href="#affected">Who's Affected</a>
+        <a href="#blocked">Who Blocked Action</a>
+        <a href="#province">Provincial Vacuum</a>
+        <a href="#timeline">Timeline</a>
+        <a href="#action">What Needs to Change</a>
+      </nav>
+    </header>
 
-    <section class="hero">
-      <div class="hero-grid">
-        <div>
-          <div class="kicker">The bigger picture</div>
-          <h1>Regina recognized the issue years ago, moved policy in stages, and still leaves an open question about delivery.</h1>
-          <p class="lede">The official record shows continuity from 2021 through 2025 and real policy movement. But the strongest current reading is incremental movement, not a full reset, and the unresolved accountability question is whether delivery became fast and strong enough to match the stakes.</p>
-          <div class="stat-row">
-            <span class="stat-chip">Recognition on record</span>
-            <span class="stat-chip">Staged movement</span>
-            <span class="stat-chip">Delivery still open</span>
-          </div>
-          <div class="action-row" style="margin-top:18px;">
-            <a class="btn primary" href="#main-finding">Read the main finding</a>
-            <a class="btn secondary" href="reports/public-brief.html">Read the brief</a>
+    <main>
+      <section id="hero" class="hero section">
+        <div class="hero-bg"></div>
+        <div class="hero-copy">
+          <p class="eyebrow">A city infrastructure failure with a human body count</p>
+          <h1>Regina's Children Are Drinking Lead</h1>
+          <p class="hero-text">Regina still has <strong>1,089 active lead service connections</strong>. In the census tracts carrying the heaviest burden, about <strong>1,540 children</strong> live with the consequences of delayed replacement, weak disclosure rules, and political choices that treated lead exposure like a manageable inconvenience.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#map-section">See the map</a>
+            <a class="button button-secondary" href="#action">What needs to change</a>
           </div>
         </div>
-        <div class="side-panel">
-          <h2>What you should take away</h2>
-          <ul>
-            <li><strong>The issue was already in the official record.</strong> Regina had the problem on the agenda years ago.</li>
-            <li><strong>The City did move policy.</strong> The record shows a staged framework rather than a transformational reset.</li>
-            <li><strong>The main accountability question is now delivery adequacy.</strong> The record is stronger on decisions than on verified follow-through.</li>
+        <div class="hero-stats">
+          <article class="stat-card stat-card-accent">
+            <span class="stat-label">Active lead connections</span>
+            <strong>1,089</strong>
+            <p>Lead service lines still in service across Regina.</p>
+          </article>
+          <article class="stat-card">
+            <span class="stat-label">Children in affected CTs</span>
+            <strong>~1,540</strong>
+            <p>Children living in the tracts carrying the heaviest modeled burden.</p>
+          </article>
+          <article class="stat-card">
+            <span class="stat-label">Locked-in healthcare cost</span>
+            <strong>$39.6M</strong>
+            <p>Realized harm already baked in because replacement came too late.</p>
+          </article>
+          <article class="stat-card">
+            <span class="stat-label">Filter uptake</span>
+            <strong>~25%</strong>
+            <p>Only about one quarter of affected households use the filter program.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="map-section" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Geography of harm</p>
+          <h2>The burden is concentrated — and visible</h2>
+          <p>The map below layers census-tract harm estimates on top of Regina. Darker tracts represent higher <strong>realized QALY loss</strong>: harm that is no longer hypothetical because exposure already happened. Below it, the existing observed-replacement map is embedded for context.</p>
+        </div>
+        <div class="map-layout">
+          <div class="map-card main-map-card">
+            <div class="map-toolbar">
+              <div>
+                <h3>Realized harm by census tract</h3>
+                <p>Choropleth: <code>realized_qaly</code> from <code>ct_harm_analysis.geojson</code></p>
+              </div>
+              <div class="legend" aria-label="Map legend">
+                <span><i style="background:#33110f"></i>Highest</span>
+                <span><i style="background:#7f1d1d"></i></span>
+                <span><i style="background:#b91c1c"></i></span>
+                <span><i style="background:#f59e0b"></i></span>
+                <span><i style="background:#fde68a"></i>Lowest</span>
+              </div>
+            </div>
+            <div id="lead-map" class="lead-map" role="img" aria-label="Map of realized QALY harm by census tract"></div>
+          </div>
+          <aside class="map-card map-sidepanel">
+            <h3>What the map shows</h3>
+            <ul class="bullet-list">
+              <li><strong>CT 0018.00</strong>: 152 lead connections, 72 children, 59.8% renter, highest modeled realized harm.</li>
+              <li><strong>CT 0009.01</strong>: 186 lead connections, one of the worst concentrations in the city.</li>
+              <li><strong>CT 0012.00</strong>: 154 lead connections, another high-burden tract.</li>
+            </ul>
+            <div class="info-box">
+              <span class="info-label">Hover the map</span>
+              <p id="map-summary">Inspect a tract to see realized QALYs, projected cost, renter share, and child exposure context.</p>
+            </div>
+            <div class="metric-stack">
+              <div>
+                <span class="stat-label">Realized harm citywide</span>
+                <strong>148.9 QALYs</strong>
+              </div>
+              <div>
+                <span class="stat-label">Projected additional harm</span>
+                <strong>252.1 QALYs</strong>
+              </div>
+              <div>
+                <span class="stat-label">Projected additional healthcare cost</span>
+                <strong>$67.0M</strong>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <div class="embed-card">
+          <div class="section-subhead">
+            <h3>Observed replacement map</h3>
+            <p>This is the existing MapLibre public map from <code>public/map/</code>, embedded directly for continuity with the earlier package.</p>
+          </div>
+          <iframe class="map-embed" src="public/map/" title="Observed area replacements map"></iframe>
+        </div>
+      </section>
+
+      <section id="harm" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">The harm</p>
+          <h2>Three columns. One pattern. Delay converts preventable harm into permanent loss.</h2>
+        </div>
+        <div class="harm-grid">
+          <article class="panel panel-muted">
+            <span class="panel-kicker">Avoided</span>
+            <h3>What replacement already prevented</h3>
+            <div class="number-pair">
+              <strong>149.6 QALYs</strong>
+              <span>$40.0M cost avoided</span>
+            </div>
+            <p>Replacement work has prevented real harm. That matters. It also proves the point: when pipes are removed, losses stop compounding.</p>
+          </article>
+          <article class="panel panel-hot">
+            <span class="panel-kicker">Realized</span>
+            <h3>What is already locked in</h3>
+            <div class="number-pair">
+              <strong>148.9 QALYs</strong>
+              <span>$39.6M realized healthcare cost</span>
+            </div>
+            <p>This is the burden already converted into irreversible damage because exposure happened before replacement. The bill is not theoretical anymore.</p>
+          </article>
+          <article class="panel panel-warn">
+            <span class="panel-kicker">Projected</span>
+            <h3>What delay will add next</h3>
+            <div class="number-pair">
+              <strong>252.1 QALYs</strong>
+              <span>$67.0M projected healthcare cost</span>
+            </div>
+            <p>If the remaining lead lines stay in the ground, Regina is not standing still. It is choosing to accumulate more loss.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="affected" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Who's affected</p>
+          <h2>The citywide problem lands hardest on renters, lower-income households, and a handful of census tracts</h2>
+          <p>The worst tracts are not random. They combine high lead-line counts, significant child exposure, and renter-heavy housing where tenants have the least leverage and the least legal protection.</p>
+        </div>
+        <div class="table-card">
+          <table>
+            <thead>
+              <tr>
+                <th>Census tract</th>
+                <th>Lead connections</th>
+                <th>Children</th>
+                <th>Renter share</th>
+                <th>Why it matters</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0018.00</td>
+                <td>152</td>
+                <td>72</td>
+                <td>59.8%</td>
+                <td>Highest modeled realized harm; heavy child exposure and high renter burden.</td>
+              </tr>
+              <tr>
+                <td>0009.01</td>
+                <td>186</td>
+                <td>—</td>
+                <td>—</td>
+                <td>Worst concentration of lead service connections in the city.</td>
+              </tr>
+              <tr>
+                <td>0012.00</td>
+                <td>154</td>
+                <td>—</td>
+                <td>—</td>
+                <td>Another severe concentration with major replacement urgency.</td>
+              </tr>
+              <tr>
+                <td>0011.00</td>
+                <td>—</td>
+                <td>—</td>
+                <td>82.6%</td>
+                <td>Extreme renter concentration; weak tenant protection magnifies risk.</td>
+              </tr>
+              <tr>
+                <td>0013.00</td>
+                <td>—</td>
+                <td>—</td>
+                <td>78.6%</td>
+                <td>Renter-heavy tract where disclosure failures hit hardest.</td>
+              </tr>
+              <tr>
+                <td>0014.00</td>
+                <td>—</td>
+                <td>—</td>
+                <td>72.2%</td>
+                <td>Another renter-dominant tract trapped in the landlord gap.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="blocked" class="section split-section">
+        <div>
+          <div class="section-heading left-tight">
+            <p class="eyebrow">Who blocked action</p>
+            <h2>Regina council was not neutral</h2>
+            <p>When faster replacement and basic reporting accountability came to council, several councillors repeatedly landed on the wrong side of the vote.</p>
+          </div>
+          <div class="vote-grid">
+            <article class="vote-card">
+              <span class="panel-kicker">CR21-90</span>
+              <h3>7–4 against faster replacement</h3>
+              <p>On the amendment pushing a faster 10-year timeline, the vote failed. Bob Hawkins, John Findura, and Sandra Masters were among the councillors who opposed faster action, along with four others.</p>
+            </article>
+            <article class="vote-card">
+              <span class="panel-kicker">CR23-97</span>
+              <h3>6–3 on reporting — with key NO votes</h3>
+              <p>Even formal reporting faced resistance. Findura, Hawkins, and Masters voted <strong>NO</strong> on reporting.</p>
+            </article>
+          </div>
+        </div>
+        <div class="quote-stack">
+          <blockquote>
+            <p>“It's not like we're saying to anybody you have to drink lead water”</p>
+            <footer>— Bob Hawkins</footer>
+          </blockquote>
+          <blockquote class="quote-alert">
+            <p>“Some tap tests over 100 times greater than Health Canada's maximum”</p>
+            <footer>— Patricia Elliott</footer>
+          </blockquote>
+        </div>
+      </section>
+
+      <section id="province" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">The provincial vacuum</p>
+          <h2>Saskatchewan left municipalities and tenants exposed</h2>
+        </div>
+        <div class="compare-grid">
+          <article class="panel panel-hot">
+            <h3>Saskatchewan</h3>
+            <ul class="bullet-list compact">
+              <li><strong>No</strong> provincial lead-in-water standard</li>
+              <li><strong>No</strong> landlord disclosure requirement</li>
+              <li><strong>No</strong> dedicated provincial funding stream</li>
+            </ul>
+          </article>
+          <article class="panel">
+            <h3>What stronger provinces do</h3>
+            <ul class="bullet-list compact">
+              <li>Set explicit standards or action thresholds</li>
+              <li>Require clearer testing and disclosure expectations</li>
+              <li>Back local remediation with provincial money</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="rental" class="section split-section">
+        <div>
+          <div class="section-heading left-tight">
+            <p class="eyebrow">The rental trap</p>
+            <h2>Tenants carry the risk while landlords face almost no lead-specific obligations</h2>
+          </div>
+          <p>In the worst-hit tracts, renter shares run from roughly 60% to more than 80%. Yet Saskatchewan does not require landlords to test for lead, disclose lead service connections, or proactively remediate the risk. For renters, “choice” is mostly fiction: they often do not know the line is lead, cannot authorize replacement themselves, and may not even control plumbing decisions inside the home.</p>
+        </div>
+        <div class="panel panel-outline">
+          <h3>The gap in plain language</h3>
+          <ul class="bullet-list compact">
+            <li>Landlords are not required to disclose lead service lines to tenants.</li>
+            <li>Tenants cannot force private-side replacement on their own.</li>
+            <li>Filter programs do not fix ownership and disclosure failures.</li>
+            <li>Low filter uptake means the fallback safety net is weak.</li>
           </ul>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="section" id="main-finding">
-      <div class="callout">The strongest safe reading is singular: recognition, then staged movement, then an unresolved public question about whether delivery became strong enough in practice.</div>
-      <div class="section-head">
-        <h2>The main finding</h2>
-        <p>If someone reads only one section, it should be this one.</p>
-      </div>
-      <div class="grid-3">
-        <article class="grid-card strong">
-          <span class="label">Recognition</span>
-          <h3>The issue was in the formal record years ago</h3>
-          <p>The lead-service-line file appears in the documentary chain well before the latest adjustment package.</p>
-        </article>
-        <article class="grid-card strong">
-          <span class="label">Movement</span>
-          <h3>The official record shows real policy movement from 2021 through 2025</h3>
-          <p>The package shows a baseline program, implementation routing, continued oversight, and later affordability, reimbursement, outreach, and reporting adjustments.</p>
-        </article>
-        <article class="grid-card strong">
-          <span class="label">Open question</span>
-          <h3>Delivery adequacy remains unresolved</h3>
-          <p>The strongest current question is not whether decisions were adopted, but whether delivery and follow-through became fast and strong enough to match the stakes.</p>
-        </article>
-      </div>
-    </section>
+      <section id="timeline" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Timeline</p>
+          <h2>The warning signs were old. The urgency is current.</h2>
+        </div>
+        <div class="timeline">
+          <article class="timeline-item">
+            <span class="timeline-date">2019</span>
+            <h3>Recognition enters the public record</h3>
+            <p>Lead service connections were already part of the formal municipal record.</p>
+          </article>
+          <article class="timeline-item">
+            <span class="timeline-date">2021 · CR21-90</span>
+            <h3>Faster replacement is voted down</h3>
+            <p>Council rejects a faster replacement path, keeping a slower timeline in place.</p>
+          </article>
+          <article class="timeline-item">
+            <span class="timeline-date">2023 · CR23-97</span>
+            <h3>Even reporting draws resistance</h3>
+            <p>Formal reporting survives, but Findura, Hawkins, and Masters vote no.</p>
+          </article>
+          <article class="timeline-item">
+            <span class="timeline-date">2025</span>
+            <h3>Public warnings sharpen</h3>
+            <p>Advocates highlight extreme tap test results while Saskatchewan still offers no meaningful provincial backstop.</p>
+          </article>
+        </div>
+      </section>
 
-    <section class="section">
-      <div class="section-head">
-        <h2>What the record clearly shows</h2>
-        <p>The documentary spine is continuity, not one-off action.</p>
-      </div>
-      <div class="summary-grid">
-        <article class="grid-card">
-          <span class="label">2019</span>
-          <p>The issue appears in the formal record through the MN19-23 lane.</p>
-        </article>
-        <article class="grid-card">
-          <span class="label">2021</span>
-          <p>Council approved the baseline architecture: a 15-year program targeting 2036, a conditional private-side replacement rule, support tools, and reporting direction.</p>
-        </article>
-        <article class="grid-card">
-          <span class="label">2022–2025</span>
-          <p>Implementation-facing mechanics moved forward, oversight continued, and a later package added affordability, reimbursement, outreach, and reporting adjustments.</p>
-        </article>
-      </div>
-    </section>
+      <section id="action" class="section action-section">
+        <div class="section-heading">
+          <p class="eyebrow">What needs to change</p>
+          <h2>Regina does not need more soft language. It needs a harder replacement regime.</h2>
+        </div>
+        <div class="action-grid">
+          <article class="action-card">
+            <span>01</span>
+            <h3>Accelerate full lead-line replacement</h3>
+            <p>Move from incrementalism to an aggressively scheduled, publicly tracked replacement program.</p>
+          </article>
+          <article class="action-card">
+            <span>02</span>
+            <h3>Mandate landlord disclosure and testing</h3>
+            <p>Tenants should not have to guess whether the water entering their home passes through lead.</p>
+          </article>
+          <article class="action-card">
+            <span>03</span>
+            <h3>Publish tract-level progress and failure</h3>
+            <p>Public reporting should show where replacement is happening, where it is stalling, and who is still being left behind.</p>
+          </article>
+          <article class="action-card">
+            <span>04</span>
+            <h3>Force a provincial response</h3>
+            <p>Saskatchewan needs standards, disclosure rules, and money — not silence.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
 
-    <section class="section">
-      <div class="section-head">
-        <h2>What changed — and what did not</h2>
-        <p>The package is strongest when it distinguishes real movement from overclaiming transformation.</p>
-      </div>
-      <div class="summary-grid">
-        <article class="grid-card">
-          <span class="label">What changed</span>
-          <p>Financing and reimbursement tools changed. Filter-related support improved. Reporting expectations were reinforced. Outreach and follow-up directions became more explicit.</p>
-        </article>
-        <article class="grid-card">
-          <span class="label">What did not become proven</span>
-          <p>The current record does not yet support a claim of a full reset, a citywide accelerated completion regime replacing 2036, or proven delivery success.</p>
-        </article>
-        <article class="grid-card">
-          <span class="label">Strongest reading</span>
-          <p>Incremental movement, not a true policy transformation.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-head">
-        <h2>Why this matters</h2>
-        <p>This is not only a budget or pipe-replacement story.</p>
-      </div>
-      <div class="grid-3">
-        <article class="grid-card">
-          <span class="label">Human stakes</span>
-          <p>Delay should not be understood only in engineering or budget terms. It can also matter in human terms for families, children, health, and quality of life.</p>
-        </article>
-        <article class="grid-card">
-          <span class="label">Support-layer limit</span>
-          <p>This page keeps the health lane broad and cautious. The best available modeled estimate in the current Regina record suggests roughly 8,319 impacted people, including about 1,540 children aged 0-14, within the accepted smaller denominator frame tied to the OpenGIS baseline and strict replacement path. This is a constrained, proxy-based estimate validated against known baselines and governance checks, not an audited household or person headcount. Any downstream burden estimate inherits that same modeled frame and remains a bounded technical/support estimate rather than a settled public burden number.</p>
-        </article>
-        <article class="grid-card">
-          <span class="label">Accountability</span>
-          <p>The strongest public-interest question is whether the pace and follow-through became proportionate to what the record already showed.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-head">
-        <h2>Quick timeline</h2>
-        <p>The timeline shows recognition first, policy movement after, and an open delivery question at the end.</p>
-      </div>
-      <div class="grid-3">
-        <article class="grid-card">
-          <h3>2019</h3>
-          <p><strong>Recognition on record.</strong> The issue appears in the formal record through the MN19-23 lane.</p>
-        </article>
-        <article class="grid-card">
-          <h3>2021–2023</h3>
-          <p><strong>Baseline and oversight.</strong> Council adopted the core framework, then implementation-facing mechanics and continued reporting/oversight remained in the official process.</p>
-        </article>
-        <article class="grid-card">
-          <h3>2025</h3>
-          <p><strong>Further adjustments.</strong> Another package added affordability, reimbursement, outreach, and reporting changes, while leaving delivery verification as the next open layer.</p>
-        </article>
-      </div>
-      <div class="grid-3" style="margin-top:16px; grid-template-columns: minmax(0,1.4fr) minmax(280px,0.8fr) minmax(260px,0.8fr);">
-        <article class="grid-card" style="padding:0; overflow:hidden;">
-          <div id="map" style="height:360px; border-radius:20px;"></div>
-        </article>
-        <article class="grid-card">
-          <h3>Map context</h3>
-          <p>The live map adds geographic context. It is useful for location context, not for proving that delivery succeeded or failed.</p>
-          <p class="meta-note" style="margin-top:12px;"><strong>Use it for:</strong> distribution context, not as a claim about verified outcomes.</p>
-          <div class="metrics-grid" style="grid-template-columns:1fr; margin-top:14px;">
-            <div>
-              <span class="label">Community areas</span>
-              <div class="metric-value" id="areas">-</div>
-            </div>
-            <div>
-              <span class="label">Lead connections</span>
-              <div class="metric-value" id="lead">-</div>
-            </div>
-          </div>
-        </article>
-        <article class="grid-card">
-          <h3>Selected milestones</h3>
-          <div style="position:relative; height:220px; width:100%; overflow:hidden;">
-            <canvas id="timeline"></canvas>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-head">
-        <h2>Why the priority question remains live</h2>
-        <p>Budget and funding context belongs below the documentary spine. It does not prove motive, but it does sharpen the accountability question.</p>
-      </div>
-      <div class="grid-3">
-        <article class="grid-card">
-          <span class="label">Lead program context</span>
-          <h3>Bounded financing model</h3>
-          <p>The lead-service program moved through a bounded utility-capital structure rather than a fully socialized emergency replacement frame.</p>
-        </article>
-        <article class="grid-card">
-          <span class="label">Acceleration context</span>
-          <h3>Support improved, obligations remained</h3>
-          <p>The acceleration path still relied on rate-funded support while preserving private-side obligations in the framework.</p>
-        </article>
-        <article class="grid-card">
-          <span class="label">Comparator context</span>
-          <h3>Named same-book priorities</h3>
-          <p>The City’s 2025 budget materials also showed named capital priorities with explicit planned or advanced funding. That keeps the pace-and-priority question live without proving direct displacement.</p>
-        </article>
-      </div>
-      <div class="callout" style="margin-top:18px;">This subordinate budget lane is accountability context, not the main proof. It does not prove malicious intent, direct tradeoff, or that any one project displaced lead funding.</div>
-    </section>
-
-    <section class="section">
-      <div class="section-head">
-        <h2>What this package is not claiming</h2>
-        <p>These guardrails are deliberate.</p>
-      </div>
-      <div class="grid-3">
-        <article class="grid-card">
-          <span class="label">Not claiming</span>
-          <p>That one delegation directly caused one later Council vote.</p>
-        </article>
-        <article class="grid-card">
-          <span class="label">Not claiming</span>
-          <p>That delivery success is already proven or that delivery failure has already been fully measured.</p>
-        </article>
-        <article class="grid-card">
-          <span class="label">Not claiming</span>
-          <p>That appendix burden estimates, numeric healthy-life outputs, or KG-style linkages are headline proof.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="section" id="documents">
-      <div class="section-head">
-        <h2>Read more or verify the record</h2>
-        <p>Start with the story. Then go one click deeper for the supporting material.</p>
-      </div>
-      <div class="resource-grid">
-        <div class="resource-link" aria-disabled="true"><span>Observed area map (2019–2025)</span><span>Pending asset restore</span></div>
-        <a class="resource-link" href="reports/public-brief.html"><span>Public brief</span><span>Read →</span></a>
-        <a class="resource-link" href="reports/public-handout.html"><span>Public handout</span><span>Read →</span></a>
-        <a class="resource-link" href="reports/journalist-memo.html"><span>Journalist memo</span><span>Read →</span></a>
-        <a class="resource-link" href="reports/claim-evidence.html"><span>Claim / evidence table</span><span>Verify →</span></a>
-        <a class="resource-link" href="reports/delivery-tracker.html"><span>Decision / delivery tracker</span><span>Track →</span></a>
-        <a class="resource-link" href="reports/technical-appendix.html"><span>Technical appendix</span><span>Support →</span></a>
-      </div>
-      <div class="site-footer">
-        <span>The story first. The evidence one click behind it.</span>
-        <span>Built to explain the issue without overstating the record.</span>
-      </div>
-    </section>
-  </main>
-
-<script>
-const map = L.map('map').setView([50.4452, -104.6189], 11);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap contributors' }).addTo(map);
-const geoUrl = 'https://opengis.regina.ca/arcgis/rest/services/CGISViewer/LeadConnectionAreas/MapServer/0/query?where=1%3D1&outFields=NAME%2CWC_Total%2CLead_Total%2CLead_Per&f=geojson';
-function color(p) {
-  return p > 15 ? '#7f1d1d' : p > 10 ? '#dc2626' : p > 5 ? '#f59e0b' : '#22c55e';
-}
-fetch(geoUrl)
-  .then(r => r.json())
-  .then(g => {
-    let lead = 0;
-    g.features.forEach(f => {
-      lead += Number(f.properties.Lead_Total || 0);
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+  <script>
+    const toggle = document.querySelector('.nav-toggle');
+    const nav = document.querySelector('#site-nav');
+    toggle?.addEventListener('click', () => {
+      const expanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!expanded));
+      nav.classList.toggle('is-open');
     });
-    document.getElementById('areas').textContent = g.features.length;
-    document.getElementById('lead').textContent = lead.toLocaleString();
-    L.geoJSON(g, {
-      style: f => ({
-        color: '#475569',
-        weight: 1,
-        fillColor: color(Number(f.properties.Lead_Per || 0)),
-        fillOpacity: 0.76
-      }),
-      onEachFeature: (f, l) => {
-        l.bindPopup(`<b>${f.properties.NAME}</b><br/>Lead %: ${Number(f.properties.Lead_Per || 0).toFixed(2)}%<br/>Lead: ${f.properties.Lead_Total || 0}<br/>Total: ${f.properties.WC_Total || 0}`);
-      }
-    }).addTo(map);
-  })
-  .catch(() => {
-    const note = document.createElement('div');
-    note.className = 'callout';
-    note.textContent = 'Map load issue: the live GIS layer could not be loaded right now. Please try refreshing.';
-    document.querySelector('#documents').before(note);
-  });
-new Chart(document.getElementById('timeline'), {
-  type: 'line',
-  data: {
-    labels: ['2019 recognition', '2021 baseline package', '2025 adjustment package'],
-    datasets: [{
-      label: 'Selected reported milestones',
-      data: [1, 2, 3],
-      borderColor: '#0f4c81',
-      backgroundColor: 'rgba(15,76,129,0.10)',
-      pointBackgroundColor: '#0f4c81',
-      borderWidth: 3,
-      pointRadius: 4,
-      tension: 0.25,
-      fill: true
-    }]
-  },
-  options: {
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        labels: { color: '#475569', usePointStyle: true, boxWidth: 10 }
+
+    document.querySelectorAll('#site-nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        nav.classList.remove('is-open');
+        toggle?.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    const map = new maplibregl.Map({
+      container: 'lead-map',
+      style: {
+        version: 8,
+        sources: {
+          osm: {
+            type: 'raster',
+            tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
+            tileSize: 256,
+            attribution: '© OpenStreetMap contributors'
+          }
+        },
+        layers: [{ id: 'osm', type: 'raster', source: 'osm' }]
       },
-      tooltip: {
-        callbacks: {
-          label: (ctx) => ['Recognition on record', 'Baseline program adopted', 'Later adjustments approved'][ctx.dataIndex]
+      center: [-104.6189, 50.4452],
+      zoom: 10.9,
+      cooperativeGestures: true
+    });
+
+    map.addControl(new maplibregl.NavigationControl(), 'top-right');
+
+    map.on('load', async () => {
+      const response = await fetch('public/data/ct_harm_analysis.geojson');
+      const geojson = await response.json();
+
+      map.addSource('ct-harm', {
+        type: 'geojson',
+        data: geojson
+      });
+
+      map.addLayer({
+        id: 'ct-harm-fill',
+        type: 'fill',
+        source: 'ct-harm',
+        paint: {
+          'fill-color': [
+            'interpolate', ['linear'], ['get', 'realized_qaly'],
+            0, '#fde68a',
+            5, '#f59e0b',
+            10, '#b91c1c',
+            18, '#7f1d1d',
+            23.39, '#33110f'
+          ],
+          'fill-opacity': 0.78
         }
-      }
-    },
-    scales: {
-      x: { ticks: { color: '#64748b' }, grid: { display: false } },
-      y: {
-        min: 0,
-        max: 4,
-        ticks: { display: false },
-        grid: { display: false }
-      }
-    }
-  }
-});
-</script>
-</body>
-</html>splay: false } },
-      y: {
-        min: 0,
-        max: 4,
-        ticks: { display: false },
-        grid: { display: false }
-      }
-    }
-  }
-});
-</script>
+      });
+
+      map.addLayer({
+        id: 'ct-harm-line',
+        type: 'line',
+        source: 'ct-harm',
+        paint: {
+          'line-color': '#f5f5f5',
+          'line-width': 1.2,
+          'line-opacity': 0.35
+        }
+      });
+
+      map.fitBounds([[-104.75, 50.36], [-104.52, 50.52]], { padding: 24, duration: 0 });
+
+      const popup = new maplibregl.Popup({ closeButton: false, closeOnClick: false });
+      const summary = document.getElementById('map-summary');
+
+      map.on('mousemove', 'ct-harm-fill', e => {
+        map.getCanvas().style.cursor = 'pointer';
+        const feature = e.features?.[0];
+        if (!feature) return;
+        const p = feature.properties;
+        summary.textContent = `${p.ct_name}: ${Number(p.realized_qaly).toFixed(2)} realized QALYs, ${Number(p.projected_qaly).toFixed(2)} projected QALYs, ${p.lead_connections} lead connections, ${p.children} children, ${Number(p.renter_pct).toFixed(1)}% renter.`;
+        popup
+          .setLngLat(e.lngLat)
+          .setHTML(`
+            <div class="popup-card">
+              <strong>${p.ct_name}</strong>
+              <span>${p.lead_connections} lead connections · ${p.children} children</span>
+              <span>Realized harm: ${Number(p.realized_qaly).toFixed(2)} QALYs</span>
+              <span>Projected cost: $${Math.round(Number(p.projected_cost)).toLocaleString()}</span>
+              <span>Renter share: ${Number(p.renter_pct).toFixed(1)}%</span>
+            </div>
+          `)
+          .addTo(map);
+      });
+
+      map.on('mouseleave', 'ct-harm-fill', () => {
+        map.getCanvas().style.cursor = '';
+        summary.textContent = 'Inspect a tract to see realized QALYs, projected cost, renter share, and child exposure context.';
+        popup.remove();
+      });
+    });
+  </script>
 </body>
 </html>
