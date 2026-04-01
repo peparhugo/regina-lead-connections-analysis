@@ -3,459 +3,292 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dream Runner & Investigative Intelligence — Presentation</title>
+<title>Dream Lab — Presentation</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   :root {
-    --bg: #0a0a0f;
-    --surface: #12121a;
-    --surface2: #1a1a25;
-    --border: #2a2a3a;
-    --text: #e8e8f0;
-    --text-dim: #8888a0;
-    --accent: #6366f1;
-    --accent2: #818cf8;
-    --green: #22c55e;
-    --amber: #f59e0b;
-    --red: #ef4444;
-    --cyan: #06b6d4;
+    --bg: #09090b;
+    --surface: #18181b;
+    --surface2: #27272a;
+    --border: #3f3f46;
+    --text: #fafafa;
+    --dim: #a1a1aa;
+    --accent: #818cf8;
+    --cyan: #22d3ee;
+    --green: #4ade80;
+    --amber: #fbbf24;
+    --red: #f87171;
+    --pink: #f472b6;
   }
+  body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); overflow: hidden; }
+  
+  .slide { display: none; width: 100vw; height: 100vh; padding: 0; position: relative; }
+  .slide.active { display: flex; flex-direction: column; }
+  .slide-inner { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 60px 100px; }
 
-  body {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    overflow: hidden;
+  /* Progress bar */
+  .progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--accent); transition: width 0.4s ease; z-index: 100; }
+
+  /* Slide counter */
+  .counter { position: fixed; bottom: 32px; right: 48px; font-size: 14px; color: var(--dim); font-weight: 500; font-variant-numeric: tabular-nums; }
+
+  /* Typography */
+  .eyebrow { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 20px; }
+  .eyebrow-accent { color: var(--accent); }
+  .eyebrow-cyan { color: var(--cyan); }
+  .eyebrow-red { color: var(--red); }
+  .eyebrow-green { color: var(--green); }
+
+  h1 { font-size: 56px; font-weight: 800; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 20px; }
+  h1 .gradient { background: linear-gradient(135deg, var(--accent) 0%, var(--cyan) 50%, var(--green) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  h1 .red-gradient { background: linear-gradient(135deg, var(--red) 0%, var(--amber) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+  .lead { font-size: 22px; color: var(--dim); line-height: 1.5; max-width: 680px; margin-bottom: 48px; }
+
+  /* Diagram — the core visual */
+  .pipeline { display: flex; align-items: center; justify-content: center; gap: 0; margin: 40px 0; }
+  .pipe-node { 
+    padding: 20px 28px; border-radius: 14px; font-size: 15px; font-weight: 600; 
+    text-align: center; min-width: 140px; position: relative; line-height: 1.3;
+    border: 1.5px solid var(--border);
   }
+  .pipe-node small { display: block; font-size: 12px; font-weight: 400; color: var(--dim); margin-top: 4px; }
+  .pipe-arrow { width: 48px; height: 2px; background: var(--border); position: relative; flex-shrink: 0; }
+  .pipe-arrow::after { content: ''; position: absolute; right: -1px; top: -5px; border: 6px solid transparent; border-left-color: var(--border); }
 
-  .slide {
-    display: none;
-    width: 100vw;
-    height: 100vh;
-    padding: 60px 80px;
-    position: relative;
-    flex-direction: column;
-    justify-content: center;
+  .n-source { background: rgba(34,211,238,0.08); border-color: rgba(34,211,238,0.25); color: var(--cyan); }
+  .n-worker { background: rgba(129,140,248,0.08); border-color: rgba(129,140,248,0.25); color: var(--accent); }
+  .n-review { background: rgba(251,191,36,0.08); border-color: rgba(251,191,36,0.25); color: var(--amber); }
+  .n-output { background: rgba(74,222,128,0.08); border-color: rgba(74,222,128,0.25); color: var(--green); }
+  .n-red { background: rgba(248,113,113,0.08); border-color: rgba(248,113,113,0.25); color: var(--red); }
+
+  /* Worker pills — compact grid */
+  .pill-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .pill { 
+    padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 600;
+    background: var(--surface); border: 1px solid var(--border); white-space: nowrap;
   }
+  .pill-accent { border-color: rgba(129,140,248,0.3); color: var(--accent); }
+  .pill-red { border-color: rgba(248,113,113,0.3); color: var(--red); }
 
-  .slide.active { display: flex; }
+  /* Big stats */
+  .stats-row { display: flex; gap: 64px; margin: 40px 0; }
+  .stat { text-align: left; }
+  .stat-num { font-size: 56px; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; }
+  .stat-num.accent { color: var(--accent); }
+  .stat-num.cyan { color: var(--cyan); }
+  .stat-num.green { color: var(--green); }
+  .stat-num.red { color: var(--red); }
+  .stat-num.amber { color: var(--amber); }
+  .stat-label { font-size: 14px; color: var(--dim); margin-top: 6px; font-weight: 500; }
 
-  .slide-number {
-    position: absolute;
-    bottom: 30px;
-    right: 40px;
-    font-size: 14px;
-    color: var(--text-dim);
-    font-weight: 500;
+  /* Two-column */
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 32px; }
+  .col-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 32px; }
+  .col-card h2 { font-size: 24px; font-weight: 700; margin-bottom: 12px; }
+  .col-card .desc { font-size: 15px; color: var(--dim); line-height: 1.5; margin-bottom: 20px; }
+
+  /* Cycle diagram */
+  .cycle { display: flex; align-items: center; justify-content: center; gap: 0; margin: 48px 0 24px; }
+  .cycle-node { 
+    width: 120px; height: 120px; border-radius: 50%; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; font-size: 14px; font-weight: 600;
+    border: 2px solid var(--border); text-align: center; line-height: 1.3;
   }
+  .cycle-node small { font-size: 11px; font-weight: 400; color: var(--dim); }
+  .cycle-arrow { width: 36px; text-align: center; font-size: 18px; color: var(--dim); flex-shrink: 0; }
 
-  .badge {
-    display: inline-block;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 16px;
+  /* Feedback loop arrow */
+  .feedback-bar { 
+    width: 80%; margin: 0 auto; height: 2px; background: var(--border); position: relative;
+    border-radius: 0 0 12px 12px; margin-top: -12px;
   }
-  .badge-purple { background: rgba(99,102,241,0.15); color: var(--accent2); border: 1px solid rgba(99,102,241,0.3); }
-  .badge-green { background: rgba(34,197,94,0.15); color: var(--green); border: 1px solid rgba(34,197,94,0.3); }
-  .badge-red { background: rgba(239,68,68,0.15); color: var(--red); border: 1px solid rgba(239,68,68,0.3); }
-  .badge-cyan { background: rgba(6,182,212,0.15); color: var(--cyan); border: 1px solid rgba(6,182,212,0.3); }
+  .feedback-bar::before { content: '↩ each cycle sharpens'; position: absolute; bottom: -22px; left: 50%; transform: translateX(-50%); font-size: 12px; color: var(--dim); white-space: nowrap; }
 
-  h1 {
-    font-size: 48px;
-    font-weight: 800;
-    line-height: 1.1;
-    margin-bottom: 24px;
-    background: linear-gradient(135deg, #e8e8f0 0%, #a0a0c0 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  /* Bottom bar */
+  .bottom-bar { 
+    position: absolute; bottom: 0; left: 0; right: 0; 
+    padding: 16px 48px; display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.04);
   }
+  .bottom-bar .author { font-size: 13px; color: var(--dim); font-weight: 500; }
 
-  h2 {
-    font-size: 32px;
-    font-weight: 700;
-    margin-bottom: 16px;
-  }
-
-  h3 {
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 8px;
-  }
-
-  p, li {
-    font-size: 18px;
-    line-height: 1.6;
-    color: var(--text-dim);
-  }
-
-  .subtitle {
-    font-size: 22px;
-    color: var(--text-dim);
-    margin-bottom: 40px;
-    max-width: 700px;
-  }
-
-  /* Architecture diagram styles */
-  .arch-flow {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin: 16px 0;
-    flex-wrap: wrap;
-  }
-
-  .arch-box {
-    padding: 12px 20px;
-    border-radius: 10px;
-    font-size: 14px;
-    font-weight: 600;
-    text-align: center;
-    min-width: 120px;
-    border: 1px solid var(--border);
-  }
-
-  .arch-arrow {
-    font-size: 20px;
-    color: var(--text-dim);
-  }
-
-  .box-source { background: rgba(6,182,212,0.12); border-color: rgba(6,182,212,0.3); color: var(--cyan); }
-  .box-worker { background: rgba(99,102,241,0.12); border-color: rgba(99,102,241,0.3); color: var(--accent2); }
-  .box-review { background: rgba(245,158,11,0.12); border-color: rgba(245,158,11,0.3); color: var(--amber); }
-  .box-output { background: rgba(34,197,94,0.12); border-color: rgba(34,197,94,0.3); color: var(--green); }
-  .box-danger { background: rgba(239,68,68,0.12); border-color: rgba(239,68,68,0.3); color: var(--red); }
-
-  /* Grid layouts */
-  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 32px; }
-  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; margin-top: 32px; }
-
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 24px;
-  }
-
-  .card h3 { margin-bottom: 12px; }
-
-  .stat-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 6px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-    font-size: 15px;
-  }
-
-  .stat-label { color: var(--text-dim); }
-  .stat-value { font-weight: 600; }
-  .stat-green { color: var(--green); }
-  .stat-red { color: var(--red); }
-  .stat-amber { color: var(--amber); }
-
-  .worker-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin-top: 20px;
-  }
-
-  .worker-chip {
-    padding: 10px 14px;
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: 500;
-    text-align: center;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-  }
-
-  .big-number {
-    font-size: 52px;
-    font-weight: 800;
-    line-height: 1;
-  }
-
-  .big-label {
-    font-size: 14px;
-    color: var(--text-dim);
-    margin-top: 4px;
-    font-weight: 500;
-  }
-
-  /* Navigation */
-  .nav-hint {
-    position: fixed;
-    bottom: 30px;
-    left: 40px;
-    font-size: 13px;
-    color: var(--text-dim);
-    opacity: 0.5;
-  }
-
-  .logo-bar {
-    position: absolute;
-    top: 30px;
-    left: 40px;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text-dim);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .logo-bar span { color: var(--accent2); }
-
-  ul { list-style: none; padding: 0; }
-  ul li { padding: 4px 0; font-size: 16px; }
-  ul li::before { content: "→ "; color: var(--accent2); font-weight: 600; }
+  /* Transitions */
+  .slide { animation: fadeIn 0.3s ease; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 </style>
 </head>
 <body>
 
-<!-- SLIDE 1: Title + Architecture Overview -->
-<div class="slide active" id="slide1">
-  <div class="logo-bar">🧠 <span>ChaosClaw</span> / Dream Lab</div>
-  <span class="badge badge-purple">Architecture Overview</span>
-  <h1>Dream Runner &<br>Investigative Intelligence</h1>
-  <p class="subtitle">A delegated LLM worker swarm that turns repos and data into structured knowledge — then reviews its own work.</p>
+<div class="progress" id="progress"></div>
+<div class="counter" id="counter"></div>
 
-  <div class="grid-2">
-    <div class="card">
-      <span class="badge badge-cyan">GitHub Analyzer</span>
-      <h3>Repo Intelligence Loop</h3>
-      <div class="arch-flow">
-        <div class="arch-box box-source">GitHub Repo</div>
-        <span class="arch-arrow">→</span>
-        <div class="arch-box box-worker">11 Workers</div>
-        <span class="arch-arrow">→</span>
-        <div class="arch-box box-review">JTB Review</div>
-        <span class="arch-arrow">→</span>
-        <div class="arch-box box-output">Knowledge</div>
-      </div>
-      <div class="stat-row"><span class="stat-label">Repos analyzed</span><span class="stat-value">21</span></div>
-      <div class="stat-row"><span class="stat-label">Total findings</span><span class="stat-value stat-green">597</span></div>
-      <div class="stat-row"><span class="stat-label">Workers per repo</span><span class="stat-value">11</span></div>
-      <div class="stat-row"><span class="stat-label">Worker types</span><span class="stat-value">P1 + P2 + P3</span></div>
-    </div>
-
-    <div class="card">
-      <span class="badge badge-red">Regina Investigation</span>
-      <h3>Investigative Intelligence Loop</h3>
-      <div class="arch-flow">
-        <div class="arch-box box-danger">PostGIS + Web</div>
-        <span class="arch-arrow">→</span>
-        <div class="arch-box box-worker">8 Workers</div>
-        <span class="arch-arrow">→</span>
-        <div class="arch-box box-review">JTB Review</div>
-        <span class="arch-arrow">→</span>
-        <div class="arch-box box-output">Evidence</div>
-      </div>
-      <div class="stat-row"><span class="stat-label">Claims generated</span><span class="stat-value stat-red">32</span></div>
-      <div class="stat-row"><span class="stat-label">Experiments run</span><span class="stat-value">8</span></div>
-      <div class="stat-row"><span class="stat-label">Data sources</span><span class="stat-value">PostGIS, Web, Media</span></div>
-      <div class="stat-row"><span class="stat-label">Database tables</span><span class="stat-value">22 + 15 matviews</span></div>
-    </div>
+<!-- ========== SLIDE 1: THE IDEA ========== -->
+<div class="slide active" id="s1">
+  <div class="slide-inner">
+    <div class="eyebrow eyebrow-accent">Dream Lab / OpenClaw</div>
+    <h1>What if an AI could<br><span class="gradient">investigate a codebase</span><br>the way you'd investigate<br><span class="red-gradient">a public health crisis?</span></h1>
+    <p class="lead">Same architecture. Same worker swarm. Same review pipeline.<br>Two completely different domains — one system.</p>
   </div>
-
-  <div class="slide-number">1 / 4</div>
+  <div class="bottom-bar">
+    <span class="author">Pepar · ChaosClaw · April 2026</span>
+  </div>
 </div>
 
-<!-- SLIDE 2: The Worker Swarm -->
-<div class="slide" id="slide2">
-  <div class="logo-bar">🧠 <span>ChaosClaw</span> / Dream Lab</div>
-  <span class="badge badge-purple">Worker Architecture</span>
-  <h1>The Worker Swarm</h1>
-  <p class="subtitle">Each worker is a specialized LLM agent with a strict output contract. Workers run in batches of 3, orchestrated by a single conductor prompt.</p>
+<!-- ========== SLIDE 2: HOW IT WORKS ========== -->
+<div class="slide" id="s2">
+  <div class="slide-inner">
+    <div class="eyebrow eyebrow-accent">Architecture</div>
+    <h1>The Pipeline</h1>
+    <p class="lead">Data goes in. Specialized workers generate findings. A review layer attacks and adjudicates. Only surviving claims become knowledge.</p>
 
-  <div class="grid-2" style="margin-top: 24px;">
-    <div>
-      <h3 style="color: var(--cyan); margin-bottom: 16px;">GitHub Repo Workers (11)</h3>
-      <div class="worker-grid" style="grid-template-columns: repeat(3, 1fr);">
-        <div class="worker-chip">🔍 Question</div>
-        <div class="worker-chip">🧬 Mutation</div>
-        <div class="worker-chip">🔗 Linkage</div>
-        <div class="worker-chip">📚 Learning</div>
-        <div class="worker-chip">👤 Contributor</div>
-        <div class="worker-chip">💳 Debt</div>
-        <div class="worker-chip">⚠️ Risk</div>
-        <div class="worker-chip">🏗️ Architecture</div>
-        <div class="worker-chip">📋 Review Cov.</div>
-        <div class="worker-chip">🔒 Security</div>
-        <div class="worker-chip">👥 Ownership</div>
-      </div>
+    <div class="pipeline">
+      <div class="pipe-node n-source">📥 Data Source<small>Repo / PostGIS / Web</small></div>
+      <div class="pipe-arrow"></div>
+      <div class="pipe-node n-worker">🐒 Worker Swarm<small>3-11 specialists</small></div>
+      <div class="pipe-arrow"></div>
+      <div class="pipe-node n-red">⚔️ Counterargument<small>attack own claims</small></div>
+      <div class="pipe-arrow"></div>
+      <div class="pipe-node n-review">⚖️ JTB Review<small>justified true belief</small></div>
+      <div class="pipe-arrow"></div>
+      <div class="pipe-node n-output">✅ Knowledge<small>promoted claims</small></div>
     </div>
 
-    <div>
-      <h3 style="color: var(--red); margin-bottom: 16px;">Investigative Workers (8)</h3>
-      <div class="worker-grid" style="grid-template-columns: repeat(2, 1fr);">
-        <div class="worker-chip">🔎 Evidence Hunter</div>
-        <div class="worker-chip">⚔️ Counterargument</div>
-        <div class="worker-chip">📊 Equity Analyst</div>
-        <div class="worker-chip">🏛️ Accountability</div>
-        <div class="worker-chip">⏱️ Timeline</div>
-        <div class="worker-chip">🌍 Comparator</div>
-        <div class="worker-chip">💬 Quote Miner</div>
-        <div class="worker-chip">🕳️ Gap Detector</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="card" style="margin-top: 32px;">
-    <h3>Orchestration Pattern</h3>
-    <div class="arch-flow" style="justify-content: center;">
-      <div class="arch-box box-source">Data Context<br><small>PostGIS / Repo Files</small></div>
-      <span class="arch-arrow">→</span>
-      <div class="arch-box box-worker">Orchestrator Prompt<br><small>batches of 3</small></div>
-      <span class="arch-arrow">→</span>
-      <div class="arch-box box-worker">LLM Agent<br><small>mini-dreamer</small></div>
-      <span class="arch-arrow">→</span>
-      <div class="arch-box box-output">Structured JSON<br><small>claims + evidence</small></div>
-      <span class="arch-arrow">→</span>
-      <div class="arch-box box-review">JTB Pipeline<br><small>n8n workflows</small></div>
-      <span class="arch-arrow">→</span>
-      <div class="arch-box box-output">Reviewed Knowledge<br><small>promoted / rejected</small></div>
-    </div>
-  </div>
-
-  <div class="slide-number">2 / 4</div>
-</div>
-
-<!-- SLIDE 3: JTB Review Pipeline -->
-<div class="slide" id="slide3">
-  <div class="logo-bar">🧠 <span>ChaosClaw</span> / Dream Lab</div>
-  <span class="badge badge-green">Quality Gate</span>
-  <h1>JTB: Justified True Belief</h1>
-  <p class="subtitle">Every claim must pass through a review pipeline before it becomes trusted knowledge. The system attacks its own outputs.</p>
-
-  <div class="grid-3">
-    <div class="card">
-      <h3 style="color: var(--amber);">1. Intake</h3>
-      <p style="font-size: 15px;">Raw worker outputs → normalized claim records with evidence refs, confidence scores, and provenance.</p>
-      <div style="margin-top: 12px;">
-        <div class="arch-box box-review" style="width: 100%;">cc-jtb-intake-evidence</div>
-      </div>
-    </div>
-    <div class="card">
-      <h3 style="color: var(--amber);">2. Build & Review</h3>
-      <p style="font-size: 15px;">Claims batched, cross-referenced, contradictions flagged. Review profiles applied per domain.</p>
-      <div style="margin-top: 12px;">
-        <div class="arch-box box-review" style="width: 100%;">cc-jtb-build-claim-batch</div>
-      </div>
-    </div>
-    <div class="card">
-      <h3 style="color: var(--amber);">3. Adjudicate</h3>
-      <p style="font-size: 15px;">Each claim gets a verdict: <span style="color:var(--green)">supported</span>, <span style="color:var(--red)">rejected</span>, <span style="color:var(--amber)">provisional</span>, or <span style="color:var(--text-dim)">insufficient evidence</span>.</p>
-      <div style="margin-top: 12px;">
-        <div class="arch-box box-review" style="width: 100%;">cc-jtb-review-and-revise</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="card" style="margin-top: 32px;">
-    <h3>Key Design Principle: The Counterargument Monkey</h3>
-    <div class="grid-2" style="margin-top: 12px; gap: 20px;">
+    <div style="display:flex; gap: 48px; margin-top: 40px;">
       <div>
-        <p style="font-size: 15px;">Before any claim is published, a dedicated worker <strong>attacks it</strong>:</p>
-        <ul style="margin-top: 8px;">
-          <li>What's the strongest counterargument?</li>
-          <li>Does the evidence actually support the claim?</li>
-          <li>What would an opponent say?</li>
-          <li>Is our confidence justified?</li>
-        </ul>
+        <div class="eyebrow eyebrow-cyan" style="margin-bottom: 10px;">GitHub Workers</div>
+        <div class="pill-grid">
+          <span class="pill pill-accent">Question</span>
+          <span class="pill pill-accent">Mutation</span>
+          <span class="pill pill-accent">Linkage</span>
+          <span class="pill pill-accent">Learning</span>
+          <span class="pill pill-accent">Debt</span>
+          <span class="pill pill-accent">Risk</span>
+          <span class="pill pill-accent">Architecture</span>
+          <span class="pill pill-accent">Security</span>
+          <span class="pill pill-accent">Ownership</span>
+          <span class="pill pill-accent">Contributor</span>
+          <span class="pill pill-accent">Review Cov.</span>
+        </div>
       </div>
       <div>
-        <p style="font-size: 15px;"><strong>Regina example:</strong> The counterargument monkey found that councillor accountability claims drop from 0.90 to 0.72 strength under a "budget prudence" attack — but the harm magnitude claims survive at full strength because they're anchored to city data.</p>
+        <div class="eyebrow eyebrow-red" style="margin-bottom: 10px;">Investigative Workers</div>
+        <div class="pill-grid">
+          <span class="pill pill-red">Evidence Hunter</span>
+          <span class="pill pill-red">Counterargument</span>
+          <span class="pill pill-red">Equity Analyst</span>
+          <span class="pill pill-red">Accountability</span>
+          <span class="pill pill-red">Timeline</span>
+          <span class="pill pill-red">Comparator</span>
+          <span class="pill pill-red">Quote Miner</span>
+          <span class="pill pill-red">Gap Detector</span>
+        </div>
       </div>
     </div>
   </div>
-
-  <div class="slide-number">3 / 4</div>
 </div>
 
-<!-- SLIDE 4: Results & What It Produces -->
-<div class="slide" id="slide4">
-  <div class="logo-bar">🧠 <span>ChaosClaw</span> / Dream Lab</div>
-  <span class="badge badge-green">Results</span>
-  <h1>What It Produces</h1>
+<!-- ========== SLIDE 3: TWO APPLICATIONS ========== -->
+<div class="slide" id="s3">
+  <div class="slide-inner">
+    <div class="eyebrow eyebrow-green">Results</div>
+    <h1>One System, Two Domains</h1>
 
-  <div class="grid-2" style="margin-top: 24px;">
-    <div class="card">
-      <span class="badge badge-cyan">GitHub Analyzer</span>
-      <h3>21 repos × 11 workers = 597 findings</h3>
-      <div style="margin-top: 16px;">
-        <div class="stat-row"><span class="stat-label">Security vulnerabilities</span><span class="stat-value stat-red">3 repos with injection risk</span></div>
-        <div class="stat-row"><span class="stat-label">Bus factor</span><span class="stat-value stat-amber">Every repo = 1 on release/CI</span></div>
-        <div class="stat-row"><span class="stat-label">Systemic debt</span><span class="stat-value">Ungated dependency edits fleet-wide</span></div>
-        <div class="stat-row"><span class="stat-label">Test gaps</span><span class="stat-value">Zero repos have E2E publish tests</span></div>
-        <div class="stat-row"><span class="stat-label">Coverage</span><span class="stat-value stat-green">9/21 repos at 11/11 buckets</span></div>
+    <div class="cols">
+      <div class="col-card" style="border-color: rgba(34,211,238,0.2);">
+        <div class="eyebrow eyebrow-cyan">GitHub Analyzer</div>
+        <h2>Repo Intelligence</h2>
+        <p class="desc">Feed it any GitHub repo. It maps architecture, finds debt, scores risk, profiles contributors, detects security surfaces — then reviews its own findings.</p>
+        <div class="stats-row" style="gap: 40px;">
+          <div class="stat"><div class="stat-num cyan">21</div><div class="stat-label">repos analyzed</div></div>
+          <div class="stat"><div class="stat-num cyan">597</div><div class="stat-label">findings</div></div>
+          <div class="stat"><div class="stat-num cyan">11</div><div class="stat-label">workers/repo</div></div>
+        </div>
+        <div class="pill-grid" style="margin-top: 8px;">
+          <span class="pill" style="font-size: 12px;">🔒 3 repos: injection risk</span>
+          <span class="pill" style="font-size: 12px;">👤 bus factor = 1 on every repo</span>
+          <span class="pill" style="font-size: 12px;">🧪 0 repos have E2E publish tests</span>
+        </div>
       </div>
-    </div>
 
-    <div class="card">
-      <span class="badge badge-red">Regina Investigation</span>
-      <h3>32 claims across 8 experiments</h3>
-      <div style="margin-top: 16px;">
-        <div class="stat-row"><span class="stat-label">Active lead connections</span><span class="stat-value stat-red">1,089</span></div>
-        <div class="stat-row"><span class="stat-label">Children at risk</span><span class="stat-value stat-red">~1,540</span></div>
-        <div class="stat-row"><span class="stat-label">Realized QALY loss</span><span class="stat-value stat-red">148.9</span></div>
-        <div class="stat-row"><span class="stat-label">Locked-in healthcare cost</span><span class="stat-value stat-red">$39.6M</span></div>
-        <div class="stat-row"><span class="stat-label">Named accountability actors</span><span class="stat-value stat-amber">3 (2 votes each)</span></div>
+      <div class="col-card" style="border-color: rgba(248,113,113,0.2);">
+        <div class="eyebrow eyebrow-red">Regina Lead Investigation</div>
+        <h2>Public Health Crisis</h2>
+        <p class="desc">Same swarm pattern — but workers query PostGIS, search media, trace vote records, model child harm per census tract, and attack their own conclusions.</p>
+        <div class="stats-row" style="gap: 40px;">
+          <div class="stat"><div class="stat-num red">1,089</div><div class="stat-label">active lead pipes</div></div>
+          <div class="stat"><div class="stat-num red">1,540</div><div class="stat-label">children at risk</div></div>
+          <div class="stat"><div class="stat-num red">$40M</div><div class="stat-label">locked-in cost</div></div>
+        </div>
+        <div class="pill-grid" style="margin-top: 8px;">
+          <span class="pill" style="font-size: 12px;">🏛️ Named councillors who voted NO</span>
+          <span class="pill" style="font-size: 12px;">🏠 72% renter in worst tract</span>
+          <span class="pill" style="font-size: 12px;">🗺️ CT-level harm map from PostGIS</span>
+        </div>
       </div>
     </div>
   </div>
-
-  <div class="card" style="margin-top: 24px; text-align: center; padding: 32px;">
-    <h3 style="margin-bottom: 8px;">The Loop</h3>
-    <div class="arch-flow" style="justify-content: center; flex-wrap: nowrap;">
-      <div class="arch-box box-source">Question</div>
-      <span class="arch-arrow">→</span>
-      <div class="arch-box box-worker">Workers</div>
-      <span class="arch-arrow">→</span>
-      <div class="arch-box box-output">Findings</div>
-      <span class="arch-arrow">→</span>
-      <div class="arch-box box-review">Review</div>
-      <span class="arch-arrow">→</span>
-      <div class="arch-box box-output">Knowledge</div>
-      <span class="arch-arrow">→</span>
-      <div class="arch-box box-source">New Questions</div>
-    </div>
-    <p style="margin-top: 16px; font-size: 16px;">Each cycle makes the case sharper. The system learns what it doesn't know and asks the right next question.</p>
-  </div>
-
-  <div class="slide-number">4 / 4</div>
 </div>
 
-<div class="nav-hint">← → arrow keys to navigate</div>
+<!-- ========== SLIDE 4: THE LOOP ========== -->
+<div class="slide" id="s4">
+  <div class="slide-inner" style="align-items: center; text-align: center;">
+    <div class="eyebrow eyebrow-green">The Key Insight</div>
+    <h1>It Gets Sharper<br>Every Cycle</h1>
+    <p class="lead" style="text-align: center; max-width: 600px;">Each pass generates findings, attacks them, reviews them, identifies gaps — and generates better questions for the next pass.</p>
+
+    <div class="cycle">
+      <div class="cycle-node n-source">❓<br>Question<small>hypothesis</small></div>
+      <div class="cycle-arrow">→</div>
+      <div class="cycle-node n-worker">🐒<br>Workers<small>evidence</small></div>
+      <div class="cycle-arrow">→</div>
+      <div class="cycle-node n-red">⚔️<br>Attack<small>stress-test</small></div>
+      <div class="cycle-arrow">→</div>
+      <div class="cycle-node n-review">⚖️<br>Review<small>adjudicate</small></div>
+      <div class="cycle-arrow">→</div>
+      <div class="cycle-node n-output">📦<br>Knowledge<small>claims</small></div>
+      <div class="cycle-arrow">→</div>
+      <div class="cycle-node n-source" style="border-style: dashed;">🔄<br>New<br>Questions</div>
+    </div>
+
+    <div style="margin-top: 48px; display: flex; gap: 64px; justify-content: center;">
+      <div class="stat" style="text-align: center;"><div class="stat-num accent">53</div><div class="stat-label">claims generated</div></div>
+      <div class="stat" style="text-align: center;"><div class="stat-num amber">8</div><div class="stat-label">experiments run</div></div>
+      <div class="stat" style="text-align: center;"><div class="stat-num green">14</div><div class="stat-label">cycles completed</div></div>
+    </div>
+
+    <p style="margin-top: 40px; font-size: 16px; color: var(--dim);">
+      <span style="color: var(--accent); font-weight: 600;">Live demo:</span> 
+      <span style="color: var(--text);">peparhugo.github.io/regina-lead-connections-analysis</span>
+    </p>
+  </div>
+</div>
 
 <script>
 const slides = document.querySelectorAll('.slide');
-let current = 0;
+let cur = 0;
+const total = slides.length;
 
-function showSlide(n) {
-  slides[current].classList.remove('active');
-  current = ((n % slides.length) + slides.length) % slides.length;
-  slides[current].classList.add('active');
+function go(n) {
+  slides[cur].classList.remove('active');
+  cur = ((n % total) + total) % total;
+  slides[cur].classList.add('active');
+  document.getElementById('progress').style.width = ((cur + 1) / total * 100) + '%';
+  document.getElementById('counter').textContent = (cur + 1) + ' / ' + total;
 }
+go(0);
 
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); showSlide(current + 1); }
-  if (e.key === 'ArrowLeft') { e.preventDefault(); showSlide(current - 1); }
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') { e.preventDefault(); go(cur + 1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); go(cur - 1); }
 });
 
-// Touch support
-let touchStartX = 0;
-document.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; });
-document.addEventListener('touchend', (e) => {
-  const diff = touchStartX - e.changedTouches[0].clientX;
-  if (Math.abs(diff) > 50) { showSlide(current + (diff > 0 ? 1 : -1)); }
+let tx = 0;
+document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; });
+document.addEventListener('touchend', e => {
+  const d = tx - e.changedTouches[0].clientX;
+  if (Math.abs(d) > 50) go(cur + (d > 0 ? 1 : -1));
 });
 </script>
 </body>
