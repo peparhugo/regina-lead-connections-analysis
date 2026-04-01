@@ -407,6 +407,11 @@
 
 <script src="../assets/anime.min.js"></script>
 <script>
+// Anime.js v4 compat: anime.animate() not anime(), _stagger() stays
+const _animate = anime.animate.bind(anime);
+const _stagger = _stagger.bind(anime);
+</script>
+<script>
 // --- Floating particles ---
 const canvas = document.getElementById('particles');
 const ctx = canvas.getContext('2d');
@@ -458,12 +463,12 @@ function animateSlideIn(slide) {
   // Reset
   els.forEach(el => { el.style.opacity = '0'; el.style.transform = 'translateY(30px)'; });
   // Staggered entrance
-  anime({
+  _animate({
     targets: Array.from(els),
     opacity: [0, 1],
     translateY: [30, 0],
     duration: 700,
-    delay: anime.stagger(120, { start: 100 }),
+    delay: _stagger(120, { start: 100 }),
     easing: 'easeOutCubic'
   });
   // Animate stat counters on this slide
@@ -473,7 +478,7 @@ function animateSlideIn(slide) {
     const suffix = el.dataset.suffix || '';
     const format = el.dataset.format;
     const obj = { val: 0 };
-    anime({
+    _animate({
       targets: obj,
       val: target,
       round: 1,
@@ -491,12 +496,12 @@ function animateSlideIn(slide) {
   const findings = slide.querySelectorAll('.finding-row');
   if (findings.length) {
     findings.forEach(f => { f.style.opacity = '0'; f.style.transform = 'translateX(-20px)'; });
-    anime({
+    _animate({
       targets: Array.from(findings),
       opacity: [0, 1],
       translateX: [-20, 0],
       duration: 500,
-      delay: anime.stagger(100, { start: 600 }),
+      delay: _stagger(100, { start: 600 }),
       easing: 'easeOutCubic'
     });
   }
@@ -504,19 +509,19 @@ function animateSlideIn(slide) {
   const archBoxes = slide.querySelectorAll('.arch-box');
   if (archBoxes.length) {
     archBoxes.forEach(b => { b.style.opacity = '0'; b.style.transform = 'scale(0.8)'; });
-    anime({
+    _animate({
       targets: Array.from(archBoxes),
       opacity: [0, 1],
       scale: [0.8, 1],
       duration: 500,
-      delay: anime.stagger(60, { start: 400 }),
+      delay: _stagger(60, { start: 400 }),
       easing: 'easeOutBack'
     });
   }
   // Animate pipeline nodes
   const pipeNodes = slide.querySelectorAll('.pipe-node, .cycle-node');
   if (pipeNodes.length) {
-    anime({
+    _animate({
       targets: Array.from(pipeNodes),
       borderColor: [
         { value: 'rgba(129,140,248,0.6)', duration: 600 },
@@ -526,7 +531,7 @@ function animateSlideIn(slide) {
         { value: '0 0 20px rgba(129,140,248,0.3)', duration: 600 },
         { value: '0 0 0px transparent', duration: 400 }
       ],
-      delay: anime.stagger(150, { start: 300 }),
+      delay: _stagger(150, { start: 300 }),
       easing: 'easeInOutSine'
     });
   }
