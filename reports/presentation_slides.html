@@ -136,8 +136,57 @@
   </div>
 </div>
 
-<!-- ========== SLIDE 2: HOW IT WORKS ========== -->
+<!-- ========== SLIDE 2: THE INSPIRATION ========== -->
 <div class="slide" id="s2">
+  <div class="slide-inner">
+    <div class="eyebrow eyebrow-accent">The Idea Behind It</div>
+    <h1>World Models<br><span class="gradient">→ Belief Models</span></h1>
+    <p class="lead">In 2018, Ha &amp; Schmidhuber showed agents can learn inside their own dreams — building compressed world models, then training on predictions from those models instead of reality.</p>
+
+    <div class="cols" style="margin-top: 32px;">
+      <div class="col-card" style="border-color: rgba(129,140,248,0.2);">
+        <div class="eyebrow eyebrow-accent">World Models (Ha &amp; Schmidhuber 2018)</div>
+        <h2 style="font-size: 20px;">Agent learns inside its own dream</h2>
+
+        <div class="pipeline" style="margin: 20px 0; justify-content: flex-start;">
+          <div class="pipe-node n-source" style="min-width: 80px; padding: 14px 16px;">V<small>observe</small></div>
+          <div class="pipe-arrow" style="width: 32px;"></div>
+          <div class="pipe-node n-worker" style="min-width: 80px; padding: 14px 16px;">M<small>model</small></div>
+          <div class="pipe-arrow" style="width: 32px;"></div>
+          <div class="pipe-node n-output" style="min-width: 80px; padding: 14px 16px;">C<small>decide</small></div>
+        </div>
+
+        <p style="font-size: 14px; color: var(--dim); line-height: 1.5;">Compress observations → build a predictive model → train a controller entirely inside the model's generated environment. Add noise to prevent the agent from exploiting imperfections in its own dream.</p>
+      </div>
+
+      <div class="col-card" style="border-color: rgba(248,113,113,0.2);">
+        <div class="eyebrow eyebrow-red">Dream Lab / JTB (our adaptation)</div>
+        <h2 style="font-size: 20px;">System learns by attacking its own beliefs</h2>
+
+        <div class="pipeline" style="margin: 20px 0; justify-content: flex-start;">
+          <div class="pipe-node n-source" style="min-width: 80px; padding: 14px 16px;">📥<small>observe</small></div>
+          <div class="pipe-arrow" style="width: 32px;"></div>
+          <div class="pipe-node n-worker" style="min-width: 80px; padding: 14px 16px;">🐒<small>believe</small></div>
+          <div class="pipe-arrow" style="width: 32px;"></div>
+          <div class="pipe-node n-red" style="min-width: 80px; padding: 14px 16px;">⚔️<small>attack</small></div>
+          <div class="pipe-arrow" style="width: 32px;"></div>
+          <div class="pipe-node n-output" style="min-width: 80px; padding: 14px 16px;">✅<small>know</small></div>
+        </div>
+
+        <p style="font-size: 14px; color: var(--dim); line-height: 1.5;">Workers generate candidate beliefs from data → a counterargument agent stress-tests them inside the belief model → JTB review adjudicates what survives. The "noise" is adversarial scrutiny.</p>
+      </div>
+    </div>
+
+    <p style="margin-top: 24px; font-size: 15px; color: var(--dim); text-align: center;">
+      <span style="color: var(--accent);">The parallel:</span> 
+      World Models add noise to prevent dream exploitation. We add a counterargument monkey to prevent belief exploitation.
+      <br><span style="color: var(--dim); font-size: 13px;">worldmodels.github.io · Ha &amp; Schmidhuber, 2018</span>
+    </p>
+  </div>
+</div>
+
+<!-- ========== SLIDE 3: HOW IT WORKS ========== -->
+<div class="slide" id="s3">
   <div class="slide-inner">
     <div class="eyebrow eyebrow-accent">Architecture</div>
     <h1>The Pipeline</h1>
@@ -189,8 +238,8 @@
   </div>
 </div>
 
-<!-- ========== SLIDE 3: TWO APPLICATIONS ========== -->
-<div class="slide" id="s3">
+<!-- ========== SLIDE 4: TWO APPLICATIONS ========== -->
+<div class="slide" id="s4">
   <div class="slide-inner">
     <div class="eyebrow eyebrow-green">Results</div>
     <h1>One System, Two Domains</h1>
@@ -231,8 +280,8 @@
   </div>
 </div>
 
-<!-- ========== SLIDE 4: THE LOOP ========== -->
-<div class="slide" id="s4">
+<!-- ========== SLIDE 5: THE LOOP ========== -->
+<div class="slide" id="s5">
   <div class="slide-inner" style="align-items: center; text-align: center;">
     <div class="eyebrow eyebrow-green">The Key Insight</div>
     <h1>It Gets Sharper<br>Every Cycle</h1>
