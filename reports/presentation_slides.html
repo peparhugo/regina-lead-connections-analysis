@@ -8,43 +8,38 @@
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
   * { margin: 0; padding: 0; box-sizing: border-box; }
   :root {
-    --bg: #09090b;
-    --surface: #18181b;
-    --surface2: #27272a;
-    --border: #3f3f46;
-    --text: #fafafa;
-    --dim: #a1a1aa;
-    --accent: #818cf8;
-    --cyan: #22d3ee;
-    --green: #4ade80;
-    --amber: #fbbf24;
-    --red: #f87171;
-    --pink: #f472b6;
+    --bg: #09090b; --surface: #18181b; --surface2: #27272a; --border: #3f3f46;
+    --text: #fafafa; --dim: #a1a1aa; --accent: #818cf8; --cyan: #22d3ee;
+    --green: #4ade80; --amber: #fbbf24; --red: #f87171; --pink: #f472b6;
   }
   body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); overflow: hidden; }
   
-  .slide { display: none; width: 100vw; height: 100vh; padding: 0; position: relative; }
-  .slide.active { display: flex; flex-direction: column; }
-  .slide-inner { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 60px 100px; }
+  /* Particle canvas */
+  #particles { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
 
-  .progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--accent); transition: width 0.4s ease; z-index: 100; }
-  .counter { position: fixed; bottom: 32px; right: 48px; font-size: 14px; color: var(--dim); font-weight: 500; font-variant-numeric: tabular-nums; }
+  .slide { display: none; width: 100vw; height: 100vh; padding: 0; position: relative; z-index: 1; }
+  .slide.active { display: flex; flex-direction: column; }
+  .slide-inner { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 60px 100px; position: relative; z-index: 1; }
+
+  .progress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--accent), var(--cyan), var(--green)); transition: width 0.6s cubic-bezier(.4,0,.2,1); z-index: 100; }
+  .counter { position: fixed; bottom: 32px; right: 48px; font-size: 14px; color: var(--dim); font-weight: 500; font-variant-numeric: tabular-nums; z-index: 100; }
 
   .eyebrow { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 20px; }
-  .eyebrow-accent { color: var(--accent); }
-  .eyebrow-cyan { color: var(--cyan); }
-  .eyebrow-red { color: var(--red); }
-  .eyebrow-green { color: var(--green); }
-  .eyebrow-amber { color: var(--amber); }
+  .eyebrow-accent { color: var(--accent); } .eyebrow-cyan { color: var(--cyan); }
+  .eyebrow-red { color: var(--red); } .eyebrow-green { color: var(--green); } .eyebrow-amber { color: var(--amber); }
 
   h1 { font-size: 56px; font-weight: 800; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 20px; }
-  h1 .gradient { background: linear-gradient(135deg, var(--accent) 0%, var(--cyan) 50%, var(--green) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  h1 .gradient { background: linear-gradient(135deg, var(--accent) 0%, var(--cyan) 50%, var(--green) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-size: 200% 200%; }
   h1 .red-gradient { background: linear-gradient(135deg, var(--red) 0%, var(--amber) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
   h2 { font-size: 24px; font-weight: 700; margin-bottom: 12px; }
   .lead { font-size: 22px; color: var(--dim); line-height: 1.5; max-width: 680px; margin-bottom: 48px; }
 
+  /* Animatable elements — start hidden, anime.js reveals them */
+  .anim-in { opacity: 0; transform: translateY(30px); }
+
   .pipeline { display: flex; align-items: center; justify-content: center; gap: 0; margin: 40px 0; }
-  .pipe-node { padding: 20px 28px; border-radius: 14px; font-size: 15px; font-weight: 600; text-align: center; min-width: 140px; position: relative; line-height: 1.3; border: 1.5px solid var(--border); }
+  .pipe-node { padding: 20px 28px; border-radius: 14px; font-size: 15px; font-weight: 600; text-align: center; min-width: 140px; position: relative; line-height: 1.3; border: 1.5px solid var(--border); transition: box-shadow 0.3s; }
+  .pipe-node:hover { box-shadow: 0 0 24px rgba(129,140,248,0.3); }
   .pipe-node small { display: block; font-size: 12px; font-weight: 400; color: var(--dim); margin-top: 4px; }
   .pipe-arrow { width: 48px; height: 2px; background: var(--border); position: relative; flex-shrink: 0; }
   .pipe-arrow::after { content: ''; position: absolute; right: -1px; top: -5px; border: 6px solid transparent; border-left-color: var(--border); }
@@ -56,25 +51,21 @@
   .n-red { background: rgba(248,113,113,0.08); border-color: rgba(248,113,113,0.25); color: var(--red); }
 
   .pill-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
-  .pill { padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; background: var(--surface); border: 1px solid var(--border); white-space: nowrap; }
+  .pill { padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; background: var(--surface); border: 1px solid var(--border); white-space: nowrap; transition: transform 0.2s, box-shadow 0.2s; }
+  .pill:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
   .pill-accent { border-color: rgba(129,140,248,0.3); color: var(--accent); }
   .pill-red { border-color: rgba(248,113,113,0.3); color: var(--red); }
-  .pill-green { border-color: rgba(74,222,128,0.3); color: var(--green); }
-  .pill-amber { border-color: rgba(251,191,36,0.3); color: var(--amber); }
-  .pill-cyan { border-color: rgba(34,211,238,0.3); color: var(--cyan); }
 
   .stats-row { display: flex; gap: 64px; margin: 40px 0; }
   .stat { text-align: left; }
   .stat-num { font-size: 56px; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; }
-  .stat-num.accent { color: var(--accent); }
-  .stat-num.cyan { color: var(--cyan); }
-  .stat-num.green { color: var(--green); }
-  .stat-num.red { color: var(--red); }
-  .stat-num.amber { color: var(--amber); }
+  .stat-num.accent { color: var(--accent); } .stat-num.cyan { color: var(--cyan); }
+  .stat-num.green { color: var(--green); } .stat-num.red { color: var(--red); } .stat-num.amber { color: var(--amber); }
   .stat-label { font-size: 14px; color: var(--dim); margin-top: 4px; }
 
   .cols { display: flex; gap: 32px; }
-  .col-card { flex: 1; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
+  .col-card { flex: 1; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; transition: border-color 0.3s, transform 0.3s; }
+  .col-card:hover { border-color: rgba(129,140,248,0.4); transform: translateY(-2px); }
   .col-card .desc { font-size: 14px; color: var(--dim); line-height: 1.5; margin-top: 8px; }
 
   .bottom-bar { padding: 16px 100px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
@@ -85,36 +76,38 @@
   .cycle-node small { display: block; font-size: 11px; font-weight: 400; color: var(--dim); margin-top: 2px; }
   .cycle-arrow { padding: 0 6px; font-size: 20px; color: var(--border); }
 
-  /* Severity badges */
   .sev { display: inline-block; padding: 3px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
   .sev-critical { background: rgba(248,113,113,0.15); color: var(--red); }
   .sev-major { background: rgba(251,191,36,0.15); color: var(--amber); }
   .sev-minor { background: rgba(129,140,248,0.15); color: var(--accent); }
-  .sev-info { background: rgba(74,222,128,0.15); color: var(--green); }
 
-  /* About me */
   .about-grid { display: flex; gap: 40px; align-items: flex-start; margin-top: 32px; }
-  .about-photo { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent); flex-shrink: 0; }
+  .about-photo { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent); flex-shrink: 0; box-shadow: 0 0 40px rgba(129,140,248,0.2); }
   .about-bio { flex: 1; }
   .about-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
   .about-tag { padding: 4px 12px; border-radius: 6px; font-size: 11px; font-weight: 600; background: var(--surface); border: 1px solid var(--border); color: var(--dim); }
 
-  /* Architecture diagram for anime.js */
-  .arch-box { padding: 12px 16px; border-radius: 10px; font-size: 13px; font-weight: 600; text-align: center; border: 1px solid var(--border); }
+  .arch-box { padding: 12px 16px; border-radius: 10px; font-size: 13px; font-weight: 600; text-align: center; border: 1px solid var(--border); transition: transform 0.2s, box-shadow 0.2s; }
+  .arch-box:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(129,140,248,0.2); }
   .arch-box small { display: block; font-size: 11px; font-weight: 400; color: var(--dim); margin-top: 2px; }
-  .arch-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 16px 0; }
+
+  /* Glowing orbs background */
+  .orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.12; pointer-events: none; z-index: 0; }
 </style>
 </head>
 <body>
+<canvas id="particles"></canvas>
 <div class="progress" id="progress"></div>
 <div class="counter" id="counter">1 / 9</div>
 
 <!-- ========== SLIDE 1: TITLE ========== -->
 <div class="slide active" id="s1">
+  <div class="orb" style="width:400px;height:400px;background:var(--accent);top:-100px;right:10%;"></div>
+  <div class="orb" style="width:300px;height:300px;background:var(--red);bottom:10%;left:5%;"></div>
   <div class="slide-inner">
-    <div class="eyebrow eyebrow-accent">Dream Lab / OpenClaw</div>
-    <h1>What if an AI could<br><span class="gradient">investigate a codebase</span><br>the way you'd investigate<br><span class="red-gradient">a public health crisis?</span></h1>
-    <p class="lead">Same architecture. Same worker swarm. Same review pipeline.<br>Two completely different domains — one system.</p>
+    <div class="eyebrow eyebrow-accent anim-in">Dream Lab / OpenClaw</div>
+    <h1 class="anim-in">What if an AI could<br><span class="gradient">investigate a codebase</span><br>the way you'd investigate<br><span class="red-gradient">a public health crisis?</span></h1>
+    <p class="lead anim-in">Same architecture. Same worker swarm. Same review pipeline.<br>Two completely different domains — one system.</p>
   </div>
   <div class="bottom-bar">
     <span class="author">Thomas (Pepar) Hugo · ChaosClaw · April 2026</span>
@@ -123,20 +116,16 @@
 
 <!-- ========== SLIDE 2: ABOUT ME ========== -->
 <div class="slide" id="s2">
+  <div class="orb" style="width:350px;height:350px;background:var(--cyan);top:5%;left:60%;"></div>
   <div class="slide-inner">
-    <div class="eyebrow eyebrow-accent">The Builder</div>
-    <h1>Why I Built This</h1>
-
-    <div class="about-grid">
-      <img class="about-photo" src="../assets/pepar-headshot.jpg" alt="Thomas Hugo" onerror="this.style.background='var(--surface)';this.style.display='flex';">
+    <div class="eyebrow eyebrow-accent anim-in">The Builder</div>
+    <h1 class="anim-in">Why I Built This</h1>
+    <div class="about-grid anim-in">
+      <img class="about-photo" src="../assets/pepar-headshot.jpg" alt="Thomas Hugo" onerror="this.style.background='linear-gradient(135deg, #818cf8, #22d3ee)';this.alt='TH';">
       <div class="about-bio">
-        <h2 style="font-size: 22px; color: var(--text);">Thomas Jay Pepar Hugo</h2>
-        <p style="font-size: 15px; color: var(--dim); line-height: 1.6; margin-top: 8px;">
-          13 years building data &amp; AI platforms across investment management, energy, telecom, health, and geospatial systems.
-          This tool is the culmination of every hat I've ever worn — data engineering, ML, optimization algorithms, GenAI agentic workflows, solution architecture, and team leadership — compressed into one system that can investigate anything.
-        </p>
+        <h2 style="font-size: 22px;">Thomas Jay Pepar Hugo</h2>
+        <p style="font-size: 15px; color: var(--dim); line-height: 1.6; margin-top: 8px;">13 years building data &amp; AI platforms across investment management, energy, telecom, health, and geospatial systems. This tool is the culmination of every hat I've ever worn — data engineering, ML, optimization algorithms, GenAI agentic workflows, solution architecture, and team leadership — compressed into one system that can investigate anything.</p>
         <p style="font-size: 14px; color: var(--accent); margin-top: 12px; font-weight: 600;">It may be my life's work at the moment.</p>
-
         <div style="display: flex; gap: 48px; margin-top: 20px;">
           <div>
             <div style="font-size: 12px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px;">Where the pieces come from</div>
@@ -164,58 +153,51 @@
   </div>
 </div>
 
-<!-- ========== SLIDE 3: THE INSPIRATION ========== -->
+<!-- ========== SLIDE 3: WORLD MODELS ========== -->
 <div class="slide" id="s3">
+  <div class="orb" style="width:300px;height:300px;background:var(--accent);top:20%;right:5%;"></div>
   <div class="slide-inner">
-    <div class="eyebrow eyebrow-accent">The Idea Behind It</div>
-    <h1>World Models<br><span class="gradient">→ Belief Models</span></h1>
-    <p class="lead">In 2018, Ha &amp; Schmidhuber showed agents can learn inside their own dreams — building compressed world models, then training on predictions.</p>
-
-    <div class="cols" style="margin-top: 24px;">
+    <div class="eyebrow eyebrow-accent anim-in">The Idea Behind It</div>
+    <h1 class="anim-in">World Models<br><span class="gradient">→ Belief Models</span></h1>
+    <p class="lead anim-in" style="margin-bottom: 24px;">In 2018, Ha &amp; Schmidhuber showed agents can learn inside their own dreams.</p>
+    <div class="cols anim-in">
       <div class="col-card" style="border-color: rgba(129,140,248,0.2);">
-        <div class="eyebrow eyebrow-accent">World Models (Ha &amp; Schmidhuber 2018)</div>
+        <div class="eyebrow eyebrow-accent">World Models (2018)</div>
         <h2 style="font-size: 20px;">Agent learns inside its own dream</h2>
         <div class="pipeline" style="margin: 20px 0; justify-content: flex-start;">
-          <div class="pipe-node n-source" style="min-width: 80px; padding: 14px 16px;">V<small>observe</small></div>
-          <div class="pipe-arrow" style="width: 32px;"></div>
-          <div class="pipe-node n-worker" style="min-width: 80px; padding: 14px 16px;">M<small>model</small></div>
-          <div class="pipe-arrow" style="width: 32px;"></div>
-          <div class="pipe-node n-output" style="min-width: 80px; padding: 14px 16px;">C<small>decide</small></div>
+          <div class="pipe-node n-source" style="min-width:80px;padding:14px 16px;">V<small>observe</small></div>
+          <div class="pipe-arrow" style="width:32px;"></div>
+          <div class="pipe-node n-worker" style="min-width:80px;padding:14px 16px;">M<small>model</small></div>
+          <div class="pipe-arrow" style="width:32px;"></div>
+          <div class="pipe-node n-output" style="min-width:80px;padding:14px 16px;">C<small>decide</small></div>
         </div>
-        <p style="font-size: 14px; color: var(--dim); line-height: 1.5;">Compress observations → build a predictive model → train inside the model. Add noise to prevent exploiting imperfections.</p>
+        <p style="font-size:14px;color:var(--dim);line-height:1.5;">Compress → model → train inside the model. Add noise to prevent exploiting imperfections.</p>
       </div>
-
       <div class="col-card" style="border-color: rgba(248,113,113,0.2);">
-        <div class="eyebrow eyebrow-red">Dream Lab / JVB (our adaptation)</div>
-        <h2 style="font-size: 20px;">System learns by attacking its own beliefs</h2>
+        <div class="eyebrow eyebrow-red">Dream Lab / JVB (ours)</div>
+        <h2 style="font-size: 20px;">System attacks its own beliefs</h2>
         <div class="pipeline" style="margin: 20px 0; justify-content: flex-start;">
-          <div class="pipe-node n-source" style="min-width: 80px; padding: 14px 16px;">📥<small>observe</small></div>
-          <div class="pipe-arrow" style="width: 32px;"></div>
-          <div class="pipe-node n-worker" style="min-width: 80px; padding: 14px 16px;">🐒<small>believe</small></div>
-          <div class="pipe-arrow" style="width: 32px;"></div>
-          <div class="pipe-node n-red" style="min-width: 80px; padding: 14px 16px;">⚔️<small>attack</small></div>
-          <div class="pipe-arrow" style="width: 32px;"></div>
-          <div class="pipe-node n-output" style="min-width: 80px; padding: 14px 16px;">✅<small>know</small></div>
+          <div class="pipe-node n-source" style="min-width:80px;padding:14px 16px;">📥<small>observe</small></div>
+          <div class="pipe-arrow" style="width:32px;"></div>
+          <div class="pipe-node n-worker" style="min-width:80px;padding:14px 16px;">🐒<small>believe</small></div>
+          <div class="pipe-arrow" style="width:32px;"></div>
+          <div class="pipe-node n-red" style="min-width:80px;padding:14px 16px;">⚔️<small>attack</small></div>
+          <div class="pipe-arrow" style="width:32px;"></div>
+          <div class="pipe-node n-output" style="min-width:80px;padding:14px 16px;">✅<small>know</small></div>
         </div>
-        <p style="font-size: 14px; color: var(--dim); line-height: 1.5;">Workers generate beliefs → counterargument agent stress-tests them → JVB review adjudicates what survives. The "noise" is adversarial scrutiny.</p>
+        <p style="font-size:14px;color:var(--dim);line-height:1.5;">Workers generate beliefs → counterargument stress-tests → JVB adjudicates what survives.</p>
       </div>
     </div>
-
-    <p style="margin-top: 20px; font-size: 14px; color: var(--dim); text-align: center;">
-      <span style="color: var(--accent);">The parallel:</span> World Models add noise to prevent dream exploitation. We add a counterargument monkey to prevent belief exploitation.
-      <br><span style="font-size: 12px;">worldmodels.github.io · Ha &amp; Schmidhuber, 2018</span>
-    </p>
   </div>
 </div>
 
 <!-- ========== SLIDE 4: ARCHITECTURE ========== -->
 <div class="slide" id="s4">
   <div class="slide-inner">
-    <div class="eyebrow eyebrow-accent">Architecture</div>
-    <h1>The Pipeline</h1>
-    <p class="lead">Data goes in. Specialized workers generate findings. A review layer attacks and adjudicates. Only surviving claims become knowledge.</p>
-
-    <div class="pipeline">
+    <div class="eyebrow eyebrow-accent anim-in">Architecture</div>
+    <h1 class="anim-in">The Pipeline</h1>
+    <p class="lead anim-in">Data in. Workers generate. Counterargument attacks. Review adjudicates. Knowledge out.</p>
+    <div class="pipeline anim-in">
       <div class="pipe-node n-source">📥 Data Source<small>Repo / PostGIS / Web</small></div>
       <div class="pipe-arrow"></div>
       <div class="pipe-node n-worker">🐒 Worker Swarm<small>3–11 specialists</small></div>
@@ -226,108 +208,82 @@
       <div class="pipe-arrow"></div>
       <div class="pipe-node n-output">✅ Knowledge<small>promoted claims</small></div>
     </div>
-
-    <div style="display:flex; gap: 48px; margin-top: 40px;">
+    <div style="display:flex;gap:48px;margin-top:40px;" class="anim-in">
       <div>
-        <div class="eyebrow eyebrow-cyan" style="margin-bottom: 10px;">GitHub Workers (genetic algorithm)</div>
-        <div style="font-size: 12px; color: var(--dim); margin-bottom: 8px;">🎯 Required = selection pressure &nbsp;&nbsp; 🎲 Random = mutation/exploration</div>
+        <div class="eyebrow eyebrow-cyan" style="margin-bottom:10px;">Genetic Algorithm Workers</div>
+        <div style="font-size:12px;color:var(--dim);margin-bottom:8px;">🎯 Required = selection &nbsp; 🎲 Random = mutation</div>
         <div class="pill-grid">
-          <span class="pill pill-accent">🎯 Question</span>
-          <span class="pill pill-accent">🎯 Mutation</span>
-          <span class="pill pill-accent">🎯 Linkage</span>
-          <span class="pill pill-accent">🎯 Risk</span>
+          <span class="pill pill-accent">🎯 Question</span><span class="pill pill-accent">🎯 Mutation</span>
+          <span class="pill pill-accent">🎯 Linkage</span><span class="pill pill-accent">🎯 Risk</span>
           <span class="pill pill-accent">🎯 Security</span>
-          <span class="pill" style="border-color: rgba(129,140,248,0.15); color: var(--dim);">🎲 Learning</span>
-          <span class="pill" style="border-color: rgba(129,140,248,0.15); color: var(--dim);">🎲 Debt</span>
-          <span class="pill" style="border-color: rgba(129,140,248,0.15); color: var(--dim);">🎲 Architecture</span>
-          <span class="pill" style="border-color: rgba(129,140,248,0.15); color: var(--dim);">🎲 Ownership</span>
-          <span class="pill" style="border-color: rgba(129,140,248,0.15); color: var(--dim);">🎲 Contributor</span>
-          <span class="pill" style="border-color: rgba(129,140,248,0.15); color: var(--dim);">🎲 Review Cov.</span>
+          <span class="pill" style="border-color:rgba(129,140,248,0.15);color:var(--dim);">🎲 Learning</span>
+          <span class="pill" style="border-color:rgba(129,140,248,0.15);color:var(--dim);">🎲 Debt</span>
+          <span class="pill" style="border-color:rgba(129,140,248,0.15);color:var(--dim);">🎲 Architecture</span>
+          <span class="pill" style="border-color:rgba(129,140,248,0.15);color:var(--dim);">🎲 Ownership</span>
+          <span class="pill" style="border-color:rgba(129,140,248,0.15);color:var(--dim);">🎲 Contributor</span>
+          <span class="pill" style="border-color:rgba(129,140,248,0.15);color:var(--dim);">🎲 Review Cov.</span>
         </div>
       </div>
       <div>
-        <div class="eyebrow eyebrow-red" style="margin-bottom: 10px;">Investigative Workers</div>
+        <div class="eyebrow eyebrow-red" style="margin-bottom:10px;">Investigative Workers</div>
         <div class="pill-grid">
-          <span class="pill pill-red">Evidence Hunter</span>
-          <span class="pill pill-red">Counterargument</span>
-          <span class="pill pill-red">Equity Analyst</span>
-          <span class="pill pill-red">Accountability</span>
-          <span class="pill pill-red">Timeline</span>
-          <span class="pill pill-red">Comparator</span>
-          <span class="pill pill-red">Quote Miner</span>
-          <span class="pill pill-red">Gap Detector</span>
+          <span class="pill pill-red">Evidence Hunter</span><span class="pill pill-red">Counterargument</span>
+          <span class="pill pill-red">Equity Analyst</span><span class="pill pill-red">Accountability</span>
+          <span class="pill pill-red">Timeline</span><span class="pill pill-red">Comparator</span>
+          <span class="pill pill-red">Quote Miner</span><span class="pill pill-red">Gap Detector</span>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ========== SLIDE 5: LIVE DEMO — ANIME.JS ========== -->
+<!-- ========== SLIDE 5: ANIME.JS DEMO ========== -->
 <div class="slide" id="s5">
+  <div class="orb" style="width:350px;height:350px;background:var(--cyan);bottom:5%;right:10%;"></div>
   <div class="slide-inner">
-    <div class="eyebrow eyebrow-cyan">Live Demo — GitHub Analyzer</div>
-    <h1>Anime.js v4<br><span class="gradient">Deep Analysis</span></h1>
-    <p style="font-size: 16px; color: var(--dim); margin-bottom: 24px;">456 files · 60 JS source files · ~10K LOC · 12 subsystems identified · 2 cycles, 16 worker findings</p>
-
-    <div style="display: flex; gap: 24px;">
-      <!-- Architecture map -->
-      <div style="flex: 1;">
-        <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--cyan); margin-bottom: 10px;">Auto-discovered Architecture</div>
-        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px;">
+    <div class="eyebrow eyebrow-cyan anim-in">Live Demo — GitHub Analyzer</div>
+    <h1 class="anim-in">Anime.js v4 <span class="gradient">Deep Analysis</span></h1>
+    <p style="font-size:16px;color:var(--dim);margin-bottom:24px;" class="anim-in">456 files · 60 JS source · ~10K LOC · 12 subsystems · 2 cycles · 16 findings</p>
+    <div style="display:flex;gap:24px;" class="anim-in">
+      <div style="flex:1;">
+        <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--cyan);margin-bottom:10px;">Auto-discovered Architecture</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;">
           <div class="arch-box n-source">Engine<small>181 LOC · tick loop</small></div>
           <div class="arch-box n-worker">Animation<small>747 LOC · keyframes</small></div>
           <div class="arch-box n-review">Timeline<small>362 LOC · sequencing</small></div>
-          <div class="arch-box n-red" style="grid-column: span 1;">Layout<small>1,607 LOC · FLIP ⚠️</small></div>
+          <div class="arch-box n-red">Layout<small>1,607 LOC · FLIP ⚠️</small></div>
           <div class="arch-box n-red">Draggable<small>1,286 LOC · interaction</small></div>
           <div class="arch-box n-red">Scroll<small>986 LOC · linked anim</small></div>
-          <div class="arch-box" style="background: rgba(129,140,248,0.06);">Easings<small>7 families incl. spring</small></div>
-          <div class="arch-box" style="background: rgba(129,140,248,0.06);">WAAPI Bridge<small>hardware accel</small></div>
-          <div class="arch-box" style="background: rgba(129,140,248,0.06);">Text · SVG<small>split + morph + path</small></div>
+          <div class="arch-box" style="background:rgba(129,140,248,0.06);">Easings<small>7 families incl. spring</small></div>
+          <div class="arch-box" style="background:rgba(129,140,248,0.06);">WAAPI Bridge<small>hardware accel</small></div>
+          <div class="arch-box" style="background:rgba(129,140,248,0.06);">Text · SVG<small>split + morph + path</small></div>
         </div>
       </div>
-
-      <!-- Findings -->
-      <div style="flex: 1;">
-        <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--amber); margin-bottom: 10px;">Classified Findings</div>
-        <div style="display: flex; flex-direction: column; gap: 8px;">
-          <div style="padding: 10px 14px; background: var(--surface); border-radius: 10px; border: 1px solid var(--border);">
-            <span class="sev sev-critical">CRITICAL</span>
-            <span style="font-size: 13px; margin-left: 8px;">Core timing regressions invisible to unit tests</span>
-          </div>
-          <div style="padding: 10px 14px; background: var(--surface); border-radius: 10px; border: 1px solid var(--border);">
-            <span class="sev sev-critical">CRITICAL</span>
-            <span style="font-size: 13px; margin-left: 8px;">JSDoc-only type safety with no runtime validation</span>
-          </div>
-          <div style="padding: 10px 14px; background: var(--surface); border-radius: 10px; border: 1px solid var(--border);">
-            <span class="sev sev-major">MAJOR</span>
-            <span style="font-size: 13px; margin-left: 8px;">Bus-factor 1 — entire library = one maintainer</span>
-          </div>
-          <div style="padding: 10px 14px; background: var(--surface); border-radius: 10px; border: 1px solid var(--border);">
-            <span class="sev sev-major">MAJOR</span>
-            <span style="font-size: 13px; margin-left: 8px;">No visual regression testing for animation correctness</span>
-          </div>
-          <div style="padding: 10px 14px; background: var(--surface); border-radius: 10px; border: 1px solid var(--border);">
-            <span class="sev sev-minor">MINOR</span>
-            <span style="font-size: 13px; margin-left: 8px;">DOM injection risk via unsanitized selector inputs</span>
-          </div>
+      <div style="flex:1;">
+        <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--amber);margin-bottom:10px;">Classified Findings</div>
+        <div style="display:flex;flex-direction:column;gap:8px;" id="findings-list">
+          <div class="finding-row" style="padding:10px 14px;background:var(--surface);border-radius:10px;border:1px solid var(--border);"><span class="sev sev-critical">CRITICAL</span><span style="font-size:13px;margin-left:8px;">Core timing regressions invisible to unit tests</span></div>
+          <div class="finding-row" style="padding:10px 14px;background:var(--surface);border-radius:10px;border:1px solid var(--border);"><span class="sev sev-critical">CRITICAL</span><span style="font-size:13px;margin-left:8px;">JSDoc-only type safety — no runtime validation</span></div>
+          <div class="finding-row" style="padding:10px 14px;background:var(--surface);border-radius:10px;border:1px solid var(--border);"><span class="sev sev-major">MAJOR</span><span style="font-size:13px;margin-left:8px;">Bus-factor 1 — entire library = one maintainer</span></div>
+          <div class="finding-row" style="padding:10px 14px;background:var(--surface);border-radius:10px;border:1px solid var(--border);"><span class="sev sev-major">MAJOR</span><span style="font-size:13px;margin-left:8px;">No visual regression testing for animations</span></div>
+          <div class="finding-row" style="padding:10px 14px;background:var(--surface);border-radius:10px;border:1px solid var(--border);"><span class="sev sev-minor">MINOR</span><span style="font-size:13px;margin-left:8px;">DOM injection risk via unsanitized selectors</span></div>
         </div>
-        <p style="font-size: 12px; color: var(--dim); margin-top: 8px;">Spring physics adapted from Apple WebKit · WAAPI bridge for compositor-thread performance</p>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ========== SLIDE 6: LEARNING FROM SQ ========== -->
+<!-- ========== SLIDE 6: CROSS-REPO LEARNING ========== -->
 <div class="slide" id="s6">
+  <div class="orb" style="width:300px;height:300px;background:var(--green);top:10%;left:5%;"></div>
   <div class="slide-inner">
-    <div class="eyebrow eyebrow-green">Cross-Repo Learning</div>
-    <h1>System Learns<br><span class="gradient">From What It Reads</span></h1>
-    <p style="font-size: 16px; color: var(--dim); margin-bottom: 24px;">After analyzing SonarQube (8,800 files, 15-year codebase), the system extracted design patterns and applied them to itself.</p>
-
-    <div style="display: flex; gap: 24px;">
-      <div class="col-card" style="flex:1; border-color: rgba(34,211,238,0.2); padding: 20px;">
+    <div class="eyebrow eyebrow-green anim-in">Cross-Repo Learning</div>
+    <h1 class="anim-in">System Learns <span class="gradient">From What It Reads</span></h1>
+    <p style="font-size:16px;color:var(--dim);margin-bottom:24px;" class="anim-in">After analyzing SonarQube (8,800 files), the system extracted design patterns and applied them to itself.</p>
+    <div style="display:flex;gap:24px;" class="anim-in">
+      <div class="col-card" style="flex:1;border-color:rgba(34,211,238,0.2);padding:20px;">
         <div class="eyebrow eyebrow-cyan">Read from SonarQube</div>
-        <div style="font-size: 14px; color: var(--dim); line-height: 1.7;">
+        <div style="font-size:14px;color:var(--dim);line-height:1.7;">
           <div>✅ Per-condition gate evaluation with actual values</div>
           <div>✅ Typed severity classification (BLOCKER→INFO)</div>
           <div>✅ Profile-level worker activation</div>
@@ -335,11 +291,11 @@
           <div>✅ Built-in sensible defaults</div>
         </div>
       </div>
-      <div style="display: flex; align-items: center; font-size: 32px; color: var(--accent);">→</div>
-      <div class="col-card" style="flex:1; border-color: rgba(74,222,128,0.2); padding: 20px;">
+      <div style="display:flex;align-items:center;font-size:32px;color:var(--accent);">→</div>
+      <div class="col-card" style="flex:1;border-color:rgba(74,222,128,0.2);padding:20px;">
         <div class="eyebrow eyebrow-green">Applied to Dream Lab</div>
-        <div style="font-size: 14px; color: var(--dim); line-height: 1.7;">
-          <div>✅ JVB bridge now tracks 8 conditions with values</div>
+        <div style="font-size:14px;color:var(--dim);line-height:1.7;">
+          <div>✅ JVB bridge tracks 8 conditions with values</div>
           <div>✅ Workers output severity + impact + effort</div>
           <div>✅ Profiles declare required + random workers</div>
           <div>✅ Graceful handling of missing evidence</div>
@@ -347,9 +303,8 @@
         </div>
       </div>
     </div>
-
-    <p style="margin-top: 24px; font-size: 15px; color: var(--dim); text-align: center;">
-      <span style="color: var(--accent); font-weight: 600;">The system reverse-engineered a Toyota factory to improve its own assembly line.</span>
+    <p style="margin-top:24px;font-size:15px;color:var(--dim);text-align:center;" class="anim-in">
+      <span style="color:var(--accent);font-weight:600;">The system reverse-engineered a Toyota factory to improve its own assembly line.</span>
     </p>
   </div>
 </div>
@@ -357,39 +312,27 @@
 <!-- ========== SLIDE 7: TWO DOMAINS ========== -->
 <div class="slide" id="s7">
   <div class="slide-inner">
-    <div class="eyebrow eyebrow-green">Results</div>
-    <h1>One System, Two Domains</h1>
-
-    <div class="cols">
-      <div class="col-card" style="border-color: rgba(34,211,238,0.2);">
+    <div class="eyebrow eyebrow-green anim-in">Results</div>
+    <h1 class="anim-in">One System, Two Domains</h1>
+    <div class="cols anim-in">
+      <div class="col-card" style="border-color:rgba(34,211,238,0.2);">
         <div class="eyebrow eyebrow-cyan">GitHub Analyzer</div>
         <h2>Repo Intelligence</h2>
-        <p class="desc">Feed it any GitHub repo. It maps architecture, finds debt, scores risk, profiles contributors, detects security surfaces — then reviews its own findings.</p>
-        <div class="stats-row" style="gap: 40px;">
-          <div class="stat"><div class="stat-num cyan">21</div><div class="stat-label">repos analyzed</div></div>
-          <div class="stat"><div class="stat-num cyan">597</div><div class="stat-label">findings</div></div>
-          <div class="stat"><div class="stat-num cyan">11</div><div class="stat-label">workers/repo</div></div>
-        </div>
-        <div class="pill-grid" style="margin-top: 8px;">
-          <span class="pill" style="font-size: 12px;">🔒 3 repos: injection risk</span>
-          <span class="pill" style="font-size: 12px;">👤 bus factor = 1 on every repo</span>
-          <span class="pill" style="font-size: 12px;">🧪 0 repos have E2E publish tests</span>
+        <p class="desc">Feed it any GitHub repo. It maps architecture, finds debt, scores risk, detects security surfaces — then reviews its own findings.</p>
+        <div class="stats-row" style="gap:40px;">
+          <div class="stat"><div class="stat-num cyan" data-count="21">0</div><div class="stat-label">repos analyzed</div></div>
+          <div class="stat"><div class="stat-num cyan" data-count="597">0</div><div class="stat-label">findings</div></div>
+          <div class="stat"><div class="stat-num cyan" data-count="11">0</div><div class="stat-label">workers/repo</div></div>
         </div>
       </div>
-
-      <div class="col-card" style="border-color: rgba(248,113,113,0.2);">
+      <div class="col-card" style="border-color:rgba(248,113,113,0.2);">
         <div class="eyebrow eyebrow-red">Regina Lead Investigation</div>
         <h2>Public Health Crisis</h2>
-        <p class="desc">Same swarm pattern — but workers query PostGIS, search media, trace vote records, model child harm per census tract, and attack their own conclusions.</p>
-        <div class="stats-row" style="gap: 40px;">
-          <div class="stat"><div class="stat-num red">1,089</div><div class="stat-label">active lead pipes</div></div>
-          <div class="stat"><div class="stat-num red">1,540</div><div class="stat-label">children at risk</div></div>
-          <div class="stat"><div class="stat-num red">$40M</div><div class="stat-label">locked-in cost</div></div>
-        </div>
-        <div class="pill-grid" style="margin-top: 8px;">
-          <span class="pill" style="font-size: 12px;">🏛️ Named councillors who voted NO</span>
-          <span class="pill" style="font-size: 12px;">🏠 72% renter in worst tract</span>
-          <span class="pill" style="font-size: 12px;">🗺️ CT-level harm map from PostGIS</span>
+        <p class="desc">Same swarm — but workers query PostGIS, search media, trace vote records, model child harm, and attack their own conclusions.</p>
+        <div class="stats-row" style="gap:40px;">
+          <div class="stat"><div class="stat-num red" data-count="1089" data-format="comma">0</div><div class="stat-label">active lead pipes</div></div>
+          <div class="stat"><div class="stat-num red" data-count="1540" data-format="comma">0</div><div class="stat-label">children at risk</div></div>
+          <div class="stat"><div class="stat-num red" data-count="40" data-prefix="$" data-suffix="M">0</div><div class="stat-label">locked-in cost</div></div>
         </div>
       </div>
     </div>
@@ -399,68 +342,32 @@
 <!-- ========== SLIDE 8: TECH STACK ========== -->
 <div class="slide" id="s8">
   <div class="slide-inner">
-    <div class="eyebrow eyebrow-cyan">Infrastructure</div>
-    <h1>Tech Stack</h1>
-
-    <div style="display: flex; gap: 24px; margin-top: 32px;">
-      <div style="flex: 1; display: flex; flex-direction: column; gap: 2px;">
-        <div style="background: rgba(74,222,128,0.08); border: 1px solid rgba(74,222,128,0.2); border-radius: 12px 12px 4px 4px; padding: 20px 24px; text-align: center;">
-          <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--green); margin-bottom: 6px;">Presentation Layer</div>
-          <div class="pill-grid" style="justify-content: center;">
-            <span class="pill" style="font-size: 12px;">GitHub Pages</span>
-            <span class="pill" style="font-size: 12px;">MapLibre GL</span>
-            <span class="pill" style="font-size: 12px;">GeoJSON</span>
-            <span class="pill" style="font-size: 12px;">Vanilla JS</span>
-          </div>
+    <div class="eyebrow eyebrow-cyan anim-in">Infrastructure</div>
+    <h1 class="anim-in">Tech Stack</h1>
+    <div style="display:flex;gap:24px;margin-top:32px;" class="anim-in">
+      <div style="flex:1;display:flex;flex-direction:column;gap:2px;">
+        <div style="background:rgba(74,222,128,0.08);border:1px solid rgba(74,222,128,0.2);border-radius:12px 12px 4px 4px;padding:20px 24px;text-align:center;">
+          <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--green);margin-bottom:6px;">Presentation</div>
+          <div class="pill-grid" style="justify-content:center;"><span class="pill" style="font-size:12px;">GitHub Pages</span><span class="pill" style="font-size:12px;">MapLibre GL</span><span class="pill" style="font-size:12px;">Anime.js</span><span class="pill" style="font-size:12px;">Vanilla JS</span></div>
         </div>
-        <div style="background: rgba(129,140,248,0.08); border: 1px solid rgba(129,140,248,0.2); border-radius: 4px; padding: 20px 24px; text-align: center;">
-          <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 6px;">Orchestration Layer</div>
-          <div class="pill-grid" style="justify-content: center;">
-            <span class="pill" style="font-size: 12px;">OpenClaw</span>
-            <span class="pill" style="font-size: 12px;">Dream Runner</span>
-            <span class="pill" style="font-size: 12px;">Python</span>
-            <span class="pill" style="font-size: 12px;">Subagent Swarm</span>
-          </div>
+        <div style="background:rgba(129,140,248,0.08);border:1px solid rgba(129,140,248,0.2);border-radius:4px;padding:20px 24px;text-align:center;">
+          <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent);margin-bottom:6px;">Orchestration</div>
+          <div class="pill-grid" style="justify-content:center;"><span class="pill" style="font-size:12px;">OpenClaw</span><span class="pill" style="font-size:12px;">Dream Runner</span><span class="pill" style="font-size:12px;">Python</span><span class="pill" style="font-size:12px;">Subagent Swarm</span></div>
         </div>
-        <div style="background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.2); border-radius: 4px; padding: 20px 24px; text-align: center;">
-          <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--amber); margin-bottom: 6px;">Intelligence Layer</div>
-          <div class="pill-grid" style="justify-content: center;">
-            <span class="pill" style="font-size: 12px;">GPT-5 Mini</span>
-            <span class="pill" style="font-size: 12px;">Claude</span>
-            <span class="pill" style="font-size: 12px;">JVB Review (n8n)</span>
-            <span class="pill" style="font-size: 12px;">Counterargument Monkey</span>
-          </div>
+        <div style="background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.2);border-radius:4px;padding:20px 24px;text-align:center;">
+          <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);margin-bottom:6px;">Intelligence</div>
+          <div class="pill-grid" style="justify-content:center;"><span class="pill" style="font-size:12px;">GPT-5 Mini</span><span class="pill" style="font-size:12px;">Claude</span><span class="pill" style="font-size:12px;">JVB Review (n8n)</span><span class="pill" style="font-size:12px;">Counterargument 🐒</span></div>
         </div>
-        <div style="background: rgba(34,211,238,0.08); border: 1px solid rgba(34,211,238,0.2); border-radius: 4px 4px 12px 12px; padding: 20px 24px; text-align: center;">
-          <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--cyan); margin-bottom: 6px;">Data Layer</div>
-          <div class="pill-grid" style="justify-content: center;">
-            <span class="pill" style="font-size: 12px;">PostGIS</span>
-            <span class="pill" style="font-size: 12px;">Neo4j</span>
-            <span class="pill" style="font-size: 12px;">GitHub API</span>
-            <span class="pill" style="font-size: 12px;">ArcGIS REST</span>
-            <span class="pill" style="font-size: 12px;">StatsCan</span>
-            <span class="pill" style="font-size: 12px;">SearXNG</span>
-          </div>
+        <div style="background:rgba(34,211,238,0.08);border:1px solid rgba(34,211,238,0.2);border-radius:4px 4px 12px 12px;padding:20px 24px;text-align:center;">
+          <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--cyan);margin-bottom:6px;">Data</div>
+          <div class="pill-grid" style="justify-content:center;"><span class="pill" style="font-size:12px;">PostGIS</span><span class="pill" style="font-size:12px;">Neo4j</span><span class="pill" style="font-size:12px;">GitHub API</span><span class="pill" style="font-size:12px;">ArcGIS</span><span class="pill" style="font-size:12px;">StatsCan</span><span class="pill" style="font-size:12px;">SearXNG</span></div>
         </div>
       </div>
-
-      <div style="flex: 0.6; display: flex; flex-direction: column; gap: 16px;">
-        <div class="col-card" style="padding: 20px; border-color: var(--border);">
-          <h2 style="font-size: 16px; color: var(--accent); margin-bottom: 8px;">Orchestration</h2>
-          <p style="font-size: 13px; color: var(--dim); line-height: 1.5;">OpenClaw spawns agents as subprocesses. Workers run in batches of 3. Profile-driven activation: 5 required + 3 random per cycle (genetic algorithm pattern).</p>
-        </div>
-        <div class="col-card" style="padding: 20px; border-color: var(--border);">
-          <h2 style="font-size: 16px; color: var(--amber); margin-bottom: 8px;">JVB Pipeline</h2>
-          <p style="font-size: 13px; color: var(--dim); line-height: 1.5;">3 n8n workflows: <code style="color:var(--amber);">intake</code> → <code style="color:var(--amber);">build-claim-batch</code> → <code style="color:var(--amber);">review-and-revise</code>. Per-condition gate evaluation with fail-closed normalization.</p>
-        </div>
-        <div class="col-card" style="padding: 20px; border-color: var(--border);">
-          <h2 style="font-size: 16px; color: var(--cyan); margin-bottom: 8px;">Data</h2>
-          <p style="font-size: 13px; color: var(--dim); line-height: 1.5;">PostGIS: 22 tables + 15 materialized views. 87K address points, 1.1K replacement events, child harm / QALY / cost models per census tract.</p>
-        </div>
-        <div class="col-card" style="padding: 20px; border-color: var(--border);">
-          <h2 style="font-size: 16px; color: var(--green); margin-bottom: 8px;">Hosting</h2>
-          <p style="font-size: 13px; color: var(--dim); line-height: 1.5;">Single VPS. Docker containers for PostGIS, Neo4j, n8n, VictoriaMetrics. GitHub Pages for public site. Everything on one box.</p>
-        </div>
+      <div style="flex:0.6;display:flex;flex-direction:column;gap:16px;">
+        <div class="col-card" style="padding:20px;"><h2 style="font-size:16px;color:var(--accent);margin-bottom:8px;">Orchestration</h2><p style="font-size:13px;color:var(--dim);line-height:1.5;">OpenClaw spawns agents. Workers in batches of 3. Profile-driven: 5 required + 3 random per cycle.</p></div>
+        <div class="col-card" style="padding:20px;"><h2 style="font-size:16px;color:var(--amber);margin-bottom:8px;">JVB Pipeline</h2><p style="font-size:13px;color:var(--dim);line-height:1.5;">3 n8n workflows chain. Per-condition gate with 8 tracked conditions. Fail-closed normalization.</p></div>
+        <div class="col-card" style="padding:20px;"><h2 style="font-size:16px;color:var(--cyan);margin-bottom:8px;">Data</h2><p style="font-size:13px;color:var(--dim);line-height:1.5;">PostGIS: 22 tables + 15 matviews. 87K addresses. Child harm / QALY / cost models per CT.</p></div>
+        <div class="col-card" style="padding:20px;"><h2 style="font-size:16px;color:var(--green);margin-bottom:8px;">Hosting</h2><p style="font-size:13px;color:var(--dim);line-height:1.5;">Single VPS. Docker containers. GitHub Pages. Everything on one box.</p></div>
       </div>
     </div>
   </div>
@@ -468,12 +375,12 @@
 
 <!-- ========== SLIDE 9: THE LOOP ========== -->
 <div class="slide" id="s9">
-  <div class="slide-inner" style="align-items: center; text-align: center;">
-    <div class="eyebrow eyebrow-green">The Key Insight</div>
-    <h1>It Gets Sharper<br>Every Cycle</h1>
-    <p class="lead" style="text-align: center; max-width: 600px;">Each pass generates findings, attacks them, reviews them, identifies gaps — and generates better questions for the next pass.</p>
-
-    <div class="cycle">
+  <div class="orb" style="width:400px;height:400px;background:var(--green);top:-50px;left:30%;"></div>
+  <div class="slide-inner" style="align-items:center;text-align:center;">
+    <div class="eyebrow eyebrow-green anim-in">The Key Insight</div>
+    <h1 class="anim-in">It Gets Sharper<br>Every Cycle</h1>
+    <p class="lead anim-in" style="text-align:center;max-width:600px;">Each pass generates findings, attacks them, reviews them, identifies gaps — and generates better questions for the next pass.</p>
+    <div class="cycle anim-in">
       <div class="cycle-node n-source">❓<br>Question<small>hypothesis</small></div>
       <div class="cycle-arrow">→</div>
       <div class="cycle-node n-worker">🐒<br>Workers<small>evidence</small></div>
@@ -484,26 +391,146 @@
       <div class="cycle-arrow">→</div>
       <div class="cycle-node n-output">📦<br>Knowledge<small>claims</small></div>
       <div class="cycle-arrow">→</div>
-      <div class="cycle-node n-source" style="border-style: dashed;">🔄<br>New<br>Questions</div>
+      <div class="cycle-node n-source" style="border-style:dashed;">🔄<br>New<br>Questions</div>
     </div>
-
-    <div style="margin-top: 48px; display: flex; gap: 64px; justify-content: center;">
-      <div class="stat" style="text-align: center;"><div class="stat-num accent">53</div><div class="stat-label">claims generated</div></div>
-      <div class="stat" style="text-align: center;"><div class="stat-num amber">8</div><div class="stat-label">experiments run</div></div>
-      <div class="stat" style="text-align: center;"><div class="stat-num green">14</div><div class="stat-label">cycles completed</div></div>
+    <div style="margin-top:48px;display:flex;gap:64px;justify-content:center;" class="anim-in">
+      <div class="stat" style="text-align:center;"><div class="stat-num accent" data-count="53">0</div><div class="stat-label">claims generated</div></div>
+      <div class="stat" style="text-align:center;"><div class="stat-num amber" data-count="8">0</div><div class="stat-label">experiments run</div></div>
+      <div class="stat" style="text-align:center;"><div class="stat-num green" data-count="14">0</div><div class="stat-label">cycles completed</div></div>
     </div>
-
-    <p style="margin-top: 40px; font-size: 16px; color: var(--dim);">
-      <span style="color: var(--accent); font-weight: 600;">Live demo:</span> 
-      <span style="color: var(--text);">peparhugo.github.io/regina-lead-connections-analysis</span>
+    <p style="margin-top:40px;font-size:16px;color:var(--dim);" class="anim-in">
+      <span style="color:var(--accent);font-weight:600;">Live demo:</span> 
+      <span style="color:var(--text);">peparhugo.github.io/regina-lead-connections-analysis</span>
     </p>
   </div>
 </div>
 
+<script src="../assets/anime.min.js"></script>
 <script>
+// --- Floating particles ---
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let particles = [];
+function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+for (let i = 0; i < 60; i++) {
+  particles.push({
+    x: Math.random() * canvas.width, y: Math.random() * canvas.height,
+    r: Math.random() * 2 + 0.5, vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3,
+    color: ['#818cf8','#22d3ee','#4ade80','#f87171','#fbbf24'][Math.floor(Math.random()*5)],
+    alpha: Math.random() * 0.4 + 0.1
+  });
+}
+
+function drawParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => {
+    p.x += p.vx; p.y += p.vy;
+    if (p.x < 0) p.x = canvas.width; if (p.x > canvas.width) p.x = 0;
+    if (p.y < 0) p.y = canvas.height; if (p.y > canvas.height) p.y = 0;
+    ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = p.color; ctx.globalAlpha = p.alpha; ctx.fill();
+  });
+  // Draw connections
+  ctx.globalAlpha = 0.04; ctx.strokeStyle = '#818cf8'; ctx.lineWidth = 0.5;
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x, dy = particles[i].y - particles[j].y;
+      if (dx * dx + dy * dy < 15000) {
+        ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y); ctx.stroke();
+      }
+    }
+  }
+  ctx.globalAlpha = 1;
+  requestAnimationFrame(drawParticles);
+}
+drawParticles();
+
+// --- Slide navigation ---
 const slides = document.querySelectorAll('.slide');
 let cur = 0;
 const total = slides.length;
+
+function animateSlideIn(slide) {
+  const els = slide.querySelectorAll('.anim-in');
+  // Reset
+  els.forEach(el => { el.style.opacity = '0'; el.style.transform = 'translateY(30px)'; });
+  // Staggered entrance
+  anime({
+    targets: Array.from(els),
+    opacity: [0, 1],
+    translateY: [30, 0],
+    duration: 700,
+    delay: anime.stagger(120, { start: 100 }),
+    easing: 'easeOutCubic'
+  });
+  // Animate stat counters on this slide
+  slide.querySelectorAll('[data-count]').forEach(el => {
+    const target = parseInt(el.dataset.count);
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+    const format = el.dataset.format;
+    const obj = { val: 0 };
+    anime({
+      targets: obj,
+      val: target,
+      round: 1,
+      duration: 1200,
+      delay: 400,
+      easing: 'easeOutExpo',
+      update: () => {
+        let display = obj.val;
+        if (format === 'comma') display = display.toLocaleString();
+        el.textContent = prefix + display + suffix;
+      }
+    });
+  });
+  // Animate findings stagger if present
+  const findings = slide.querySelectorAll('.finding-row');
+  if (findings.length) {
+    findings.forEach(f => { f.style.opacity = '0'; f.style.transform = 'translateX(-20px)'; });
+    anime({
+      targets: Array.from(findings),
+      opacity: [0, 1],
+      translateX: [-20, 0],
+      duration: 500,
+      delay: anime.stagger(100, { start: 600 }),
+      easing: 'easeOutCubic'
+    });
+  }
+  // Animate arch boxes
+  const archBoxes = slide.querySelectorAll('.arch-box');
+  if (archBoxes.length) {
+    archBoxes.forEach(b => { b.style.opacity = '0'; b.style.transform = 'scale(0.8)'; });
+    anime({
+      targets: Array.from(archBoxes),
+      opacity: [0, 1],
+      scale: [0.8, 1],
+      duration: 500,
+      delay: anime.stagger(60, { start: 400 }),
+      easing: 'easeOutBack'
+    });
+  }
+  // Animate pipeline nodes
+  const pipeNodes = slide.querySelectorAll('.pipe-node, .cycle-node');
+  if (pipeNodes.length) {
+    anime({
+      targets: Array.from(pipeNodes),
+      borderColor: [
+        { value: 'rgba(129,140,248,0.6)', duration: 600 },
+        { value: '', duration: 400 }
+      ],
+      boxShadow: [
+        { value: '0 0 20px rgba(129,140,248,0.3)', duration: 600 },
+        { value: '0 0 0px transparent', duration: 400 }
+      ],
+      delay: anime.stagger(150, { start: 300 }),
+      easing: 'easeInOutSine'
+    });
+  }
+}
 
 function go(n) {
   slides[cur].classList.remove('active');
@@ -511,20 +538,19 @@ function go(n) {
   slides[cur].classList.add('active');
   document.getElementById('progress').style.width = ((cur + 1) / total * 100) + '%';
   document.getElementById('counter').textContent = (cur + 1) + ' / ' + total;
+  animateSlideIn(slides[cur]);
 }
-go(0);
+
+// Initial animation
+setTimeout(() => animateSlideIn(slides[0]), 200);
 
 document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') { e.preventDefault(); go(cur + 1); }
   if (e.key === 'ArrowLeft') { e.preventDefault(); go(cur - 1); }
 });
-
 let tx = 0;
 document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; });
-document.addEventListener('touchend', e => {
-  const d = tx - e.changedTouches[0].clientX;
-  if (Math.abs(d) > 50) go(cur + (d > 0 ? 1 : -1));
-});
+document.addEventListener('touchend', e => { const d = tx - e.changedTouches[0].clientX; if (Math.abs(d) > 50) go(cur + (d > 0 ? 1 : -1)); });
 </script>
 </body>
 </html>

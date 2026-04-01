@@ -28,6 +28,7 @@
         <a href="#province">Provincial Vacuum</a>
         <a href="#timeline">Timeline</a>
         <a href="#action">What Needs to Change</a>
+        <a href="#built">How It Was Built</a>
       </nav>
     </header>
 
@@ -364,7 +365,82 @@
     </main>
   </div>
 
+      <!-- ========== HOW THIS WAS BUILT ========== -->
+      <section id="built" class="section reveal-section">
+        <div class="section-heading">
+          <p class="eyebrow">How this was built</p>
+          <h2>This investigation was produced by an AI worker swarm — then stress-tested by its own counterargument agent</h2>
+        </div>
+        <div style="display:flex;gap:16px;align-items:center;justify-content:center;flex-wrap:wrap;margin:32px 0;">
+          <div style="padding:18px 24px;border-radius:14px;border:1.5px solid rgba(34,211,238,0.25);background:rgba(34,211,238,0.08);text-align:center;min-width:120px;">
+            <div style="font-size:24px;">📥</div>
+            <div style="font-size:13px;font-weight:600;color:#22d3ee;margin-top:4px;">Data Sources</div>
+            <div style="font-size:11px;color:#acb4c3;">PostGIS · ArcGIS · StatsCan</div>
+          </div>
+          <div style="font-size:24px;color:#3f3f46;">→</div>
+          <div style="padding:18px 24px;border-radius:14px;border:1.5px solid rgba(129,140,248,0.25);background:rgba(129,140,248,0.08);text-align:center;min-width:120px;">
+            <div style="font-size:24px;">🐒</div>
+            <div style="font-size:13px;font-weight:600;color:#818cf8;margin-top:4px;">8 Workers</div>
+            <div style="font-size:11px;color:#acb4c3;">Evidence · Equity · Timeline</div>
+          </div>
+          <div style="font-size:24px;color:#3f3f46;">→</div>
+          <div style="padding:18px 24px;border-radius:14px;border:1.5px solid rgba(248,113,113,0.25);background:rgba(248,113,113,0.08);text-align:center;min-width:120px;">
+            <div style="font-size:24px;">⚔️</div>
+            <div style="font-size:13px;font-weight:600;color:#f87171;margin-top:4px;">Counterargument</div>
+            <div style="font-size:11px;color:#acb4c3;">Attacks own claims</div>
+          </div>
+          <div style="font-size:24px;color:#3f3f46;">→</div>
+          <div style="padding:18px 24px;border-radius:14px;border:1.5px solid rgba(251,191,36,0.25);background:rgba(251,191,36,0.08);text-align:center;min-width:120px;">
+            <div style="font-size:24px;">⚖️</div>
+            <div style="font-size:13px;font-weight:600;color:#fbbf24;margin-top:4px;">JVB Review</div>
+            <div style="font-size:11px;color:#acb4c3;">Justified Revisable Belief</div>
+          </div>
+          <div style="font-size:24px;color:#3f3f46;">→</div>
+          <div style="padding:18px 24px;border-radius:14px;border:1.5px solid rgba(74,222,128,0.25);background:rgba(74,222,128,0.08);text-align:center;min-width:120px;">
+            <div style="font-size:24px;">✅</div>
+            <div style="font-size:13px;font-weight:600;color:#4ade80;margin-top:4px;">Knowledge</div>
+            <div style="font-size:11px;color:#acb4c3;">Promoted claims only</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:24px;">
+          <div style="text-align:center;padding:16px;border-radius:14px;border:1px solid rgba(255,255,255,0.09);background:rgba(255,255,255,0.03);">
+            <strong style="font-size:2rem;color:#818cf8;" class="counter-num" data-target="53">0</strong>
+            <div style="font-size:0.82rem;color:#acb4c3;margin-top:4px;">claims generated</div>
+          </div>
+          <div style="text-align:center;padding:16px;border-radius:14px;border:1px solid rgba(255,255,255,0.09);background:rgba(255,255,255,0.03);">
+            <strong style="font-size:2rem;color:#fbbf24;" class="counter-num" data-target="8">0</strong>
+            <div style="font-size:0.82rem;color:#acb4c3;margin-top:4px;">experiments run</div>
+          </div>
+          <div style="text-align:center;padding:16px;border-radius:14px;border:1px solid rgba(255,255,255,0.09);background:rgba(255,255,255,0.03);">
+            <strong style="font-size:2rem;color:#4ade80;" class="counter-num" data-target="14">0</strong>
+            <div style="font-size:0.82rem;color:#acb4c3;margin-top:4px;">cycles completed</div>
+          </div>
+          <div style="text-align:center;padding:16px;border-radius:14px;border:1px solid rgba(255,255,255,0.09);background:rgba(255,255,255,0.03);">
+            <strong style="font-size:2rem;color:#22d3ee;" class="counter-num" data-target="22">0</strong>
+            <div style="font-size:0.82rem;color:#acb4c3;margin-top:4px;">PostGIS tables</div>
+          </div>
+        </div>
+        <p style="text-align:center;margin-top:24px;font-size:0.92rem;color:#acb4c3;">
+          <a href="reports/presentation_slides.html" style="color:#818cf8;font-weight:600;text-decoration:none;">View the full Dream Lab presentation →</a>
+        </p>
+      </section>
+
+      <!-- ========== METHODOLOGY / FOOTER ========== -->
+      <section class="section" style="margin-top:26px;padding:28px 34px;text-align:center;">
+        <p class="eyebrow">Methodology &amp; Attribution</p>
+        <p style="font-size:0.95rem;color:#acb4c3;max-width:72ch;margin:0 auto;line-height:1.6;">
+          This investigation was produced using <strong style="color:#f4f7fb;">Dream Lab</strong>, a worker-swarm analysis system built on <a href="https://github.com/openclaw/openclaw" style="color:#818cf8;text-decoration:none;">OpenClaw</a>. 
+          Data sources include City of Regina open data (ArcGIS REST), Statistics Canada census profiles, council meeting records, media coverage, and spatial analysis via PostGIS with 22 tables and 15 materialized views. 
+          All findings were stress-tested by a counterargument agent before promotion to knowledge status.
+        </p>
+        <p style="font-size:0.85rem;color:#6b7280;margin-top:16px;">
+          Built by <strong style="color:#acb4c3;">Thomas (Pepar) Hugo</strong> · April 2026 · 
+          <a href="https://www.linkedin.com/in/thomasjayhugo/" style="color:#818cf8;text-decoration:none;">LinkedIn</a>
+        </p>
+      </section>
+
   <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+  <script src="assets/anime.min.js"></script>
   <script>
     const toggle = document.querySelector('.nav-toggle');
     const nav = document.querySelector('#site-nav');
@@ -470,6 +546,160 @@
         popup.remove();
       });
     });
+
+    // ===== ANIME.JS ENHANCEMENTS =====
+
+    // 1. Hero stat counter animation
+    function animateHeroStats() {
+      document.querySelectorAll('.stat-card strong').forEach(el => {
+        const text = el.textContent.trim();
+        const match = text.match(/[\d,.]+/);
+        if (!match) return;
+        const target = parseFloat(match[0].replace(/,/g, ''));
+        const prefix = text.slice(0, text.indexOf(match[0]));
+        const suffix = text.slice(text.indexOf(match[0]) + match[0].length);
+        const isDecimal = match[0].includes('.');
+        const obj = { val: 0 };
+        anime({
+          targets: obj,
+          val: target,
+          round: isDecimal ? 10 : 1,
+          duration: 1800,
+          delay: 300,
+          easing: 'easeOutExpo',
+          update: () => {
+            let v = isDecimal ? obj.val.toFixed(1) : Math.round(obj.val).toLocaleString();
+            el.textContent = prefix + v + suffix;
+          }
+        });
+      });
+    }
+
+    // 2. Section reveal animations
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const section = entry.target;
+          // Animate section entrance
+          anime({
+            targets: section,
+            opacity: [0, 1],
+            translateY: [40, 0],
+            duration: 800,
+            easing: 'easeOutCubic'
+          });
+          // Animate cards/panels inside
+          const cards = section.querySelectorAll('.panel, .col-card, .vote-card, .action-card, .stat-card, .timeline-item');
+          if (cards.length) {
+            anime({
+              targets: Array.from(cards),
+              opacity: [0, 1],
+              translateY: [20, 0],
+              duration: 600,
+              delay: anime.stagger(80, { start: 200 }),
+              easing: 'easeOutCubic'
+            });
+          }
+          // Counter nums in this section
+          section.querySelectorAll('.counter-num').forEach(el => {
+            if (el.dataset.counted) return;
+            el.dataset.counted = '1';
+            const target = parseInt(el.dataset.target);
+            const obj = { val: 0 };
+            anime({
+              targets: obj, val: target, round: 1,
+              duration: 1400, delay: 300, easing: 'easeOutExpo',
+              update: () => { el.textContent = obj.val; }
+            });
+          });
+          revealObserver.unobserve(section);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    // Set initial state and observe
+    document.querySelectorAll('.section').forEach(section => {
+      if (section.classList.contains('hero')) return; // hero is always visible
+      section.style.opacity = '0';
+      section.style.transform = 'translateY(40px)';
+      revealObserver.observe(section);
+    });
+
+    // 3. Timeline dot pulse
+    anime({
+      targets: '.timeline-item::before',
+      scale: [1, 1.3, 1],
+      duration: 2000,
+      loop: true,
+      easing: 'easeInOutSine'
+    });
+
+    // 3b. Timeline pulse via real elements
+    document.querySelectorAll('.timeline-item').forEach(item => {
+      const dot = document.createElement('div');
+      dot.style.cssText = 'position:absolute;left:8px;top:24px;width:18px;height:18px;border-radius:50%;background:transparent;box-shadow:0 0 0 0 rgba(217,45,32,0.4);pointer-events:none;';
+      item.style.position = 'relative';
+      item.appendChild(dot);
+      anime({
+        targets: dot,
+        boxShadow: ['0 0 0 0 rgba(217,45,32,0.4)', '0 0 0 12px rgba(217,45,32,0)'],
+        duration: 2000,
+        loop: true,
+        easing: 'easeOutSine',
+        delay: Math.random() * 1000
+      });
+    });
+
+    // 4. Hero entrance
+    anime({
+      targets: '.hero-copy > *',
+      opacity: [0, 1],
+      translateY: [30, 0],
+      duration: 800,
+      delay: anime.stagger(150, { start: 200 }),
+      easing: 'easeOutCubic'
+    });
+
+    // 5. Hero stats entrance + count
+    anime({
+      targets: '.hero-stats .stat-card',
+      opacity: [0, 1],
+      translateX: [30, 0],
+      duration: 600,
+      delay: anime.stagger(120, { start: 600 }),
+      easing: 'easeOutCubic',
+      complete: animateHeroStats
+    });
+
+    // 6. Subtle gradient shimmer on hero h1
+    anime({
+      targets: '.hero h1',
+      backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+      duration: 8000,
+      loop: true,
+      easing: 'linear'
+    });
+
+    // 7. Pipeline flow visual in #built section
+    const builtObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const nodes = entry.target.querySelectorAll('[style*="border-radius:14px"]');
+          anime({
+            targets: Array.from(nodes),
+            scale: [0.85, 1],
+            opacity: [0, 1],
+            duration: 500,
+            delay: anime.stagger(100),
+            easing: 'easeOutBack'
+          });
+          builtObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    const builtSection = document.getElementById('built');
+    if (builtSection) builtObserver.observe(builtSection);
   </script>
 </body>
 </html>
