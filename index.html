@@ -552,9 +552,10 @@
       });
     });
 
-    // ===== ANIME.JS ENHANCEMENTS =====
+    // ===== ANIME.JS v4 ENHANCEMENTS =====
+    // v4 API: animate(targets, {keyframes}, {options})
 
-    // 1. Hero stat counter animation
+    // 1. Hero stat counter animation (vanilla JS — anime v4 doesn't do object tweening)
     function animateHeroStats() {
       document.querySelectorAll('.stat-card strong').forEach(el => {
         const text = el.textContent.trim();
@@ -564,19 +565,16 @@
         const prefix = text.slice(0, text.indexOf(match[0]));
         const suffix = text.slice(text.indexOf(match[0]) + match[0].length);
         const isDecimal = match[0].includes('.');
-        const obj = { val: 0 };
-        _animate({
-          targets: obj,
-          val: target,
-          round: isDecimal ? 10 : 1,
-          duration: 1800,
-          delay: 300,
-          easing: 'easeOutExpo',
-          update: () => {
-            let v = isDecimal ? obj.val.toFixed(1) : Math.round(obj.val).toLocaleString();
-            el.textContent = prefix + v + suffix;
-          }
-        });
+        const start = performance.now();
+        const dur = 1800;
+        function tick(now) {
+          const t = Math.min((now - start) / dur, 1);
+          const eased = 1 - Math.pow(1 - t, 4);
+          let v = target * eased;
+          el.textContent = prefix + (isDecimal ? v.toFixed(1) : Math.round(v).toLocaleString()) + suffix;
+          if (t < 1) requestAnimationFrame(tick);
+        }
+        setTimeout(() => requestAnimationFrame(tick), 300);
       });
     }
 
@@ -585,118 +583,70 @@
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const section = entry.target;
-          // Animate section entrance
-          _animate({
-            targets: section,
-            opacity: [0, 1],
-            translateY: [40, 0],
-            duration: 800,
-            easing: 'easeOutCubic'
-          });
-          // Animate cards/panels inside
+          _animate(section, { opacity: [0, 1], translateY: [40, 0] }, { duration: 800, ease: 'outCubic' });
+
           const cards = section.querySelectorAll('.panel, .col-card, .vote-card, .action-card, .stat-card, .timeline-item');
           if (cards.length) {
-            _animate({
-              targets: Array.from(cards),
-              opacity: [0, 1],
-              translateY: [20, 0],
-              duration: 600,
-              delay: _stagger(80, { start: 200 }),
-              easing: 'easeOutCubic'
+            _animate(Array.from(cards), { opacity: [0, 1], translateY: [20, 0] }, {
+              duration: 600, delay: _stagger(80, { start: 200 }), ease: 'outCubic'
             });
           }
-          // Counter nums in this section
+          // Counter nums
           section.querySelectorAll('.counter-num').forEach(el => {
             if (el.dataset.counted) return;
             el.dataset.counted = '1';
             const target = parseInt(el.dataset.target);
-            const obj = { val: 0 };
-            _animate({
-              targets: obj, val: target, round: 1,
-              duration: 1400, delay: 300, easing: 'easeOutExpo',
-              update: () => { el.textContent = obj.val; }
-            });
+            const start = performance.now();
+            const dur = 1400;
+            function tick(now) {
+              const t = Math.min((now - start) / dur, 1);
+              const eased = 1 - Math.pow(1 - t, 4);
+              el.textContent = Math.round(target * eased);
+              if (t < 1) requestAnimationFrame(tick);
+            }
+            setTimeout(() => requestAnimationFrame(tick), 300);
           });
           revealObserver.unobserve(section);
         }
       });
     }, { threshold: 0.15 });
 
-    // Set initial state and observe
     document.querySelectorAll('.section').forEach(section => {
-      if (section.classList.contains('hero')) return; // hero is always visible
+      if (section.classList.contains('hero')) return;
       section.style.opacity = '0';
       section.style.transform = 'translateY(40px)';
       revealObserver.observe(section);
     });
 
-    // 3. Timeline dot pulse
-    _animate({
-      targets: '.timeline-item::before',
-      scale: [1, 1.3, 1],
-      duration: 2000,
-      loop: true,
-      easing: 'easeInOutSine'
-    });
-
-    // 3b. Timeline pulse via real elements
+    // 3. Timeline pulse dots
     document.querySelectorAll('.timeline-item').forEach(item => {
       const dot = document.createElement('div');
       dot.style.cssText = 'position:absolute;left:8px;top:24px;width:18px;height:18px;border-radius:50%;background:transparent;box-shadow:0 0 0 0 rgba(217,45,32,0.4);pointer-events:none;';
       item.style.position = 'relative';
       item.appendChild(dot);
-      _animate({
-        targets: dot,
-        boxShadow: ['0 0 0 0 rgba(217,45,32,0.4)', '0 0 0 12px rgba(217,45,32,0)'],
-        duration: 2000,
-        loop: true,
-        easing: 'easeOutSine',
-        delay: Math.random() * 1000
-      });
+      _animate(dot, {
+        boxShadow: ['0 0 0 0 rgba(217,45,32,0.4)', '0 0 0 12px rgba(217,45,32,0)']
+      }, { duration: 2000, loop: true, ease: 'outSine', delay: Math.random() * 1000 });
     });
 
     // 4. Hero entrance
-    _animate({
-      targets: '.hero-copy > *',
-      opacity: [0, 1],
-      translateY: [30, 0],
-      duration: 800,
-      delay: _stagger(150, { start: 200 }),
-      easing: 'easeOutCubic'
+    _animate('.hero-copy > *', { opacity: [0, 1], translateY: [30, 0] }, {
+      duration: 800, delay: _stagger(150, { start: 200 }), ease: 'outCubic'
     });
 
     // 5. Hero stats entrance + count
-    _animate({
-      targets: '.hero-stats .stat-card',
-      opacity: [0, 1],
-      translateX: [30, 0],
-      duration: 600,
-      delay: _stagger(120, { start: 600 }),
-      easing: 'easeOutCubic',
-      complete: animateHeroStats
+    _animate('.hero-stats .stat-card', { opacity: [0, 1], translateX: [30, 0] }, {
+      duration: 600, delay: _stagger(120, { start: 600 }), ease: 'outCubic',
+      onComplete: animateHeroStats
     });
 
-    // 6. Subtle gradient shimmer on hero h1
-    _animate({
-      targets: '.hero h1',
-      backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-      duration: 8000,
-      loop: true,
-      easing: 'linear'
-    });
-
-    // 7. Pipeline flow visual in #built section
+    // 6. Pipeline flow in #built section
     const builtObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const nodes = entry.target.querySelectorAll('[style*="border-radius:14px"]');
-          _animate({
-            targets: Array.from(nodes),
-            scale: [0.85, 1],
-            opacity: [0, 1],
-            duration: 500,
-            delay: _stagger(100),
-            easing: 'easeOutBack'
+          _animate(Array.from(nodes), { scale: [0.85, 1], opacity: [0, 1] }, {
+            duration: 500, delay: _stagger(100), ease: 'outBack'
           });
           builtObserver.unobserve(entry.target);
         }

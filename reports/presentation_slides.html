@@ -459,80 +459,50 @@ const total = slides.length;
 
 function animateSlideIn(slide) {
   const els = slide.querySelectorAll('.anim-in');
-  // Reset
   els.forEach(el => { el.style.opacity = '0'; el.style.transform = 'translateY(30px)'; });
-  // Staggered entrance
-  _animate({
-    targets: Array.from(els),
-    opacity: [0, 1],
-    translateY: [30, 0],
-    duration: 700,
-    delay: _stagger(120, { start: 100 }),
-    easing: 'easeOutCubic'
+  // v4 API: animate(targets, {keyframes}, {options})
+  _animate(Array.from(els), { opacity: [0, 1], translateY: [30, 0] }, {
+    duration: 700, delay: _stagger(120, { start: 100 }), ease: 'outCubic'
   });
-  // Animate stat counters on this slide
+  // Stat counters — use vanilla JS (anime v4 object animation differs)
   slide.querySelectorAll('[data-count]').forEach(el => {
     const target = parseInt(el.dataset.count);
     const prefix = el.dataset.prefix || '';
     const suffix = el.dataset.suffix || '';
     const format = el.dataset.format;
-    const obj = { val: 0 };
-    _animate({
-      targets: obj,
-      val: target,
-      round: 1,
-      duration: 1200,
-      delay: 400,
-      easing: 'easeOutExpo',
-      update: () => {
-        let display = obj.val;
-        if (format === 'comma') display = display.toLocaleString();
-        el.textContent = prefix + display + suffix;
-      }
-    });
+    let start = performance.now();
+    const dur = 1200;
+    function tick(now) {
+      const t = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - t, 4);
+      let v = Math.round(target * eased);
+      el.textContent = prefix + (format === 'comma' ? v.toLocaleString() : v) + suffix;
+      if (t < 1) requestAnimationFrame(tick);
+    }
+    setTimeout(() => requestAnimationFrame(tick), 400);
   });
-  // Animate findings stagger if present
+  // Findings
   const findings = slide.querySelectorAll('.finding-row');
   if (findings.length) {
     findings.forEach(f => { f.style.opacity = '0'; f.style.transform = 'translateX(-20px)'; });
-    _animate({
-      targets: Array.from(findings),
-      opacity: [0, 1],
-      translateX: [-20, 0],
-      duration: 500,
-      delay: _stagger(100, { start: 600 }),
-      easing: 'easeOutCubic'
+    _animate(Array.from(findings), { opacity: [0, 1], translateX: [-20, 0] }, {
+      duration: 500, delay: _stagger(100, { start: 600 }), ease: 'outCubic'
     });
   }
-  // Animate arch boxes
+  // Arch boxes
   const archBoxes = slide.querySelectorAll('.arch-box');
   if (archBoxes.length) {
     archBoxes.forEach(b => { b.style.opacity = '0'; b.style.transform = 'scale(0.8)'; });
-    _animate({
-      targets: Array.from(archBoxes),
-      opacity: [0, 1],
-      scale: [0.8, 1],
-      duration: 500,
-      delay: _stagger(60, { start: 400 }),
-      easing: 'easeOutBack'
+    _animate(Array.from(archBoxes), { opacity: [0, 1], scale: [0.8, 1] }, {
+      duration: 500, delay: _stagger(60, { start: 400 }), ease: 'outBack'
     });
   }
-  // Animate pipeline nodes
+  // Pipeline node glow
   const pipeNodes = slide.querySelectorAll('.pipe-node, .cycle-node');
   if (pipeNodes.length) {
-    _animate({
-      targets: Array.from(pipeNodes),
-      borderColor: [
-        { value: 'rgba(129,140,248,0.6)', duration: 600 },
-        { value: '', duration: 400 }
-      ],
-      boxShadow: [
-        { value: '0 0 20px rgba(129,140,248,0.3)', duration: 600 },
-        { value: '0 0 0px transparent', duration: 400 }
-      ],
-      delay: _stagger(150, { start: 300 }),
-      easing: 'easeInOutSine'
-    });
+    _animate(Array.from(pipeNodes), {
+      boxShadow: ['0 0 0px transparent', '0 0 20px rgba(129,140,248,0.3)', '0 0 0px transparent']
+    }, { duration: 1000, delay: _stagger(150, { start: 300 }), ease: 'inOutSine' });
   }
 }
 
