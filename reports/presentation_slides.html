@@ -280,8 +280,99 @@
   </div>
 </div>
 
-<!-- ========== SLIDE 5: THE LOOP ========== -->
+<!-- ========== SLIDE 5: TECH STACK ========== -->
 <div class="slide" id="s5">
+  <div class="slide-inner">
+    <div class="eyebrow eyebrow-cyan">Infrastructure</div>
+    <h1>Tech Stack</h1>
+
+    <div style="display: flex; gap: 24px; margin-top: 32px;">
+
+      <!-- Left: layered stack -->
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 2px;">
+        
+        <div style="background: rgba(74,222,128,0.08); border: 1px solid rgba(74,222,128,0.2); border-radius: 12px 12px 4px 4px; padding: 20px 24px; text-align: center;">
+          <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--green); margin-bottom: 6px;">Presentation Layer</div>
+          <div class="pill-grid" style="justify-content: center;">
+            <span class="pill" style="font-size: 12px;">GitHub Pages</span>
+            <span class="pill" style="font-size: 12px;">MapLibre GL</span>
+            <span class="pill" style="font-size: 12px;">GeoJSON</span>
+            <span class="pill" style="font-size: 12px;">Vanilla JS</span>
+          </div>
+        </div>
+
+        <div style="background: rgba(129,140,248,0.08); border: 1px solid rgba(129,140,248,0.2); border-radius: 4px; padding: 20px 24px; text-align: center;">
+          <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 6px;">Orchestration Layer</div>
+          <div class="pill-grid" style="justify-content: center;">
+            <span class="pill" style="font-size: 12px;">OpenClaw</span>
+            <span class="pill" style="font-size: 12px;">Dream Runner</span>
+            <span class="pill" style="font-size: 12px;">Python</span>
+            <span class="pill" style="font-size: 12px;">Subagent Swarm</span>
+          </div>
+        </div>
+
+        <div style="background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.2); border-radius: 4px; padding: 20px 24px; text-align: center;">
+          <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--amber); margin-bottom: 6px;">Intelligence Layer</div>
+          <div class="pill-grid" style="justify-content: center;">
+            <span class="pill" style="font-size: 12px;">GPT-5 Mini</span>
+            <span class="pill" style="font-size: 12px;">Claude</span>
+            <span class="pill" style="font-size: 12px;">JTB Review (n8n)</span>
+            <span class="pill" style="font-size: 12px;">Counterargument Monkey</span>
+          </div>
+        </div>
+
+        <div style="background: rgba(34,211,238,0.08); border: 1px solid rgba(34,211,238,0.2); border-radius: 4px 4px 12px 12px; padding: 20px 24px; text-align: center;">
+          <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--cyan); margin-bottom: 6px;">Data Layer</div>
+          <div class="pill-grid" style="justify-content: center;">
+            <span class="pill" style="font-size: 12px;">PostGIS</span>
+            <span class="pill" style="font-size: 12px;">Neo4j</span>
+            <span class="pill" style="font-size: 12px;">GitHub API</span>
+            <span class="pill" style="font-size: 12px;">ArcGIS REST</span>
+            <span class="pill" style="font-size: 12px;">StatsCan</span>
+            <span class="pill" style="font-size: 12px;">SearXNG</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right: key details -->
+      <div style="flex: 0.6; display: flex; flex-direction: column; gap: 16px;">
+
+        <div class="col-card" style="padding: 20px; border-color: var(--border);">
+          <h2 style="font-size: 16px; color: var(--accent); margin-bottom: 8px;">Orchestration</h2>
+          <p style="font-size: 13px; color: var(--dim); line-height: 1.5;">
+            OpenClaw spawns agents as subprocesses. Each worker is a structured prompt dispatched to a dedicated LLM agent (<code style="color:var(--cyan);">mini-dreamer</code>). Workers run in batches of 3 to prevent output drops.
+          </p>
+        </div>
+
+        <div class="col-card" style="padding: 20px; border-color: var(--border);">
+          <h2 style="font-size: 16px; color: var(--amber); margin-bottom: 8px;">JTB Pipeline</h2>
+          <p style="font-size: 13px; color: var(--dim); line-height: 1.5;">
+            3 n8n workflows chain: <code style="color:var(--amber);">intake</code> → <code style="color:var(--amber);">build-claim-batch</code> → <code style="color:var(--amber);">review-and-revise</code>. Connected via a Python bridge with fail-closed normalization.
+          </p>
+        </div>
+
+        <div class="col-card" style="padding: 20px; border-color: var(--border);">
+          <h2 style="font-size: 16px; color: var(--cyan); margin-bottom: 8px;">Data</h2>
+          <p style="font-size: 13px; color: var(--dim); line-height: 1.5;">
+            PostGIS: 22 tables + 15 materialized views. 87K address points, 1.1K replacement events, child harm / QALY / cost models per census tract. All geometry in EPSG:4326.
+          </p>
+        </div>
+
+        <div class="col-card" style="padding: 20px; border-color: var(--border);">
+          <h2 style="font-size: 16px; color: var(--green); margin-bottom: 8px;">Hosting</h2>
+          <p style="font-size: 13px; color: var(--dim); line-height: 1.5;">
+            VPS (Linux). Docker containers for PostGIS, Neo4j, n8n, VictoriaMetrics. GitHub Pages for public site. Everything runs on one box.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== SLIDE 6: THE LOOP ========== -->
+<div class="slide" id="s6">
   <div class="slide-inner" style="align-items: center; text-align: center;">
     <div class="eyebrow eyebrow-green">The Key Insight</div>
     <h1>It Gets Sharper<br>Every Cycle</h1>
