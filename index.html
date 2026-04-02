@@ -7,7 +7,7 @@
   <meta name="description" content="A public-interest investigation into Regina's lead service connections, the children exposed, the cost already locked in, and the political choices that slowed action." />
   <meta name="theme-color" content="#0a0c10" />
   <meta property="og:title" content="Regina's Children Are Drinking Lead" />
-  <meta property="og:description" content="1,089 active lead service connections. ~1,540 children in affected census tracts. $39.6M in realized healthcare cost already locked in." />
+  <meta property="og:description" content="2,698 active lead service connections across 14 neighborhoods. ~1,600 children estimated affected. Corrected from City of Regina ArcGIS data — April 2026." />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
@@ -38,7 +38,7 @@
         <div class="hero-copy">
           <p class="eyebrow">A city infrastructure failure with a human body count</p>
           <h1>Regina's Children Are Drinking Lead</h1>
-          <p class="hero-text">Regina still has <strong>1,089 active lead service connections</strong>. In the census tracts carrying the heaviest burden, about <strong>1,540 children</strong> live with the consequences of delayed replacement, weak disclosure rules, and political choices that treated lead exposure like a manageable inconvenience.</p>
+          <p class="hero-text">Regina still has <strong>2,698 active lead service connections</strong> across 14 neighborhoods. An estimated <strong>1,600 children</strong> live in homes served by lead pipes — facing the consequences of delayed replacement, weak disclosure rules, and political choices that treated lead exposure like a manageable inconvenience.</p>
           <div class="hero-actions">
             <a class="button button-primary" href="#map-section">See the map</a>
             <a class="button button-secondary" href="#action">What needs to change</a>
@@ -47,18 +47,18 @@
         <div class="hero-stats">
           <article class="stat-card stat-card-accent">
             <span class="stat-label">Active lead connections</span>
-            <strong>1,089</strong>
-            <p>Lead service lines still in service across Regina.</p>
+            <strong>2,698</strong>
+            <p>Lead service lines still in service across 14 neighborhoods.</p>
           </article>
           <article class="stat-card">
-            <span class="stat-label">Children in affected CTs</span>
-            <strong>~1,540</strong>
-            <p>Children living in the tracts carrying the heaviest modeled burden.</p>
+            <span class="stat-label">Children estimated affected</span>
+            <strong>~1,600</strong>
+            <p>Children living in neighborhoods with active lead service connections.</p>
           </article>
           <article class="stat-card">
-            <span class="stat-label">Locked-in healthcare cost</span>
-            <strong>$39.6M</strong>
-            <p>Realized harm already baked in because replacement came too late.</p>
+            <span class="stat-label">Replaced so far</span>
+            <strong>939</strong>
+            <p>Connections replaced since baseline — only 25.8% of the original 3,637.</p>
           </article>
           <article class="stat-card">
             <span class="stat-label">Filter uptake</span>
@@ -72,48 +72,48 @@
         <div class="section-heading">
           <p class="eyebrow">Geography of harm</p>
           <h2>The burden is concentrated — and visible</h2>
-          <p>The map below layers census-tract harm estimates on top of Regina. Darker tracts represent higher <strong>realized QALY loss</strong>: harm that is no longer hypothetical because exposure already happened. Below it, the existing observed-replacement map is embedded for context.</p>
+          <p>The map below shows active lead service connections by neighborhood, using the City of Regina's own ArcGIS data verified live on April 2, 2026. Darker areas have more remaining lead connections.</p>
         </div>
         <div class="map-layout">
           <div class="map-card main-map-card">
             <div class="map-toolbar">
               <div>
-                <h3>Realized harm by census tract</h3>
-                <p>Choropleth: <code>realized_qaly</code> from <code>ct_harm_analysis.geojson</code></p>
+                <h3>Active lead connections by neighborhood</h3>
+                <p>Source: City of Regina ArcGIS LeadConnectionAreas service (verified April 2, 2026)</p>
               </div>
               <div class="legend" aria-label="Map legend">
-                <span><i style="background:#33110f"></i>Highest</span>
-                <span><i style="background:#7f1d1d"></i></span>
-                <span><i style="background:#b91c1c"></i></span>
-                <span><i style="background:#f59e0b"></i></span>
-                <span><i style="background:#fde68a"></i>Lowest</span>
+                <span><i style="background:#33110f"></i>700+</span>
+                <span><i style="background:#7f1d1d"></i>400+</span>
+                <span><i style="background:#b91c1c"></i>100+</span>
+                <span><i style="background:#f59e0b"></i>25+</span>
+                <span><i style="background:#fde68a"></i>&lt;25</span>
               </div>
             </div>
-            <div id="lead-map" class="lead-map" role="img" aria-label="Map of realized QALY harm by census tract"></div>
+            <div id="lead-map" class="lead-map" role="img" aria-label="Map of active lead connections by neighborhood"></div>
           </div>
           <aside class="map-card map-sidepanel">
             <h3>What the map shows</h3>
             <ul class="bullet-list">
-              <li><strong>CT 0018.00</strong>: 152 lead connections, 72 children, 59.8% renter, highest modeled realized harm.</li>
-              <li><strong>CT 0009.01</strong>: 186 lead connections, one of the worst concentrations in the city.</li>
-              <li><strong>CT 0012.00</strong>: 154 lead connections, another high-burden tract.</li>
+              <li><strong>North Central</strong>: 702 active connections, ~326 children affected, 55.8% renter, 20.1% Indigenous — the highest burden in the city.</li>
+              <li><strong>Cathedral</strong>: 659 active connections, the largest absolute concentration with the most replacements (277) but still massive exposure.</li>
+              <li><strong>Heritage</strong>: 518 active connections, another heavily impacted older neighborhood.</li>
             </ul>
             <div class="info-box">
               <span class="info-label">Hover the map</span>
-              <p id="map-summary">Inspect a tract to see realized QALYs, projected cost, renter share, and child exposure context.</p>
+              <p id="map-summary">Hover a neighborhood to see lead connections, children affected, renter share, and income context.</p>
             </div>
             <div class="metric-stack">
               <div>
-                <span class="stat-label">Realized harm citywide</span>
-                <strong>148.9 QALYs</strong>
+                <span class="stat-label">Baseline (FOI total)</span>
+                <strong>3,637</strong>
               </div>
               <div>
-                <span class="stat-label">Projected additional harm</span>
-                <strong>252.1 QALYs</strong>
+                <span class="stat-label">Current remaining</span>
+                <strong>2,698</strong>
               </div>
               <div>
-                <span class="stat-label">Projected additional healthcare cost</span>
-                <strong>$67.0M</strong>
+                <span class="stat-label">Replacement rate</span>
+                <strong>25.8%</strong>
               </div>
             </div>
           </aside>
@@ -131,35 +131,35 @@
       <section id="harm" class="section">
         <div class="section-heading">
           <p class="eyebrow">The harm</p>
-          <h2>Three columns. One pattern. Delay converts preventable harm into permanent loss.</h2>
+          <h2>The numbers tell one story. Delay converts preventable harm into permanent loss.</h2>
         </div>
         <div class="harm-grid">
           <article class="panel panel-muted">
-            <span class="panel-kicker">Avoided</span>
-            <h3>What replacement already prevented</h3>
+            <span class="panel-kicker">Replaced</span>
+            <h3>What has been done</h3>
             <div class="number-pair">
-              <strong>149.6 QALYs</strong>
-              <span>$40.0M cost avoided</span>
+              <strong>939 connections</strong>
+              <span>25.8% of the original 3,637</span>
             </div>
-            <p>Replacement work has prevented real harm. That matters. It also proves the point: when pipes are removed, losses stop compounding.</p>
+            <p>Cathedral (277) and North Central (238) saw the most work. But that still leaves 74.2% of all lead service connections in the ground.</p>
           </article>
           <article class="panel panel-hot">
-            <span class="panel-kicker">Realized</span>
-            <h3>What is already locked in</h3>
+            <span class="panel-kicker">Remaining</span>
+            <h3>What is still in the ground</h3>
             <div class="number-pair">
-              <strong>148.9 QALYs</strong>
-              <span>$39.6M realized healthcare cost</span>
+              <strong>2,698 connections</strong>
+              <span>~1,600 children estimated affected</span>
             </div>
-            <p>This is the burden already converted into irreversible damage because exposure happened before replacement. The bill is not theoretical anymore.</p>
+            <p>Every day these pipes stay connected, children drink water that has passed through lead. The city's own plan targets 2036 for full replacement — 10 more years.</p>
           </article>
           <article class="panel panel-warn">
-            <span class="panel-kicker">Projected</span>
-            <h3>What delay will add next</h3>
+            <span class="panel-kicker">Pace</span>
+            <h3>At current pace, replacement finishes around 2036</h3>
             <div class="number-pair">
-              <strong>252.1 QALYs</strong>
-              <span>$67.0M projected healthcare cost</span>
+              <strong>~220/year target</strong>
+              <span>$36M total program cost (city estimate)</span>
             </div>
-            <p>If the remaining lead lines stay in the ground, Regina is not standing still. It is choosing to accumulate more loss.</p>
+            <p>At 220 replacements per year, 2,698 remaining connections will take over 12 years. The city's target of 2036 assumes no slowdowns.</p>
           </article>
         </div>
       </section>
@@ -167,62 +167,62 @@
       <section id="affected" class="section">
         <div class="section-heading">
           <p class="eyebrow">Who's affected</p>
-          <h2>The citywide problem lands hardest on renters, lower-income households, and a handful of census tracts</h2>
-          <p>The worst tracts are not random. They combine high lead-line counts, significant child exposure, and renter-heavy housing where tenants have the least leverage and the least legal protection.</p>
+          <h2>The citywide problem lands hardest on renters, lower-income households, and a handful of older neighborhoods</h2>
+          <p>The worst-hit neighborhoods are not random. They combine high lead-line counts, significant child exposure, and renter-heavy housing where tenants have the least leverage and the least legal protection.</p>
         </div>
         <div class="table-card">
           <table>
             <thead>
               <tr>
-                <th>Census tract</th>
-                <th>Lead connections</th>
-                <th>Children</th>
+                <th>Neighborhood</th>
+                <th>Active connections</th>
+                <th>Children affected (est.)</th>
                 <th>Renter share</th>
                 <th>Why it matters</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>0018.00</td>
-                <td>152</td>
-                <td>72</td>
-                <td>59.8%</td>
-                <td>Highest modeled realized harm; heavy child exposure and high renter burden.</td>
+                <td>North Central</td>
+                <td>702</td>
+                <td>~326</td>
+                <td>55.8%</td>
+                <td>Highest burden: low income ($46.8K), 20.1% Indigenous, high renter share.</td>
               </tr>
               <tr>
-                <td>0009.01</td>
-                <td>186</td>
-                <td>—</td>
-                <td>—</td>
-                <td>Worst concentration of lead service connections in the city.</td>
+                <td>Cathedral</td>
+                <td>659</td>
+                <td>~541</td>
+                <td>26.3%</td>
+                <td>Largest concentration. 277 replaced but 659 remain — most in the city.</td>
               </tr>
               <tr>
-                <td>0012.00</td>
-                <td>154</td>
-                <td>—</td>
-                <td>—</td>
-                <td>Another severe concentration with major replacement urgency.</td>
+                <td>Heritage</td>
+                <td>518</td>
+                <td>~324</td>
+                <td>38.4%</td>
+                <td>Older housing stock with heavy lead infrastructure.</td>
               </tr>
               <tr>
-                <td>0011.00</td>
-                <td>—</td>
-                <td>—</td>
-                <td>82.6%</td>
-                <td>Extreme renter concentration; weak tenant protection magnifies risk.</td>
+                <td>Al Ritchie</td>
+                <td>388</td>
+                <td>~162</td>
+                <td>44.9%</td>
+                <td>Only 66 replaced from a baseline of 454 — slowest progress rate.</td>
               </tr>
               <tr>
-                <td>0013.00</td>
-                <td>—</td>
-                <td>—</td>
-                <td>78.6%</td>
-                <td>Renter-heavy tract where disclosure failures hit hardest.</td>
-              </tr>
-              <tr>
-                <td>0014.00</td>
-                <td>—</td>
-                <td>—</td>
+                <td>Warehouse District</td>
+                <td>32</td>
+                <td>~5</td>
                 <td>72.2%</td>
-                <td>Another renter-dominant tract trapped in the landlord gap.</td>
+                <td>Extreme renter concentration; lowest median income ($31.6K).</td>
+              </tr>
+              <tr>
+                <td>Downtown</td>
+                <td>25</td>
+                <td>~8</td>
+                <td>75.4%</td>
+                <td>High renter share; tenant disclosure failures hit hardest here.</td>
               </tr>
             </tbody>
           </table>
@@ -292,7 +292,7 @@
             <p class="eyebrow">The rental trap</p>
             <h2>Tenants carry the risk while landlords face almost no lead-specific obligations</h2>
           </div>
-          <p>In the worst-hit tracts, renter shares run from roughly 60% to more than 80%. Yet Saskatchewan does not require landlords to test for lead, disclose lead service connections, or proactively remediate the risk. For renters, “choice” is mostly fiction: they often do not know the line is lead, cannot authorize replacement themselves, and may not even control plumbing decisions inside the home.</p>
+          <p>In the worst-hit neighborhoods, renter shares run from 45% to more than 75%. Yet Saskatchewan does not require landlords to test for lead, disclose lead service connections, or proactively remediate the risk. For renters, “choice” is mostly fiction: they often do not know the line is lead, cannot authorize replacement themselves, and may not even control plumbing decisions inside the home.</p>
         </div>
         <div class="panel panel-outline">
           <h3>The gap in plain language</h3>
@@ -430,8 +430,8 @@
         <p class="eyebrow">Methodology &amp; Attribution</p>
         <p style="font-size:0.95rem;color:#acb4c3;max-width:72ch;margin:0 auto;line-height:1.6;">
           This investigation was produced using <strong style="color:#f4f7fb;">Dream Lab</strong>, a worker-swarm analysis system built on <a href="https://github.com/openclaw/openclaw" style="color:#818cf8;text-decoration:none;">OpenClaw</a>. 
-          Data sources include City of Regina open data (ArcGIS REST), Statistics Canada census profiles, council meeting records, media coverage, and spatial analysis via PostGIS with 22 tables and 15 materialized views. 
-          All findings were stress-tested by a counterargument agent before promotion to knowledge status.
+          Lead connection data is sourced directly from the City of Regina's live ArcGIS LeadConnectionAreas service, verified April 2, 2026. Demographic overlays use Statistics Canada 2016/2021 census profiles. Council voting records, media coverage, and advocacy materials provide the governance context.
+          <br/><strong>April 2026 correction:</strong> An earlier version of this site reported 1,089 active connections — a 60% undercount caused by a lossy spatial join. The corrected count of 2,698 comes from the City's own authoritative data source.
         </p>
         <p style="font-size:0.85rem;color:#6b7280;margin-top:16px;">
           Built by <strong style="color:#acb4c3;">Thomas (Pepar) Hugo</strong> · April 2026 · 
@@ -484,35 +484,35 @@
     map.addControl(new maplibregl.NavigationControl(), 'top-right');
 
     map.on('load', async () => {
-      const response = await fetch('public/data/ct_harm_analysis.geojson');
+      const response = await fetch('public/data/lead_areas_harm_analysis.geojson');
       const geojson = await response.json();
 
-      map.addSource('ct-harm', {
+      map.addSource('lead-areas', {
         type: 'geojson',
         data: geojson
       });
 
       map.addLayer({
-        id: 'ct-harm-fill',
+        id: 'lead-areas-fill',
         type: 'fill',
-        source: 'ct-harm',
+        source: 'lead-areas',
         paint: {
           'fill-color': [
-            'interpolate', ['linear'], ['get', 'realized_qaly'],
+            'interpolate', ['linear'], ['get', 'current_lead_connections'],
             0, '#fde68a',
-            5, '#f59e0b',
-            10, '#b91c1c',
-            18, '#7f1d1d',
-            23.39, '#33110f'
+            25, '#f59e0b',
+            100, '#b91c1c',
+            400, '#7f1d1d',
+            700, '#33110f'
           ],
           'fill-opacity': 0.78
         }
       });
 
       map.addLayer({
-        id: 'ct-harm-line',
+        id: 'lead-areas-line',
         type: 'line',
-        source: 'ct-harm',
+        source: 'lead-areas',
         paint: {
           'line-color': '#f5f5f5',
           'line-width': 1.2,
@@ -520,34 +520,55 @@
         }
       });
 
-      map.fitBounds([[-104.75, 50.36], [-104.52, 50.52]], { padding: 24, duration: 0 });
+      map.addLayer({
+        id: 'lead-areas-labels',
+        type: 'symbol',
+        source: 'lead-areas',
+        layout: {
+          'text-field': ['get', 'name'],
+          'text-size': 11,
+          'text-font': ['Open Sans Regular', 'Arial Unicode MS Regular'],
+          'text-anchor': 'center',
+          'text-allow-overlap': false
+        },
+        paint: {
+          'text-color': '#f5f5f5',
+          'text-halo-color': 'rgba(10,12,16,0.8)',
+          'text-halo-width': 1.5
+        }
+      });
+
+      map.fitBounds([[-104.72, 50.40], [-104.55, 50.48]], { padding: 24, duration: 0 });
 
       const popup = new maplibregl.Popup({ closeButton: false, closeOnClick: false });
       const summary = document.getElementById('map-summary');
 
-      map.on('mousemove', 'ct-harm-fill', e => {
+      map.on('mousemove', 'lead-areas-fill', e => {
         map.getCanvas().style.cursor = 'pointer';
         const feature = e.features?.[0];
         if (!feature) return;
         const p = feature.properties;
-        summary.textContent = `${p.ct_name}: ${Number(p.realized_qaly).toFixed(2)} realized QALYs, ${Number(p.projected_qaly).toFixed(2)} projected QALYs, ${p.lead_connections} lead connections, ${p.children} children, ${Number(p.renter_pct).toFixed(1)}% renter.`;
+        const kids = p.estimated_children_affected || 0;
+        const income = p.median_after_tax_income ? `$${Number(p.median_after_tax_income).toLocaleString()}` : 'N/A';
+        summary.textContent = `${p.name}: ${p.current_lead_connections} active connections (was ${p.baseline_lead_connections}), ~${kids} children affected, ${p.renter_pct}% renter, median income ${income}.`;
         popup
           .setLngLat(e.lngLat)
           .setHTML(`
             <div class="popup-card">
-              <strong>${p.ct_name}</strong>
-              <span>${p.lead_connections} lead connections · ${p.children} children</span>
-              <span>Realized harm: ${Number(p.realized_qaly).toFixed(2)} QALYs</span>
-              <span>Projected cost: $${Math.round(Number(p.projected_cost)).toLocaleString()}</span>
-              <span>Renter share: ${Number(p.renter_pct).toFixed(1)}%</span>
+              <strong>${p.name}</strong>
+              <span>${p.current_lead_connections} active · ${p.replaced} replaced · was ${p.baseline_lead_connections}</span>
+              <span>~${kids} children affected</span>
+              <span>Renter share: ${p.renter_pct}%</span>
+              <span>Median income: ${income}</span>
+              <span>Indigenous: ${p.indigenous_pct}%</span>
             </div>
           `)
           .addTo(map);
       });
 
-      map.on('mouseleave', 'ct-harm-fill', () => {
+      map.on('mouseleave', 'lead-areas-fill', () => {
         map.getCanvas().style.cursor = '';
-        summary.textContent = 'Inspect a tract to see realized QALYs, projected cost, renter share, and child exposure context.';
+        summary.textContent = 'Hover a neighborhood to see lead connections, children affected, renter share, and income context.';
         popup.remove();
       });
     });
