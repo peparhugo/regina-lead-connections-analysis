@@ -11,7 +11,7 @@
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
-  <link rel="stylesheet" href="styles.css?v=3" />
+  <link rel="stylesheet" href="styles.css?v=4" />
 </head>
 <body>
   <div class="site-shell">
@@ -34,84 +34,294 @@
 
     <main>
       <!-- NARRATIVE HERO SLIDESHOW -->
-      <section id="hero" class="hero section narrative-hero">
-        <div class="narrative-slides">
-          <article class="narrative-slide slide-active" data-slide="1">
-            <div class="slide-content">
-              <p class="slide-kicker">The problem</p>
-              <h1 class="slide-headline"><span class="highlight-danger">2,743</span> lead pipes still poison Regina's water</h1>
-              <p class="slide-subtext">At the current pace of 220 replacements per year, that's <strong>12 more years</strong> until every child has lead-free water.</p>
+      <section id="hero" class="story-hero">
+        <div class="story-slides" id="storySlides">
+          <div class="story-slide is-active" data-index="0">
+            <span class="story-label">The problem</span>
+            <h1><em>2,743</em> lead pipes still poison Regina's water</h1>
+            <p>At the current pace of 220 replacements per year, that's <strong>12 more years</strong> until every child has lead-free water.</p>
+            <div class="story-metric">
+              <span class="metric-value">2,743</span>
+              <span class="metric-label">active lead connections</span>
             </div>
-            <div class="slide-stat">
-              <span class="stat-number" data-value="2743">2,743</span>
-              <span class="stat-context">active lead service connections</span>
-            </div>
-          </article>
+          </div>
 
-          <article class="narrative-slide" data-slide="2">
-            <div class="slide-content">
-              <p class="slide-kicker">The harm</p>
-              <h1 class="slide-headline"><span class="highlight-purple">179</span> years of healthy life lost</h1>
-              <p class="slide-subtext"><strong>$47.6 million</strong> in healthcare costs. Mostly children. The burden is already locked in — and growing every day these pipes stay connected.</p>
+          <div class="story-slide" data-index="1">
+            <span class="story-label">The harm</span>
+            <h1><em class="purple">179</em> years of healthy life lost</h1>
+            <p><strong>$47.6 million</strong> in healthcare costs. Mostly children. The burden is already locked in.</p>
+            <div class="story-metric purple">
+              <span class="metric-value">179.2</span>
+              <span class="metric-label">QALYs lost</span>
             </div>
-            <div class="slide-stat">
-              <span class="stat-number stat-qaly" data-value="179.2">179.2</span>
-              <span class="stat-context">QALYs (quality-adjusted life years)</span>
-            </div>
-          </article>
+          </div>
 
-          <article class="narrative-slide" data-slide="3">
-            <div class="slide-content">
-              <p class="slide-kicker">Who's affected</p>
-              <h1 class="slide-headline"><span class="highlight-amber">82%</span> renters in the hardest-hit neighborhoods</h1>
-              <p class="slide-subtext">Tenants can't authorize replacement. Landlords aren't required to disclose or test. The most vulnerable have the least power.</p>
+          <div class="story-slide" data-index="2">
+            <span class="story-label">Who's affected</span>
+            <h1><em class="amber">82%</em> renters in the hardest-hit neighborhoods</h1>
+            <p>Tenants can't authorize replacement. Landlords aren't required to disclose. The vulnerable have the least power.</p>
+            <div class="story-metric amber">
+              <span class="metric-value">~1,540</span>
+              <span class="metric-label">children exposed</span>
             </div>
-            <div class="slide-stat">
-              <span class="stat-number stat-renter" data-value="1540">~1,540</span>
-              <span class="stat-context">children in affected homes</span>
-            </div>
-          </article>
+          </div>
 
-          <article class="narrative-slide" data-slide="4">
-            <div class="slide-content">
-              <p class="slide-kicker">Who blocked action</p>
-              <h1 class="slide-headline">Two councillors voted against acceleration. <span class="highlight-danger">Twice.</span></h1>
-              <p class="slide-subtext">Bob Hawkins and John Findura voted NO on CR21-90 and CR23-97. The votes are public record.</p>
+          <div class="story-slide" data-index="3">
+            <span class="story-label">Who blocked action</span>
+            <h1>Two councillors voted against acceleration. <em>Twice.</em></h1>
+            <p>Bob Hawkins and John Findura voted NO on CR21-90 and CR23-97. Public record.</p>
+            <div class="story-metric">
+              <span class="metric-value">7-4</span>
+              <span class="metric-label">against acceleration</span>
             </div>
-            <div class="slide-stat slide-stat-vote">
-              <span class="stat-label-sm">CR21-90 (2021)</span>
-              <span class="stat-vote">7-4 against acceleration</span>
-            </div>
-          </article>
+          </div>
 
-          <article class="narrative-slide" data-slide="5">
-            <div class="slide-content">
-              <p class="slide-kicker">The path forward</p>
-              <h1 class="slide-headline">Here's what you can demand — at every level of government</h1>
-              <p class="slide-subtext">City. Province. Federal. Landlord. Concrete actions with real contacts below.</p>
+          <div class="story-slide" data-index="4">
+            <span class="story-label">The path forward</span>
+            <h1>Here's what you can demand — at every level</h1>
+            <p>City. Province. Federal. Landlord. Concrete actions below.</p>
+            <div class="story-actions">
+              <a href="#action" class="btn-action">Take Action</a>
+              <a href="#map-section" class="btn-secondary">See the Map</a>
             </div>
-            <div class="slide-cta">
-              <a class="button button-primary" href="#action">Take action</a>
-              <a class="button button-secondary" href="#map-section">See the map</a>
-            </div>
-          </article>
+          </div>
         </div>
 
-        <nav class="slide-nav" aria-label="Narrative slides">
-          <button class="slide-dot active" data-target="1" aria-label="Slide 1: The problem"></button>
-          <button class="slide-dot" data-target="2" aria-label="Slide 2: The harm"></button>
-          <button class="slide-dot" data-target="3" aria-label="Slide 3: Who's affected"></button>
-          <button class="slide-dot" data-target="4" aria-label="Slide 4: Who blocked action"></button>
-          <button class="slide-dot" data-target="5" aria-label="Slide 5: Take action"></button>
-        </nav>
+        <div class="story-dots">
+          <button class="dot is-active" data-slide="0"></button>
+          <button class="dot" data-slide="1"></button>
+          <button class="dot" data-slide="2"></button>
+          <button class="dot" data-slide="3"></button>
+          <button class="dot" data-slide="4"></button>
+        </div>
 
-        <div class="data-source-badge">
-          <span class="badge-label">Open Data Source</span>
-          <a href="https://gis.regina.ca/arcgis/rest/services/OpenData/LeadConnectionAreas/MapServer/0" target="_blank" rel="noopener">
-            City of Regina ArcGIS API →
+        <div class="story-source">
+          <a href="https://gis.regina.ca/arcgis/rest/services/OpenData/LeadConnectionAreas/MapServer/0" target="_blank">
+            City of Regina ArcGIS — Verified April 6, 2026
           </a>
-          <span class="badge-verify">Verified April 6, 2026</span>
         </div>
+
+        <style>
+          .story-hero {
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 100px 24px 60px;
+            position: relative;
+            background: linear-gradient(145deg, #0a0a14 0%, #12121f 50%, #0a0a14 100%);
+            overflow: hidden;
+          }
+          .story-hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background:
+              radial-gradient(ellipse 80% 50% at 20% 20%, rgba(139, 92, 246, 0.15), transparent),
+              radial-gradient(ellipse 60% 40% at 80% 80%, rgba(239, 68, 68, 0.1), transparent);
+            pointer-events: none;
+          }
+          .story-slides {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            min-height: 400px;
+            z-index: 1;
+          }
+          .story-slide {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(40px);
+            transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s;
+          }
+          .story-slide.is-active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            position: relative;
+          }
+          .story-label {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #a78bfa;
+            margin-bottom: 20px;
+            padding: 6px 16px;
+            background: rgba(167, 139, 250, 0.1);
+            border: 1px solid rgba(167, 139, 250, 0.3);
+            border-radius: 100px;
+          }
+          .story-slide h1 {
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            font-weight: 800;
+            line-height: 1.2;
+            color: #f8f8fc;
+            margin: 0 0 20px;
+            max-width: 700px;
+          }
+          .story-slide h1 em {
+            font-style: normal;
+            color: #f87171;
+          }
+          .story-slide h1 em.purple { color: #a78bfa; }
+          .story-slide h1 em.amber { color: #fbbf24; }
+          .story-slide p {
+            font-size: 1.1rem;
+            color: #a0a0b8;
+            margin: 0 0 32px;
+            max-width: 550px;
+            line-height: 1.6;
+          }
+          .story-metric {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            padding: 24px 48px;
+            background: rgba(248, 113, 113, 0.08);
+            border: 1px solid rgba(248, 113, 113, 0.25);
+            border-radius: 16px;
+          }
+          .story-metric.purple {
+            background: rgba(167, 139, 250, 0.08);
+            border-color: rgba(167, 139, 250, 0.25);
+          }
+          .story-metric.amber {
+            background: rgba(251, 191, 36, 0.08);
+            border-color: rgba(251, 191, 36, 0.25);
+          }
+          .metric-value {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 900;
+            color: #f87171;
+            line-height: 1;
+          }
+          .story-metric.purple .metric-value { color: #a78bfa; }
+          .story-metric.amber .metric-value { color: #fbbf24; }
+          .metric-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #808090;
+          }
+          .story-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+          }
+          .btn-action, .btn-secondary {
+            padding: 14px 32px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+          }
+          .btn-action {
+            background: #a78bfa;
+            color: #0a0a14;
+          }
+          .btn-action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(167, 139, 250, 0.3);
+          }
+          .btn-secondary {
+            background: rgba(255,255,255,0.08);
+            color: #f8f8fc;
+            border: 1px solid rgba(255,255,255,0.15);
+          }
+          .btn-secondary:hover {
+            background: rgba(255,255,255,0.12);
+          }
+          .story-dots {
+            display: flex;
+            gap: 12px;
+            margin-top: 48px;
+            z-index: 2;
+          }
+          .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid rgba(167, 139, 250, 0.4);
+            background: transparent;
+            padding: 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+          }
+          .dot:hover { border-color: #a78bfa; }
+          .dot.is-active {
+            background: #a78bfa;
+            border-color: #a78bfa;
+            transform: scale(1.3);
+          }
+          .story-source {
+            position: absolute;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+          }
+          .story-source a {
+            font-size: 0.75rem;
+            color: #606070;
+            text-decoration: none;
+            letter-spacing: 0.05em;
+          }
+          .story-source a:hover { color: #a78bfa; }
+          @media (max-width: 640px) {
+            .story-hero { padding: 80px 16px 48px; }
+            .story-slides { min-height: 450px; }
+            .story-metric { padding: 20px 32px; }
+            .story-actions { flex-direction: column; width: 100%; }
+            .btn-action, .btn-secondary { width: 100%; text-align: center; }
+          }
+        </style>
+
+        <script>
+          (function() {
+            const slides = document.querySelectorAll('.story-slide');
+            const dots = document.querySelectorAll('.dot');
+            let current = 0;
+            let interval;
+
+            function goTo(index) {
+              slides.forEach((s, i) => s.classList.toggle('is-active', i === index));
+              dots.forEach((d, i) => d.classList.toggle('is-active', i === index));
+              current = index;
+            }
+
+            dots.forEach((dot, i) => {
+              dot.addEventListener('click', () => {
+                goTo(i);
+                clearInterval(interval);
+                startAuto();
+              });
+            });
+
+            function startAuto() {
+              interval = setInterval(() => {
+                goTo((current + 1) % slides.length);
+              }, 6000);
+            }
+
+            // Start after 2s
+            setTimeout(startAuto, 2000);
+          })();
+        </script>
       </section>
 
       <section id="map-section" class="section">
@@ -165,13 +375,6 @@
           </aside>
         </div>
 
-        <div class="embed-card">
-          <div class="section-subhead">
-            <h3>Observed replacement map</h3>
-            <p>This is the existing MapLibre public map from <code>public/map/</code>, embedded directly for continuity with the earlier package.</p>
-          </div>
-          <iframe class="map-embed" src="public/map/" title="Observed area replacements map"></iframe>
-        </div>
       </section>
 
       <section id="harm" class="section">
