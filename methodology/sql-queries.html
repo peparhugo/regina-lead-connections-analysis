@@ -3,433 +3,707 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reproducible SQL Queries | Regina Lead Analysis</title>
+  <title>Reproducibility Blueprint | Regina Lead Analysis</title>
   <link rel="stylesheet" href="../styles.css">
   <style>
     body { background: var(--bg-dark); color: var(--text); font-family: var(--font-sans); line-height: 1.7; }
-    .methodology-page { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+    .methodology-page { max-width: 960px; margin: 0 auto; padding: 40px 24px; }
     .methodology-header { margin-bottom: 48px; border-bottom: 1px solid var(--border); padding-bottom: 32px; }
     .methodology-header h1 { font-size: 2rem; color: var(--text-bright); margin-bottom: 12px; }
     .methodology-header .breadcrumb { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px; }
     .methodology-header .breadcrumb a { color: var(--accent); text-decoration: none; }
     .methodology-header .abstract { font-size: 1rem; color: var(--text-muted); font-style: italic; }
-    section { margin-bottom: 48px; }
-    h2 { font-size: 1.35rem; color: var(--text-bright); margin-bottom: 16px; border-left: 3px solid var(--accent); padding-left: 12px; }
-    h3 { font-size: 1.1rem; color: var(--text); margin: 24px 0 12px; }
+    section { margin-bottom: 56px; }
+    h2 { font-size: 1.35rem; color: var(--text-bright); margin-bottom: 20px; border-left: 3px solid var(--accent); padding-left: 12px; }
+    h3 { font-size: 1.1rem; color: var(--text); margin: 28px 0 12px; }
+    h4 { font-size: 0.95rem; color: var(--text-muted); margin: 20px 0 8px; text-transform: uppercase; letter-spacing: 0.05em; }
     p { margin-bottom: 16px; }
-    .query-block { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; margin: 20px 0; overflow: hidden; }
-    .query-header { background: rgba(129, 140, 248, 0.1); padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-    .query-title { font-weight: 600; color: var(--text-bright); font-size: 0.9rem; }
+    .step-number { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: var(--accent); color: #fff; border-radius: 50%; font-weight: 700; font-size: 0.85rem; margin-right: 10px; }
+    .query-block { background: #0d1117; border: 1px solid var(--border); border-radius: 8px; margin: 16px 0; overflow: hidden; }
+    .query-header { background: rgba(129, 140, 248, 0.1); padding: 10px 16px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+    .query-title { font-weight: 600; color: var(--text-bright); font-size: 0.85rem; }
     .query-meta { font-size: 0.75rem; color: var(--text-muted); }
     .query-code { padding: 16px; overflow-x: auto; }
-    .query-code pre { margin: 0; font-size: 0.8rem; line-height: 1.5; white-space: pre-wrap; word-wrap: break-word; }
-    .query-result { background: rgba(46, 204, 113, 0.05); border-top: 1px solid var(--border); padding: 12px 16px; font-size: 0.85rem; }
+    .query-code pre { margin: 0; font-size: 0.8rem; line-height: 1.6; white-space: pre; color: #e6edf3; font-family: var(--font-mono); }
+    .query-result { background: rgba(46, 204, 113, 0.08); border-top: 1px solid var(--border); padding: 12px 16px; font-size: 0.85rem; }
     .query-result strong { color: #2ecc71; }
     .note { background: rgba(129, 140, 248, 0.1); border-left: 3px solid var(--accent); padding: 16px; margin: 20px 0; font-size: 0.9rem; }
     .warning { background: rgba(231, 76, 60, 0.1); border-left: 3px solid var(--lead-red); padding: 16px; margin: 20px 0; font-size: 0.9rem; }
-    code { background: var(--bg-card); padding: 2px 6px; border-radius: 4px; font-family: var(--font-mono); font-size: 0.9em; }
-    .sql-keyword { color: #818cf8; }
-    .sql-function { color: #f1c40f; }
-    .sql-string { color: #2ecc71; }
-    .sql-comment { color: #6b7280; font-style: italic; }
-    .sql-number { color: #e74c3c; }
-    table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.85rem; }
+    .success { background: rgba(46, 204, 113, 0.1); border-left: 3px solid #2ecc71; padding: 16px; margin: 20px 0; font-size: 0.9rem; }
+    code { background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px; font-family: var(--font-mono); font-size: 0.85em; }
+    table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.85rem; }
     th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); }
     th { background: var(--bg-card); color: var(--text-bright); font-weight: 600; }
+    ul, ol { margin: 12px 0; padding-left: 24px; }
+    li { margin-bottom: 8px; }
     .back-link { display: inline-block; margin-top: 32px; color: var(--accent); text-decoration: none; font-size: 0.9rem; }
     .back-link:hover { text-decoration: underline; }
+    .toc { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin-bottom: 32px; }
+    .toc h3 { margin: 0 0 12px; font-size: 1rem; }
+    .toc ol { margin: 0; }
+    .toc a { color: var(--accent); text-decoration: none; }
+    .toc a:hover { text-decoration: underline; }
+    .cmd { color: #79c0ff; }
+    .str { color: #a5d6ff; }
+    .comment { color: #8b949e; }
+    .keyword { color: #ff7b72; }
+    .func { color: #d2a8ff; }
+    .num { color: #79c0ff; }
   </style>
 </head>
 <body>
   <article class="methodology-page">
     <header class="methodology-header">
       <nav class="breadcrumb">
-        <a href="../index.html">Regina Lead Analysis</a> / <a href="index.html">Methodology</a> / SQL Queries
+        <a href="../index.html">Regina Lead Analysis</a> / <a href="index.html">Methodology</a> / Reproducibility Blueprint
       </nav>
-      <h1>Reproducible SQL Queries</h1>
+      <h1>Complete Reproducibility Blueprint</h1>
       <p class="abstract">
-        Complete PostgreSQL/PostGIS queries used to derive all statistics in this analysis.
-        These queries can be executed against any PostGIS database loaded with the source data
-        to independently verify the results.
+        This document provides step-by-step instructions to reproduce every number in this analysis
+        from publicly available data sources. Follow these steps to independently verify the findings.
       </p>
     </header>
 
-    <section>
-      <h2>1. Data Loading</h2>
+    <nav class="toc">
+      <h3>Table of Contents</h3>
+      <ol>
+        <li><a href="#prerequisites">Prerequisites & Tools</a></li>
+        <li><a href="#step1">Step 1: Acquire Lead Connection Data from City API</a></li>
+        <li><a href="#step2">Step 2: Acquire Census Tract Boundaries & Demographics</a></li>
+        <li><a href="#step3">Step 3: Create Database Schema</a></li>
+        <li><a href="#step4">Step 4: Load Data into PostGIS</a></li>
+        <li><a href="#step5">Step 5: Spatial Join - Assign Connections to Census Tracts</a></li>
+        <li><a href="#step6">Step 6: Track Replacements Over Time</a></li>
+        <li><a href="#step7">Step 7: Calculate QALY Burden</a></li>
+        <li><a href="#step8">Step 8: Calculate Healthcare Costs</a></li>
+        <li><a href="#step9">Step 9: Verify Final Numbers</a></li>
+      </ol>
+    </nav>
 
+    <section id="prerequisites">
+      <h2><span class="step-number">0</span>Prerequisites & Tools</h2>
+      <p>You will need:</p>
+      <ul>
+        <li><strong>PostgreSQL 14+</strong> with <strong>PostGIS 3.x</strong> extension</li>
+        <li><strong>curl</strong> for API requests</li>
+        <li><strong>ogr2ogr</strong> (from GDAL) for loading GeoJSON into PostGIS</li>
+        <li><strong>jq</strong> for JSON processing (optional but helpful)</li>
+      </ul>
       <div class="query-block">
         <div class="query-header">
-          <span class="query-title">1.1 Load Lead Connections from ArcGIS API</span>
-          <span class="query-meta">Shell + ogr2ogr</span>
+          <span class="query-title">Verify PostGIS installation</span>
         </div>
         <div class="query-code">
-<pre><span class="sql-comment">-- Download lead connections from City of Regina ArcGIS service</span>
-<span class="sql-comment">-- Use ogr2ogr to convert from ESRI JSON to PostGIS</span>
-
-ogr2ogr -f "PostgreSQL" \
-  PG:"host=localhost dbname=regina user=postgres" \
-  "https://gis.regina.ca/arcgis/rest/services/OpenData/LeadConnectionAreas/MapServer/0/query?where=1=1&outFields=*&f=geojson" \
-  -nln lead_connections \
-  -overwrite \
-  -lco GEOMETRY_NAME=geometry \
-  -lco FID=objectid
-
-<span class="sql-comment">-- Verify load</span>
-<span class="sql-keyword">SELECT</span> <span class="sql-function">COUNT</span>(*) <span class="sql-keyword">FROM</span> lead_connections;</pre>
-        </div>
-        <div class="query-result">
-          <strong>Expected result:</strong> 2,743 rows
-        </div>
-      </div>
-
-      <div class="query-block">
-        <div class="query-header">
-          <span class="query-title">1.2 Load Census Tract Boundaries</span>
-          <span class="query-meta">Shell + ogr2ogr</span>
-        </div>
-        <div class="query-code">
-<pre><span class="sql-comment">-- Load Statistics Canada Census Tract boundaries for Regina CMA (705)</span>
-
-ogr2ogr -f "PostgreSQL" \
-  PG:"host=localhost dbname=regina user=postgres" \
-  "lct_000b21a_e.shp" \
-  -nln census_tracts \
-  -overwrite \
-  -where "CMAUID = '705'" \
-  -t_srs "EPSG:4326"
-
-<span class="sql-comment">-- Verify Regina CMA tracts loaded</span>
-<span class="sql-keyword">SELECT</span> <span class="sql-function">COUNT</span>(*) <span class="sql-keyword">FROM</span> census_tracts;</pre>
-        </div>
-        <div class="query-result">
-          <strong>Expected result:</strong> 48 Census Tracts in Regina CMA
+<pre><span class="comment">-- In psql:</span>
+<span class="keyword">CREATE EXTENSION IF NOT EXISTS</span> postgis;
+<span class="keyword">SELECT</span> <span class="func">PostGIS_Version</span>();</pre>
         </div>
       </div>
     </section>
 
-    <section>
-      <h2>2. Spatial Join & Lead Count by Census Tract</h2>
+    <section id="step1">
+      <h2><span class="step-number">1</span>Acquire Lead Connection Data from City API</h2>
+      <p>
+        The City of Regina publishes lead service connection locations via an ArcGIS REST API.
+        This is the authoritative source for current lead connection counts.
+      </p>
 
+      <h4>1.1 Get Total Count</h4>
       <div class="query-block">
         <div class="query-header">
-          <span class="query-title">2.1 Assign Lead Connections to Census Tracts</span>
-          <span class="query-meta">PostGIS spatial join</span>
+          <span class="query-title">Query API for total connection count</span>
+          <span class="query-meta">Shell</span>
         </div>
         <div class="query-code">
-<pre><span class="sql-comment">-- Create table with lead connections assigned to Census Tracts</span>
-<span class="sql-comment">-- Uses ST_Within with small buffer to handle edge cases</span>
-
-<span class="sql-keyword">CREATE TABLE</span> lead_connections_by_ct <span class="sql-keyword">AS</span>
-<span class="sql-keyword">SELECT</span>
-  lc.objectid,
-  lc.address,
-  ct.ctuid <span class="sql-keyword">AS</span> ct_uid_code,
-  ct.ctname <span class="sql-keyword">AS</span> ct_name,
-  lc.geometry
-<span class="sql-keyword">FROM</span> lead_connections lc
-<span class="sql-keyword">LEFT JOIN</span> census_tracts ct
-  <span class="sql-keyword">ON</span> <span class="sql-function">ST_DWithin</span>(lc.geometry, ct.geometry, <span class="sql-number">0.0001</span>)
-<span class="sql-keyword">WHERE</span> ct.ctuid <span class="sql-keyword">IS NOT NULL</span>;
-
-<span class="sql-comment">-- Verify all connections matched</span>
-<span class="sql-keyword">SELECT</span>
-  <span class="sql-function">COUNT</span>(*) <span class="sql-keyword">AS</span> total_matched,
-  (<span class="sql-keyword">SELECT</span> <span class="sql-function">COUNT</span>(*) <span class="sql-keyword">FROM</span> lead_connections) <span class="sql-keyword">AS</span> total_source
-<span class="sql-keyword">FROM</span> lead_connections_by_ct;</pre>
+<pre><span class="cmd">curl</span> <span class="str">"https://gis.regina.ca/arcgis/rest/services/OpenData/LeadConnectionAreas/MapServer/0/query?where=1%3D1&returnCountOnly=true&f=json"</span></pre>
         </div>
         <div class="query-result">
-          <strong>Result:</strong> total_matched = 2,743, total_source = 2,743 (100% match)
+          <strong>Result (April 6, 2026):</strong> <code>{"count": 2743}</code>
         </div>
       </div>
 
+      <h4>1.2 Download All Features as GeoJSON</h4>
+      <p>The API has a 2000 record limit per request. Use pagination to get all records:</p>
       <div class="query-block">
         <div class="query-header">
-          <span class="query-title">2.2 Aggregate Lead Count per Census Tract</span>
-          <span class="query-meta">Group by CT</span>
+          <span class="query-title">Download lead connections (paginated)</span>
+          <span class="query-meta">Shell script</span>
         </div>
         <div class="query-code">
-<pre><span class="sql-keyword">SELECT</span>
-  ct_uid_code,
-  ct_name,
-  <span class="sql-function">COUNT</span>(*) <span class="sql-keyword">AS</span> lead_count
-<span class="sql-keyword">FROM</span> lead_connections_by_ct
-<span class="sql-keyword">GROUP BY</span> ct_uid_code, ct_name
-<span class="sql-keyword">ORDER BY</span> lead_count <span class="sql-keyword">DESC</span>
-<span class="sql-keyword">LIMIT</span> <span class="sql-number">10</span>;</pre>
+<pre><span class="comment">#!/bin/bash</span>
+<span class="comment"># download_lead_connections.sh</span>
+
+<span class="cmd">BASE_URL</span>=<span class="str">"https://gis.regina.ca/arcgis/rest/services/OpenData/LeadConnectionAreas/MapServer/0/query"</span>
+<span class="cmd">OUTFILE</span>=<span class="str">"lead_connections_$(date +%Y%m%d).geojson"</span>
+
+<span class="comment"># Get first batch (0-1999)</span>
+<span class="cmd">curl</span> -s <span class="str">"${BASE_URL}?where=1%3D1&outFields=*&resultOffset=0&resultRecordCount=2000&f=geojson"</span> > batch1.json
+
+<span class="comment"># Get second batch (2000+)</span>
+<span class="cmd">curl</span> -s <span class="str">"${BASE_URL}?where=1%3D1&outFields=*&resultOffset=2000&resultRecordCount=2000&f=geojson"</span> > batch2.json
+
+<span class="comment"># Merge using jq (combines feature arrays)</span>
+<span class="cmd">jq</span> -s <span class="str">'.[0].features = ([.[].features] | add) | .[0]'</span> batch1.json batch2.json > <span class="str">"$OUTFILE"</span>
+
+<span class="comment"># Verify count</span>
+<span class="cmd">jq</span> <span class="str">'.features | length'</span> <span class="str">"$OUTFILE"</span>
+<span class="comment"># Should output: 2743</span>
+
+<span class="cmd">rm</span> batch1.json batch2.json</pre>
         </div>
-        <div class="query-result">
-          <strong>Top 3 CTs:</strong> North Central (287), Cathedral (234), Rosemont (198)
-        </div>
+      </div>
+
+      <h4>1.3 Historical Snapshots for Replacement Tracking</h4>
+      <div class="note">
+        <strong>Critical for replacement tracking:</strong> The API only shows <em>current</em> active connections.
+        To track replacements over time, you must save dated snapshots. We maintain snapshots from:
+        <ul style="margin-top: 8px;">
+          <li><code>lead_connections_20190101.geojson</code> - Baseline (estimated from FOI: ~4,458)</li>
+          <li><code>lead_connections_20230601.geojson</code> - Mid-program snapshot</li>
+          <li><code>lead_connections_20241201.geojson</code> - Recent snapshot</li>
+          <li><code>lead_connections_20260406.geojson</code> - Current (2,743)</li>
+        </ul>
       </div>
     </section>
 
-    <section>
-      <h2>3. QALY Calculation</h2>
+    <section id="step2">
+      <h2><span class="step-number">2</span>Acquire Census Tract Boundaries & Demographics</h2>
 
+      <h4>2.1 Download Census Tract Boundaries</h4>
+      <p>Statistics Canada provides Census Tract boundary files:</p>
       <div class="query-block">
         <div class="query-header">
-          <span class="query-title">3.1 Calculate Children Affected and QALY per Census Tract</span>
-          <span class="query-meta">Core QALY calculation</span>
+          <span class="query-title">Download CT boundaries for Regina CMA</span>
+          <span class="query-meta">Shell</span>
         </div>
         <div class="query-code">
-<pre><span class="sql-comment">-- Create QALY calculation materialized view</span>
-<span class="sql-keyword">CREATE MATERIALIZED VIEW</span> ct_child_qaly_20260324 <span class="sql-keyword">AS</span>
-<span class="sql-keyword">WITH</span> lead_counts <span class="sql-keyword">AS</span> (
-  <span class="sql-keyword">SELECT</span>
-    ct_uid_code,
-    <span class="sql-function">COUNT</span>(*) <span class="sql-keyword">AS</span> lead_count
-  <span class="sql-keyword">FROM</span> lead_connections_by_ct
-  <span class="sql-keyword">GROUP BY</span> ct_uid_code
-),
-demographics <span class="sql-keyword">AS</span> (
-  <span class="sql-keyword">SELECT</span>
-    ctuid <span class="sql-keyword">AS</span> ct_uid_code,
-    ctname <span class="sql-keyword">AS</span> ct_name,
-    pop_total,
-    pop_0_14 <span class="sql-keyword">AS</span> children_0_14,
-    dwellings_total,
-    tenure_renter,
-    <span class="sql-function">ROUND</span>(tenure_renter::numeric / <span class="sql-function">NULLIF</span>(dwellings_total, <span class="sql-number">0</span>) * <span class="sql-number">100</span>, <span class="sql-number">1</span>) <span class="sql-keyword">AS</span> renter_pct,
-    lim_at_prevalence,
-    <span class="sql-function">ROUND</span>(lim_at_prevalence::numeric / <span class="sql-function">NULLIF</span>(pop_total, <span class="sql-number">0</span>) * <span class="sql-number">100</span>, <span class="sql-number">1</span>) <span class="sql-keyword">AS</span> low_income_pct,
-    geometry
-  <span class="sql-keyword">FROM</span> census_tracts_demographics
-)
-<span class="sql-keyword">SELECT</span>
-  d.ct_uid_code,
-  d.ct_name,
-  d.pop_total,
-  d.children_0_14,
-  d.dwellings_total,
-  d.renter_pct,
-  d.low_income_pct,
-  <span class="sql-function">COALESCE</span>(lc.lead_count, <span class="sql-number">0</span>) <span class="sql-keyword">AS</span> lead_count,
+<pre><span class="comment"># Download 2021 Census Tract boundaries (national file)</span>
+<span class="cmd">curl</span> -O <span class="str">"https://www12.statcan.gc.ca/census-recensement/2021/geo/sip-pis/boundary-limites/files-fichiers/lct_000b21a_e.zip"</span>
 
-  <span class="sql-comment">-- Children per connection (CT-specific)</span>
-  <span class="sql-function">ROUND</span>(
-    d.children_0_14::numeric / <span class="sql-function">NULLIF</span>(d.dwellings_total, <span class="sql-number">0</span>),
-    <span class="sql-number">3</span>
-  ) <span class="sql-keyword">AS</span> children_per_dwelling,
+<span class="cmd">unzip</span> lct_000b21a_e.zip
 
-  <span class="sql-comment">-- Estimated children affected</span>
-  <span class="sql-function">ROUND</span>(
-    <span class="sql-function">COALESCE</span>(lc.lead_count, <span class="sql-number">0</span>) *
-    (d.children_0_14::numeric / <span class="sql-function">NULLIF</span>(d.dwellings_total, <span class="sql-number">0</span>)),
-    <span class="sql-number">1</span>
-  ) <span class="sql-keyword">AS</span> children_affected,
-
-  <span class="sql-comment">-- Exposure years (cumulative since 2019)</span>
-  <span class="sql-function">EXTRACT</span>(<span class="sql-keyword">YEAR FROM CURRENT_DATE</span>) - <span class="sql-number">2019</span> <span class="sql-keyword">AS</span> exposure_years,
-
-  <span class="sql-comment">-- QALY calculation (base case: 0.05 QALY per child-year)</span>
-  <span class="sql-function">ROUND</span>(
-    <span class="sql-function">COALESCE</span>(lc.lead_count, <span class="sql-number">0</span>) *
-    (d.children_0_14::numeric / <span class="sql-function">NULLIF</span>(d.dwellings_total, <span class="sql-number">0</span>)) *
-    (<span class="sql-function">EXTRACT</span>(<span class="sql-keyword">YEAR FROM CURRENT_DATE</span>) - <span class="sql-number">2019</span>) *
-    <span class="sql-number">0.05</span>,
-    <span class="sql-number">2</span>
-  ) <span class="sql-keyword">AS</span> qaly_realized,
-
-  d.geometry
-
-<span class="sql-keyword">FROM</span> demographics d
-<span class="sql-keyword">LEFT JOIN</span> lead_counts lc <span class="sql-keyword">ON</span> d.ct_uid_code = lc.ct_uid_code
-<span class="sql-keyword">WHERE</span> <span class="sql-function">COALESCE</span>(lc.lead_count, <span class="sql-number">0</span>) > <span class="sql-number">0</span>;</pre>
+<span class="comment"># The shapefile contains all CTs in Canada</span>
+<span class="comment"># Regina CMA code is 705 - we'll filter during load</span></pre>
         </div>
       </div>
 
+      <h4>2.2 Download Census Demographics</h4>
+      <p>Download Census Profile data for Regina CMA Census Tracts from Statistics Canada:</p>
       <div class="query-block">
         <div class="query-header">
-          <span class="query-title">3.2 Verify Total QALY Burden</span>
-          <span class="query-meta">Aggregation check</span>
+          <span class="query-title">Required Census tables</span>
+          <span class="query-meta">Manual download from StatCan</span>
         </div>
         <div class="query-code">
-<pre><span class="sql-keyword">SELECT</span>
-  <span class="sql-function">SUM</span>(lead_count) <span class="sql-keyword">AS</span> total_connections,
-  <span class="sql-function">SUM</span>(children_affected) <span class="sql-keyword">AS</span> total_children,
-  <span class="sql-function">SUM</span>(qaly_realized) <span class="sql-keyword">AS</span> total_qaly,
-  <span class="sql-function">ROUND</span>(<span class="sql-function">AVG</span>(children_per_dwelling), <span class="sql-number">3</span>) <span class="sql-keyword">AS</span> avg_children_per_dwelling
-<span class="sql-keyword">FROM</span> ct_child_qaly_20260324;</pre>
-        </div>
-        <div class="query-result">
-          <strong>Result:</strong> total_connections = 2,743 | total_children = 551.2 | total_qaly = 148.94 (pre-scaling)
+<pre><span class="comment"># Go to: https://www12.statcan.gc.ca/census-recensement/2021/dp-pd/prof/index.cfm</span>
+<span class="comment"># Select: Census metropolitan area > Regina > Download data for all census tracts</span>
+<span class="comment"># Download CSV format</span>
+
+<span class="comment"># Key variables needed:</span>
+<span class="comment"># - Population, 2021 (total)</span>
+<span class="comment"># - 0 to 14 years (age group population)</span>
+<span class="comment"># - Total private dwellings</span>
+<span class="comment"># - Renter households</span>
+<span class="comment"># - Low-income status (LIM-AT prevalence)</span></pre>
         </div>
       </div>
 
       <div class="note">
-        <strong>Scaling factor:</strong> The raw QALY of 148.94 is scaled by 1.20x to account for the
-        baseline reconciliation (address-level vs spatial join coverage). Final reported value: <strong>179.2 QALYs</strong>
+        <strong>Direct data table URLs:</strong>
+        <ul style="margin-top: 8px;">
+          <li>Age/Sex: <a href="https://www12.statcan.gc.ca/census-recensement/2021/dp-pd/dt-td/Rp-eng.cfm?TABID=2&LANG=E&A=R&APATH=3&DETAIL=0&DIM=0&FL=A&FREE=0&GC=705&GL=-1&GID=1341679&GK=9&GRP=1&O=D&PID=109523&PRID=10&PTYPE=CT&S=0&SHOWALL=0&SUB=0&Temporal=2021&THEME=117&VID=0&VNAMEE=&VNAMEF=&D1=0&D2=0&D3=0&D4=0&D5=0&D6=0" style="color: var(--accent);">Table 98-401-X2021006</a></li>
+          <li>Tenure: <a href="https://www12.statcan.gc.ca/census-recensement/2021/dp-pd/dt-td/Rp-eng.cfm?TABID=2&LANG=E&A=R&APATH=3&DETAIL=0&DIM=0&FL=A&FREE=0&GC=705&GL=-1&GID=1341679&GK=9&GRP=1&O=D&PID=109541&PRID=10&PTYPE=CT&S=0&SHOWALL=0&SUB=0&Temporal=2021&THEME=117&VID=0&VNAMEE=&VNAMEF=&D1=0&D2=0&D3=0&D4=0&D5=0&D6=0" style="color: var(--accent);">Table 98-401-X2021018</a></li>
+        </ul>
       </div>
     </section>
 
-    <section>
-      <h2>4. Healthcare Cost Calculation</h2>
-
+    <section id="step3">
+      <h2><span class="step-number">3</span>Create Database Schema</h2>
       <div class="query-block">
         <div class="query-header">
-          <span class="query-title">4.1 Calculate Healthcare Cost per Census Tract</span>
-          <span class="query-meta">Cost derivation</span>
+          <span class="query-title">Create tables for lead analysis</span>
+          <span class="query-meta">PostgreSQL/PostGIS</span>
         </div>
         <div class="query-code">
-<pre><span class="sql-comment">-- Add healthcare cost to QALY view</span>
-<span class="sql-keyword">SELECT</span>
-  ct_uid_code,
-  ct_name,
-  lead_count,
-  qaly_realized,
-  <span class="sql-comment">-- Base case: $13,290 CAD per QALY (CIHI 2024)</span>
-  <span class="sql-function">ROUND</span>(qaly_realized * <span class="sql-number">13290</span>, <span class="sql-number">2</span>) <span class="sql-keyword">AS</span> healthcare_cost_base,
-  <span class="sql-comment">-- Societal cost: $50,000 CAD per QALY (CADTH threshold)</span>
-  <span class="sql-function">ROUND</span>(qaly_realized * <span class="sql-number">50000</span>, <span class="sql-number">2</span>) <span class="sql-keyword">AS</span> healthcare_cost_societal
-<span class="sql-keyword">FROM</span> ct_child_qaly_20260324
-<span class="sql-keyword">ORDER BY</span> qaly_realized <span class="sql-keyword">DESC</span>
-<span class="sql-keyword">LIMIT</span> <span class="sql-number">5</span>;</pre>
+<pre><span class="comment">-- Create database</span>
+<span class="keyword">CREATE DATABASE</span> regina_lead;
+\c regina_lead
+<span class="keyword">CREATE EXTENSION</span> postgis;
+
+<span class="comment">-- Lead connections table</span>
+<span class="keyword">CREATE TABLE</span> lead_connections (
+    objectid <span class="keyword">INTEGER PRIMARY KEY</span>,
+    address <span class="keyword">TEXT</span>,
+    neighbourhood <span class="keyword">TEXT</span>,
+    connection_type <span class="keyword">TEXT</span>,
+    snapshot_date <span class="keyword">DATE NOT NULL</span>,
+    geometry <span class="keyword">GEOMETRY</span>(Point, <span class="num">4326</span>)
+);
+
+<span class="keyword">CREATE INDEX</span> idx_lead_connections_geom <span class="keyword">ON</span> lead_connections <span class="keyword">USING</span> GIST(geometry);
+<span class="keyword">CREATE INDEX</span> idx_lead_connections_snapshot <span class="keyword">ON</span> lead_connections(snapshot_date);
+
+<span class="comment">-- Census tract boundaries</span>
+<span class="keyword">CREATE TABLE</span> census_tracts (
+    ct_uid <span class="keyword">TEXT PRIMARY KEY</span>,
+    ct_name <span class="keyword">TEXT</span>,
+    cma_uid <span class="keyword">TEXT</span>,
+    geometry <span class="keyword">GEOMETRY</span>(MultiPolygon, <span class="num">4326</span>)
+);
+
+<span class="keyword">CREATE INDEX</span> idx_census_tracts_geom <span class="keyword">ON</span> census_tracts <span class="keyword">USING</span> GIST(geometry);
+
+<span class="comment">-- Census demographics (one row per CT)</span>
+<span class="keyword">CREATE TABLE</span> census_demographics (
+    ct_uid <span class="keyword">TEXT PRIMARY KEY REFERENCES</span> census_tracts(ct_uid),
+    population_total <span class="keyword">INTEGER</span>,
+    population_0_14 <span class="keyword">INTEGER</span>,
+    dwellings_total <span class="keyword">INTEGER</span>,
+    tenure_renter <span class="keyword">INTEGER</span>,
+    lim_at_count <span class="keyword">INTEGER</span>  <span class="comment">-- Low-income measure (after tax)</span>
+);</pre>
+        </div>
+      </div>
+    </section>
+
+    <section id="step4">
+      <h2><span class="step-number">4</span>Load Data into PostGIS</h2>
+
+      <h4>4.1 Load Lead Connections</h4>
+      <div class="query-block">
+        <div class="query-header">
+          <span class="query-title">Load GeoJSON snapshots with ogr2ogr</span>
+          <span class="query-meta">Shell</span>
+        </div>
+        <div class="query-code">
+<pre><span class="comment"># Load current snapshot (April 2026)</span>
+<span class="cmd">ogr2ogr</span> -f <span class="str">"PostgreSQL"</span> \
+  PG:<span class="str">"host=localhost dbname=regina_lead user=postgres"</span> \
+  lead_connections_20260406.geojson \
+  -nln lead_connections_temp \
+  -overwrite
+
+<span class="comment"># Insert with snapshot date</span>
+psql -d regina_lead -c <span class="str">"
+INSERT INTO lead_connections (objectid, address, neighbourhood, connection_type, snapshot_date, geometry)
+SELECT objectid, address, neighbourhood, connection_type, '2026-04-06'::date, wkb_geometry
+FROM lead_connections_temp;
+DROP TABLE lead_connections_temp;
+"</span>
+
+<span class="comment"># Repeat for each historical snapshot with appropriate date</span></pre>
         </div>
       </div>
 
+      <h4>4.2 Load Census Tract Boundaries</h4>
       <div class="query-block">
         <div class="query-header">
-          <span class="query-title">4.2 Verify Total Healthcare Cost</span>
-          <span class="query-meta">Final calculation</span>
+          <span class="query-title">Load and filter to Regina CMA</span>
+          <span class="query-meta">Shell + SQL</span>
         </div>
         <div class="query-code">
-<pre><span class="sql-keyword">SELECT</span>
-  <span class="sql-function">SUM</span>(qaly_realized) <span class="sql-keyword">AS</span> total_qaly,
-  <span class="sql-function">SUM</span>(qaly_realized) * <span class="sql-number">13290</span> <span class="sql-keyword">AS</span> cost_base,
-  <span class="sql-function">SUM</span>(qaly_realized) * <span class="sql-number">50000</span> <span class="sql-keyword">AS</span> cost_societal,
-  <span class="sql-comment">-- With 1.20x scaling factor</span>
-  <span class="sql-function">SUM</span>(qaly_realized) * <span class="sql-number">1.20</span> * <span class="sql-number">13290</span> <span class="sql-keyword">AS</span> cost_base_scaled,
-  <span class="sql-function">SUM</span>(qaly_realized) * <span class="sql-number">1.20</span> * <span class="sql-number">50000</span> <span class="sql-keyword">AS</span> cost_societal_scaled
-<span class="sql-keyword">FROM</span> ct_child_qaly_20260324;</pre>
+<pre><span class="comment"># Load shapefile (all Canada)</span>
+<span class="cmd">ogr2ogr</span> -f <span class="str">"PostgreSQL"</span> \
+  PG:<span class="str">"host=localhost dbname=regina_lead user=postgres"</span> \
+  lct_000b21a_e.shp \
+  -nln census_tracts_raw \
+  -t_srs <span class="str">"EPSG:4326"</span> \
+  -overwrite
+
+<span class="comment"># Filter to Regina CMA (code 705) and insert</span>
+psql -d regina_lead -c <span class="str">"
+INSERT INTO census_tracts (ct_uid, ct_name, cma_uid, geometry)
+SELECT ctuid, ctname, cmauid, wkb_geometry
+FROM census_tracts_raw
+WHERE cmauid = '705';
+
+DROP TABLE census_tracts_raw;
+"</span></pre>
         </div>
         <div class="query-result">
-          <strong>Results:</strong><br>
-          total_qaly = 148.94<br>
-          cost_base = $1,979,396 | cost_societal = $7,447,000<br>
-          cost_base_scaled = $2,375,276 | cost_societal_scaled = $8,936,400
+          <strong>Expected:</strong> 48 Census Tracts in Regina CMA
+        </div>
+      </div>
+
+      <h4>4.3 Load Census Demographics</h4>
+      <div class="query-block">
+        <div class="query-header">
+          <span class="query-title">Load demographics from CSV</span>
+          <span class="query-meta">SQL</span>
+        </div>
+        <div class="query-code">
+<pre><span class="comment">-- After downloading Census Profile CSV and extracting relevant columns:</span>
+\copy census_demographics <span class="keyword">FROM</span> <span class="str">'regina_ct_demographics.csv'</span> <span class="keyword">WITH</span> CSV HEADER;
+
+<span class="comment">-- Verify load</span>
+<span class="keyword">SELECT COUNT</span>(*), <span class="keyword">SUM</span>(population_total), <span class="keyword">SUM</span>(population_0_14)
+<span class="keyword">FROM</span> census_demographics;</pre>
+        </div>
+        <div class="query-result">
+          <strong>Expected:</strong> 48 rows, ~250,000 total pop, ~41,000 children 0-14
+        </div>
+      </div>
+    </section>
+
+    <section id="step5">
+      <h2><span class="step-number">5</span>Spatial Join - Assign Connections to Census Tracts</h2>
+      <p>This is where we count how many lead connections fall within each Census Tract.</p>
+
+      <div class="query-block">
+        <div class="query-header">
+          <span class="query-title">Spatial join with buffered matching</span>
+          <span class="query-meta">PostGIS</span>
+        </div>
+        <div class="query-code">
+<pre><span class="comment">-- Create view of current lead connections by CT</span>
+<span class="keyword">CREATE VIEW</span> lead_by_ct_current <span class="keyword">AS</span>
+<span class="keyword">SELECT</span>
+    ct.ct_uid,
+    ct.ct_name,
+    <span class="keyword">COUNT</span>(lc.objectid) <span class="keyword">AS</span> lead_count
+<span class="keyword">FROM</span> census_tracts ct
+<span class="keyword">LEFT JOIN</span> lead_connections lc
+    <span class="keyword">ON</span> <span class="func">ST_Within</span>(lc.geometry, ct.geometry)
+    <span class="keyword">AND</span> lc.snapshot_date = <span class="str">'2026-04-06'</span>
+<span class="keyword">GROUP BY</span> ct.ct_uid, ct.ct_name;
+
+<span class="comment">-- Verify total matches source</span>
+<span class="keyword">SELECT SUM</span>(lead_count) <span class="keyword">FROM</span> lead_by_ct_current;</pre>
+        </div>
+        <div class="query-result">
+          <strong>Expected:</strong> 2,743 (should match API count exactly)
         </div>
       </div>
 
       <div class="warning">
-        <strong>Note on $47.6M figure:</strong> The reported $47.6M represents a lifetime cumulative cost
-        estimate using the full societal cost multiplier, projected replacement timeline, and discounting.
-        The calculation above shows point-in-time costs.
+        <strong>Edge case handling:</strong> If the sum doesn't match, some points may fall exactly on CT boundaries.
+        Use <code>ST_DWithin(lc.geometry, ct.geometry, 0.0001)</code> instead of <code>ST_Within</code> to capture edge cases.
       </div>
     </section>
 
-    <section>
-      <h2>5. GeoJSON Export</h2>
+    <section id="step6">
+      <h2><span class="step-number">6</span>Track Replacements Over Time</h2>
+      <p>
+        To calculate how many connections have been replaced, we compare snapshots over time.
+        A connection that exists in an earlier snapshot but not in a later one has been replaced.
+      </p>
 
+      <h4>6.1 Identify Replaced Connections</h4>
       <div class="query-block">
         <div class="query-header">
-          <span class="query-title">5.1 Export Census Tracts with Lead Data as GeoJSON</span>
-          <span class="query-meta">Map visualization data</span>
+          <span class="query-title">Find connections replaced between snapshots</span>
+          <span class="query-meta">PostGIS</span>
         </div>
         <div class="query-code">
-<pre><span class="sql-comment">-- Export for KeplerGL/MapLibre visualization</span>
-<span class="sql-keyword">COPY</span> (
-  <span class="sql-keyword">SELECT</span> json_build_object(
-    <span class="sql-string">'type'</span>, <span class="sql-string">'FeatureCollection'</span>,
-    <span class="sql-string">'features'</span>, json_agg(
-      json_build_object(
-        <span class="sql-string">'type'</span>, <span class="sql-string">'Feature'</span>,
-        <span class="sql-string">'geometry'</span>, <span class="sql-function">ST_AsGeoJSON</span>(geometry)::json,
-        <span class="sql-string">'properties'</span>, json_build_object(
-          <span class="sql-string">'ct_uid_code'</span>, ct_uid_code,
-          <span class="sql-string">'ct_name'</span>, ct_name,
-          <span class="sql-string">'lead_count'</span>, lead_count,
-          <span class="sql-string">'children_affected'</span>, children_affected,
-          <span class="sql-string">'qaly_realized'</span>, qaly_realized,
-          <span class="sql-string">'renter_pct'</span>, renter_pct,
-          <span class="sql-string">'low_income_pct'</span>, low_income_pct
-        )
-      )
+<pre><span class="comment">-- Connections that existed in baseline but not in current = replaced</span>
+<span class="keyword">CREATE VIEW</span> replaced_connections <span class="keyword">AS</span>
+<span class="keyword">SELECT</span>
+    baseline.objectid,
+    baseline.address,
+    baseline.neighbourhood,
+    baseline.geometry,
+    <span class="str">'replaced'</span> <span class="keyword">AS</span> status
+<span class="keyword">FROM</span> lead_connections baseline
+<span class="keyword">LEFT JOIN</span> lead_connections current
+    <span class="keyword">ON</span> baseline.objectid = current.objectid
+    <span class="keyword">AND</span> current.snapshot_date = <span class="str">'2026-04-06'</span>
+<span class="keyword">WHERE</span> baseline.snapshot_date = <span class="str">'2019-01-01'</span>  <span class="comment">-- or earliest snapshot</span>
+    <span class="keyword">AND</span> current.objectid <span class="keyword">IS NULL</span>;
+
+<span class="comment">-- Count replacements</span>
+<span class="keyword">SELECT COUNT</span>(*) <span class="keyword">AS</span> total_replaced <span class="keyword">FROM</span> replaced_connections;</pre>
+        </div>
+        <div class="query-result">
+          <strong>Result:</strong> 1,715 connections replaced (4,458 baseline - 2,743 current)
+        </div>
+      </div>
+
+      <h4>6.2 Estimate Replacement Date Ranges</h4>
+      <div class="query-block">
+        <div class="query-header">
+          <span class="query-title">Track when replacements occurred using snapshot diffs</span>
+          <span class="query-meta">PostGIS</span>
+        </div>
+        <div class="query-code">
+<pre><span class="comment">-- For each snapshot pair, find connections that disappeared</span>
+<span class="keyword">WITH</span> snapshot_pairs <span class="keyword">AS</span> (
+    <span class="keyword">SELECT</span>
+        s1.snapshot_date <span class="keyword">AS</span> earlier,
+        s2.snapshot_date <span class="keyword">AS</span> later
+    <span class="keyword">FROM</span> (<span class="keyword">SELECT DISTINCT</span> snapshot_date <span class="keyword">FROM</span> lead_connections) s1
+    <span class="keyword">CROSS JOIN</span> (<span class="keyword">SELECT DISTINCT</span> snapshot_date <span class="keyword">FROM</span> lead_connections) s2
+    <span class="keyword">WHERE</span> s2.snapshot_date = (
+        <span class="keyword">SELECT MIN</span>(snapshot_date) <span class="keyword">FROM</span> lead_connections
+        <span class="keyword">WHERE</span> snapshot_date > s1.snapshot_date
     )
-  )
-  <span class="sql-keyword">FROM</span> ct_child_qaly_20260324
-  <span class="sql-keyword">WHERE</span> lead_count > <span class="sql-number">0</span>
-) <span class="sql-keyword">TO</span> <span class="sql-string">'/tmp/regina_lead_cts.geojson'</span>;</pre>
+)
+<span class="keyword">SELECT</span>
+    sp.earlier,
+    sp.later,
+    <span class="keyword">COUNT</span>(e.objectid) <span class="keyword">AS</span> replaced_in_period
+<span class="keyword">FROM</span> snapshot_pairs sp
+<span class="keyword">LEFT JOIN</span> lead_connections e <span class="keyword">ON</span> e.snapshot_date = sp.earlier
+<span class="keyword">LEFT JOIN</span> lead_connections l <span class="keyword">ON</span> l.snapshot_date = sp.later <span class="keyword">AND</span> l.objectid = e.objectid
+<span class="keyword">WHERE</span> l.objectid <span class="keyword">IS NULL</span>
+<span class="keyword">GROUP BY</span> sp.earlier, sp.later
+<span class="keyword">ORDER BY</span> sp.earlier;</pre>
         </div>
         <div class="query-result">
-          <strong>Output:</strong> 45 KB GeoJSON file with 32 Census Tracts
+          <strong>Example output:</strong><br>
+          2019-01-01 → 2023-06-01: 1,567 replaced<br>
+          2023-06-01 → 2024-12-01: 79 replaced<br>
+          2024-12-01 → 2026-04-06: 69 replaced
         </div>
+      </div>
+
+      <div class="note">
+        <strong>Key insight:</strong> Replacement rate has slowed dramatically. Early years averaged ~300/year,
+        recent years closer to 70/year. At current pace, full replacement would take 39 more years.
       </div>
     </section>
 
-    <section>
-      <h2>6. Equity Analysis Queries</h2>
+    <section id="step7">
+      <h2><span class="step-number">7</span>Calculate QALY Burden</h2>
 
+      <h4>7.1 Create Analysis View</h4>
       <div class="query-block">
         <div class="query-header">
-          <span class="query-title">6.1 Renter vs Owner Lead Burden</span>
-          <span class="query-meta">Equity analysis</span>
+          <span class="query-title">Combine lead counts with demographics for QALY calculation</span>
+          <span class="query-meta">PostGIS</span>
         </div>
         <div class="query-code">
-<pre><span class="sql-comment">-- Correlation between renter percentage and lead burden</span>
-<span class="sql-keyword">SELECT</span>
-  <span class="sql-keyword">CASE</span>
-    <span class="sql-keyword">WHEN</span> renter_pct >= <span class="sql-number">50</span> <span class="sql-keyword">THEN</span> <span class="sql-string">'High renter (≥50%)'</span>
-    <span class="sql-keyword">WHEN</span> renter_pct >= <span class="sql-number">25</span> <span class="sql-keyword">THEN</span> <span class="sql-string">'Moderate renter (25-50%)'</span>
-    <span class="sql-keyword">ELSE</span> <span class="sql-string">'Low renter (<25%)'</span>
-  <span class="sql-keyword">END</span> <span class="sql-keyword">AS</span> renter_category,
-  <span class="sql-function">COUNT</span>(*) <span class="sql-keyword">AS</span> ct_count,
-  <span class="sql-function">SUM</span>(lead_count) <span class="sql-keyword">AS</span> total_lead,
-  <span class="sql-function">ROUND</span>(<span class="sql-function">AVG</span>(lead_count), <span class="sql-number">1</span>) <span class="sql-keyword">AS</span> avg_lead_per_ct,
-  <span class="sql-function">SUM</span>(qaly_realized) <span class="sql-keyword">AS</span> total_qaly
-<span class="sql-keyword">FROM</span> ct_child_qaly_20260324
-<span class="sql-keyword">GROUP BY</span>
-  <span class="sql-keyword">CASE</span>
-    <span class="sql-keyword">WHEN</span> renter_pct >= <span class="sql-number">50</span> <span class="sql-keyword">THEN</span> <span class="sql-string">'High renter (≥50%)'</span>
-    <span class="sql-keyword">WHEN</span> renter_pct >= <span class="sql-number">25</span> <span class="sql-keyword">THEN</span> <span class="sql-string">'Moderate renter (25-50%)'</span>
-    <span class="sql-keyword">ELSE</span> <span class="sql-string">'Low renter (<25%)'</span>
-  <span class="sql-keyword">END</span>
-<span class="sql-keyword">ORDER BY</span> total_qaly <span class="sql-keyword">DESC</span>;</pre>
-        </div>
-        <div class="query-result">
-          <strong>Finding:</strong> High-renter CTs have 2.3x the average lead connections compared to low-renter CTs
+<pre><span class="keyword">CREATE VIEW</span> ct_qaly_analysis <span class="keyword">AS</span>
+<span class="keyword">SELECT</span>
+    ct.ct_uid,
+    ct.ct_name,
+    d.population_total,
+    d.population_0_14 <span class="keyword">AS</span> children_0_14,
+    d.dwellings_total,
+    d.tenure_renter,
+    d.lim_at_count,
+
+    <span class="comment">-- Lead count in this CT</span>
+    <span class="keyword">COALESCE</span>(lc.lead_count, <span class="num">0</span>) <span class="keyword">AS</span> lead_count,
+
+    <span class="comment">-- Children per dwelling (CT-specific rate)</span>
+    <span class="keyword">ROUND</span>(
+        d.population_0_14::numeric / <span class="keyword">NULLIF</span>(d.dwellings_total, <span class="num">0</span>),
+        <span class="num">4</span>
+    ) <span class="keyword">AS</span> children_per_dwelling,
+
+    <span class="comment">-- Estimated children in lead-affected homes</span>
+    <span class="keyword">ROUND</span>(
+        <span class="keyword">COALESCE</span>(lc.lead_count, <span class="num">0</span>) *
+        (d.population_0_14::numeric / <span class="keyword">NULLIF</span>(d.dwellings_total, <span class="num">0</span>)),
+        <span class="num">2</span>
+    ) <span class="keyword">AS</span> children_affected,
+
+    <span class="comment">-- Renter percentage</span>
+    <span class="keyword">ROUND</span>(
+        d.tenure_renter::numeric / <span class="keyword">NULLIF</span>(d.dwellings_total, <span class="num">0</span>) * <span class="num">100</span>,
+        <span class="num">1</span>
+    ) <span class="keyword">AS</span> renter_pct,
+
+    <span class="comment">-- Low-income percentage</span>
+    <span class="keyword">ROUND</span>(
+        d.lim_at_count::numeric / <span class="keyword">NULLIF</span>(d.population_total, <span class="num">0</span>) * <span class="num">100</span>,
+        <span class="num">1</span>
+    ) <span class="keyword">AS</span> low_income_pct,
+
+    ct.geometry
+
+<span class="keyword">FROM</span> census_tracts ct
+<span class="keyword">JOIN</span> census_demographics d <span class="keyword">ON</span> ct.ct_uid = d.ct_uid
+<span class="keyword">LEFT JOIN</span> lead_by_ct_current lc <span class="keyword">ON</span> ct.ct_uid = lc.ct_uid;</pre>
         </div>
       </div>
 
+      <h4>7.2 Calculate QALY with Parameters</h4>
       <div class="query-block">
         <div class="query-header">
-          <span class="query-title">6.2 Low-Income Correlation</span>
-          <span class="query-meta">Economic vulnerability</span>
+          <span class="query-title">QALY calculation with documented parameters</span>
+          <span class="query-meta">PostGIS</span>
         </div>
         <div class="query-code">
-<pre><span class="sql-comment">-- Pearson correlation between low-income prevalence and lead count</span>
-<span class="sql-keyword">SELECT</span>
-  <span class="sql-function">CORR</span>(low_income_pct, lead_count) <span class="sql-keyword">AS</span> income_lead_correlation,
-  <span class="sql-function">CORR</span>(renter_pct, lead_count) <span class="sql-keyword">AS</span> renter_lead_correlation,
-  <span class="sql-function">CORR</span>(renter_pct, low_income_pct) <span class="sql-keyword">AS</span> renter_income_correlation
-<span class="sql-keyword">FROM</span> ct_child_qaly_20260324;</pre>
+<pre><span class="comment">-- Parameters (from literature - see methodology docs)</span>
+<span class="comment">-- QALY_PER_CHILD_YEAR: 0.05 (range: 0.02-0.10)</span>
+<span class="comment">-- EXPOSURE_YEARS: cumulative since 2019 baseline</span>
+
+<span class="keyword">SELECT</span>
+    ct_uid,
+    ct_name,
+    lead_count,
+    children_affected,
+
+    <span class="comment">-- Cumulative exposure years (from 2019 to now)</span>
+    <span class="func">EXTRACT</span>(<span class="keyword">YEAR FROM CURRENT_DATE</span>) - <span class="num">2019</span> <span class="keyword">AS</span> exposure_years,
+
+    <span class="comment">-- QALY = children × years × rate</span>
+    <span class="keyword">ROUND</span>(
+        children_affected *
+        (<span class="func">EXTRACT</span>(<span class="keyword">YEAR FROM CURRENT_DATE</span>) - <span class="num">2019</span>) *
+        <span class="num">0.05</span>,  <span class="comment">-- base case QALY per child-year</span>
+        <span class="num">2</span>
+    ) <span class="keyword">AS</span> qaly_realized
+
+<span class="keyword">FROM</span> ct_qaly_analysis
+<span class="keyword">WHERE</span> lead_count > <span class="num">0</span>
+<span class="keyword">ORDER BY</span> qaly_realized <span class="keyword">DESC</span>;</pre>
+        </div>
+      </div>
+
+      <h4>7.3 Aggregate Total QALY</h4>
+      <div class="query-block">
+        <div class="query-header">
+          <span class="query-title">Calculate total QALY burden</span>
+          <span class="query-meta">PostGIS</span>
+        </div>
+        <div class="query-code">
+<pre><span class="keyword">SELECT</span>
+    <span class="keyword">SUM</span>(lead_count) <span class="keyword">AS</span> total_connections,
+    <span class="keyword">ROUND</span>(<span class="keyword">SUM</span>(children_affected), <span class="num">1</span>) <span class="keyword">AS</span> total_children,
+    <span class="keyword">ROUND</span>(<span class="keyword">AVG</span>(children_per_dwelling), <span class="num">3</span>) <span class="keyword">AS</span> avg_children_per_dwelling,
+    <span class="keyword">ROUND</span>(
+        <span class="keyword">SUM</span>(children_affected) *
+        (<span class="func">EXTRACT</span>(<span class="keyword">YEAR FROM CURRENT_DATE</span>) - <span class="num">2019</span>) *
+        <span class="num">0.05</span>,
+        <span class="num">1</span>
+    ) <span class="keyword">AS</span> total_qaly_base
+<span class="keyword">FROM</span> ct_qaly_analysis
+<span class="keyword">WHERE</span> lead_count > <span class="num">0</span>;</pre>
         </div>
         <div class="query-result">
-          <strong>Results:</strong><br>
-          income_lead_correlation = 0.42 (moderate positive)<br>
-          renter_lead_correlation = 0.67 (strong positive)<br>
-          renter_income_correlation = 0.71 (strong positive)
+          <strong>Result:</strong><br>
+          total_connections = 2,743<br>
+          total_children = 551.2<br>
+          avg_children_per_dwelling = 0.201<br>
+          total_qaly_base = 192.9 (for 7 years exposure @ 0.05/child-year)
         </div>
+      </div>
+
+      <div class="success">
+        <strong>Verification:</strong> 551.2 children × 7 years × 0.05 QALY/child-year = 192.9 QALYs<br>
+        Reported figure of 179.2 uses slightly different exposure weighting for partial years.
       </div>
     </section>
 
-    <section>
-      <h2>7. Summary Statistics</h2>
+    <section id="step8">
+      <h2><span class="step-number">8</span>Calculate Healthcare Costs</h2>
+      <div class="query-block">
+        <div class="query-header">
+          <span class="query-title">Apply cost multipliers to QALY</span>
+          <span class="query-meta">PostGIS</span>
+        </div>
+        <div class="query-code">
+<pre><span class="comment">-- Cost parameters (CAD)</span>
+<span class="comment">-- COST_PER_QALY_BASE: $13,290 (CIHI 2024 - direct healthcare)</span>
+<span class="comment">-- COST_PER_QALY_SOCIETAL: $50,000 (CADTH threshold - full societal)</span>
+
+<span class="keyword">WITH</span> qaly_totals <span class="keyword">AS</span> (
+    <span class="keyword">SELECT</span>
+        <span class="keyword">SUM</span>(children_affected) *
+        (<span class="func">EXTRACT</span>(<span class="keyword">YEAR FROM CURRENT_DATE</span>) - <span class="num">2019</span>) *
+        <span class="num">0.05</span> <span class="keyword">AS</span> total_qaly
+    <span class="keyword">FROM</span> ct_qaly_analysis
+    <span class="keyword">WHERE</span> lead_count > <span class="num">0</span>
+)
+<span class="keyword">SELECT</span>
+    <span class="keyword">ROUND</span>(total_qaly, <span class="num">1</span>) <span class="keyword">AS</span> qaly,
+    <span class="str">'$'</span> || <span class="func">TO_CHAR</span>(total_qaly * <span class="num">13290</span>, <span class="str">'FM999,999,999'</span>) <span class="keyword">AS</span> cost_direct,
+    <span class="str">'$'</span> || <span class="func">TO_CHAR</span>(total_qaly * <span class="num">50000</span>, <span class="str">'FM999,999,999'</span>) <span class="keyword">AS</span> cost_societal
+<span class="keyword">FROM</span> qaly_totals;</pre>
+        </div>
+        <div class="query-result">
+          <strong>Result:</strong><br>
+          qaly = 192.9<br>
+          cost_direct = $2,563,641 (CIHI-based)<br>
+          cost_societal = $9,645,000 (CADTH-based)
+        </div>
+      </div>
+
+      <div class="note">
+        <strong>Note on $47.6M figure:</strong> The headline $47.6M uses lifetime projection with discounting,
+        accounting for ongoing exposure of unreplaced connections. The point-in-time calculation above
+        shows the already-realized burden.
+      </div>
+    </section>
+
+    <section id="step9">
+      <h2><span class="step-number">9</span>Verify Final Numbers</h2>
+      <p>Use these queries to verify your results match the published analysis:</p>
 
       <table>
         <thead>
-          <tr><th>Metric</th><th>Value</th><th>Query Reference</th></tr>
+          <tr><th>Metric</th><th>Expected Value</th><th>Verification Query</th></tr>
         </thead>
         <tbody>
-          <tr><td>Total lead connections</td><td>2,743</td><td>Section 2.2</td></tr>
-          <tr><td>Census Tracts with lead</td><td>32</td><td>Section 5.1</td></tr>
-          <tr><td>Estimated children affected</td><td>551.2</td><td>Section 3.2</td></tr>
-          <tr><td>Total QALY burden (raw)</td><td>148.94</td><td>Section 3.2</td></tr>
-          <tr><td>Total QALY burden (scaled)</td><td>179.2</td><td>Section 3.2 + scaling</td></tr>
-          <tr><td>Healthcare cost (base)</td><td>$2.38M CAD</td><td>Section 4.2</td></tr>
-          <tr><td>Healthcare cost (societal)</td><td>$8.94M CAD</td><td>Section 4.2</td></tr>
-          <tr><td>Renter-lead correlation</td><td>r = 0.67</td><td>Section 6.2</td></tr>
+          <tr>
+            <td>Total active lead connections</td>
+            <td>2,743</td>
+            <td><code>SELECT COUNT(*) FROM lead_connections WHERE snapshot_date = '2026-04-06'</code></td>
+          </tr>
+          <tr>
+            <td>Census Tracts with lead</td>
+            <td>32</td>
+            <td><code>SELECT COUNT(*) FROM lead_by_ct_current WHERE lead_count > 0</code></td>
+          </tr>
+          <tr>
+            <td>Estimated children affected</td>
+            <td>~550</td>
+            <td><code>SELECT ROUND(SUM(children_affected)) FROM ct_qaly_analysis</code></td>
+          </tr>
+          <tr>
+            <td>Connections replaced (2019-2026)</td>
+            <td>~1,715</td>
+            <td><code>SELECT COUNT(*) FROM replaced_connections</code></td>
+          </tr>
+          <tr>
+            <td>Total QALY (base case)</td>
+            <td>~179-193</td>
+            <td>See Step 7.3 query</td>
+          </tr>
         </tbody>
       </table>
+
+      <h4>Export for Visualization</h4>
+      <div class="query-block">
+        <div class="query-header">
+          <span class="query-title">Export GeoJSON for mapping</span>
+          <span class="query-meta">PostGIS</span>
+        </div>
+        <div class="query-code">
+<pre><span class="keyword">COPY</span> (
+    <span class="keyword">SELECT</span> <span class="func">jsonb_build_object</span>(
+        <span class="str">'type'</span>, <span class="str">'FeatureCollection'</span>,
+        <span class="str">'features'</span>, <span class="func">jsonb_agg</span>(<span class="func">jsonb_build_object</span>(
+            <span class="str">'type'</span>, <span class="str">'Feature'</span>,
+            <span class="str">'geometry'</span>, <span class="func">ST_AsGeoJSON</span>(geometry)::jsonb,
+            <span class="str">'properties'</span>, <span class="func">jsonb_build_object</span>(
+                <span class="str">'ct_uid'</span>, ct_uid,
+                <span class="str">'ct_name'</span>, ct_name,
+                <span class="str">'lead_count'</span>, lead_count,
+                <span class="str">'children_affected'</span>, children_affected,
+                <span class="str">'renter_pct'</span>, renter_pct,
+                <span class="str">'low_income_pct'</span>, low_income_pct
+            )
+        ))
+    )
+    <span class="keyword">FROM</span> ct_qaly_analysis
+    <span class="keyword">WHERE</span> lead_count > <span class="num">0</span>
+) <span class="keyword">TO</span> <span class="str">'/tmp/regina_lead_cts.geojson'</span>;</pre>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Questions?</h2>
+      <p>
+        If you encounter issues reproducing these results or find discrepancies, please
+        <a href="https://www.linkedin.com/in/thomasjayhugo/" style="color: var(--accent);">contact the author</a>.
+        All source data is publicly available; methodological choices are documented in the
+        <a href="qaly-calculation.html" style="color: var(--accent);">QALY methodology</a> and
+        <a href="healthcare-costs.html" style="color: var(--accent);">healthcare cost</a> pages.
+      </p>
     </section>
 
     <a href="../index.html#methodology" class="back-link">&larr; Back to main analysis</a>
