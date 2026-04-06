@@ -923,32 +923,33 @@ code {
 
 .narrative-slides {
   position: relative;
-  min-height: 60vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  min-height: 70vh;
+  display: grid;
+  place-items: center;
 }
 
 .narrative-slide {
-  position: absolute;
+  grid-area: 1 / 1;
   width: 100%;
   max-width: 900px;
-  margin: 0 auto;
+  padding: 40px 20px;
   opacity: 0;
   transform: translateY(30px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition: opacity 0.6s ease, transform 0.6s ease;
   pointer-events: none;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   gap: 32px;
+  visibility: hidden;
 }
 
 .narrative-slide.slide-active {
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
+  visibility: visible;
 }
 
 .slide-content {
