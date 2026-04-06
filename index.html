@@ -12,6 +12,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
   <link rel="stylesheet" href="styles.css" />
+  <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
   <div class="site-shell">
@@ -35,18 +36,7 @@
     <main>
       <section id="hero" class="hero section">
         <div class="hero-bg"></div>
-        <div class="hero-particles">
-          <div class="hero-particle"></div>
-          <div class="hero-particle"></div>
-          <div class="hero-particle"></div>
-          <div class="hero-particle"></div>
-          <div class="hero-particle"></div>
-          <div class="hero-particle"></div>
-          <div class="hero-particle"></div>
-          <div class="hero-particle"></div>
-          <div class="hero-particle"></div>
-          <div class="hero-particle"></div>
-        </div>
+        <canvas id="children-canvas" class="children-canvas" aria-label="Visualization: 1,540 particles representing affected children"></canvas>
         <div class="hero-copy">
           <p class="eyebrow">A city infrastructure failure with a human body count</p>
           <h1>Regina's Children Are Drinking Lead</h1>
@@ -866,11 +856,8 @@ FROM ct_child_healthcare_cost_20260324;
         onComplete: animateHeroStats
       });
 
-      // Particles fade in
-      _animate('.hero-particle', {
-        opacity: [0, 0.8],
-        scale: [0, 1]
-      }, { duration: 1500, delay: _stagger(100, { start: 800 }), ease: 'outCubic' });
+      // Initialize particle system (canvas-based)
+      initChildrenParticles();
     } else {
       // Instant show for reduced motion
       document.querySelectorAll('.hero-copy > *, .hero-stats .stat-card').forEach(el => {
@@ -944,6 +931,192 @@ FROM ct_child_healthcare_cost_20260324;
           btn.setAttribute('aria-expanded', !wasOpen);
         });
       });
+    }
+
+    // ===== CANVAS PARTICLE SYSTEM: 1,540 CHILDREN =====
+    // Each particle represents one affected child
+    function initChildrenParticles() {
+      const canvas = document.getElementById('children-canvas');
+      if (!canvas) return;
+
+      const ctx = canvas.getContext('2d');
+      const dpr = window.devicePixelRatio || 1;
+
+      // Neighborhood data (proportional to actual affected children)
+      const neighborhoods = [
+        { name: 'North Central', children: 326, color: '#f87171' },  // red - highest burden
+        { name: 'Cathedral', children: 287, color: '#a78bfa' },      // purple
+        { name: 'Heritage', children: 234, color: '#c4b5fd' },       // light purple
+        { name: 'Al Ritchie', children: 198, color: '#818cf8' },     // indigo
+        { name: 'Coronation Park', children: 156, color: '#6366f1' },
+        { name: 'Rosemont', children: 142, color: '#8b5cf6' },
+        { name: 'Other Areas', children: 197, color: '#a855f7' }     // remaining
+      ];
+
+      const totalChildren = neighborhoods.reduce((sum, n) => sum + n.children, 0);
+
+      // Reduce particle count on mobile for performance
+      const isMobile = window.innerWidth < 768;
+      const particleRatio = isMobile ? 0.1 : 1; // 10% on mobile
+
+      let particles = [];
+      let width, height;
+      let simulation;
+      let currentMode = 'scattered'; // scattered, clustered, flowing
+
+      function resize() {
+        const rect = canvas.parentElement.getBoundingClientRect();
+        width = rect.width;
+        height = rect.height;
+        canvas.width = width * dpr;
+        canvas.height = height * dpr;
+        canvas.style.width = width + 'px';
+        canvas.style.height = height + 'px';
+        ctx.scale(dpr, dpr);
+      }
+
+      function createParticles() {
+        particles = [];
+        let particleId = 0;
+
+        neighborhoods.forEach((neighborhood, ni) => {
+          const count = Math.floor(neighborhood.children * particleRatio);
+          for (let i = 0; i < count; i++) {
+            particles.push({
+              id: particleId++,
+              neighborhood: ni,
+              neighborhoodName: neighborhood.name,
+              color: neighborhood.color,
+              x: Math.random() * width,
+              y: Math.random() * height,
+              vx: 0,
+              vy: 0,
+              radius: isMobile ? 2 : 2.5,
+              alpha: 0, // Start invisible for fade-in
+              targetAlpha: 0.85
+            });
+          }
+        });
+      }
+
+      function initSimulation() {
+        // D3 force simulation for organic movement
+        simulation = d3.forceSimulation(particles)
+          .force('charge', d3.forceManyBody().strength(-0.3))
+          .force('collision', d3.forceCollide().radius(d => d.radius + 1))
+          .force('gravity', d3.forceY(height * 0.6).strength(0.0008)) // subtle downward drift
+          .force('center', d3.forceCenter(width / 2, height / 2).strength(0.01))
+          .alphaDecay(0.01)
+          .velocityDecay(0.3)
+          .on('tick', render);
+      }
+
+      function setClusterMode() {
+        if (currentMode === 'clustered') return;
+        currentMode = 'clustered';
+
+        // Create cluster centers based on neighborhoods
+        const clusterCenters = neighborhoods.map((n, i) => ({
+          x: width * (0.15 + (i % 4) * 0.22),
+          y: height * (0.3 + Math.floor(i / 4) * 0.35)
+        }));
+
+        simulation
+          .force('cluster', d3.forceX(d => clusterCenters[d.neighborhood].x).strength(0.05))
+          .force('clusterY', d3.forceY(d => clusterCenters[d.neighborhood].y).strength(0.05))
+          .force('center', null)
+          .alpha(0.5)
+          .restart();
+      }
+
+      function setScatteredMode() {
+        if (currentMode === 'scattered') return;
+        currentMode = 'scattered';
+
+        simulation
+          .force('cluster', null)
+          .force('clusterY', null)
+          .force('center', d3.forceCenter(width / 2, height / 2).strength(0.01))
+          .alpha(0.3)
+          .restart();
+      }
+
+      function render() {
+        ctx.clearRect(0, 0, width, height);
+
+        particles.forEach(p => {
+          // Fade in
+          if (p.alpha < p.targetAlpha) {
+            p.alpha = Math.min(p.alpha + 0.02, p.targetAlpha);
+          }
+
+          // Keep particles in bounds with soft bounce
+          if (p.x < 0) { p.x = 0; p.vx *= -0.5; }
+          if (p.x > width) { p.x = width; p.vx *= -0.5; }
+          if (p.y < 0) { p.y = 0; p.vy *= -0.5; }
+          if (p.y > height) { p.y = height; p.vy *= -0.5; }
+
+          // Draw particle with glow
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fillStyle = p.color;
+          ctx.globalAlpha = p.alpha;
+          ctx.fill();
+
+          // Subtle glow for larger particles
+          if (p.radius > 2) {
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius * 2, 0, Math.PI * 2);
+            ctx.fillStyle = p.color;
+            ctx.globalAlpha = p.alpha * 0.15;
+            ctx.fill();
+          }
+        });
+
+        ctx.globalAlpha = 1;
+      }
+
+      // Scroll-triggered mode changes
+      function initScrollTriggers() {
+        const heroSection = document.getElementById('hero');
+        const mapSection = document.getElementById('map-section');
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.target.id === 'hero' && entry.isIntersecting) {
+              setScatteredMode();
+            } else if (entry.target.id === 'map-section' && entry.isIntersecting) {
+              setClusterMode();
+            }
+          });
+        }, { threshold: 0.3 });
+
+        if (heroSection) observer.observe(heroSection);
+        if (mapSection) observer.observe(mapSection);
+      }
+
+      // Initialize
+      resize();
+      createParticles();
+      initSimulation();
+      initScrollTriggers();
+
+      // Handle resize
+      window.addEventListener('resize', () => {
+        resize();
+        particles.forEach(p => {
+          p.x = Math.min(p.x, width);
+          p.y = Math.min(p.y, height);
+        });
+        simulation.force('center', d3.forceCenter(width / 2, height / 2).strength(0.01));
+        simulation.alpha(0.3).restart();
+      });
+
+      // Particle count indicator
+      const countEl = document.querySelector('.hero-counter[data-value="1540"]');
+      if (countEl) {
+        countEl.title = `Each floating particle represents one of these ${Math.round(totalChildren * particleRatio)} children`;
+      }
     }
   </script>
 </body>
