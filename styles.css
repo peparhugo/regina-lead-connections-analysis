@@ -914,24 +914,28 @@ code {
 
 .narrative-hero {
   min-height: 100vh;
-  display: flex;
+  display: flex !important;
   flex-direction: column;
   justify-content: center;
-  padding: 80px 0 40px;
+  align-items: center;
+  padding: 80px 20px 40px;
   position: relative;
+  grid-template-columns: none !important;
 }
 
 .narrative-slides {
   position: relative;
-  min-height: 70vh;
-  display: grid;
-  place-items: center;
+  width: 100%;
+  max-width: 900px;
+  min-height: 60vh;
 }
 
 .narrative-slide {
-  grid-area: 1 / 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
   width: 100%;
-  max-width: 900px;
   padding: 40px 20px;
   opacity: 0;
   transform: translateY(30px);
@@ -942,14 +946,12 @@ code {
   align-items: center;
   text-align: center;
   gap: 32px;
-  visibility: hidden;
 }
 
 .narrative-slide.slide-active {
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
-  visibility: visible;
 }
 
 .slide-content {
