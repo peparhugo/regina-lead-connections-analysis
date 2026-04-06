@@ -33,54 +33,84 @@
     </header>
 
     <main>
-      <section id="hero" class="hero section">
-        <div class="hero-copy">
-          <p class="eyebrow">A city infrastructure failure with a human body count</p>
-          <h1>Regina's Children Are Drinking Lead</h1>
-          <p class="hero-text">Regina still has <strong>2,743 active lead service connections</strong> across 14 neighborhoods. An estimated <strong>1,540 children</strong> live in homes served by lead pipes — already costing <strong>179 quality-adjusted life years</strong> and <strong>$47.6 million</strong> in projected healthcare costs. The consequences of delayed replacement and weak disclosure rules are now quantified.</p>
-          <div class="hero-actions">
-            <a class="button button-primary" href="#map-section">See the map</a>
-            <a class="button button-secondary" href="#action">What needs to change</a>
-          </div>
-          <div class="data-source-badge">
-            <span class="badge-label">Open Data Source</span>
-            <a href="https://gis.regina.ca/arcgis/rest/services/OpenData/LeadConnectionAreas/MapServer/0" target="_blank" rel="noopener">
-              City of Regina ArcGIS API →
-            </a>
-            <span class="badge-verify">Verify the count yourself: <code>?where=1=1&returnCountOnly=true&f=json</code></span>
-          </div>
+      <!-- NARRATIVE HERO SLIDESHOW -->
+      <section id="hero" class="hero section narrative-hero">
+        <div class="narrative-slides">
+          <article class="narrative-slide slide-active" data-slide="1">
+            <div class="slide-content">
+              <p class="slide-kicker">The problem</p>
+              <h1 class="slide-headline"><span class="highlight-danger">2,743</span> lead pipes still poison Regina's water</h1>
+              <p class="slide-subtext">At the current pace of 220 replacements per year, that's <strong>12 more years</strong> until every child has lead-free water.</p>
+            </div>
+            <div class="slide-stat">
+              <span class="stat-number" data-value="2743">2,743</span>
+              <span class="stat-context">active lead service connections</span>
+            </div>
+          </article>
+
+          <article class="narrative-slide" data-slide="2">
+            <div class="slide-content">
+              <p class="slide-kicker">The harm</p>
+              <h1 class="slide-headline"><span class="highlight-purple">179</span> years of healthy life lost</h1>
+              <p class="slide-subtext"><strong>$47.6 million</strong> in healthcare costs. Mostly children. The burden is already locked in — and growing every day these pipes stay connected.</p>
+            </div>
+            <div class="slide-stat">
+              <span class="stat-number stat-qaly" data-value="179.2">179.2</span>
+              <span class="stat-context">QALYs (quality-adjusted life years)</span>
+            </div>
+          </article>
+
+          <article class="narrative-slide" data-slide="3">
+            <div class="slide-content">
+              <p class="slide-kicker">Who's affected</p>
+              <h1 class="slide-headline"><span class="highlight-amber">82%</span> renters in the hardest-hit neighborhoods</h1>
+              <p class="slide-subtext">Tenants can't authorize replacement. Landlords aren't required to disclose or test. The most vulnerable have the least power.</p>
+            </div>
+            <div class="slide-stat">
+              <span class="stat-number stat-renter" data-value="1540">~1,540</span>
+              <span class="stat-context">children in affected homes</span>
+            </div>
+          </article>
+
+          <article class="narrative-slide" data-slide="4">
+            <div class="slide-content">
+              <p class="slide-kicker">Who blocked action</p>
+              <h1 class="slide-headline">Two councillors voted against acceleration. <span class="highlight-danger">Twice.</span></h1>
+              <p class="slide-subtext">Bob Hawkins and John Findura voted NO on CR21-90 and CR23-97. The votes are public record.</p>
+            </div>
+            <div class="slide-stat slide-stat-vote">
+              <span class="stat-label-sm">CR21-90 (2021)</span>
+              <span class="stat-vote">7-4 against acceleration</span>
+            </div>
+          </article>
+
+          <article class="narrative-slide" data-slide="5">
+            <div class="slide-content">
+              <p class="slide-kicker">The path forward</p>
+              <h1 class="slide-headline">Here's what you can demand — at every level of government</h1>
+              <p class="slide-subtext">City. Province. Federal. Landlord. Concrete actions with real contacts below.</p>
+            </div>
+            <div class="slide-cta">
+              <a class="button button-primary" href="#action">Take action</a>
+              <a class="button button-secondary" href="#map-section">See the map</a>
+            </div>
+          </article>
         </div>
-        <div class="hero-stats">
-          <article class="stat-card stat-card-accent">
-            <span class="stat-label">Active lead connections</span>
-            <strong class="hero-counter" data-value="2743" data-suffix="">2,743</strong>
-            <p>Lead service lines still in service — verified from City ArcGIS data.</p>
-          </article>
-          <article class="stat-card stat-card-qaly">
-            <span class="stat-label">QALYs lost (children 0-14)</span>
-            <strong class="hero-counter" data-value="179.2" data-decimals="1">179.2</strong>
-            <p>Quality-adjusted life years — the health burden already locked in.</p>
-          </article>
-          <article class="stat-card stat-card-cost">
-            <span class="stat-label">Healthcare cost burden</span>
-            <strong class="hero-counter" data-value="47.6" data-prefix="$" data-suffix="M" data-decimals="1">$47.6M</strong>
-            <p>Projected lifetime healthcare costs from childhood lead exposure.</p>
-          </article>
-          <article class="stat-card">
-            <span class="stat-label">Replaced since 2019</span>
-            <strong class="hero-counter" data-value="1715" data-suffix="">1,715</strong>
-            <p>Connections replaced — 38% of original 4,458 baseline.</p>
-          </article>
-          <article class="stat-card">
-            <span class="stat-label">Children estimated affected</span>
-            <strong class="hero-counter" data-value="1540" data-prefix="~" data-suffix="">~1,540</strong>
-            <p>Children aged 0-14 in households with active lead connections.</p>
-          </article>
-          <article class="stat-card">
-            <span class="stat-label">Filter program coverage</span>
-            <strong class="hero-counter" data-value="25" data-prefix="~" data-suffix="%">~25%</strong>
-            <p>Ever-received — actual time-weighted protection is 3-10%.</p>
-          </article>
+
+        <nav class="slide-nav" aria-label="Narrative slides">
+          <button class="slide-dot active" data-target="1" aria-label="Slide 1: The problem"></button>
+          <button class="slide-dot" data-target="2" aria-label="Slide 2: The harm"></button>
+          <button class="slide-dot" data-target="3" aria-label="Slide 3: Who's affected"></button>
+          <button class="slide-dot" data-target="4" aria-label="Slide 4: Who blocked action"></button>
+          <button class="slide-dot" data-target="5" aria-label="Slide 5: Take action"></button>
+        </nav>
+
+        <div class="data-source-badge">
+          <span class="badge-label">Open Data Source</span>
+          <a href="https://gis.regina.ca/arcgis/rest/services/OpenData/LeadConnectionAreas/MapServer/0" target="_blank" rel="noopener">
+            City of Regina ArcGIS API →
+          </a>
+          <span class="badge-verify">Verified April 6, 2026</span>
         </div>
       </section>
 
@@ -352,29 +382,270 @@
 
       <section id="action" class="section action-section">
         <div class="section-heading">
-          <p class="eyebrow">What needs to change</p>
-          <h2>Regina does not need more soft language. It needs a harder replacement regime.</h2>
+          <p class="eyebrow">Take action</p>
+          <h2>What you can do — right now, at every level</h2>
+          <p>Select your situation below for specific contacts, templates, and concrete asks.</p>
         </div>
-        <div class="action-grid">
-          <article class="action-card">
-            <span>01</span>
-            <h3>Accelerate full lead-line replacement</h3>
-            <p>Move from incrementalism to an aggressively scheduled, publicly tracked replacement program.</p>
+
+        <nav class="action-tabs" role="tablist" aria-label="Action guide by audience">
+          <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="tab-resident" id="btn-resident">Resident</button>
+          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-tenant" id="btn-tenant">Tenant</button>
+          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-owner" id="btn-owner">Landlord/Owner</button>
+          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-city" id="btn-city">City Council</button>
+          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-province" id="btn-province">Province</button>
+          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-federal" id="btn-federal">Federal</button>
+        </nav>
+
+        <div class="action-panels">
+          <!-- RESIDENT TAB -->
+          <article class="action-panel active" role="tabpanel" id="tab-resident" aria-labelledby="btn-resident">
+            <h3>If you're a concerned resident</h3>
+            <ol class="action-steps">
+              <li>
+                <strong>Check your address</strong>
+                <p>See if your home has a lead service connection.</p>
+                <a class="action-link" href="https://www.regina.ca/home-property/water/water/lead-service-connections/" target="_blank" rel="noopener">City lead connection lookup →</a>
+              </li>
+              <li>
+                <strong>Get a free water filter</strong>
+                <p>The City provides NSF 53-certified filters to affected households at no cost.</p>
+                <a class="action-link" href="https://www.regina.ca/home-property/water/water/lead-service-connections/water-filter-request-application/" target="_blank" rel="noopener">Request a filter →</a>
+              </li>
+              <li>
+                <strong>Get your water tested</strong>
+                <p>Free testing available through the City.</p>
+                <a class="action-link" href="https://www.regina.ca/home-property/water/water/lead-service-connections/water-testing-request-form/" target="_blank" rel="noopener">Request water testing →</a>
+              </li>
+              <li>
+                <strong>Apply for replacement</strong>
+                <p>If you own your home, City covers city-side; financing available for private-side.</p>
+                <a class="action-link" href="https://www.regina.ca/home-property/water/water/lead-service-connections/lead-service-connection-replacement-application/" target="_blank" rel="noopener">Apply for replacement →</a>
+              </li>
+            </ol>
+            <div class="action-contact">
+              <span class="contact-label">Service Regina</span>
+              <a href="tel:306-777-7000" class="contact-phone">306-777-7000</a>
+            </div>
           </article>
-          <article class="action-card">
-            <span>02</span>
-            <h3>Mandate landlord disclosure and testing</h3>
-            <p>Tenants should not have to guess whether the water entering their home passes through lead.</p>
+
+          <!-- TENANT TAB -->
+          <article class="action-panel" role="tabpanel" id="tab-tenant" aria-labelledby="btn-tenant" hidden>
+            <h3>If you're a tenant</h3>
+            <div class="action-alert">
+              <strong>Know the gap:</strong> Saskatchewan law does NOT require landlords to test for lead or disclose lead service connections. You have limited legal leverage — but you can still act.
+            </div>
+            <ol class="action-steps">
+              <li>
+                <strong>Request a filter directly from the City</strong>
+                <p>You do NOT need landlord permission. The City will provide one free.</p>
+                <a class="action-link" href="https://www.regina.ca/home-property/water/water/lead-service-connections/water-filter-request-application/" target="_blank" rel="noopener">Request a filter →</a>
+              </li>
+              <li>
+                <strong>Ask your landlord in writing</strong>
+                <p>Request confirmation of lead status and their replacement plans. Keep a copy.</p>
+              </li>
+              <li>
+                <strong>File a complaint if needed</strong>
+                <p>If landlord refuses to address habitability concerns, contact the Office of Residential Tenancies.</p>
+                <a class="action-link" href="https://www.saskatchewan.ca/government/government-structure/boards-commissions-and-agencies/office-of-residential-tenancies" target="_blank" rel="noopener">ORT website →</a>
+              </li>
+            </ol>
+            <div class="action-template">
+              <h4>Template letter to your landlord</h4>
+              <pre class="template-text">Dear [Landlord Name],
+
+I am a tenant at [Address]. According to City of Regina records,
+approximately 2,743 properties still have lead service connections.
+
+I respectfully request:
+1. Confirmation of whether this property has a lead connection
+2. If yes, whether you have applied for the City's replacement program
+3. If no replacement plans, whether you will support a water filter
+
+The City offers financing and support. I can provide more information.
+
+Sincerely,
+[Your Name]
+[Date]</pre>
+            </div>
+            <div class="action-contact">
+              <span class="contact-label">Office of Residential Tenancies</span>
+              <a href="tel:306-787-1334" class="contact-phone">306-787-1334</a>
+              <span class="contact-extra">Toll-free: 1-888-215-2222</span>
+            </div>
           </article>
-          <article class="action-card">
-            <span>03</span>
-            <h3>Publish tract-level progress and failure</h3>
-            <p>Public reporting should show where replacement is happening, where it is stalling, and who is still being left behind.</p>
+
+          <!-- LANDLORD/OWNER TAB -->
+          <article class="action-panel" role="tabpanel" id="tab-owner" aria-labelledby="btn-owner" hidden>
+            <h3>If you're a landlord or property owner</h3>
+            <ol class="action-steps">
+              <li>
+                <strong>Access free city-side replacement</strong>
+                <p>The City replaces the portion of lead pipe they own at no cost to you.</p>
+              </li>
+              <li>
+                <strong>Use 0% financing for private-side</strong>
+                <p>Interest-free loans available. No administration fees (as of 2025). Reimbursement for installation costs.</p>
+                <a class="action-link" href="https://www.regina.ca/home-property/water/water/lead-service-connections/lead-service-connection-replacement-application/" target="_blank" rel="noopener">Apply for replacement →</a>
+              </li>
+              <li>
+                <strong>Protect tenants now</strong>
+                <p>While waiting for replacement, provide NSF 53-certified filters. Cost: ~$30-50/filter, or use the City's $200 rebate program.</p>
+                <a class="action-link" href="https://www.regina.ca/home-property/water/water/lead-service-connections/water-filter-rebate-application/" target="_blank" rel="noopener">Filter rebate program →</a>
+              </li>
+            </ol>
+            <div class="action-contact">
+              <span class="contact-label">Service Regina</span>
+              <a href="tel:306-777-7000" class="contact-phone">306-777-7000</a>
+            </div>
           </article>
-          <article class="action-card">
-            <span>04</span>
-            <h3>Force a provincial response</h3>
-            <p>Saskatchewan needs standards, disclosure rules, and money — not silence.</p>
+
+          <!-- CITY COUNCIL TAB -->
+          <article class="action-panel" role="tabpanel" id="tab-city" aria-labelledby="btn-city" hidden>
+            <h3>Contact your City Councillor</h3>
+            <ol class="action-steps">
+              <li>
+                <strong>Find your ward</strong>
+                <a class="action-link" href="https://www.regina.ca/city-government/city-council/wards" target="_blank" rel="noopener">Ward lookup by address →</a>
+              </li>
+              <li>
+                <strong>Email your councillor</strong>
+                <p>Use the template below. Be specific about what you're asking for.</p>
+              </li>
+            </ol>
+            <div class="action-template">
+              <h4>What to ask for</h4>
+              <ul class="ask-list">
+                <li>Accelerate replacement to a <strong>5-year timeline</strong></li>
+                <li><strong>Quarterly public reporting</strong> by neighborhood</li>
+                <li><strong>Equity-based prioritization</strong> (highest-renter, highest-child areas first)</li>
+                <li>Advocate for <strong>provincial and federal funding</strong></li>
+              </ul>
+              <h4>Sample email</h4>
+              <pre class="template-text">Subject: Accelerate Lead Service Line Replacement
+
+Dear Councillor [Name],
+
+I am a Ward [X] resident writing about lead service lines.
+
+Current situation:
+- 2,743 lead connections remain active
+- At 220/year, completion is 12+ years away
+- Children continue to be exposed
+
+I ask you to support:
+1. A 5-year accelerated timeline
+2. Quarterly public progress reports
+3. Equity-based neighborhood prioritization
+
+The cost is ~$2.27 per household/year. The cost of delay
+is measured in children's health.
+
+Sincerely,
+[Your Name]</pre>
+            </div>
+            <div class="action-contact">
+              <span class="contact-label">City Clerk</span>
+              <a href="tel:306-777-7262" class="contact-phone">306-777-7262</a>
+            </div>
+          </article>
+
+          <!-- PROVINCE TAB -->
+          <article class="action-panel" role="tabpanel" id="tab-province" aria-labelledby="btn-province" hidden>
+            <h3>Contact your provincial MLA</h3>
+            <div class="action-alert">
+              <strong>The gap:</strong> Saskatchewan has NO provincial lead-in-water standard, NO landlord disclosure requirement, and NO dedicated infrastructure funding.
+            </div>
+            <ol class="action-steps">
+              <li>
+                <strong>Find your MLA</strong>
+                <a class="action-link" href="https://www.legassembly.sk.ca/mlas/" target="_blank" rel="noopener">MLA finder →</a>
+              </li>
+              <li>
+                <strong>Write or call your MLA</strong>
+                <p>Ask for provincial action on all three fronts.</p>
+              </li>
+            </ol>
+            <div class="action-template">
+              <h4>What to demand</h4>
+              <ul class="ask-list">
+                <li><strong>Provincial drinking water standards</strong> that match or exceed federal guidelines</li>
+                <li><strong>Mandatory landlord disclosure</strong> of known lead service connections</li>
+                <li><strong>Provincial infrastructure funding</strong> to support municipal replacement programs</li>
+                <li><strong>RTA amendments</strong> requiring lead testing in rental properties</li>
+              </ul>
+              <h4>Sample letter</h4>
+              <pre class="template-text">Subject: Saskatchewan Needs Lead Protection Standards
+
+Dear MLA [Name],
+
+58% of water samples from older homes in Regina, Saskatoon,
+and Moose Jaw exceeded the 5 ppb lead limit (2013-2018 data).
+
+Saskatchewan currently:
+- Has no provincial lead standard beyond federal guidelines
+- Does not require landlords to disclose lead connections
+- Provides no provincial funding for lead remediation
+
+I ask you to advocate for provincial standards, mandatory
+disclosure, and infrastructure funding.
+
+Other provinces have stronger protections. Saskatchewan
+families deserve the same.
+
+Sincerely,
+[Your Name]</pre>
+            </div>
+            <div class="action-contact">
+              <span class="contact-label">Relevant Ministries</span>
+              <span class="contact-extra">Health (Jeremy Cockrill) • Water Security Agency (David Marit) • Government Relations (Eric Schmalz)</span>
+            </div>
+          </article>
+
+          <!-- FEDERAL TAB -->
+          <article class="action-panel" role="tabpanel" id="tab-federal" aria-labelledby="btn-federal" hidden>
+            <h3>Contact your federal MP</h3>
+            <ol class="action-steps">
+              <li>
+                <strong>Find your MP</strong>
+                <a class="action-link" href="https://www.ourcommons.ca/members/en" target="_blank" rel="noopener">MP finder by postal code →</a>
+              </li>
+              <li>
+                <strong>Ask for federal infrastructure support</strong>
+                <p>Reference the Newark model: with federal support, they replaced 23,000 lead pipes in 3 years.</p>
+              </li>
+            </ol>
+            <div class="action-template">
+              <h4>Federal programs that could help</h4>
+              <ul class="ask-list">
+                <li><strong>Investing in Canada Infrastructure Program (ICIP)</strong> — $33B+ nationally, Green Stream covers water</li>
+                <li><strong>Clean Water and Wastewater Fund</strong> — $2B for water infrastructure, closes 2026-27</li>
+                <li><strong>Housing Accelerator Fund</strong> — could include lead remediation criteria</li>
+              </ul>
+              <h4>Sample letter</h4>
+              <pre class="template-text">Subject: Federal Support for Lead Service Line Replacement
+
+Dear MP [Name],
+
+Regina has 2,743 active lead service connections. At current
+pace, complete replacement will take 12+ years.
+
+Newark, NJ replaced 23,000 lead pipes in 3 years with
+federal/state coordination. Canadian children deserve
+the same urgency.
+
+I ask you to:
+1. Advocate for dedicated federal lead replacement funding
+2. Ensure Saskatchewan receives fair infrastructure allocation
+3. Include lead remediation in Housing Accelerator Fund criteria
+
+Sincerely,
+[Your Name]</pre>
+            </div>
+            <div class="action-contact">
+              <span class="contact-label">House of Commons</span>
+              <a class="action-link" href="https://www.ourcommons.ca/members/en" target="_blank" rel="noopener">Find your MP →</a>
+            </div>
           </article>
         </div>
       </section>
@@ -799,24 +1070,32 @@ FROM ct_child_healthcare_cost_20260324;
       revealObserver.observe(section);
     });
 
-    // 3. Simple hero entrance - fade in and slide up
+    // 3. Simple hero entrance - fade in and slide up (for narrative slideshow)
     if (!prefersReducedMotion) {
-      _animate('.hero-copy > *', {
-        opacity: [0, 1],
-        translateY: [20, 0]
-      }, { duration: 500, delay: _stagger(80), ease: 'outCubic' });
+      // Animate the first slide content
+      const firstSlide = document.querySelector('.narrative-slide.slide-active');
+      if (firstSlide) {
+        _animate(firstSlide.querySelectorAll('.slide-kicker, .slide-headline, .slide-subtext'), {
+          opacity: [0, 1],
+          translateY: [20, 0]
+        }, { duration: 600, delay: _stagger(100), ease: 'outCubic' });
 
-      _animate('.hero-stats .stat-card', {
+        _animate(firstSlide.querySelector('.slide-stat'), {
+          opacity: [0, 1],
+          scale: [0.9, 1]
+        }, { duration: 500, delay: 400, ease: 'outCubic' });
+      }
+
+      // Animate slide navigation
+      _animate('.slide-nav', {
         opacity: [0, 1],
-        translateY: [20, 0]
-      }, {
-        duration: 400,
-        delay: _stagger(60, { start: 300 }),
-        ease: 'outCubic',
-        onComplete: animateHeroStats
-      });
-    } else {
-      animateHeroStats();
+        translateY: [10, 0]
+      }, { duration: 400, delay: 600, ease: 'outCubic' });
+
+      // Animate data source badge
+      _animate('.data-source-badge', {
+        opacity: [0, 1]
+      }, { duration: 400, delay: 800, ease: 'outCubic' });
     }
 
     // 6. Pipeline flow in #built section
@@ -834,6 +1113,74 @@ FROM ct_child_healthcare_cost_20260324;
 
     const builtSection = document.getElementById('built');
     if (builtSection) builtObserver.observe(builtSection);
+
+    // ===== NARRATIVE SLIDESHOW =====
+    const slides = document.querySelectorAll('.narrative-slide');
+    const dots = document.querySelectorAll('.slide-dot');
+    let currentSlide = 1;
+    let autoplayInterval = null;
+
+    function goToSlide(n) {
+      currentSlide = n;
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('slide-active', parseInt(slide.dataset.slide) === n);
+      });
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', parseInt(dot.dataset.target) === n);
+      });
+    }
+
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        goToSlide(parseInt(dot.dataset.target));
+        // Reset autoplay on manual interaction
+        if (autoplayInterval) {
+          clearInterval(autoplayInterval);
+          startAutoplay();
+        }
+      });
+    });
+
+    function startAutoplay() {
+      autoplayInterval = setInterval(() => {
+        currentSlide = currentSlide >= slides.length ? 1 : currentSlide + 1;
+        goToSlide(currentSlide);
+      }, 6000); // 6 seconds per slide
+    }
+
+    // Start autoplay after initial load
+    if (slides.length > 0 && !prefersReducedMotion) {
+      setTimeout(startAutoplay, 3000);
+    }
+
+    // ===== ACTION TABS =====
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabPanels = document.querySelectorAll('.action-panel');
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('aria-controls');
+
+        // Update buttons
+        tabBtns.forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+
+        // Update panels
+        tabPanels.forEach(panel => {
+          if (panel.id === targetId) {
+            panel.classList.add('active');
+            panel.removeAttribute('hidden');
+          } else {
+            panel.classList.remove('active');
+            panel.setAttribute('hidden', '');
+          }
+        });
+      });
+    });
 
     // ===== METHODOLOGY ACCORDION with anime.js createLayout =====
     // Pattern extracted from anime.js examples/auto-layout/accordion
