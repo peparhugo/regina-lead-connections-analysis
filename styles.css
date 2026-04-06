@@ -852,15 +852,35 @@ code {
   z-index: 0;
 }
 
-/* Canvas particle system - 1,540 children */
-.children-canvas {
+/* Floating particles container */
+.hero-particles {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
+  overflow: hidden;
   pointer-events: none;
   z-index: 0;
 }
+
+.hero-particle {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: radial-gradient(circle, rgba(167, 139, 250, 0.9) 0%, rgba(139, 92, 246, 0.5) 50%, transparent 70%);
+  border-radius: 50%;
+  animation: float 8s ease-in-out infinite;
+  box-shadow: 0 0 20px rgba(167, 139, 250, 0.4), 0 0 40px rgba(139, 92, 246, 0.2);
+}
+
+.hero-particle:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; animation-duration: 7s; width: 8px; height: 8px; }
+.hero-particle:nth-child(2) { left: 20%; top: 60%; animation-delay: 1s; animation-duration: 9s; width: 14px; height: 14px; }
+.hero-particle:nth-child(3) { left: 35%; top: 30%; animation-delay: 2s; animation-duration: 6s; width: 10px; height: 10px; }
+.hero-particle:nth-child(4) { left: 50%; top: 70%; animation-delay: 0.5s; animation-duration: 8s; width: 16px; height: 16px; }
+.hero-particle:nth-child(5) { left: 65%; top: 25%; animation-delay: 1.5s; animation-duration: 10s; width: 12px; height: 12px; }
+.hero-particle:nth-child(6) { left: 80%; top: 55%; animation-delay: 2.5s; animation-duration: 7s; width: 8px; height: 8px; }
+.hero-particle:nth-child(7) { left: 90%; top: 35%; animation-delay: 3s; animation-duration: 9s; width: 14px; height: 14px; }
+.hero-particle:nth-child(8) { left: 15%; top: 80%; animation-delay: 0.8s; animation-duration: 11s; width: 10px; height: 10px; }
+.hero-particle:nth-child(9) { left: 45%; top: 15%; animation-delay: 1.8s; animation-duration: 6.5s; width: 18px; height: 18px; }
+.hero-particle:nth-child(10) { left: 75%; top: 85%; animation-delay: 2.8s; animation-duration: 8.5s; width: 12px; height: 12px; }
 
 /* Glowing stat cards */
 .stat-card {
