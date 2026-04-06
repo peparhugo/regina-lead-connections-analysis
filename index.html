@@ -11,7 +11,7 @@
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
-  <link rel="stylesheet" href="styles.css?v=4" />
+  <link rel="stylesheet" href="styles.css?v=5" />
 </head>
 <body>
   <div class="site-shell">
@@ -27,7 +27,8 @@
         <a href="#blocked">Who Blocked Action</a>
         <a href="#province">Provincial Vacuum</a>
         <a href="#timeline">Timeline</a>
-        <a href="#action">What Needs to Change</a>
+        <a href="#gaps">Gap Analysis</a>
+        <a href="#action">Take Action</a>
         <a href="#built">How It Was Built</a>
       </nav>
     </header>
@@ -581,6 +582,144 @@
             <p>Advocates highlight extreme tap test results while Saskatchewan still offers no meaningful provincial backstop.</p>
           </article>
         </div>
+      </section>
+
+      <!-- GAP ANALYSIS - from dreamlab investigative research -->
+      <section id="gaps" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Gap analysis</p>
+          <h2>What Regina is missing — compared to other jurisdictions</h2>
+          <p>Findings from investigative research comparing Regina to peer cities and provinces.</p>
+        </div>
+        <div class="gap-grid">
+          <article class="gap-card policy">
+            <h3>Policy Gaps</h3>
+            <ul>
+              <li><strong>No mandatory replacement at property sale</strong> — Ontario municipalities have this</li>
+              <li><strong>No landlord compliance requirement</strong> — no mechanism to compel participation</li>
+              <li><strong>Rejected 10-year acceleration</strong> — CR21-90-AMEND defeated 7-4</li>
+              <li><strong>Voluntary homeowner model</strong> — unlike US EPA's 10-year mandate</li>
+            </ul>
+          </article>
+          <article class="gap-card transparency">
+            <h3>Transparency Gaps</h3>
+            <ul>
+              <li><strong>Only biennial reporting</strong> — not annual (CR23-97-D1 passed 6-3)</li>
+              <li><strong>No public real-time dashboard</strong> — replacement progress by CT unavailable</li>
+              <li><strong>No cost-per-QALY analysis</strong> — not found in governance records</li>
+            </ul>
+          </article>
+          <article class="gap-card equity">
+            <h3>Equity Gaps</h3>
+            <ul>
+              <li><strong>No targeted program for high-renter CTs</strong> — despite 72% renters in worst-hit areas</li>
+              <li><strong>No mechanism to compel landlord participation</strong> — tenants can't authorize replacement</li>
+              <li><strong>No replacement sequence data by CT</strong> — can't verify equity prioritization</li>
+            </ul>
+          </article>
+        </div>
+        <div class="gap-comparison">
+          <h3>How Regina compares</h3>
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Jurisdiction</th>
+                <th>Timeline</th>
+                <th>Approach</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Regina</td>
+                <td>15 years (2021-2036)</td>
+                <td>Voluntary, gradual</td>
+              </tr>
+              <tr>
+                <td>Newark, NJ</td>
+                <td>3 years</td>
+                <td>Emergency acceleration — 23,000 lines replaced</td>
+              </tr>
+              <tr>
+                <td>Saskatoon, SK</td>
+                <td>Completed</td>
+                <td>Bulk replacement, smaller inventory</td>
+              </tr>
+              <tr>
+                <td>Ontario cities</td>
+                <td>Varies</td>
+                <td>Mandatory at property sale</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <style>
+          .gap-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+          }
+          .gap-card {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+          }
+          .gap-card h3 {
+            font-size: 1.1rem;
+            margin: 0 0 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid;
+          }
+          .gap-card.policy h3 { border-color: #f87171; color: #f87171; }
+          .gap-card.transparency h3 { border-color: #fbbf24; color: #fbbf24; }
+          .gap-card.equity h3 { border-color: #a78bfa; color: #a78bfa; }
+          .gap-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+          }
+          .gap-card li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--line);
+            font-size: 0.95rem;
+            color: var(--text-muted);
+          }
+          .gap-card li:last-child { border-bottom: none; }
+          .gap-card li strong { color: var(--text); display: block; margin-bottom: 4px; }
+          .gap-comparison {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+          }
+          .gap-comparison h3 {
+            margin: 0 0 20px;
+            font-size: 1.1rem;
+          }
+          .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+          }
+          .comparison-table th, .comparison-table td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--line);
+          }
+          .comparison-table th {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+          }
+          .comparison-table tr:first-child td {
+            background: rgba(248, 113, 113, 0.1);
+            font-weight: 600;
+          }
+          .comparison-table tr:nth-child(2) td {
+            background: rgba(52, 211, 153, 0.1);
+          }
+        </style>
       </section>
 
       <section id="action" class="section action-section">
