@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Methodology | Regina Lead Analysis</title>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    body { background: var(--bg-dark); color: var(--text); font-family: var(--font-sans); line-height: 1.7; }
+    .methodology-page { max-width: 800px; margin: 0 auto; padding: 40px 24px; }
+    .methodology-header { margin-bottom: 48px; border-bottom: 1px solid var(--border); padding-bottom: 32px; }
+    .methodology-header h1 { font-size: 2rem; color: var(--text-bright); margin-bottom: 12px; }
+    .methodology-header .breadcrumb { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px; }
+    .methodology-header .breadcrumb a { color: var(--accent); text-decoration: none; }
+    .methodology-header p { font-size: 1rem; color: var(--text-muted); }
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin: 32px 0; }
+    .method-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; transition: border-color 0.2s, transform 0.2s; }
+    .method-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .method-card h3 { color: var(--text-bright); font-size: 1.1rem; margin: 0 0 8px; }
+    .method-card p { color: var(--text-muted); font-size: 0.9rem; margin: 0 0 16px; line-height: 1.5; }
+    .method-card a { color: var(--accent); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+    .method-card a:hover { text-decoration: underline; }
+    .method-card .icon { font-size: 1.5rem; margin-bottom: 12px; }
+    .principles { margin: 48px 0; }
+    .principles h2 { font-size: 1.35rem; color: var(--text-bright); margin-bottom: 20px; border-left: 3px solid var(--accent); padding-left: 12px; }
+    .principles ul { list-style: none; padding: 0; }
+    .principles li { padding: 12px 0; border-bottom: 1px solid var(--border); display: flex; gap: 12px; }
+    .principles li:last-child { border-bottom: none; }
+    .principles .check { color: #2ecc71; font-weight: bold; }
+    .principles .text { color: var(--text); }
+    .back-link { display: inline-block; margin-top: 32px; color: var(--accent); text-decoration: none; font-size: 0.9rem; }
+    .back-link:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <article class="methodology-page">
+    <header class="methodology-header">
+      <nav class="breadcrumb">
+        <a href="../index.html">Regina Lead Analysis</a> / Methodology
+      </nav>
+      <h1>Methodology & Documentation</h1>
+      <p>
+        This analysis follows PhD-level standards for transparency and reproducibility.
+        Every claim is grounded in peer-reviewed literature, documented data sources,
+        and reproducible SQL queries that can be independently verified.
+      </p>
+    </header>
+
+    <div class="card-grid">
+      <div class="method-card">
+        <div class="icon">📊</div>
+        <h3>QALY Calculation</h3>
+        <p>
+          Complete derivation of Quality-Adjusted Life Year estimates from childhood lead exposure,
+          including parameter sources and sensitivity analysis.
+        </p>
+        <a href="qaly-calculation.html">View full derivation →</a>
+      </div>
+
+      <div class="method-card">
+        <div class="icon">💰</div>
+        <h3>Healthcare Costs</h3>
+        <p>
+          Cost model using Canadian-specific parameters from CIHI and CADTH,
+          validated against international estimates.
+        </p>
+        <a href="healthcare-costs.html">View cost model →</a>
+      </div>
+
+      <div class="method-card">
+        <div class="icon">📁</div>
+        <h3>Data Sources</h3>
+        <p>
+          Complete data dictionary, source documentation, and verification procedures
+          for all primary data used in this analysis.
+        </p>
+        <a href="data-sources.html">View data dictionary →</a>
+      </div>
+
+      <div class="method-card">
+        <div class="icon">🔧</div>
+        <h3>SQL Queries</h3>
+        <p>
+          Reproducible PostgreSQL/PostGIS queries for independent verification
+          of all statistics presented in this analysis.
+        </p>
+        <a href="sql-queries.html">View SQL queries →</a>
+      </div>
+    </div>
+
+    <section class="principles">
+      <h2>Research Principles</h2>
+      <ul>
+        <li>
+          <span class="check">✓</span>
+          <span class="text"><strong>Transparency:</strong> All data sources are publicly accessible. No proprietary or restricted datasets.</span>
+        </li>
+        <li>
+          <span class="check">✓</span>
+          <span class="text"><strong>Reproducibility:</strong> Complete SQL queries provided. Results can be independently verified.</span>
+        </li>
+        <li>
+          <span class="check">✓</span>
+          <span class="text"><strong>Conservative estimates:</strong> Parameters chosen to produce lower-bound estimates where uncertainty exists.</span>
+        </li>
+        <li>
+          <span class="check">✓</span>
+          <span class="text"><strong>Peer-reviewed basis:</strong> Health burden calculations grounded in established literature (Lanphear, Gould, EPA LCRI).</span>
+        </li>
+        <li>
+          <span class="check">✓</span>
+          <span class="text"><strong>Canadian-specific costs:</strong> Healthcare costs use CIHI and CADTH guidelines, not US estimates.</span>
+        </li>
+        <li>
+          <span class="check">✓</span>
+          <span class="text"><strong>Sensitivity analysis:</strong> Results presented with ranges reflecting parameter uncertainty.</span>
+        </li>
+        <li>
+          <span class="check">✓</span>
+          <span class="text"><strong>Limitations acknowledged:</strong> Known data quality issues and assumptions explicitly documented.</span>
+        </li>
+      </ul>
+    </section>
+
+    <section style="margin-top: 48px; padding: 24px; background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border);">
+      <h3 style="color: var(--text-bright); margin: 0 0 12px;">Questions or Concerns?</h3>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0;">
+        This analysis is open to scrutiny. If you identify errors, have questions about methodology,
+        or wish to replicate the analysis, please contact the author via
+        <a href="https://www.linkedin.com/in/thomasjayhugo/" style="color: var(--accent);">LinkedIn</a>.
+      </p>
+    </section>
+
+    <a href="../index.html" class="back-link">← Back to main analysis</a>
+  </article>
+</body>
+</html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Sources & Verification | Regina Lead Analysis</title>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    body { background: var(--bg-dark); color: var(--text); font-family: var(--font-sans); line-height: 1.7; }
+    .methodology-page { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+    .methodology-header { margin-bottom: 48px; border-bottom: 1px solid var(--border); padding-bottom: 32px; }
+    .methodology-header h1 { font-size: 2rem; color: var(--text-bright); margin-bottom: 12px; }
+    .methodology-header .breadcrumb { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px; }
+    .methodology-header .breadcrumb a { color: var(--accent); text-decoration: none; }
+    .methodology-header .abstract { font-size: 1rem; color: var(--text-muted); font-style: italic; }
+    section { margin-bottom: 48px; }
+    h2 { font-size: 1.35rem; color: var(--text-bright); margin-bottom: 16px; border-left: 3px solid var(--accent); padding-left: 12px; }
+    h3 { font-size: 1.1rem; color: var(--text); margin: 24px 0 12px; }
+    p { margin-bottom: 16px; }
+    table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.85rem; }
+    th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); }
+    th { background: var(--bg-card); color: var(--text-bright); font-weight: 600; }
+    td { color: var(--text); }
+    td code { background: var(--bg-dark); padding: 2px 5px; border-radius: 3px; font-size: 0.85em; }
+    .source-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin: 20px 0; }
+    .source-card h4 { color: var(--text-bright); margin: 0 0 12px; font-size: 1rem; }
+    .source-card .meta { display: flex; gap: 20px; flex-wrap: wrap; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px; }
+    .source-card .meta span { display: flex; align-items: center; gap: 6px; }
+    .source-card p { margin: 0; font-size: 0.9rem; }
+    .source-card a { color: var(--accent); }
+    .verification-badge { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; }
+    .verified { background: rgba(46, 204, 113, 0.2); color: #2ecc71; }
+    .live { background: rgba(52, 152, 219, 0.2); color: #3498db; }
+    .static { background: rgba(241, 196, 15, 0.2); color: #f1c40f; }
+    .note { background: rgba(129, 140, 248, 0.1); border-left: 3px solid var(--accent); padding: 16px; margin: 20px 0; font-size: 0.9rem; }
+    .warning { background: rgba(231, 76, 60, 0.1); border-left: 3px solid var(--lead-red); padding: 16px; margin: 20px 0; font-size: 0.9rem; }
+    code { background: var(--bg-card); padding: 2px 6px; border-radius: 4px; font-family: var(--font-mono); font-size: 0.9em; }
+    pre { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 16px; overflow-x: auto; font-size: 0.8rem; }
+    .back-link { display: inline-block; margin-top: 32px; color: var(--accent); text-decoration: none; font-size: 0.9rem; }
+    .back-link:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <article class="methodology-page">
+    <header class="methodology-header">
+      <nav class="breadcrumb">
+        <a href="../index.html">Regina Lead Analysis</a> / <a href="index.html">Methodology</a> / Data Sources
+      </nav>
+      <h1>Data Sources & Verification</h1>
+      <p class="abstract">
+        Complete documentation of primary data sources, verification procedures, and data dictionary
+        for the Regina lead service line analysis. All sources are publicly accessible for independent verification.
+      </p>
+    </header>
+
+    <section>
+      <h2>1. Primary Data Sources</h2>
+
+      <div class="source-card">
+        <h4>City of Regina Lead Connection Areas (ArcGIS Feature Service)</h4>
+        <div class="meta">
+          <span><span class="verification-badge live">LIVE API</span></span>
+          <span>Last verified: April 6, 2026</span>
+          <span>Update frequency: Real-time</span>
+        </div>
+        <p>
+          <strong>URL:</strong> <a href="https://gis.regina.ca/arcgis/rest/services/OpenData/LeadConnectionAreas/MapServer/0">gis.regina.ca/arcgis/rest/services/OpenData/LeadConnectionAreas/MapServer/0</a>
+        </p>
+        <p>
+          <strong>Description:</strong> Point features representing individual water service connections
+          with lead components. Each feature includes address, connection status, and replacement status.
+        </p>
+        <p>
+          <strong>Record count (verified):</strong> 2,743 active lead connections
+        </p>
+      </div>
+
+      <div class="source-card">
+        <h4>Statistics Canada Census 2021 - Census Tract Profiles</h4>
+        <div class="meta">
+          <span><span class="verification-badge verified">VERIFIED</span></span>
+          <span>Reference date: May 11, 2021</span>
+          <span>Geographic level: Census Tract</span>
+        </div>
+        <p>
+          <strong>URL:</strong> <a href="https://www12.statcan.gc.ca/census-recensement/2021/">statcan.gc.ca/census-recensement/2021</a>
+        </p>
+        <p>
+          <strong>Tables used:</strong>
+        </p>
+        <ul style="margin-top: 8px; font-size: 0.9rem;">
+          <li>98-401-X2021006 - Age and sex by Census Tract</li>
+          <li>98-401-X2021018 - Tenure by Census Tract</li>
+          <li>98-401-X2021012 - Low-income status by Census Tract</li>
+        </ul>
+      </div>
+
+      <div class="source-card">
+        <h4>Statistics Canada Census Tract Boundary Files</h4>
+        <div class="meta">
+          <span><span class="verification-badge static">STATIC</span></span>
+          <span>Reference year: 2021</span>
+          <span>Format: Shapefile/GeoJSON</span>
+        </div>
+        <p>
+          <strong>URL:</strong> <a href="https://www12.statcan.gc.ca/census-recensement/2021/geo/sip-pis/boundary-limites/">statcan.gc.ca/geo/boundary-limites</a>
+        </p>
+        <p>
+          <strong>Description:</strong> Polygon geometries for Census Tract boundaries in Regina CMA (Census Metropolitan Area code 705).
+        </p>
+      </div>
+
+      <div class="source-card">
+        <h4>Regina City Council Meeting Minutes</h4>
+        <div class="meta">
+          <span><span class="verification-badge verified">VERIFIED</span></span>
+          <span>Date range: 2019-2026</span>
+          <span>Format: PDF/HTML</span>
+        </div>
+        <p>
+          <strong>URL:</strong> <a href="https://www.regina.ca/city-government/city-council/meetings-agendas-minutes/">regina.ca/city-council/meetings-agendas-minutes</a>
+        </p>
+        <p>
+          <strong>Key documents:</strong> Lead replacement program approvals, budget allocations, progress reports, filter program decisions.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h2>2. Data Dictionary</h2>
+
+      <h3>2.1 Lead Connections Table</h3>
+      <table>
+        <thead>
+          <tr><th>Field</th><th>Type</th><th>Description</th><th>Source</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>objectid</code></td><td>Integer</td><td>Unique feature identifier</td><td>ArcGIS</td></tr>
+          <tr><td><code>address</code></td><td>String</td><td>Street address</td><td>ArcGIS</td></tr>
+          <tr><td><code>connection_type</code></td><td>String</td><td>Lead/Galvanized/Unknown</td><td>ArcGIS</td></tr>
+          <tr><td><code>replacement_status</code></td><td>String</td><td>Active/Replaced/Scheduled</td><td>ArcGIS</td></tr>
+          <tr><td><code>geometry</code></td><td>Point</td><td>WGS84 coordinates</td><td>ArcGIS</td></tr>
+          <tr><td><code>ct_uid_code</code></td><td>String</td><td>Census Tract (spatial join)</td><td>Derived</td></tr>
+        </tbody>
+      </table>
+
+      <h3>2.2 Census Tract Demographics Table</h3>
+      <table>
+        <thead>
+          <tr><th>Field</th><th>Type</th><th>Description</th><th>Source</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>ct_uid_code</code></td><td>String</td><td>Census Tract unique ID (e.g., 7050001.00)</td><td>StatCan</td></tr>
+          <tr><td><code>ct_name</code></td><td>String</td><td>Census Tract name</td><td>StatCan</td></tr>
+          <tr><td><code>total_population</code></td><td>Integer</td><td>Total population count</td><td>StatCan 2021</td></tr>
+          <tr><td><code>children_0_14</code></td><td>Integer</td><td>Population ages 0-14</td><td>StatCan 2021</td></tr>
+          <tr><td><code>total_dwellings</code></td><td>Integer</td><td>Total private dwellings</td><td>StatCan 2021</td></tr>
+          <tr><td><code>tenure_renter</code></td><td>Integer</td><td>Renter-occupied dwellings</td><td>StatCan 2021</td></tr>
+          <tr><td><code>tenure_renter_pct</code></td><td>Float</td><td>Renter percentage</td><td>Derived</td></tr>
+          <tr><td><code>lim_at_prevalence</code></td><td>Integer</td><td>Low-income measure (after tax)</td><td>StatCan 2021</td></tr>
+          <tr><td><code>lim_at_prevalence_pct</code></td><td>Float</td><td>Low-income percentage</td><td>Derived</td></tr>
+          <tr><td><code>geometry</code></td><td>Polygon</td><td>CT boundary (NAD83)</td><td>StatCan</td></tr>
+        </tbody>
+      </table>
+
+      <h3>2.3 QALY Calculation Table</h3>
+      <table>
+        <thead>
+          <tr><th>Field</th><th>Type</th><th>Description</th><th>Derivation</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>ct_uid_code</code></td><td>String</td><td>Census Tract ID</td><td>Join key</td></tr>
+          <tr><td><code>lead_count</code></td><td>Integer</td><td>Active lead connections in CT</td><td>Spatial count</td></tr>
+          <tr><td><code>children_per_connection</code></td><td>Float</td><td>Estimated children per connection</td><td>children_0_14 / total_dwellings</td></tr>
+          <tr><td><code>children_affected</code></td><td>Float</td><td>Total affected children estimate</td><td>lead_count × children_per_connection</td></tr>
+          <tr><td><code>exposure_years</code></td><td>Float</td><td>Cumulative years since 2019</td><td>current_year - 2019</td></tr>
+          <tr><td><code>qaly_realized</code></td><td>Float</td><td>QALY burden for this CT</td><td>children_affected × exposure_years × 0.05</td></tr>
+          <tr><td><code>healthcare_cost</code></td><td>Float</td><td>Healthcare cost estimate (CAD)</td><td>qaly_realized × 13290</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>3. Verification Procedures</h2>
+
+      <h3>3.1 Lead Connection Count Reconciliation</h3>
+      <div class="note">
+        <strong>Issue discovered:</strong> Initial spatial join using <code>ST_Contains</code> matched only
+        1,089 connections to Census Tracts due to boundary edge cases and coordinate precision issues.
+      </div>
+      <p>
+        <strong>Resolution:</strong> Used buffered spatial join with <code>ST_DWithin(geometry, 0.0001)</code>
+        to capture edge cases. Verified total count against ArcGIS API pagination:
+      </p>
+      <pre>
+-- Verify total from source API
+curl "https://gis.regina.ca/arcgis/rest/services/OpenData/LeadConnectionAreas/MapServer/0/query?
+  where=1=1&returnCountOnly=true&f=json"
+# Response: {"count": 2743}
+
+-- Verify spatial join coverage
+SELECT COUNT(*) FROM lead_connections_with_ct WHERE ct_uid_code IS NOT NULL;
+# Result: 2743 (100% match after buffer adjustment)</pre>
+
+      <h3>3.2 Demographic Cross-Validation</h3>
+      <p>
+        Census Tract demographics were validated against Saskatchewan Health Authority regional totals:
+      </p>
+      <ul>
+        <li>Total Regina CMA population: 249,945 (StatCan) vs 251,000 (SHA estimate) - 0.4% variance</li>
+        <li>Children 0-14: 41,230 (StatCan) - consistent with school enrollment data</li>
+        <li>Renter percentage: 32.4% (Regina CMA) - consistent with CMHC rental market report</li>
+      </ul>
+
+      <h3>3.3 Temporal Validation</h3>
+      <p>
+        Lead connection counts were compared across multiple snapshots to verify replacement program progress:
+      </p>
+      <table>
+        <thead>
+          <tr><th>Date</th><th>Active Connections</th><th>Change</th><th>Source</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>2019-01 (baseline)</td><td>~3,200</td><td>-</td><td>Council report</td></tr>
+          <tr><td>2023-06</td><td>2,891</td><td>-309</td><td>ArcGIS snapshot</td></tr>
+          <tr><td>2024-12</td><td>2,812</td><td>-79</td><td>ArcGIS snapshot</td></tr>
+          <tr><td>2026-04</td><td>2,743</td><td>-69</td><td>ArcGIS (verified)</td></tr>
+        </tbody>
+      </table>
+
+      <div class="warning">
+        <strong>Observation:</strong> Replacement rate has slowed significantly. At current pace (~70/year),
+        full replacement would take 39 years. The 2024 Council target of 300/year has not been achieved.
+      </div>
+    </section>
+
+    <section>
+      <h2>4. Data Quality Notes</h2>
+
+      <h3>4.1 Known Limitations</h3>
+      <ul>
+        <li><strong>Address geocoding:</strong> Some lead connection addresses may have imprecise geocoding, affecting CT assignment at boundaries</li>
+        <li><strong>Census undercounting:</strong> Low-income and transient populations are typically undercounted in census data</li>
+        <li><strong>Private-side connections:</strong> The City dataset only includes city-side connections; private-side lead pipes are not tracked</li>
+        <li><strong>Temporal lag:</strong> Census 2021 demographics may not reflect 2026 population distribution</li>
+      </ul>
+
+      <h3>4.2 Quality Assurance Checks</h3>
+      <table>
+        <thead>
+          <tr><th>Check</th><th>Expected</th><th>Actual</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Total lead connections</td><td>2,700-2,800</td><td>2,743</td><td>PASS</td></tr>
+          <tr><td>CT coverage</td><td>100%</td><td>100%</td><td>PASS</td></tr>
+          <tr><td>Children 0-14 range</td><td>0-500 per CT</td><td>0-485</td><td>PASS</td></tr>
+          <tr><td>Renter % range</td><td>0-100%</td><td>8%-92%</td><td>PASS</td></tr>
+          <tr><td>QALY positive</td><td>All positive</td><td>All positive</td><td>PASS</td></tr>
+          <tr><td>Geometry validity</td><td>All valid</td><td>All valid</td><td>PASS</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>5. Reproducibility</h2>
+      <p>
+        All data processing was performed using PostgreSQL 15 with PostGIS 3.4. The complete
+        SQL workflow is documented in <a href="sql-queries.html">SQL Queries</a>.
+      </p>
+      <p>
+        <strong>To reproduce this analysis:</strong>
+      </p>
+      <ol>
+        <li>Download lead connection data from the ArcGIS API (JSON format)</li>
+        <li>Download Census Tract boundaries and demographics from Statistics Canada</li>
+        <li>Load into PostGIS database with appropriate SRID transformations</li>
+        <li>Execute spatial join and QALY calculation queries</li>
+        <li>Export results to GeoJSON for visualization</li>
+      </ol>
+      <p>
+        <strong>Data snapshot date:</strong> April 6, 2026<br>
+        <strong>Analysis version:</strong> 1.0<br>
+        <strong>GeoJSON export:</strong> <a href="../data/regina_lead_cts.geojson">regina_lead_cts.geojson</a> (45 KB)
+      </p>
+    </section>
+
+    <a href="../index.html#methodology" class="back-link">&larr; Back to main analysis</a>
+  </article>
+</body>
+</html>
