@@ -34,19 +34,6 @@
 
     <main>
       <section id="hero" class="hero section">
-        <div class="hero-bg"></div>
-        <div class="hero-particles">
-          <div class="hero-particle"></div>
-          <div class="hero-particle"></div>
-          <div class="hero-particle"></div>
-          <div class="hero-particle"></div>
-          <div class="hero-particle"></div>
-          <div class="hero-particle"></div>
-          <div class="hero-particle"></div>
-          <div class="hero-particle"></div>
-          <div class="hero-particle"></div>
-          <div class="hero-particle"></div>
-        </div>
         <div class="hero-copy">
           <p class="eyebrow">A city infrastructure failure with a human body count</p>
           <h1>Regina's Children Are Drinking Lead</h1>
@@ -812,70 +799,23 @@ FROM ct_child_healthcare_cost_20260324;
       revealObserver.observe(section);
     });
 
-    // 3. Timeline pulse dots
-    document.querySelectorAll('.timeline-item').forEach(item => {
-      const dot = document.createElement('div');
-      dot.style.cssText = 'position:absolute;left:8px;top:24px;width:18px;height:18px;border-radius:50%;background:transparent;box-shadow:0 0 0 0 rgba(217,45,32,0.4);pointer-events:none;';
-      item.style.position = 'relative';
-      item.appendChild(dot);
-      _animate(dot, {
-        boxShadow: ['0 0 0 0 rgba(217,45,32,0.4)', '0 0 0 12px rgba(217,45,32,0)']
-      }, { duration: 2000, loop: true, ease: 'outSine', delay: Math.random() * 1000 });
-    });
-
-    // 4. DRAMATIC Hero entrance sequence
+    // 3. Simple hero entrance - fade in and slide up
     if (!prefersReducedMotion) {
-      // Eyebrow slides in from left with glow
-      _animate('.hero .eyebrow', {
+      _animate('.hero-copy > *', {
         opacity: [0, 1],
-        translateX: [-50, 0],
-        filter: ['blur(10px)', 'blur(0px)']
-      }, { duration: 800, delay: 100, ease: 'outExpo' });
+        translateY: [20, 0]
+      }, { duration: 500, delay: _stagger(80), ease: 'outCubic' });
 
-      // Title reveals with dramatic scale
-      _animate('.hero h1', {
-        opacity: [0, 1],
-        translateY: [80, 0],
-        scale: [0.9, 1]
-      }, { duration: 1200, delay: 300, ease: 'outExpo' });
-
-      // Hero text fades in
-      _animate('.hero-text', {
-        opacity: [0, 1],
-        translateY: [40, 0]
-      }, { duration: 800, delay: 700, ease: 'outCubic' });
-
-      // Buttons slide up
-      _animate('.hero-actions .button', {
-        opacity: [0, 1],
-        translateY: [30, 0],
-        scale: [0.95, 1]
-      }, { duration: 600, delay: _stagger(100, { start: 900 }), ease: 'outBack' });
-
-      // 5. Hero stats entrance - cards fly in from right with rotation
       _animate('.hero-stats .stat-card', {
         opacity: [0, 1],
-        translateX: [100, 0],
-        translateY: [20, 0],
-        rotateY: [15, 0],
-        scale: [0.8, 1]
+        translateY: [20, 0]
       }, {
-        duration: 800,
-        delay: _stagger(100, { start: 500 }),
-        ease: 'outExpo',
+        duration: 400,
+        delay: _stagger(60, { start: 300 }),
+        ease: 'outCubic',
         onComplete: animateHeroStats
       });
-
-      // Particles fade in
-      _animate('.hero-particle', {
-        opacity: [0, 0.8],
-        scale: [0, 1]
-      }, { duration: 1500, delay: _stagger(100, { start: 800 }), ease: 'outCubic' });
     } else {
-      // Instant show for reduced motion
-      document.querySelectorAll('.hero-copy > *, .hero-stats .stat-card').forEach(el => {
-        el.style.opacity = '1';
-      });
       animateHeroStats();
     }
 
