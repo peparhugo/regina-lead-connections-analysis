@@ -710,9 +710,6 @@ FROM ct_child_healthcare_cost_20260324;
     // ===== ANIME.JS v4 ENHANCEMENTS =====
     // v4 API: animate(targets, {keyframes}, {options})
 
-    // Check for reduced motion preference
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
     // 1. Hero stat counter animation with data attributes
     function animateHeroStats() {
       if (prefersReducedMotion) return; // Skip animation if reduced motion preferred
