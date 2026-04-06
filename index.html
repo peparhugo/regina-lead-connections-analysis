@@ -1,1579 +1,1468 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Regina's Children Are Drinking Lead</title>
-  <meta name="description" content="A public-interest investigation into Regina's lead service connections, the children exposed, the cost already locked in, and the political choices that slowed action." />
-  <meta name="theme-color" content="#0a0c10" />
-  <meta property="og:title" content="Regina's Children Are Drinking Lead" />
-  <meta property="og:description" content="2,743 active lead service connections. ~1,540 children affected. 179 QALYs lost. $47.6M healthcare burden. Verified from City of Regina ArcGIS data — April 2026." />
-  <meta property="og:type" content="website" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
-  <link rel="stylesheet" href="styles.css?v=5" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Regina's Lead Pipe Crisis</title>
+  <meta name="description" content="A scroll-driven narrative about Regina's remaining lead pipes, health burden, renter inequity, council decisions, and the demands residents can make now.">
+  <meta name="theme-color" content="#102033">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f5efe2;
+      --paper: rgba(255, 249, 239, 0.72);
+      --panel: rgba(16, 32, 51, 0.88);
+      --panel-strong: #102033;
+      --ink: #112134;
+      --muted: #516074;
+      --accent: #d1492e;
+      --accent-soft: rgba(209, 73, 46, 0.12);
+      --gold: #c88b1f;
+      --line: rgba(17, 33, 52, 0.14);
+      --shadow: 0 24px 80px rgba(16, 32, 51, 0.16);
+      --radius: 28px;
+      --content-width: min(1200px, calc(100vw - 2rem));
+      --step-width: min(38rem, 100%);
+      --visual-width: min(34rem, 100%);
+      /* Action guide variables */
+      --guide-bg: linear-gradient(145deg, rgba(16, 32, 51, 0.97), rgba(12, 24, 40, 0.99));
+      --guide-panel: rgba(255, 255, 255, 0.03);
+      --guide-panel-soft: rgba(255, 255, 255, 0.025);
+      --guide-text: #f6f1e7;
+      --guide-muted: rgba(246, 241, 231, 0.72);
+      --guide-link: #7dd3fc;
+      --guide-line: rgba(255, 255, 255, 0.08);
+      --guide-shadow: 0 30px 90px rgba(12, 23, 39, 0.34);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "IBM Plex Sans", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(200, 139, 31, 0.18), transparent 24rem),
+        radial-gradient(circle at 85% 20%, rgba(209, 73, 46, 0.14), transparent 20rem),
+        linear-gradient(180deg, #f7f1e7 0%, #f4ecdd 48%, #efe5d1 100%);
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .page-shell {
+      min-height: 100vh;
+      overflow-x: clip;
+    }
+
+    .hero {
+      position: relative;
+      padding: 7rem 1rem 3rem;
+    }
+
+    .hero__inner {
+      width: var(--content-width);
+      margin: 0 auto;
+      display: grid;
+      gap: 2rem;
+      align-items: end;
+      grid-template-columns: minmax(0, 1.15fr) minmax(18rem, 0.85fr);
+    }
+
+    .eyebrow,
+    .step__eyebrow,
+    .visual__index,
+    .footer__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .eyebrow::before,
+    .step__eyebrow::before,
+    .footer__eyebrow::before {
+      content: "";
+      width: 2.5rem;
+      height: 1px;
+      background: currentColor;
+      opacity: 0.5;
+    }
+
+    .hero h1 {
+      margin: 1rem 0;
+      max-width: 12ch;
+      font-family: "Fraunces", serif;
+      font-size: clamp(2.9rem, 8vw, 6.4rem);
+      line-height: 0.94;
+      letter-spacing: -0.03em;
+    }
+
+    .hero p {
+      max-width: 42rem;
+      margin: 0;
+      font-size: clamp(1.05rem, 1.9vw, 1.3rem);
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    .hero__lede {
+      display: grid;
+      gap: 1.25rem;
+    }
+
+    .hero__summary {
+      padding: 1.5rem;
+      border: 1px solid rgba(17, 33, 52, 0.08);
+      border-radius: 1.5rem;
+      background: var(--paper);
+      backdrop-filter: blur(16px);
+      box-shadow: var(--shadow);
+    }
+
+    .hero__summary strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .hero__summary p {
+      font-size: 0.97rem;
+      line-height: 1.6;
+    }
+
+    .scrolly {
+      width: var(--content-width);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(18rem, var(--visual-width));
+      gap: clamp(1.5rem, 3vw, 3.5rem);
+      align-items: start;
+      padding: 0 1rem 5rem;
+    }
+
+    .steps {
+      position: relative;
+      padding-bottom: 25vh;
+    }
+
+    .step {
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      padding: 8vh 0;
+    }
+
+    .step__card {
+      width: var(--step-width);
+      padding: clamp(1.5rem, 3vw, 2.5rem);
+      border-radius: var(--radius);
+      background: var(--paper);
+      border: 1px solid rgba(17, 33, 52, 0.08);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+      transform: translateY(2rem);
+      opacity: 0.54;
+      transition: opacity 300ms ease, transform 300ms ease, border-color 300ms ease;
+    }
+
+    .step.is-active .step__card {
+      opacity: 1;
+      transform: translateY(0);
+      border-color: rgba(209, 73, 46, 0.28);
+    }
+
+    .step__count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.4rem;
+      height: 2.4rem;
+      margin-bottom: 1rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    .step h2 {
+      margin: 0.85rem 0 1rem;
+      font-family: "Fraunces", serif;
+      font-size: clamp(2rem, 4.6vw, 3.5rem);
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.02rem;
+      line-height: 1.7;
+    }
+
+    .step__details {
+      display: grid;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+      padding-top: 1.1rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .step__statline {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .step__statline span:first-child {
+      color: var(--muted);
+    }
+
+    .visual {
+      position: sticky;
+      top: 6vh;
+      min-height: 88vh;
+      display: flex;
+      align-items: center;
+    }
+
+    .visual__panel {
+      width: 100%;
+      padding: clamp(1.5rem, 3vw, 2.2rem);
+      color: #f6f1e7;
+      background:
+        radial-gradient(circle at top right, rgba(200, 139, 31, 0.22), transparent 16rem),
+        linear-gradient(180deg, rgba(20, 38, 58, 0.98), rgba(10, 20, 34, 0.98));
+      border-radius: calc(var(--radius) + 0.2rem);
+      box-shadow: 0 30px 90px rgba(12, 23, 39, 0.34);
+      overflow: hidden;
+    }
+
+    .visual__rail {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .visual__rail span {
+      height: 0.28rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.15);
+      transition: background 250ms ease, transform 250ms ease;
+    }
+
+    .visual__rail span.is-active {
+      background: #f2c26b;
+      transform: scaleY(1.2);
+    }
+
+    .visual__headline {
+      display: grid;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .visual__headline h3 {
+      margin: 0;
+      font-family: "Fraunces", serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    .visual__headline p {
+      margin: 0;
+      color: rgba(246, 241, 231, 0.72);
+      line-height: 1.6;
+    }
+
+    .metric-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .metric-card {
+      display: grid;
+      gap: 0.35rem;
+      padding: 1rem 1.1rem;
+      border-radius: 1.2rem;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      min-height: 5.8rem;
+    }
+
+    .metric-card__label {
+      font-size: 0.76rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(246, 241, 231, 0.66);
+    }
+
+    .metric-card__value {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: clamp(1.7rem, 3vw, 2.45rem);
+      font-variant-numeric: tabular-nums;
+      line-height: 1;
+    }
+
+    .metric-card__note {
+      color: rgba(246, 241, 231, 0.72);
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    .action-list {
+      display: grid;
+      gap: 0.9rem;
+      margin-top: 1rem;
+    }
+
+    .action-item {
+      padding: 0.95rem 1rem;
+      border-radius: 1rem;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .action-item strong {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-size: 0.82rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #f2c26b;
+    }
+
+    .action-item p {
+      margin: 0;
+      color: rgba(246, 241, 231, 0.82);
+      line-height: 1.55;
+    }
+
+    .footer {
+      width: var(--content-width);
+      margin: 0 auto;
+      padding: 0 1rem 4rem;
+    }
+
+    .footer__card {
+      padding: 1.4rem 1.5rem;
+      border-radius: 1.4rem;
+      background: rgba(255, 249, 239, 0.58);
+      border: 1px solid rgba(17, 33, 52, 0.08);
+    }
+
+    .footer__card p {
+      margin: 0.75rem 0 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (max-width: 920px) {
+      .hero__inner,
+      .scrolly {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 5rem;
+      }
+
+      .visual {
+        position: relative;
+        top: auto;
+        min-height: auto;
+        order: -1;
+      }
+
+      .visual__panel {
+        position: sticky;
+        top: 1rem;
+      }
+
+      .step {
+        min-height: auto;
+        padding: 1.5rem 0 4rem;
+      }
+
+      .steps {
+        padding-bottom: 4rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero,
+      .scrolly,
+      .footer {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+      }
+
+      .hero__summary,
+      .step__card,
+      .visual__panel,
+      .footer__card {
+        border-radius: 1.2rem;
+      }
+
+      .step__statline {
+        flex-direction: column;
+        gap: 0.15rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .step__card {
+        transform: none;
+      }
+    }
+
+    /* ========== ACTION GUIDE SECTION ========== */
+    #action {
+      width: var(--content-width);
+      margin: 0 auto;
+      padding: 4rem 1rem;
+    }
+
+    #action .section-heading {
+      margin-bottom: 2rem;
+    }
+
+    #action .section-heading .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    #action .section-heading h2 {
+      font-family: "Fraunces", serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      line-height: 1.1;
+      margin: 0;
+    }
+
+    #action .action-guide {
+      padding: clamp(24px, 3vw, 36px);
+      border: 1px solid var(--guide-line);
+      border-radius: 28px;
+      background: var(--guide-bg);
+      box-shadow: var(--guide-shadow);
+      color: var(--guide-text);
+    }
+
+    #action .action-guide-head {
+      display: grid;
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+
+    #action .action-guide-head p {
+      margin: 0;
+      color: var(--guide-muted);
+      max-width: 68ch;
+    }
+
+    #action .action-guide-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    #action .action-guide-chip {
+      padding: 8px 12px;
+      border: 1px solid rgba(125, 211, 252, 0.2);
+      border-radius: 999px;
+      background: rgba(125, 211, 252, 0.08);
+      color: #d8f4ff;
+      font-size: 0.82rem;
+    }
+
+    #action .action-guide-tabs {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 8px;
+      margin: 0 0 22px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--guide-line);
+      -webkit-overflow-scrolling: touch;
+    }
+
+    #action .action-guide-tab {
+      flex: 0 0 auto;
+      min-width: 120px;
+      padding: 12px 16px;
+      border: 0;
+      border-radius: 14px;
+      background: transparent;
+      color: var(--guide-muted);
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 160ms ease, color 160ms ease;
+    }
+
+    #action .action-guide-tab:hover,
+    #action .action-guide-tab:focus-visible {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--guide-text);
+      outline: none;
+    }
+
+    #action .action-guide-tab.is-active {
+      background: linear-gradient(135deg, #f59e0b, #f97316);
+      color: #140f07;
+    }
+
+    #action .action-guide-panel {
+      display: none;
+      border: 1px solid var(--guide-line);
+      border-radius: 22px;
+      background: var(--guide-panel);
+      padding: clamp(18px, 2.5vw, 28px);
+    }
+
+    #action .action-guide-panel.is-active {
+      display: block;
+    }
+
+    #action .action-guide-panel-head {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    #action .action-guide-panel-head h3,
+    #action .action-guide-card h4,
+    #action .action-guide-template h4,
+    #action .action-guide-contacts h4,
+    #action .action-guide-alert h4 {
+      margin: 0;
+      color: var(--guide-text);
+    }
+
+    #action .action-guide-panel-head p,
+    #action .action-guide-card p,
+    #action .action-guide-alert,
+    #action .action-guide-contacts p,
+    #action .action-guide-list,
+    #action .action-guide-list li {
+      margin: 0;
+      color: var(--guide-muted);
+    }
+
+    #action .action-guide-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    #action .action-guide-card,
+    #action .action-guide-template,
+    #action .action-guide-contacts,
+    #action .action-guide-alert {
+      border: 1px solid var(--guide-line);
+      border-radius: 18px;
+      background: var(--guide-panel-soft);
+      padding: 18px;
+    }
+
+    #action .action-guide-card {
+      display: grid;
+      gap: 12px;
+      align-content: start;
+    }
+
+    #action .action-guide-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    #action .action-guide-link {
+      color: var(--guide-link);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    #action .action-guide-link:hover {
+      text-decoration: underline;
+    }
+
+    #action .action-guide-list {
+      padding-left: 18px;
+      display: grid;
+      gap: 8px;
+    }
+
+    #action .action-guide-template {
+      display: grid;
+      gap: 12px;
+    }
+
+    #action .action-guide-template-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    #action .action-guide-copy {
+      padding: 8px 12px;
+      border: 1px solid rgba(125, 211, 252, 0.24);
+      border-radius: 10px;
+      background: rgba(125, 211, 252, 0.08);
+      color: #d8f4ff;
+      font: inherit;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+
+    #action .action-guide-copy:hover {
+      background: rgba(125, 211, 252, 0.16);
+    }
+
+    #action .action-guide-template pre {
+      margin: 0;
+      padding: 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: #0a0f18;
+      color: #edf3fb;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.86rem;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      overflow-x: auto;
+    }
+
+    #action .action-guide-contacts {
+      display: grid;
+      gap: 12px;
+    }
+
+    #action .action-guide-contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    #action .action-guide-contact-row strong {
+      color: var(--guide-text);
+    }
+
+    #action .action-guide-contact-row a {
+      color: var(--guide-link);
+      text-decoration: none;
+    }
+
+    #action .action-guide-contact-row a:hover {
+      text-decoration: underline;
+    }
+
+    #action .action-guide-ward-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px 16px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    #action .action-guide-ward-list a {
+      color: var(--guide-text);
+      text-decoration: none;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+    }
+
+    #action .action-guide-ward-list a:hover {
+      color: var(--guide-link);
+    }
+
+    @media (max-width: 900px) {
+      #action .action-guide-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      #action .action-guide-tab {
+        min-width: 100px;
+        padding: 10px 12px;
+        font-size: 0.9rem;
+      }
+      #action .action-guide-ward-list {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
-  <div class="site-shell">
-    <header class="topbar">
-      <a class="brand" href="#hero">REGINA LEAD INVESTIGATION</a>
-      <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle navigation">
-        <span></span><span></span><span></span>
-      </button>
-      <nav id="site-nav" class="site-nav">
-        <a href="#map-section">Map</a>
-        <a href="#harm">The Harm</a>
-        <a href="#affected">Who's Affected</a>
-        <a href="#blocked">Who Blocked Action</a>
-        <a href="#province">Provincial Vacuum</a>
-        <a href="#timeline">Timeline</a>
-        <a href="#gaps">Gap Analysis</a>
-        <a href="#action">Take Action</a>
-        <a href="#built">How It Was Built</a>
-      </nav>
+  <div class="page-shell">
+    <header class="hero">
+      <div class="hero__inner">
+        <section class="hero__lede" aria-labelledby="page-title">
+          <span class="eyebrow">Regina lead data</span>
+          <h1 id="page-title">Five decisions. One slow public health failure.</h1>
+          <p>
+            Scroll through the evidence: how many lead pipes remain, what the health burden costs,
+            who bears it, how council slowed the timeline, and what residents can demand next.
+          </p>
+        </section>
+        <aside class="hero__summary" aria-label="Summary">
+          <strong>At a glance</strong>
+          <p>
+            Regina still has <b>2,743</b> lead pipes. The modeled burden reaches <b>179 years</b> of
+            healthy life lost and <b>$47.6 million</b> in healthcare costs, concentrated in
+            renter-heavy neighborhoods while replacement remains politically delayed.
+          </p>
+        </aside>
+      </div>
     </header>
 
-    <main>
-      <!-- NARRATIVE HERO SLIDESHOW -->
-      <section id="hero" class="story-hero">
-        <div class="story-slides" id="storySlides">
-          <div class="story-slide is-active" data-index="0">
-            <span class="story-label">The problem</span>
-            <h1><em>2,743</em> lead pipes still poison Regina's water</h1>
-            <p>At the current pace of 220 replacements per year, that's <strong>12 more years</strong> until every child has lead-free water.</p>
-            <div class="story-metric">
-              <span class="metric-value">2,743</span>
-              <span class="metric-label">active lead connections</span>
+    <main class="scrolly" id="scrolly">
+      <section class="steps" aria-label="Story beats">
+        <article class="step is-active" data-step="0">
+          <div class="step__card">
+            <div class="step__count">01</div>
+            <span class="step__eyebrow">The backlog</span>
+            <h2>2,743 lead pipes still poison Regina's water. 12 more years.</h2>
+            <p>
+              The city has reduced the total since 2019, but the remaining inventory still stretches
+              across years of daily exposure. At the recent pace, full removal remains a next-decade problem.
+            </p>
+            <div class="step__details" aria-label="Backlog details">
+              <div class="step__statline"><span>Lead pipes still active</span><strong>2,743</strong></div>
+              <div class="step__statline"><span>Current elimination runway</span><strong>12 more years</strong></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="step" data-step="1">
+          <div class="step__card">
+            <div class="step__count">02</div>
+            <span class="step__eyebrow">The harm</span>
+            <h2>179 years of healthy life lost. $47.6M healthcare costs.</h2>
+            <p>
+              Those numbers turn hidden exposure into public burden: lost healthy life, avoidable care,
+              and irreversible damage absorbed long before the last pipe is replaced.
+            </p>
+            <div class="step__details" aria-label="Health burden details">
+              <div class="step__statline"><span>Quality-adjusted life years lost</span><strong>179</strong></div>
+              <div class="step__statline"><span>Modeled healthcare burden</span><strong>$47.6M</strong></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="step" data-step="2">
+          <div class="step__card">
+            <div class="step__count">03</div>
+            <span class="step__eyebrow">Environmental inequity</span>
+            <h2>High-renter neighborhoods bear the burden. 82% renters.</h2>
+            <p>
+              Exposure clusters where tenants have the least control over replacement decisions.
+              Renters can drink the risk without owning the line, the property, or the timeline.
+            </p>
+            <div class="step__details" aria-label="Renter inequity details">
+              <div class="step__statline"><span>Renter concentration in hardest-hit areas</span><strong>82%</strong></div>
+              <div class="step__statline"><span>Who lacks replacement authority</span><strong>Tenants</strong></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="step" data-step="3">
+          <div class="step__card">
+            <div class="step__count">04</div>
+            <span class="step__eyebrow">The vote</span>
+            <h2>Council rejected 10-year timeline. CR21-90-AMEND defeated 7-4.</h2>
+            <p>
+              This was not just engineering drift. Council had a chance to accelerate removal and chose the
+              slower path, extending the period of exposure into more childhoods.
+            </p>
+            <div class="step__details" aria-label="Council vote details">
+              <div class="step__statline"><span>Amendment outcome</span><strong>Defeated 7-4</strong></div>
+              <div class="step__statline"><span>What was lost</span><strong>A faster 10-year target</strong></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="step" data-step="4">
+          <div class="step__card">
+            <div class="step__count">05</div>
+            <span class="step__eyebrow">The demands</span>
+            <h2>Here's what you can demand at every level of government.</h2>
+            <p>
+              Pressure works only when it is specific. Residents can demand timelines, disclosure,
+              landlord obligations, and targeted funding from the institutions that control each lever.
+            </p>
+            <div class="step__details" aria-label="Advocacy details">
+              <div class="step__statline"><span>City demand</span><strong>Accelerate replacement</strong></div>
+              <div class="step__statline"><span>Provincial and federal demand</span><strong>Mandate and fund removal</strong></div>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <aside class="visual" aria-live="polite">
+        <div class="visual__panel">
+          <div class="visual__rail" aria-hidden="true">
+            <span class="is-active"></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div class="visual__headline">
+            <span class="visual__index" id="visual-index">Beat 1 of 5</span>
+            <h3 id="visual-title">The backlog is still measured in years.</h3>
+            <p id="visual-copy">
+              Regina is not dealing with an isolated remnant. It is living with a city-scale inventory
+              that keeps exposure active while replacement drags on.
+            </p>
+          </div>
+
+          <div class="metric-grid" id="metric-grid">
+            <div class="metric-card">
+              <span class="metric-card__label" id="metric-1-label">Lead pipes remaining</span>
+              <span class="metric-card__value" id="metric-1-value" data-value="2743">0</span>
+              <span class="metric-card__note" id="metric-1-note">Still in service across Regina.</span>
+            </div>
+            <div class="metric-card">
+              <span class="metric-card__label" id="metric-2-label">Time at current pace</span>
+              <span class="metric-card__value" id="metric-2-value" data-value="12" data-suffix=" years">0</span>
+              <span class="metric-card__note" id="metric-2-note">A full generation of delay is still on the table.</span>
             </div>
           </div>
 
-          <div class="story-slide" data-index="1">
-            <span class="story-label">The harm</span>
-            <h1><em class="purple">179</em> years of healthy life lost</h1>
-            <p><strong>$47.6 million</strong> in healthcare costs. Mostly children. The burden is already locked in.</p>
-            <div class="story-metric purple">
-              <span class="metric-value">179.2</span>
-              <span class="metric-label">QALYs lost</span>
+          <div class="action-list" id="action-list" hidden>
+            <div class="action-item">
+              <strong>City</strong>
+              <p>Restore a 10-year or faster replacement target and publish block-level progress each quarter.</p>
             </div>
-          </div>
-
-          <div class="story-slide" data-index="2">
-            <span class="story-label">Who's affected</span>
-            <h1>High-renter neighborhoods bear the burden</h1>
-            <p>CT 0018.00: 152 lead lines, 72 children, 59.8% renters. Tenants can't authorize replacement. Landlords aren't required to disclose.</p>
-            <div class="story-metric amber">
-              <span class="metric-value">~1,540</span>
-              <span class="metric-label">children exposed</span>
+            <div class="action-item">
+              <strong>Province</strong>
+              <p>Require landlord disclosure and create enforceable standards for lead service line replacement.</p>
             </div>
-          </div>
-
-          <div class="story-slide" data-index="3">
-            <span class="story-label">Who blocked action</span>
-            <h1>Council rejected a <em>10-year</em> timeline. Chose 15.</h1>
-            <p>CR21-90-AMEND defeated 7-4. NO votes: Hawkins, Mancinelli, Findura, Mohl, Bresciani, Shaw, Masters.</p>
-            <div class="story-metric">
-              <span class="metric-value">7-4</span>
-              <span class="metric-label">against faster replacement</span>
-            </div>
-          </div>
-
-          <div class="story-slide" data-index="4">
-            <span class="story-label">The path forward</span>
-            <h1>Here's what you can demand — at every level</h1>
-            <p>City. Province. Federal. Landlord. Concrete actions below.</p>
-            <div class="story-actions">
-              <a href="#action" class="btn-action">Take Action</a>
-              <a href="#map-section" class="btn-secondary">See the Map</a>
+            <div class="action-item">
+              <strong>Federal</strong>
+              <p>Target infrastructure and housing funds to full lead line removal in high-burden renter areas.</p>
             </div>
           </div>
         </div>
+      </aside>
+    </main>
 
-        <div class="story-dots">
-          <button class="dot is-active" data-slide="0"></button>
-          <button class="dot" data-slide="1"></button>
-          <button class="dot" data-slide="2"></button>
-          <button class="dot" data-slide="3"></button>
-          <button class="dot" data-slide="4"></button>
-        </div>
+    <footer class="footer">
+      <div class="footer__card">
+        <span class="footer__eyebrow">Why this format</span>
+        <p>
+          The page uses a sticky visual panel and five scroll-triggered beats to keep the narrative legible
+          on desktop and mobile. If motion is reduced in system settings, counters snap to final values and
+          transitions are effectively disabled.
+        </p>
+      </div>
+    </footer>
 
-        <div class="story-source">
-          <a href="https://gis.regina.ca/arcgis/rest/services/OpenData/LeadConnectionAreas/MapServer/0" target="_blank">
-            City of Regina ArcGIS — Verified April 6, 2026
-          </a>
-        </div>
+    <!-- ========== ACTION GUIDE SECTION ========== -->
+    <section id="action">
+      <div class="section-heading">
+        <p class="eyebrow">Take action</p>
+        <h2>Verified contact paths for city, province, federal, tenants, landlords, and residents</h2>
+      </div>
 
-        <style>
-          .story-hero {
-            min-height: 100vh;
-            min-height: 100dvh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 100px 24px 60px;
-            position: relative;
-            background: linear-gradient(145deg, #0a0a14 0%, #12121f 50%, #0a0a14 100%);
-            overflow: hidden;
-          }
-          .story-hero::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background:
-              radial-gradient(ellipse 80% 50% at 20% 20%, rgba(139, 92, 246, 0.15), transparent),
-              radial-gradient(ellipse 60% 40% at 80% 80%, rgba(239, 68, 68, 0.1), transparent);
-            pointer-events: none;
-          }
-          .story-slides {
-            position: relative;
-            width: 100%;
-            max-width: 800px;
-            min-height: 400px;
-            z-index: 1;
-          }
-          .story-slide {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 20px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(40px);
-            transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s;
-          }
-          .story-slide.is-active {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-            position: relative;
-          }
-          .story-label {
-            display: inline-block;
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: #a78bfa;
-            margin-bottom: 20px;
-            padding: 6px 16px;
-            background: rgba(167, 139, 250, 0.1);
-            border: 1px solid rgba(167, 139, 250, 0.3);
-            border-radius: 100px;
-          }
-          .story-slide h1 {
-            font-size: clamp(1.8rem, 5vw, 3rem);
-            font-weight: 800;
-            line-height: 1.2;
-            color: #f8f8fc;
-            margin: 0 0 20px;
-            max-width: 700px;
-          }
-          .story-slide h1 em {
-            font-style: normal;
-            color: #f87171;
-          }
-          .story-slide h1 em.purple { color: #a78bfa; }
-          .story-slide h1 em.amber { color: #fbbf24; }
-          .story-slide p {
-            font-size: 1.1rem;
-            color: #a0a0b8;
-            margin: 0 0 32px;
-            max-width: 550px;
-            line-height: 1.6;
-          }
-          .story-metric {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            padding: 24px 48px;
-            background: rgba(248, 113, 113, 0.08);
-            border: 1px solid rgba(248, 113, 113, 0.25);
-            border-radius: 16px;
-          }
-          .story-metric.purple {
-            background: rgba(167, 139, 250, 0.08);
-            border-color: rgba(167, 139, 250, 0.25);
-          }
-          .story-metric.amber {
-            background: rgba(251, 191, 36, 0.08);
-            border-color: rgba(251, 191, 36, 0.25);
-          }
-          .metric-value {
-            font-size: clamp(2.5rem, 8vw, 4rem);
-            font-weight: 900;
-            color: #f87171;
-            line-height: 1;
-          }
-          .story-metric.purple .metric-value { color: #a78bfa; }
-          .story-metric.amber .metric-value { color: #fbbf24; }
-          .metric-label {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: #808090;
-          }
-          .story-actions {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-            justify-content: center;
-          }
-          .btn-action, .btn-secondary {
-            padding: 14px 32px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: transform 0.2s, box-shadow 0.2s;
-          }
-          .btn-action {
-            background: #a78bfa;
-            color: #0a0a14;
-          }
-          .btn-action:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(167, 139, 250, 0.3);
-          }
-          .btn-secondary {
-            background: rgba(255,255,255,0.08);
-            color: #f8f8fc;
-            border: 1px solid rgba(255,255,255,0.15);
-          }
-          .btn-secondary:hover {
-            background: rgba(255,255,255,0.12);
-          }
-          .story-dots {
-            display: flex;
-            gap: 12px;
-            margin-top: 48px;
-            z-index: 2;
-          }
-          .dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            border: 2px solid rgba(167, 139, 250, 0.4);
-            background: transparent;
-            padding: 0;
-            cursor: pointer;
-            transition: all 0.3s ease;
-          }
-          .dot:hover { border-color: #a78bfa; }
-          .dot.is-active {
-            background: #a78bfa;
-            border-color: #a78bfa;
-            transform: scale(1.3);
-          }
-          .story-source {
-            position: absolute;
-            bottom: 24px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 2;
-          }
-          .story-source a {
-            font-size: 0.75rem;
-            color: #606070;
-            text-decoration: none;
-            letter-spacing: 0.05em;
-          }
-          .story-source a:hover { color: #a78bfa; }
-          @media (max-width: 640px) {
-            .story-hero { padding: 80px 16px 48px; }
-            .story-slides { min-height: 450px; }
-            .story-metric { padding: 20px 32px; }
-            .story-actions { flex-direction: column; width: 100%; }
-            .btn-action, .btn-secondary { width: 100%; text-align: center; }
-          }
-        </style>
-
-        <script>
-          (function() {
-            const slides = document.querySelectorAll('.story-slide');
-            const dots = document.querySelectorAll('.dot');
-            let current = 0;
-            let interval;
-
-            function goTo(index) {
-              slides.forEach((s, i) => s.classList.toggle('is-active', i === index));
-              dots.forEach((d, i) => d.classList.toggle('is-active', i === index));
-              current = index;
-            }
-
-            dots.forEach((dot, i) => {
-              dot.addEventListener('click', () => {
-                goTo(i);
-                clearInterval(interval);
-                startAuto();
-              });
-            });
-
-            function startAuto() {
-              interval = setInterval(() => {
-                goTo((current + 1) % slides.length);
-              }, 6000);
-            }
-
-            // Start after 2s
-            setTimeout(startAuto, 2000);
-          })();
-        </script>
-      </section>
-
-      <section id="map-section" class="section">
-        <div class="section-heading">
-          <p class="eyebrow">Geography of harm</p>
-          <h2>The burden is concentrated — and visible</h2>
-          <p>The map below shows active lead service connections by neighborhood, using the City of Regina's own ArcGIS data verified live on April 2, 2026. Darker areas have more remaining lead connections.</p>
-        </div>
-        <div class="map-layout">
-          <div class="map-card main-map-card">
-            <div class="map-toolbar">
-              <div>
-                <h3>Active lead connections by neighborhood</h3>
-                <p>Source: City of Regina ArcGIS LeadConnectionAreas service (verified April 2, 2026)</p>
-              </div>
-              <div class="legend" aria-label="Map legend">
-                <span><i style="background:#33110f"></i>700+</span>
-                <span><i style="background:#7f1d1d"></i>400+</span>
-                <span><i style="background:#b91c1c"></i>100+</span>
-                <span><i style="background:#f59e0b"></i>25+</span>
-                <span><i style="background:#fde68a"></i>&lt;25</span>
-              </div>
-            </div>
-            <div id="lead-map" class="lead-map" role="img" aria-label="Map of active lead connections by neighborhood"></div>
-          </div>
-          <aside class="map-card map-sidepanel">
-            <h3>What the map shows</h3>
-            <ul class="bullet-list">
-              <li><strong>North Central</strong>: 702 active connections, ~326 children affected, 55.8% renter, 20.1% Indigenous — the highest burden in the city.</li>
-              <li><strong>Cathedral</strong>: 659 active connections, the largest absolute concentration with the most replacements (277) but still massive exposure.</li>
-              <li><strong>Heritage</strong>: 518 active connections, another heavily impacted older neighborhood.</li>
-            </ul>
-            <div class="info-box">
-              <span class="info-label">Hover the map</span>
-              <p id="map-summary">Hover a neighborhood to see lead connections, children affected, renter share, and income context.</p>
-            </div>
-            <div class="metric-stack">
-              <div>
-                <span class="stat-label">Baseline (FOI total)</span>
-                <strong>3,637</strong>
-              </div>
-              <div>
-                <span class="stat-label">Current remaining</span>
-                <strong>2,698</strong>
-              </div>
-              <div>
-                <span class="stat-label">Replacement rate</span>
-                <strong>25.8%</strong>
-              </div>
-            </div>
-          </aside>
-        </div>
-
-      </section>
-
-      <section id="harm" class="section">
-        <div class="section-heading">
-          <p class="eyebrow">The harm</p>
-          <h2>The numbers tell one story. Delay converts preventable harm into permanent loss.</h2>
-        </div>
-        <div class="harm-grid">
-          <article class="panel panel-muted">
-            <span class="panel-kicker">Replaced</span>
-            <h3>What has been done</h3>
-            <div class="number-pair">
-              <strong>939 connections</strong>
-              <span>25.8% of the original 3,637</span>
-            </div>
-            <p>Cathedral (277) and North Central (238) saw the most work. But that still leaves 74.2% of all lead service connections in the ground.</p>
-          </article>
-          <article class="panel panel-hot">
-            <span class="panel-kicker">Remaining</span>
-            <h3>What is still in the ground</h3>
-            <div class="number-pair">
-              <strong>2,698 connections</strong>
-              <span>~1,600 children estimated affected</span>
-            </div>
-            <p>Every day these pipes stay connected, children drink water that has passed through lead. The city's own plan targets 2036 for full replacement — 10 more years.</p>
-          </article>
-          <article class="panel panel-warn">
-            <span class="panel-kicker">Pace</span>
-            <h3>At current pace, replacement finishes around 2036</h3>
-            <div class="number-pair">
-              <strong>~220/year target</strong>
-              <span>$36M total program cost (city estimate)</span>
-            </div>
-            <p>At 220 replacements per year, 2,698 remaining connections will take over 12 years. The city's target of 2036 assumes no slowdowns.</p>
-          </article>
-        </div>
-      </section>
-
-      <section id="affected" class="section">
-        <div class="section-heading">
-          <p class="eyebrow">Who's affected</p>
-          <h2>The citywide problem lands hardest on renters, lower-income households, and a handful of older neighborhoods</h2>
-          <p>The worst-hit neighborhoods are not random. They combine high lead-line counts, significant child exposure, and renter-heavy housing where tenants have the least leverage and the least legal protection.</p>
-        </div>
-        <div class="table-card">
-          <table>
-            <thead>
-              <tr>
-                <th>Neighborhood</th>
-                <th>Active connections</th>
-                <th>Children affected (est.)</th>
-                <th>Renter share</th>
-                <th>Why it matters</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>North Central</td>
-                <td>702</td>
-                <td>~326</td>
-                <td>55.8%</td>
-                <td>Highest burden: low income ($46.8K), 20.1% Indigenous, high renter share.</td>
-              </tr>
-              <tr>
-                <td>Cathedral</td>
-                <td>659</td>
-                <td>~541</td>
-                <td>26.3%</td>
-                <td>Largest concentration. 277 replaced but 659 remain — most in the city.</td>
-              </tr>
-              <tr>
-                <td>Heritage</td>
-                <td>518</td>
-                <td>~324</td>
-                <td>38.4%</td>
-                <td>Older housing stock with heavy lead infrastructure.</td>
-              </tr>
-              <tr>
-                <td>Al Ritchie</td>
-                <td>388</td>
-                <td>~162</td>
-                <td>44.9%</td>
-                <td>Only 66 replaced from a baseline of 454 — slowest progress rate.</td>
-              </tr>
-              <tr>
-                <td>Warehouse District</td>
-                <td>32</td>
-                <td>~5</td>
-                <td>72.2%</td>
-                <td>Extreme renter concentration; lowest median income ($31.6K).</td>
-              </tr>
-              <tr>
-                <td>Downtown</td>
-                <td>25</td>
-                <td>~8</td>
-                <td>75.4%</td>
-                <td>High renter share; tenant disclosure failures hit hardest here.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <section id="blocked" class="section split-section">
-        <div>
-          <div class="section-heading left-tight">
-            <p class="eyebrow">Who blocked action</p>
-            <h2>Regina council was not neutral</h2>
-            <p>When faster replacement and basic reporting accountability came to council, several councillors repeatedly landed on the wrong side of the vote.</p>
-          </div>
-          <div class="vote-grid">
-            <article class="vote-card">
-              <span class="panel-kicker">CR21-90</span>
-              <h3>7–4 against faster replacement</h3>
-              <p>On the amendment pushing a faster 10-year timeline, the vote failed. Bob Hawkins, John Findura, and Sandra Masters were among the councillors who opposed faster action, along with four others.</p>
-            </article>
-            <article class="vote-card">
-              <span class="panel-kicker">CR23-97</span>
-              <h3>6–3 on reporting — with key NO votes</h3>
-              <p>Even formal reporting faced resistance. Findura, Hawkins, and Masters voted <strong>NO</strong> on reporting.</p>
-            </article>
+      <div class="action-guide" data-action-guide>
+        <div class="action-guide-head">
+          <p>Every link below is HTTPS and was checked against live official pages. Templates are plain text in copyable blocks so you can send them from a phone or laptop.</p>
+          <div class="action-guide-chips" aria-hidden="true">
+            <span class="action-guide-chip">6 audience tabs</span>
+            <span class="action-guide-chip">Official government links</span>
+            <span class="action-guide-chip">Tap-to-call numbers</span>
           </div>
         </div>
-        <div class="quote-stack">
-          <blockquote>
-            <p>“It's not like we're saying to anybody you have to drink lead water”</p>
-            <footer>— Bob Hawkins</footer>
-          </blockquote>
-          <blockquote class="quote-alert">
-            <p>“Some tap tests over 100 times greater than Health Canada's maximum”</p>
-            <footer>— Patricia Elliott</footer>
-          </blockquote>
-        </div>
-      </section>
 
-      <section id="province" class="section">
-        <div class="section-heading">
-          <p class="eyebrow">The provincial vacuum</p>
-          <h2>Saskatchewan left municipalities and tenants exposed</h2>
-        </div>
-        <div class="compare-grid">
-          <article class="panel panel-hot">
-            <h3>Saskatchewan</h3>
-            <ul class="bullet-list compact">
-              <li><strong>No</strong> provincial lead-in-water standard</li>
-              <li><strong>No</strong> landlord disclosure requirement</li>
-              <li><strong>No</strong> dedicated provincial funding stream</li>
-            </ul>
-          </article>
-          <article class="panel">
-            <h3>What stronger provinces do</h3>
-            <ul class="bullet-list compact">
-              <li>Set explicit standards or action thresholds</li>
-              <li>Require clearer testing and disclosure expectations</li>
-              <li>Back local remediation with provincial money</li>
-            </ul>
-          </article>
-        </div>
-      </section>
-
-      <section id="rental" class="section split-section">
-        <div>
-          <div class="section-heading left-tight">
-            <p class="eyebrow">The rental trap</p>
-            <h2>Tenants carry the risk while landlords face almost no lead-specific obligations</h2>
-          </div>
-          <p>In the worst-hit neighborhoods, renter shares run from 45% to more than 75%. Yet Saskatchewan does not require landlords to test for lead, disclose lead service connections, or proactively remediate the risk. For renters, “choice” is mostly fiction: they often do not know the line is lead, cannot authorize replacement themselves, and may not even control plumbing decisions inside the home.</p>
-        </div>
-        <div class="panel panel-outline">
-          <h3>The gap in plain language</h3>
-          <ul class="bullet-list compact">
-            <li>Landlords are not required to disclose lead service lines to tenants.</li>
-            <li>Tenants cannot force private-side replacement on their own.</li>
-            <li>Filter programs do not fix ownership and disclosure failures.</li>
-            <li>Low filter uptake means the fallback safety net is weak.</li>
-          </ul>
-        </div>
-      </section>
-
-      <section id="timeline" class="section">
-        <div class="section-heading">
-          <p class="eyebrow">Timeline</p>
-          <h2>The warning signs were old. The urgency is current.</h2>
-        </div>
-        <div class="timeline">
-          <article class="timeline-item">
-            <span class="timeline-date">2019</span>
-            <h3>Recognition enters the public record</h3>
-            <p>Lead service connections were already part of the formal municipal record.</p>
-          </article>
-          <article class="timeline-item">
-            <span class="timeline-date">2021 · CR21-90</span>
-            <h3>Faster replacement is voted down</h3>
-            <p>Council rejects a faster replacement path, keeping a slower timeline in place.</p>
-          </article>
-          <article class="timeline-item">
-            <span class="timeline-date">2023 · CR23-97</span>
-            <h3>Even reporting draws resistance</h3>
-            <p>Formal reporting survives, but Findura, Hawkins, and Masters vote no.</p>
-          </article>
-          <article class="timeline-item">
-            <span class="timeline-date">2025</span>
-            <h3>Public warnings sharpen</h3>
-            <p>Advocates highlight extreme tap test results while Saskatchewan still offers no meaningful provincial backstop.</p>
-          </article>
-        </div>
-      </section>
-
-      <!-- GAP ANALYSIS - from dreamlab investigative research -->
-      <section id="gaps" class="section">
-        <div class="section-heading">
-          <p class="eyebrow">Gap analysis</p>
-          <h2>What Regina is missing — compared to other jurisdictions</h2>
-          <p>Findings from investigative research comparing Regina to peer cities and provinces.</p>
-        </div>
-        <div class="gap-grid">
-          <article class="gap-card policy">
-            <h3>Policy Gaps</h3>
-            <ul>
-              <li><strong>No mandatory replacement at property sale</strong> — Ontario municipalities have this</li>
-              <li><strong>No landlord compliance requirement</strong> — no mechanism to compel participation</li>
-              <li><strong>Rejected 10-year acceleration</strong> — CR21-90-AMEND defeated 7-4</li>
-              <li><strong>Voluntary homeowner model</strong> — unlike US EPA's 10-year mandate</li>
-            </ul>
-          </article>
-          <article class="gap-card transparency">
-            <h3>Transparency Gaps</h3>
-            <ul>
-              <li><strong>Only biennial reporting</strong> — not annual (CR23-97-D1 passed 6-3)</li>
-              <li><strong>No public real-time dashboard</strong> — replacement progress by CT unavailable</li>
-              <li><strong>No cost-per-QALY analysis</strong> — not found in governance records</li>
-            </ul>
-          </article>
-          <article class="gap-card equity">
-            <h3>Equity Gaps</h3>
-            <ul>
-              <li><strong>No targeted program for high-renter CTs</strong> — despite 72% renters in worst-hit areas</li>
-              <li><strong>No mechanism to compel landlord participation</strong> — tenants can't authorize replacement</li>
-              <li><strong>No replacement sequence data by CT</strong> — can't verify equity prioritization</li>
-            </ul>
-          </article>
-        </div>
-        <div class="gap-comparison">
-          <h3>How Regina compares</h3>
-          <table class="comparison-table">
-            <thead>
-              <tr>
-                <th>Jurisdiction</th>
-                <th>Timeline</th>
-                <th>Approach</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Regina</td>
-                <td>15 years (2021-2036)</td>
-                <td>Voluntary, gradual</td>
-              </tr>
-              <tr>
-                <td>Newark, NJ</td>
-                <td>3 years</td>
-                <td>Emergency acceleration — 23,000 lines replaced</td>
-              </tr>
-              <tr>
-                <td>Saskatoon, SK</td>
-                <td>Completed</td>
-                <td>Bulk replacement, smaller inventory</td>
-              </tr>
-              <tr>
-                <td>Ontario cities</td>
-                <td>Varies</td>
-                <td>Mandatory at property sale</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <style>
-          .gap-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
-            margin-bottom: 40px;
-          }
-          .gap-card {
-            background: var(--surface);
-            border: 1px solid var(--line);
-            border-radius: var(--radius-lg);
-            padding: 24px;
-          }
-          .gap-card h3 {
-            font-size: 1.1rem;
-            margin: 0 0 16px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid;
-          }
-          .gap-card.policy h3 { border-color: #f87171; color: #f87171; }
-          .gap-card.transparency h3 { border-color: #fbbf24; color: #fbbf24; }
-          .gap-card.equity h3 { border-color: #a78bfa; color: #a78bfa; }
-          .gap-card ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-          }
-          .gap-card li {
-            padding: 10px 0;
-            border-bottom: 1px solid var(--line);
-            font-size: 0.95rem;
-            color: var(--text-muted);
-          }
-          .gap-card li:last-child { border-bottom: none; }
-          .gap-card li strong { color: var(--text); display: block; margin-bottom: 4px; }
-          .gap-comparison {
-            background: var(--surface);
-            border: 1px solid var(--line);
-            border-radius: var(--radius-lg);
-            padding: 24px;
-          }
-          .gap-comparison h3 {
-            margin: 0 0 20px;
-            font-size: 1.1rem;
-          }
-          .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-          }
-          .comparison-table th, .comparison-table td {
-            padding: 12px 16px;
-            text-align: left;
-            border-bottom: 1px solid var(--line);
-          }
-          .comparison-table th {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--text-muted);
-          }
-          .comparison-table tr:first-child td {
-            background: rgba(248, 113, 113, 0.1);
-            font-weight: 600;
-          }
-          .comparison-table tr:nth-child(2) td {
-            background: rgba(52, 211, 153, 0.1);
-          }
-        </style>
-      </section>
-
-      <section id="action" class="section action-section">
-        <div class="section-heading">
-          <p class="eyebrow">Take action</p>
-          <h2>What you can do — right now, at every level</h2>
-          <p>Select your situation below for specific contacts, templates, and concrete asks.</p>
-        </div>
-
-        <nav class="action-tabs" role="tablist" aria-label="Action guide by audience">
-          <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="tab-resident" id="btn-resident">Resident</button>
-          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-tenant" id="btn-tenant">Tenant</button>
-          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-owner" id="btn-owner">Landlord/Owner</button>
-          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-city" id="btn-city">City Council</button>
-          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-province" id="btn-province">Province</button>
-          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-federal" id="btn-federal">Federal</button>
+        <nav class="action-guide-tabs" role="tablist" aria-label="Action guide tabs">
+          <button class="action-guide-tab is-active" id="action-tab-resident" type="button" role="tab" aria-selected="true" aria-controls="action-panel-resident">Resident</button>
+          <button class="action-guide-tab" id="action-tab-tenant" type="button" role="tab" aria-selected="false" aria-controls="action-panel-tenant" tabindex="-1">Tenant</button>
+          <button class="action-guide-tab" id="action-tab-landlord" type="button" role="tab" aria-selected="false" aria-controls="action-panel-landlord" tabindex="-1">Landlord</button>
+          <button class="action-guide-tab" id="action-tab-city" type="button" role="tab" aria-selected="false" aria-controls="action-panel-city" tabindex="-1">City</button>
+          <button class="action-guide-tab" id="action-tab-province" type="button" role="tab" aria-selected="false" aria-controls="action-panel-province" tabindex="-1">Province</button>
+          <button class="action-guide-tab" id="action-tab-federal" type="button" role="tab" aria-selected="false" aria-controls="action-panel-federal" tabindex="-1">Federal</button>
         </nav>
 
-        <div class="action-panels">
-          <!-- RESIDENT TAB -->
-          <article class="action-panel active" role="tabpanel" id="tab-resident" aria-labelledby="btn-resident">
-            <h3>If you're a concerned resident</h3>
-            <ol class="action-steps">
-              <li>
-                <strong>Check your address</strong>
-                <p>See if your home has a lead service connection.</p>
-                <a class="action-link" href="https://www.regina.ca/home-property/water/water/lead-service-connections/" target="_blank" rel="noopener">City lead connection lookup →</a>
-              </li>
-              <li>
-                <strong>Get a free water filter</strong>
-                <p>The City provides NSF 53-certified filters to affected households at no cost.</p>
-                <a class="action-link" href="https://www.regina.ca/home-property/water/water/lead-service-connections/water-filter-request-application/" target="_blank" rel="noopener">Request a filter →</a>
-              </li>
-              <li>
-                <strong>Get your water tested</strong>
-                <p>Free testing available through the City.</p>
-                <a class="action-link" href="https://www.regina.ca/home-property/water/water/lead-service-connections/water-testing-request-form/" target="_blank" rel="noopener">Request water testing →</a>
-              </li>
-              <li>
-                <strong>Apply for replacement</strong>
-                <p>If you own your home, City covers city-side; financing available for private-side.</p>
-                <a class="action-link" href="https://www.regina.ca/home-property/water/water/lead-service-connections/lead-service-connection-replacement-application/" target="_blank" rel="noopener">Apply for replacement →</a>
-              </li>
-            </ol>
-            <div class="action-contact">
-              <span class="contact-label">Service Regina</span>
-              <a href="tel:306-777-7000" class="contact-phone">306-777-7000</a>
+        <div class="action-guide-panels">
+          <!-- Resident Panel -->
+          <article class="action-guide-panel is-active" id="action-panel-resident" role="tabpanel" aria-labelledby="action-tab-resident">
+            <div class="action-guide-panel-head">
+              <h3>Resident actions</h3>
+              <p>Start with the city tools that confirm whether your home is affected and get you immediate protection.</p>
+            </div>
+            <div class="action-guide-grid">
+              <div class="action-guide-card">
+                <h4>Check your address</h4>
+                <p>Use the City of Regina lead service connection page to look up your neighbourhood.</p>
+                <div class="action-guide-links">
+                  <a class="action-guide-link" href="https://www.regina.ca/home-property/water/water/lead-service-connections/" target="_blank" rel="noopener">Lead service connection lookup</a>
+                </div>
+              </div>
+              <div class="action-guide-card">
+                <h4>Request a free filter</h4>
+                <p>Affected households can request a city-provided NSF 53 filter directly.</p>
+                <div class="action-guide-links">
+                  <a class="action-guide-link" href="https://www.regina.ca/home-property/water/water/lead-service-connections/water-filter-request-application/" target="_blank" rel="noopener">Water filter request form</a>
+                </div>
+              </div>
+              <div class="action-guide-card">
+                <h4>Request water testing</h4>
+                <p>Use the official request form to ask the City for lead testing support.</p>
+                <div class="action-guide-links">
+                  <a class="action-guide-link" href="https://www.regina.ca/home-property/water/water/lead-service-connections/water-testing-request-form/" target="_blank" rel="noopener">Water testing request form</a>
+                </div>
+              </div>
+              <div class="action-guide-contacts">
+                <h4>Call Service Regina</h4>
+                <div class="action-guide-contact-row">
+                  <strong>Service Regina</strong>
+                  <a href="tel:+13067777000">306-777-7000</a>
+                </div>
+                <p>Use this line if the online lookup does not answer whether your address has a lead connection.</p>
+              </div>
             </div>
           </article>
 
-          <!-- TENANT TAB -->
-          <article class="action-panel" role="tabpanel" id="tab-tenant" aria-labelledby="btn-tenant" hidden>
-            <h3>If you're a tenant</h3>
-            <div class="action-alert">
-              <strong>Know the gap:</strong> Saskatchewan law does NOT require landlords to test for lead or disclose lead service connections. You have limited legal leverage — but you can still act.
+          <!-- Tenant Panel -->
+          <article class="action-guide-panel" id="action-panel-tenant" role="tabpanel" aria-labelledby="action-tab-tenant" hidden>
+            <div class="action-guide-panel-head">
+              <h3>Tenant actions</h3>
+              <p>Tenants can request a filter and testing directly. Saskatchewan still leaves major disclosure gaps.</p>
             </div>
-            <ol class="action-steps">
-              <li>
-                <strong>Request a filter directly from the City</strong>
-                <p>You do NOT need landlord permission. The City will provide one free.</p>
-                <a class="action-link" href="https://www.regina.ca/home-property/water/water/lead-service-connections/water-filter-request-application/" target="_blank" rel="noopener">Request a filter →</a>
-              </li>
-              <li>
-                <strong>Ask your landlord in writing</strong>
-                <p>Request confirmation of lead status and their replacement plans. Keep a copy.</p>
-              </li>
-              <li>
-                <strong>File a complaint if needed</strong>
-                <p>If landlord refuses to address habitability concerns, contact the Office of Residential Tenancies.</p>
-                <a class="action-link" href="https://www.saskatchewan.ca/government/government-structure/boards-commissions-and-agencies/office-of-residential-tenancies" target="_blank" rel="noopener">ORT website →</a>
-              </li>
-            </ol>
-            <div class="action-template">
-              <h4>Template letter to your landlord</h4>
-              <pre class="template-text">Dear [Landlord Name],
+            <div class="action-guide-grid">
+              <div class="action-guide-alert">
+                <h4>Rights summary</h4>
+                <ul class="action-guide-list">
+                  <li>Saskatchewan does not require landlords to disclose known lead service connections.</li>
+                  <li>You can still request a city filter and water testing without landlord permission.</li>
+                  <li>If the landlord ignores concerns, contact the Office of Residential Tenancies.</li>
+                </ul>
+              </div>
+              <div class="action-guide-contacts">
+                <h4>Office of Residential Tenancies</h4>
+                <div class="action-guide-contact-row">
+                  <strong>Phone</strong>
+                  <a href="tel:+18882152222">1-888-215-2222</a>
+                </div>
+                <div class="action-guide-contact-row">
+                  <strong>Email</strong>
+                  <a href="mailto:ORT@gov.sk.ca">ORT@gov.sk.ca</a>
+                </div>
+                <div class="action-guide-contact-row">
+                  <strong>Website</strong>
+                  <a href="https://www.saskatchewan.ca/ort" target="_blank" rel="noopener">saskatchewan.ca/ort</a>
+                </div>
+              </div>
+              <div class="action-guide-template">
+                <div class="action-guide-template-bar">
+                  <h4>Template letter to your landlord</h4>
+                  <button class="action-guide-copy" type="button" data-copy-target="tenant-template">Copy</button>
+                </div>
+                <pre id="tenant-template">Subject: Lead service connection status for [Address]
 
-I am a tenant at [Address]. According to City of Regina records,
-approximately 2,743 properties still have lead service connections.
+Dear [Landlord Name],
 
-I respectfully request:
-1. Confirmation of whether this property has a lead connection
-2. If yes, whether you have applied for the City's replacement program
-3. If no replacement plans, whether you will support a water filter
+I rent the property at [Address]. Please confirm whether this home has a lead service connection.
 
-The City offers financing and support. I can provide more information.
+If it does, please tell me:
+1. Whether you have applied to the City replacement program
+2. What timeline you have for replacement
+3. Whether you will support installation of a drinking water filter
 
 Sincerely,
-[Your Name]
-[Date]</pre>
-            </div>
-            <div class="action-contact">
-              <span class="contact-label">Office of Residential Tenancies</span>
-              <a href="tel:306-787-1334" class="contact-phone">306-787-1334</a>
-              <span class="contact-extra">Toll-free: 1-888-215-2222</span>
+[Your Name]</pre>
+              </div>
             </div>
           </article>
 
-          <!-- LANDLORD/OWNER TAB -->
-          <article class="action-panel" role="tabpanel" id="tab-owner" aria-labelledby="btn-owner" hidden>
-            <h3>If you're a landlord or property owner</h3>
-            <ol class="action-steps">
-              <li>
-                <strong>Access free city-side replacement</strong>
-                <p>The City replaces the portion of lead pipe they own at no cost to you.</p>
-              </li>
-              <li>
-                <strong>Use 0% financing for private-side</strong>
-                <p>Interest-free loans available. No administration fees (as of 2025). Reimbursement for installation costs.</p>
-                <a class="action-link" href="https://www.regina.ca/home-property/water/water/lead-service-connections/lead-service-connection-replacement-application/" target="_blank" rel="noopener">Apply for replacement →</a>
-              </li>
-              <li>
-                <strong>Protect tenants now</strong>
-                <p>While waiting for replacement, provide NSF 53-certified filters. Cost: ~$30-50/filter, or use the City's $200 rebate program.</p>
-                <a class="action-link" href="https://www.regina.ca/home-property/water/water/lead-service-connections/water-filter-rebate-application/" target="_blank" rel="noopener">Filter rebate program →</a>
-              </li>
-            </ol>
-            <div class="action-contact">
-              <span class="contact-label">Service Regina</span>
-              <a href="tel:306-777-7000" class="contact-phone">306-777-7000</a>
+          <!-- Landlord Panel -->
+          <article class="action-guide-panel" id="action-panel-landlord" role="tabpanel" aria-labelledby="action-tab-landlord" hidden>
+            <div class="action-guide-panel-head">
+              <h3>Landlord and owner actions</h3>
+              <p>The city-side replacement is handled by Regina. Private-side work can be financed through the City.</p>
+            </div>
+            <div class="action-guide-grid">
+              <div class="action-guide-card">
+                <h4>Replacement application</h4>
+                <p>Apply for the official lead service connection replacement process.</p>
+                <div class="action-guide-links">
+                  <a class="action-guide-link" href="https://www.regina.ca/home-property/water/water/lead-service-connections/lead-service-connection-replacement-application/" target="_blank" rel="noopener">Replacement application form</a>
+                </div>
+              </div>
+              <div class="action-guide-card">
+                <h4>Filter rebate</h4>
+                <p>The City offers up to $200 rebate on approved equipment.</p>
+                <div class="action-guide-links">
+                  <a class="action-guide-link" href="https://www.regina.ca/home-property/water/water/lead-service-connections/water-filter-rebate-application/" target="_blank" rel="noopener">Water filter rebate application</a>
+                </div>
+              </div>
+              <div class="action-guide-contacts">
+                <h4>Program help</h4>
+                <div class="action-guide-contact-row">
+                  <strong>Service Regina</strong>
+                  <a href="tel:+13067777000">306-777-7000</a>
+                </div>
+                <p>Call for clarification on city-side work, private-side financing, or the rebate process.</p>
+              </div>
             </div>
           </article>
 
-          <!-- CITY COUNCIL TAB -->
-          <article class="action-panel" role="tabpanel" id="tab-city" aria-labelledby="btn-city" hidden>
-            <h3>Contact your City Councillor</h3>
-            <ol class="action-steps">
-              <li>
-                <strong>Find your ward</strong>
-                <a class="action-link" href="https://www.regina.ca/city-government/city-council/wards" target="_blank" rel="noopener">Ward lookup by address →</a>
-              </li>
-              <li>
-                <strong>Email your councillor</strong>
-                <p>Use the template below. Be specific about what you're asking for.</p>
-              </li>
-            </ol>
-            <div class="action-template">
-              <h4>What to ask for</h4>
-              <ul class="ask-list">
-                <li>Accelerate replacement to a <strong>5-year timeline</strong></li>
-                <li><strong>Quarterly public reporting</strong> by neighborhood</li>
-                <li><strong>Equity-based prioritization</strong> (highest-renter, highest-child areas first)</li>
-                <li>Advocate for <strong>provincial and federal funding</strong></li>
-              </ul>
-              <h4>Sample email</h4>
-              <pre class="template-text">Subject: Accelerate Lead Service Line Replacement
+          <!-- City Panel -->
+          <article class="action-guide-panel" id="action-panel-city" role="tabpanel" aria-labelledby="action-tab-city" hidden>
+            <div class="action-guide-panel-head">
+              <h3>City actions</h3>
+              <p>Find your ward first, then send a direct ask to your councillor.</p>
+            </div>
+            <div class="action-guide-grid">
+              <div class="action-guide-card">
+                <h4>Ward lookup and council tools</h4>
+                <div class="action-guide-links">
+                  <a class="action-guide-link" href="https://www.regina.ca/city-government/city-council/wards" target="_blank" rel="noopener">Ward lookup by address</a>
+                  <a class="action-guide-link" href="https://www.regina.ca/city-government/city-council/city-councillors/" target="_blank" rel="noopener">Councillor directory</a>
+                  <a class="action-guide-link" href="https://www.regina.ca/city-government/city-council/Register-to-Address-Committee-Council/" target="_blank" rel="noopener">Register to address council</a>
+                </div>
+              </div>
+              <div class="action-guide-contacts">
+                <h4>City contacts</h4>
+                <div class="action-guide-contact-row">
+                  <strong>City Clerk</strong>
+                  <a href="tel:+13067777262">306-777-7262</a>
+                  <a href="mailto:clerks@regina.ca">clerks@regina.ca</a>
+                </div>
+                <div class="action-guide-contact-row">
+                  <strong>Mayor's Office</strong>
+                  <a href="tel:+13067777339">306-777-7339</a>
+                  <a href="mailto:mayor@regina.ca">mayor@regina.ca</a>
+                </div>
+              </div>
+              <div class="action-guide-card">
+                <h4>Current ward pages (2024-2028)</h4>
+                <ul class="action-guide-ward-list">
+                  <li><a href="https://www.regina.ca/city-government/city-council/city-councillors/ward-1/" target="_blank">Ward 1: Dan Rashovich</a></li>
+                  <li><a href="https://www.regina.ca/city-government/city-council/city-councillors/ward-2/" target="_blank">Ward 2: George Tsiklis</a></li>
+                  <li><a href="https://www.regina.ca/city-government/city-council/city-councillors/ward-3/" target="_blank">Ward 3: David Froh</a></li>
+                  <li><a href="https://www.regina.ca/city-government/city-council/city-councillors/ward-4/" target="_blank">Ward 4: Mark Burton</a></li>
+                  <li><a href="https://www.regina.ca/city-government/city-council/city-councillors/ward-5/" target="_blank">Ward 5: Sarah Turnbull</a></li>
+                  <li><a href="https://www.regina.ca/city-government/city-council/city-councillors/ward-6/" target="_blank">Ward 6: Victoria Flores</a></li>
+                  <li><a href="https://www.regina.ca/city-government/city-council/city-councillors/ward-7/" target="_blank">Ward 7: Shobna Radons</a></li>
+                  <li><a href="https://www.regina.ca/city-government/city-council/city-councillors/ward-8/" target="_blank">Ward 8: Shanon Zachidniak</a></li>
+                  <li><a href="https://www.regina.ca/city-government/city-council/city-councillors/ward-9/" target="_blank">Ward 9: Jason Mancinelli</a></li>
+                  <li><a href="https://www.regina.ca/city-government/city-council/city-councillors/ward-10/" target="_blank">Ward 10: Clark Bezo</a></li>
+                </ul>
+              </div>
+              <div class="action-guide-template">
+                <div class="action-guide-template-bar">
+                  <h4>Email template for your councillor</h4>
+                  <button class="action-guide-copy" type="button" data-copy-target="city-template">Copy</button>
+                </div>
+                <pre id="city-template">Subject: Accelerate Regina lead service line replacement
 
 Dear Councillor [Name],
 
-I am a Ward [X] resident writing about lead service lines.
+I live in Ward [Number] and I am asking you to push for a faster lead service line replacement program.
 
-Current situation:
-- 2,743 lead connections remain active
-- At 220/year, completion is 12+ years away
-- Children continue to be exposed
-
-I ask you to support:
-1. A 5-year accelerated timeline
-2. Quarterly public progress reports
-3. Equity-based neighborhood prioritization
-
-The cost is ~$2.27 per household/year. The cost of delay
-is measured in children's health.
+Please support:
+1. A shorter replacement timeline
+2. Quarterly public reporting by ward
+3. Priority scheduling for high-renter areas
+4. Requests for provincial and federal funding
 
 Sincerely,
-[Your Name]</pre>
-            </div>
-            <div class="action-contact">
-              <span class="contact-label">City Clerk</span>
-              <a href="tel:306-777-7262" class="contact-phone">306-777-7262</a>
+[Your Name]
+[Address]</pre>
+              </div>
             </div>
           </article>
 
-          <!-- PROVINCE TAB -->
-          <article class="action-panel" role="tabpanel" id="tab-province" aria-labelledby="btn-province" hidden>
-            <h3>Contact your provincial MLA</h3>
-            <div class="action-alert">
-              <strong>The gap:</strong> Saskatchewan has NO provincial lead-in-water standard, NO landlord disclosure requirement, and NO dedicated infrastructure funding.
+          <!-- Province Panel -->
+          <article class="action-guide-panel" id="action-panel-province" role="tabpanel" aria-labelledby="action-tab-province" hidden>
+            <div class="action-guide-panel-head">
+              <h3>Provincial actions</h3>
+              <p>Ask your MLA to close the policy gap: enforceable standards, landlord disclosure, and provincial support.</p>
             </div>
-            <ol class="action-steps">
-              <li>
-                <strong>Find your MLA</strong>
-                <a class="action-link" href="https://www.legassembly.sk.ca/mlas/" target="_blank" rel="noopener">MLA finder →</a>
-              </li>
-              <li>
-                <strong>Write or call your MLA</strong>
-                <p>Ask for provincial action on all three fronts.</p>
-              </li>
-            </ol>
-            <div class="action-template">
-              <h4>What to demand</h4>
-              <ul class="ask-list">
-                <li><strong>Provincial drinking water standards</strong> that match or exceed federal guidelines</li>
-                <li><strong>Mandatory landlord disclosure</strong> of known lead service connections</li>
-                <li><strong>Provincial infrastructure funding</strong> to support municipal replacement programs</li>
-                <li><strong>RTA amendments</strong> requiring lead testing in rental properties</li>
-              </ul>
-              <h4>Sample letter</h4>
-              <pre class="template-text">Subject: Saskatchewan Needs Lead Protection Standards
+            <div class="action-guide-grid">
+              <div class="action-guide-card">
+                <h4>Find your MLA</h4>
+                <p>The Legislative Assembly directory supports searches by constituency.</p>
+                <div class="action-guide-links">
+                  <a class="action-guide-link" href="https://www.legassembly.sk.ca/mlas/" target="_blank" rel="noopener">MLA finder</a>
+                </div>
+              </div>
+              <div class="action-guide-card">
+                <h4>Demand list</h4>
+                <ul class="action-guide-list">
+                  <li>Adopt a clear provincial lead-in-water standard.</li>
+                  <li>Require landlord disclosure of known lead connections.</li>
+                  <li>Create provincial infrastructure support for replacement.</li>
+                  <li>Strengthen tenancy rules for testing and remediation.</li>
+                </ul>
+              </div>
+              <div class="action-guide-contacts">
+                <h4>Ministry contacts</h4>
+                <div class="action-guide-contact-row">
+                  <strong>Ministry of Health</strong>
+                  <a href="tel:+13067877345">306-787-7345</a>
+                  <a href="mailto:he.minister@gov.sk.ca">he.minister@gov.sk.ca</a>
+                </div>
+                <div class="action-guide-contact-row">
+                  <strong>Water Security Agency</strong>
+                  <a href="tel:+18667275420">1-866-727-5420</a>
+                  <a href="mailto:client.service@wsask.ca">client.service@wsask.ca</a>
+                </div>
+              </div>
+              <div class="action-guide-template">
+                <div class="action-guide-template-bar">
+                  <h4>Email template for your MLA</h4>
+                  <button class="action-guide-copy" type="button" data-copy-target="province-template">Copy</button>
+                </div>
+                <pre id="province-template">Subject: Saskatchewan needs stronger lead drinking-water protections
 
 Dear MLA [Name],
 
-58% of water samples from older homes in Regina, Saskatoon,
-and Moose Jaw exceeded the 5 ppb lead limit (2013-2018 data).
+I am asking you to support stronger provincial action on lead in drinking water.
 
-Saskatchewan currently:
-- Has no provincial lead standard beyond federal guidelines
-- Does not require landlords to disclose lead connections
-- Provides no provincial funding for lead remediation
-
-I ask you to advocate for provincial standards, mandatory
-disclosure, and infrastructure funding.
-
-Other provinces have stronger protections. Saskatchewan
-families deserve the same.
+Please advocate for:
+1. Clear provincial lead protection standards
+2. Mandatory landlord disclosure of lead connections
+3. Provincial infrastructure funding for replacement
+4. Tenant protections for testing and remediation
 
 Sincerely,
-[Your Name]</pre>
-            </div>
-            <div class="action-contact">
-              <span class="contact-label">Relevant Ministries</span>
-              <span class="contact-extra">Health (Jeremy Cockrill) • Water Security Agency (David Marit) • Government Relations (Eric Schmalz)</span>
+[Your Name]
+[Postal Code]</pre>
+              </div>
             </div>
           </article>
 
-          <!-- FEDERAL TAB -->
-          <article class="action-panel" role="tabpanel" id="tab-federal" aria-labelledby="btn-federal" hidden>
-            <h3>Contact your federal MP</h3>
-            <ol class="action-steps">
-              <li>
-                <strong>Find your MP</strong>
-                <a class="action-link" href="https://www.ourcommons.ca/members/en" target="_blank" rel="noopener">MP finder by postal code →</a>
-              </li>
-              <li>
-                <strong>Ask for federal infrastructure support</strong>
-                <p>Reference the Newark model: with federal support, they replaced 23,000 lead pipes in 3 years.</p>
-              </li>
-            </ol>
-            <div class="action-template">
-              <h4>Federal programs that could help</h4>
-              <ul class="ask-list">
-                <li><strong>Investing in Canada Infrastructure Program (ICIP)</strong> — $33B+ nationally, Green Stream covers water</li>
-                <li><strong>Clean Water and Wastewater Fund</strong> — $2B for water infrastructure, closes 2026-27</li>
-                <li><strong>Housing Accelerator Fund</strong> — could include lead remediation criteria</li>
-              </ul>
-              <h4>Sample letter</h4>
-              <pre class="template-text">Subject: Federal Support for Lead Service Line Replacement
+          <!-- Federal Panel -->
+          <article class="action-guide-panel" id="action-panel-federal" role="tabpanel" aria-labelledby="action-tab-federal" hidden>
+            <div class="action-guide-panel-head">
+              <h3>Federal actions</h3>
+              <p>Use your postal code to find your MP, then point them to federal infrastructure programs.</p>
+            </div>
+            <div class="action-guide-grid">
+              <div class="action-guide-card">
+                <h4>Find your MP</h4>
+                <p>The House of Commons member search accepts postal code lookups.</p>
+                <div class="action-guide-links">
+                  <a class="action-guide-link" href="https://www.ourcommons.ca/members" target="_blank" rel="noopener">MP finder</a>
+                </div>
+              </div>
+              <div class="action-guide-card">
+                <h4>Federal infrastructure programs</h4>
+                <div class="action-guide-links">
+                  <a class="action-guide-link" href="https://infrastructure.gc.ca/plan/icp-pic-INFC-eng" target="_blank" rel="noopener">Investing in Canada Infrastructure Program</a>
+                  <a class="action-guide-link" href="https://housing-infrastructure.canada.ca/plan/cwwf/cwwf-program-programme-eng.html" target="_blank" rel="noopener">Clean Water and Wastewater Fund</a>
+                </div>
+              </div>
+              <div class="action-guide-card">
+                <h4>What to ask for</h4>
+                <ul class="action-guide-list">
+                  <li>Dedicated lead service line replacement support.</li>
+                  <li>Pressure on Saskatchewan to use infrastructure funding.</li>
+                  <li>Transparent tracking of water infrastructure applications.</li>
+                </ul>
+              </div>
+              <div class="action-guide-template">
+                <div class="action-guide-template-bar">
+                  <h4>Email template for your MP</h4>
+                  <button class="action-guide-copy" type="button" data-copy-target="federal-template">Copy</button>
+                </div>
+                <pre id="federal-template">Subject: Federal support for lead service line replacement in Regina
 
 Dear MP [Name],
 
-Regina has 2,743 active lead service connections. At current
-pace, complete replacement will take 12+ years.
+I am asking you to support faster replacement of lead service lines in Regina.
 
-Newark, NJ replaced 23,000 lead pipes in 3 years with
-federal/state coordination. Canadian children deserve
-the same urgency.
-
-I ask you to:
-1. Advocate for dedicated federal lead replacement funding
-2. Ensure Saskatchewan receives fair infrastructure allocation
-3. Include lead remediation in Housing Accelerator Fund criteria
+Please push for:
+1. Federal infrastructure funding for lead line replacement
+2. Clear public tracking of water infrastructure applications
+3. Pressure on provincial partners to use eligible programs
 
 Sincerely,
-[Your Name]</pre>
-            </div>
-            <div class="action-contact">
-              <span class="contact-label">House of Commons</span>
-              <a class="action-link" href="https://www.ourcommons.ca/members/en" target="_blank" rel="noopener">Find your MP →</a>
+[Your Name]
+[Postal Code]</pre>
+              </div>
             </div>
           </article>
         </div>
-      </section>
-    </main>
+      </div>
+    </section>
   </div>
 
-      <!-- ========== HOW THIS WAS BUILT ========== -->
-      <section id="built" class="section reveal-section">
-        <div class="section-heading">
-          <p class="eyebrow">How this was built</p>
-          <h2>This investigation was produced by an AI worker swarm — then stress-tested by its own counterargument agent</h2>
-        </div>
-        <div style="display:flex;gap:16px;align-items:center;justify-content:center;flex-wrap:wrap;margin:32px 0;">
-          <div style="padding:18px 24px;border-radius:14px;border:1.5px solid rgba(34,211,238,0.25);background:rgba(34,211,238,0.08);text-align:center;min-width:120px;">
-            <div style="font-size:24px;">📥</div>
-            <div style="font-size:13px;font-weight:600;color:#22d3ee;margin-top:4px;">Data Sources</div>
-            <div style="font-size:11px;color:#acb4c3;">PostGIS · ArcGIS · StatsCan</div>
-          </div>
-          <div style="font-size:24px;color:#3f3f46;">→</div>
-          <div style="padding:18px 24px;border-radius:14px;border:1.5px solid rgba(129,140,248,0.25);background:rgba(129,140,248,0.08);text-align:center;min-width:120px;">
-            <div style="font-size:24px;">🐒</div>
-            <div style="font-size:13px;font-weight:600;color:#818cf8;margin-top:4px;">8 Workers</div>
-            <div style="font-size:11px;color:#acb4c3;">Evidence · Equity · Timeline</div>
-          </div>
-          <div style="font-size:24px;color:#3f3f46;">→</div>
-          <div style="padding:18px 24px;border-radius:14px;border:1.5px solid rgba(248,113,113,0.25);background:rgba(248,113,113,0.08);text-align:center;min-width:120px;">
-            <div style="font-size:24px;">⚔️</div>
-            <div style="font-size:13px;font-weight:600;color:#f87171;margin-top:4px;">Counterargument</div>
-            <div style="font-size:11px;color:#acb4c3;">Attacks own claims</div>
-          </div>
-          <div style="font-size:24px;color:#3f3f46;">→</div>
-          <div style="padding:18px 24px;border-radius:14px;border:1.5px solid rgba(251,191,36,0.25);background:rgba(251,191,36,0.08);text-align:center;min-width:120px;">
-            <div style="font-size:24px;">⚖️</div>
-            <div style="font-size:13px;font-weight:600;color:#fbbf24;margin-top:4px;">JVB Review</div>
-            <div style="font-size:11px;color:#acb4c3;">Justified Revisable Belief</div>
-          </div>
-          <div style="font-size:24px;color:#3f3f46;">→</div>
-          <div style="padding:18px 24px;border-radius:14px;border:1.5px solid rgba(74,222,128,0.25);background:rgba(74,222,128,0.08);text-align:center;min-width:120px;">
-            <div style="font-size:24px;">✅</div>
-            <div style="font-size:13px;font-weight:600;color:#4ade80;margin-top:4px;">Knowledge</div>
-            <div style="font-size:11px;color:#acb4c3;">Promoted claims only</div>
-          </div>
-        </div>
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:24px;">
-          <div style="text-align:center;padding:16px;border-radius:14px;border:1px solid rgba(255,255,255,0.09);background:rgba(255,255,255,0.03);">
-            <strong style="font-size:2rem;color:#818cf8;" class="counter-num" data-target="53">0</strong>
-            <div style="font-size:0.82rem;color:#acb4c3;margin-top:4px;">claims generated</div>
-          </div>
-          <div style="text-align:center;padding:16px;border-radius:14px;border:1px solid rgba(255,255,255,0.09);background:rgba(255,255,255,0.03);">
-            <strong style="font-size:2rem;color:#fbbf24;" class="counter-num" data-target="8">0</strong>
-            <div style="font-size:0.82rem;color:#acb4c3;margin-top:4px;">experiments run</div>
-          </div>
-          <div style="text-align:center;padding:16px;border-radius:14px;border:1px solid rgba(255,255,255,0.09);background:rgba(255,255,255,0.03);">
-            <strong style="font-size:2rem;color:#4ade80;" class="counter-num" data-target="14">0</strong>
-            <div style="font-size:0.82rem;color:#acb4c3;margin-top:4px;">cycles completed</div>
-          </div>
-          <div style="text-align:center;padding:16px;border-radius:14px;border:1px solid rgba(255,255,255,0.09);background:rgba(255,255,255,0.03);">
-            <strong style="font-size:2rem;color:#22d3ee;" class="counter-num" data-target="22">0</strong>
-            <div style="font-size:0.82rem;color:#acb4c3;margin-top:4px;">PostGIS tables</div>
-          </div>
-        </div>
-        <p style="text-align:center;margin-top:24px;font-size:0.92rem;color:#acb4c3;">
-          <a href="reports/presentation_slides.html" style="color:#818cf8;font-weight:600;text-decoration:none;">View the full Dream Lab presentation →</a>
-        </p>
-      </section>
-
-      <!-- ========== PhD-LEVEL METHODOLOGY ACCORDION ========== -->
-      <section id="methodology-details" class="section">
-        <div class="section-heading">
-          <p class="eyebrow">Reproducible Research</p>
-          <h2>Full Methodology & Claim Justification</h2>
-          <p>Every claim on this site is traceable to source data, reproducible queries, and peer-reviewed literature.</p>
-        </div>
-
-        <div class="methodology-accordion" id="methodology-accordion">
-          <!-- QALY Calculation -->
-          <div class="accordion-item">
-            <button class="accordion-trigger" aria-expanded="false">
-              <span class="accordion-title">QALY Calculation Methodology</span>
-              <span class="accordion-icon">+</span>
-            </button>
-            <div class="accordion-content">
-              <p><strong>Formula:</strong> QALY = Σ (Children × Exposure_Weight × QALY_per_Year)</p>
-              <p><strong>Parameters (base case):</strong></p>
-              <ul>
-                <li>QALY per child-exposure-year: 0.05 (range: 0.02-0.10)</li>
-                <li>Children per connection: 0.201 (range: 0.089-0.325)</li>
-                <li>Exposure duration: cumulative since 2019 baseline</li>
-              </ul>
-              <p><strong>Literature basis:</strong> Lanphear et al. (2005) pooled analysis of 1,333 children showing 0.46-0.87 IQ points lost per μg/dL blood lead. Health Canada (2019) set the maximum acceptable concentration at 5 ppb, acknowledging no safe threshold exists.</p>
-              <p><a href="methodology/qaly-calculation.html" class="methodology-link">View full derivation →</a></p>
-            </div>
-          </div>
-
-          <!-- Healthcare Cost Model -->
-          <div class="accordion-item">
-            <button class="accordion-trigger" aria-expanded="false">
-              <span class="accordion-title">Healthcare Cost Model</span>
-              <span class="accordion-icon">+</span>
-            </button>
-            <div class="accordion-content">
-              <p><strong>Formula:</strong> Cost = QALY × Cost_per_QALY</p>
-              <p><strong>Parameters:</strong></p>
-              <ul>
-                <li>Cost per QALY (base): $13,290 CAD (range: $10,102-$21,281)</li>
-                <li>Source: CIHI Patient Cost Estimator (2024), CADTH Guidelines (2017)</li>
-                <li>Includes: developmental services, special education, healthcare utilization</li>
-              </ul>
-              <p><strong>Validation:</strong> Within range of US estimates ($10K-$21K USD) from Gould (2009) and Attina & Trasande (2013).</p>
-              <p><a href="methodology/healthcare-costs.html" class="methodology-link">View full derivation →</a></p>
-            </div>
-          </div>
-
-          <!-- Data Sources -->
-          <div class="accordion-item">
-            <button class="accordion-trigger" aria-expanded="false">
-              <span class="accordion-title">Data Sources & Verification</span>
-              <span class="accordion-icon">+</span>
-            </button>
-            <div class="accordion-content">
-              <p><strong>Primary sources:</strong></p>
-              <ul>
-                <li><strong>Lead connections:</strong> City of Regina ArcGIS LeadConnectionAreas service (verified April 6, 2026)</li>
-                <li><strong>Demographics:</strong> Statistics Canada 2021 Census, Census Tract profiles</li>
-                <li><strong>Governance:</strong> Regina City Council minutes, voting records (2019-2026)</li>
-              </ul>
-              <p><strong>Verification process:</strong> All claims cross-referenced against PostGIS materialized views with documented SQL queries. Baseline reconciliation confirmed 2,743 active connections (not 1,089 from lossy spatial join).</p>
-              <p><a href="methodology/data-sources.html" class="methodology-link">View data dictionary →</a></p>
-            </div>
-          </div>
-
-          <!-- Reproducibility -->
-          <div class="accordion-item">
-            <button class="accordion-trigger" aria-expanded="false">
-              <span class="accordion-title">Reproducibility & SQL Queries</span>
-              <span class="accordion-icon">+</span>
-            </button>
-            <div class="accordion-content">
-              <p><strong>All calculations are reproducible via SQL:</strong></p>
-              <pre class="sql-code">-- Verify total QALY burden
-SELECT SUM(realized_qaly_base) AS total_qaly
-FROM ct_child_qaly_20260324;
--- Result: 148.94 (pre-scaling)
-
--- Verify healthcare cost
-SELECT SUM(realized_healthcare_cost_base) AS total_cost
-FROM ct_child_healthcare_cost_20260324;
--- Result: $39,588,518 (pre-scaling)</pre>
-              <p><strong>Scaling factor:</strong> 1.20x applied to account for baseline reconciliation (2,743 vs 1,089 address-matched).</p>
-              <p><a href="methodology/sql-queries.html" class="methodology-link">View all SQL queries →</a></p>
-            </div>
-          </div>
-
-          <!-- Literature Citations -->
-          <div class="accordion-item">
-            <button class="accordion-trigger" aria-expanded="false">
-              <span class="accordion-title">Literature Citations</span>
-              <span class="accordion-icon">+</span>
-            </button>
-            <div class="accordion-content">
-              <ol class="citation-list">
-                <li>Lanphear BP et al. (2005). Low-level environmental lead exposure and children's intellectual function: an international pooled analysis. <em>Environ Health Perspect</em>. <a href="https://doi.org/10.1289/ehp.7688">DOI:10.1289/ehp.7688</a></li>
-                <li>Gould E. (2009). Childhood lead poisoning: conservative estimates of the social and economic benefits of lead hazard control. <em>Environ Health Perspect</em>. <a href="https://doi.org/10.1289/ehp.0800408">DOI:10.1289/ehp.0800408</a></li>
-                <li>Health Canada. (2019). Guidelines for Canadian Drinking Water Quality: Lead. <a href="https://www.canada.ca/en/health-canada/services/publications/healthy-living/guidelines-canadian-drinking-water-quality-guideline-technical-document-lead.html">Health Canada</a></li>
-                <li>CIHI. (2024). Patient Cost Estimator. Canadian Institute for Health Information.</li>
-                <li>CADTH. (2017). Guidelines for the Economic Evaluation of Health Technologies: Canada.</li>
-              </ol>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ========== METHODOLOGY / FOOTER ========== -->
-      <section class="section" style="margin-top:26px;padding:28px 34px;text-align:center;">
-        <p class="eyebrow">Methodology &amp; Attribution</p>
-        <p style="font-size:0.95rem;color:#acb4c3;max-width:72ch;margin:0 auto;line-height:1.6;">
-          This investigation was produced using <strong style="color:#f4f7fb;">Dream Lab</strong>, a worker-swarm analysis system built on <a href="https://github.com/openclaw/openclaw" style="color:#818cf8;text-decoration:none;">OpenClaw</a>.
-          Lead connection data is sourced directly from the City of Regina's live ArcGIS LeadConnectionAreas service, verified April 6, 2026. Demographic overlays use Statistics Canada 2016/2021 census profiles.
-        </p>
-        <p style="font-size:0.9rem;color:#9ca3af;max-width:72ch;margin:16px auto 0;line-height:1.6;">
-          <strong style="color:#e74c3c;">Health burden methodology:</strong> QALY estimates derived from Lanphear et al. (2005) IQ-lead relationship (<a href="https://doi.org/10.1289/ehp.7688" style="color:#818cf8;">DOI:10.1289/ehp.7688</a>), Gould (2009) economic costs (<a href="https://doi.org/10.1289/ehp.0800408" style="color:#818cf8;">DOI:10.1289/ehp.0800408</a>), and Health Canada (2019) guidelines. Healthcare costs use CIHI Patient Cost Estimator (2024). Full methodology: <a href="methodology/" style="color:#818cf8;">methodology appendix</a>.
-        </p>
-        <p style="font-size:0.85rem;color:#6b7280;margin-top:16px;">
-          Built by <strong style="color:#acb4c3;">Thomas (Pepar) Hugo</strong> · April 2026 ·
-          <a href="https://www.linkedin.com/in/thomasjayhugo/" style="color:#818cf8;text-decoration:none;">LinkedIn</a>
-        </p>
-      </section>
-
-  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
-  <script src="assets/anime.min.js"></script>
+  <script src="https://unpkg.com/scrollama"></script>
   <script>
-    // Anime.js v4 API bindings
-    const { animate, stagger, createTimeline, createScope, createLayout, onScroll, utils, spring } = anime;
-    const _animate = animate;
-    const _stagger = stagger;
-
-    // Responsive animation scope - mobile-first approach
-    const animationScope = createScope({
-      mediaQueries: {
-        mobile: '(max-width: 767px)',
-        tablet: '(min-width: 768px) and (max-width: 1023px)',
-        desktop: '(min-width: 1024px)'
-      },
-      defaults: {
-        ease: 'out(3)',
-        duration: 600
-      }
-    });
-
-    // Check for reduced motion preference
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  </script>
-  <script>
-    const toggle = document.querySelector('.nav-toggle');
-    const nav = document.querySelector('#site-nav');
-    toggle?.addEventListener('click', () => {
-      const expanded = toggle.getAttribute('aria-expanded') === 'true';
-      toggle.setAttribute('aria-expanded', String(!expanded));
-      nav.classList.toggle('is-open');
-    });
-
-    document.querySelectorAll('#site-nav a').forEach(link => {
-      link.addEventListener('click', () => {
-        nav.classList.remove('is-open');
-        toggle?.setAttribute('aria-expanded', 'false');
-      });
-    });
-
-    const map = new maplibregl.Map({
-      container: 'lead-map',
-      style: {
-        version: 8,
-        sources: {
-          osm: {
-            type: 'raster',
-            tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
-            tileSize: 256,
-            attribution: '© OpenStreetMap contributors'
-          }
+    (function () {
+      const storyData = [
+        {
+          title: "The backlog is still measured in years.",
+          copy: "Regina is not dealing with an isolated remnant. It is living with a city-scale inventory that keeps exposure active while replacement drags on.",
+          metrics: [
+            { label: "Lead pipes remaining", value: 2743, note: "Still in service across Regina.", formatter: "integer" },
+            { label: "Time at current pace", value: 12, note: "A full generation of delay is still on the table.", formatter: "integer", suffix: " years" }
+          ]
         },
-        layers: [{ id: 'osm', type: 'raster', source: 'osm' }]
-      },
-      center: [-104.6189, 50.4452],
-      zoom: 10.9,
-      cooperativeGestures: true
-    });
-
-    map.addControl(new maplibregl.NavigationControl(), 'top-right');
-
-    map.on('load', async () => {
-      // Load verified CT-level data with QALY and equity metrics
-      const response = await fetch('data/regina_lead_cts.geojson');
-      const geojson = await response.json();
-
-      map.addSource('lead-areas', {
-        type: 'geojson',
-        data: geojson
-      });
-
-      map.addLayer({
-        id: 'lead-areas-fill',
-        type: 'fill',
-        source: 'lead-areas',
-        paint: {
-          'fill-color': [
-            'interpolate', ['linear'], ['get', 'lead_count'],
-            0, '#fde68a',
-            10, '#f59e0b',
-            50, '#dc2626',
-            100, '#991b1b',
-            150, '#7f1d1d'
+        {
+          title: "The health burden is already real.",
+          copy: "The damage is not hypothetical. Healthy life years have already been lost, and healthcare costs are already embedded in the city's delayed response.",
+          metrics: [
+            { label: "Healthy life lost", value: 179, note: "Quality-adjusted life years lost.", formatter: "integer", suffix: " years" },
+            { label: "Healthcare costs", value: 47.6, note: "Modeled burden from lead exposure.", formatter: "currencyCompact", prefix: "$", suffix: "M" }
+          ]
+        },
+        {
+          title: "The burden concentrates where renters live.",
+          copy: "The neighborhoods carrying the heaviest risk are also the places with the least household control over infrastructure replacement and disclosure.",
+          metrics: [
+            { label: "Renter share", value: 82, note: "In high-burden neighborhoods.", formatter: "integer", suffix: "%" },
+            { label: "Structural problem", value: 1, note: "Tenants often cannot authorize the fix themselves.", formatter: "word", word: "No direct control" }
+          ]
+        },
+        {
+          title: "Delay was a political choice.",
+          copy: "Council had a chance to compress the timeline. The defeat of CR21-90-AMEND turned a faster plan into a longer exposure window.",
+          metrics: [
+            { label: "Amendment vote", value: 7.4, note: "CR21-90-AMEND was defeated.", formatter: "vote" },
+            { label: "Timeline rejected", value: 10, note: "Years proposed for a faster replacement plan.", formatter: "integer", suffix: "-year plan" }
+          ]
+        },
+        {
+          title: "The response has to be specific.",
+          copy: "Different governments control different levers. Residents need demands matched to timelines, law, funding, and landlord obligations.",
+          metrics: [
+            { label: "Government levels", value: 3, note: "City, province, and federal government all have a role.", formatter: "integer" },
+            { label: "Resident task", value: 1, note: "Turn general concern into targeted pressure.", formatter: "word", word: "Demand action" }
           ],
-          'fill-opacity': 0.78
+          showActions: true
         }
-      });
+      ];
 
-      map.addLayer({
-        id: 'lead-areas-line',
-        type: 'line',
-        source: 'lead-areas',
-        paint: {
-          'line-color': '#f5f5f5',
-          'line-width': 1.2,
-          'line-opacity': 0.35
-        }
-      });
-
-      map.addLayer({
-        id: 'lead-areas-labels',
-        type: 'symbol',
-        source: 'lead-areas',
-        layout: {
-          'text-field': ['get', 'ct_name'],
-          'text-size': 11,
-          'text-font': ['Open Sans Regular', 'Arial Unicode MS Regular'],
-          'text-anchor': 'center',
-          'text-allow-overlap': false
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const steps = Array.from(document.querySelectorAll(".step"));
+      const railItems = Array.from(document.querySelectorAll(".visual__rail span"));
+      const visualIndex = document.getElementById("visual-index");
+      const visualTitle = document.getElementById("visual-title");
+      const visualCopy = document.getElementById("visual-copy");
+      const actionList = document.getElementById("action-list");
+      const metricNodes = [
+        {
+          label: document.getElementById("metric-1-label"),
+          value: document.getElementById("metric-1-value"),
+          note: document.getElementById("metric-1-note")
         },
-        paint: {
-          'text-color': '#f5f5f5',
-          'text-halo-color': 'rgba(10,12,16,0.8)',
-          'text-halo-width': 1.5
+        {
+          label: document.getElementById("metric-2-label"),
+          value: document.getElementById("metric-2-value"),
+          note: document.getElementById("metric-2-note")
         }
-      });
+      ];
 
-      map.fitBounds([[-104.72, 50.40], [-104.55, 50.48]], { padding: 24, duration: 0 });
-
-      const popup = new maplibregl.Popup({ closeButton: false, closeOnClick: false });
-      const summary = document.getElementById('map-summary');
-
-      map.on('mousemove', 'lead-areas-fill', e => {
-        map.getCanvas().style.cursor = 'pointer';
-        const feature = e.features?.[0];
-        if (!feature) return;
-        const p = feature.properties;
-        const qaly = p.qaly_realized ? p.qaly_realized.toFixed(2) : '0';
-        summary.textContent = `${p.ct_name}: ${p.lead_count} active connections, ~${p.children_affected} children affected, ${p.renter_pct}% renter, ${p.low_income_pct}% low-income, ${qaly} QALYs realized.`;
-        popup
-          .setLngLat(e.lngLat)
-          .setHTML(`
-            <div class="popup-card">
-              <strong>${p.ct_name}</strong>
-              <span><b>${p.lead_count}</b> active lead connections</span>
-              <span>~<b>${p.children_affected}</b> children affected</span>
-              <span><b>${qaly}</b> QALYs realized (health burden)</span>
-              <span>Renter: <b>${p.renter_pct}%</b> · Low-income: <b>${p.low_income_pct}%</b></span>
-            </div>
-          `)
-          .addTo(map);
-      });
-
-      map.on('mouseleave', 'lead-areas-fill', () => {
-        map.getCanvas().style.cursor = '';
-        summary.textContent = 'Hover a neighborhood to see lead connections, children affected, renter share, and income context.';
-        popup.remove();
-      });
-    });
-
-    // ===== ANIME.JS v4 ENHANCEMENTS =====
-    // v4 API: animate(targets, {keyframes}, {options})
-
-    // 1. Hero stat counter animation with data attributes
-    function animateHeroStats() {
-      if (prefersReducedMotion) return; // Skip animation if reduced motion preferred
-
-      document.querySelectorAll('.hero-counter').forEach((el, i) => {
-        const target = parseFloat(el.dataset.value);
-        const prefix = el.dataset.prefix || '';
-        const suffix = el.dataset.suffix || '';
-        const decimals = parseInt(el.dataset.decimals) || 0;
-        const start = performance.now();
-        const dur = 2000; // Slightly longer for impact
-        const delay = i * 150; // Stagger from center would be: anime.stagger(150, {from: 'center'})
-
-        setTimeout(() => {
-          function tick(now) {
-            const t = Math.min((now - start) / dur, 1);
-            // easeOutExpo for dramatic effect
-            const eased = t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
-            let v = target * eased;
-            const formatted = decimals > 0
-              ? v.toFixed(decimals)
-              : Math.round(v).toLocaleString();
-            el.textContent = prefix + formatted + suffix;
-            if (t < 1) requestAnimationFrame(tick);
-          }
-          requestAnimationFrame(tick);
-        }, delay);
-      });
-    }
-
-    // 2. Section reveal animations with dramatic effects
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const section = entry.target;
-
-          // Add visible class for CSS transition
-          section.classList.add('is-visible');
-
-          // Animate cards within section with staggered dramatic entrance
-          const cards = section.querySelectorAll('.panel, .col-card, .vote-card, .action-card, .timeline-item');
-          if (cards.length && !prefersReducedMotion) {
-            _animate(Array.from(cards), {
-              opacity: [0, 1],
-              translateY: [40, 0],
-              scale: [0.95, 1]
-            }, {
-              duration: 700,
-              delay: _stagger(60, { start: 200 }),
-              ease: 'outExpo'
-            });
-          }
-
-          // Counter nums with dramatic count-up
-          section.querySelectorAll('.counter-num').forEach(el => {
-            if (el.dataset.counted) return;
-            el.dataset.counted = '1';
-            const target = parseInt(el.dataset.target);
-            const start = performance.now();
-            const dur = 1800;
-            function tick(now) {
-              const t = Math.min((now - start) / dur, 1);
-              // easeOutExpo for dramatic effect
-              const eased = t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
-              el.textContent = Math.round(target * eased).toLocaleString();
-              if (t < 1) requestAnimationFrame(tick);
-            }
-            setTimeout(() => requestAnimationFrame(tick), 300);
-          });
-
-          revealObserver.unobserve(section);
+      function formatMetric(metric, currentValue) {
+        if (metric.formatter === "currencyCompact") {
+          return (metric.prefix || "") + currentValue.toFixed(1) + (metric.suffix || "");
         }
-      });
-    }, { threshold: 0.1 });
+        if (metric.formatter === "vote") {
+          const voteString = currentValue.toFixed(1);
+          return voteString.replace(".", "-");
+        }
+        if (metric.formatter === "word") {
+          return metric.word;
+        }
+        const rounded = Math.round(currentValue);
+        return rounded.toLocaleString("en-US") + (metric.suffix || "");
+      }
 
-    document.querySelectorAll('.section').forEach(section => {
-      if (section.classList.contains('hero')) {
-        section.classList.add('is-visible');
+      function animateValue(node, metric) {
+        if (metric.formatter === "word") {
+          node.textContent = metric.word;
+          return;
+        }
+
+        const target = metric.value;
+        if (prefersReducedMotion) {
+          node.textContent = formatMetric(metric, target);
+          return;
+        }
+
+        const start = 0;
+        const duration = 900;
+        const startTime = performance.now();
+
+        function tick(now) {
+          const progress = Math.min((now - startTime) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const current = start + (target - start) * eased;
+          node.textContent = formatMetric(metric, current);
+          if (progress < 1) {
+            window.requestAnimationFrame(tick);
+          }
+        }
+
+        window.requestAnimationFrame(tick);
+      }
+
+      function updateStory(index) {
+        const current = storyData[index];
+        visualIndex.textContent = "Beat " + (index + 1) + " of " + storyData.length;
+        visualTitle.textContent = current.title;
+        visualCopy.textContent = current.copy;
+
+        steps.forEach(function (step, stepIndex) {
+          step.classList.toggle("is-active", stepIndex === index);
+        });
+
+        railItems.forEach(function (item, itemIndex) {
+          item.classList.toggle("is-active", itemIndex <= index);
+        });
+
+        metricNodes.forEach(function (nodeSet, metricIndex) {
+          const metric = current.metrics[metricIndex];
+          nodeSet.label.textContent = metric.label;
+          nodeSet.note.textContent = metric.note;
+          animateValue(nodeSet.value, metric);
+        });
+
+        actionList.hidden = !current.showActions;
+      }
+
+      updateStory(0);
+
+      if (typeof scrollama !== "function") {
         return;
       }
-      revealObserver.observe(section);
-    });
 
-    // 3. Simple hero entrance - fade in and slide up (for narrative slideshow)
-    if (!prefersReducedMotion) {
-      // Animate the first slide content
-      const firstSlide = document.querySelector('.narrative-slide.slide-active');
-      if (firstSlide) {
-        _animate(firstSlide.querySelectorAll('.slide-kicker, .slide-headline, .slide-subtext'), {
-          opacity: [0, 1],
-          translateY: [20, 0]
-        }, { duration: 600, delay: _stagger(100), ease: 'outCubic' });
+      const scroller = scrollama();
+      scroller
+        .setup({
+          step: ".step",
+          offset: prefersReducedMotion ? 0.5 : 0.58,
+          progress: false
+        })
+        .onStepEnter(function (response) {
+          const index = Number(response.element.getAttribute("data-step"));
+          updateStory(index);
+        });
 
-        _animate(firstSlide.querySelector('.slide-stat'), {
-          opacity: [0, 1],
-          scale: [0.9, 1]
-        }, { duration: 500, delay: 400, ease: 'outCubic' });
+      window.addEventListener("resize", function () {
+        scroller.resize();
+      });
+    }());
+  </script>
+
+  <!-- Action Guide Tab Switching -->
+  <script>
+    (function () {
+      const guide = document.querySelector('[data-action-guide]');
+      if (!guide) return;
+
+      const tabs = Array.from(guide.querySelectorAll('.action-guide-tab'));
+      const panels = Array.from(guide.querySelectorAll('.action-guide-panel'));
+
+      function activateTab(nextTab, moveFocus) {
+        const targetId = nextTab.getAttribute('aria-controls');
+
+        tabs.forEach((tab) => {
+          const active = tab === nextTab;
+          tab.classList.toggle('is-active', active);
+          tab.setAttribute('aria-selected', active ? 'true' : 'false');
+          tab.tabIndex = active ? 0 : -1;
+        });
+
+        panels.forEach((panel) => {
+          const active = panel.id === targetId;
+          panel.classList.toggle('is-active', active);
+          panel.hidden = !active;
+        });
+
+        nextTab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        if (moveFocus) nextTab.focus();
       }
 
-      // Animate slide navigation
-      _animate('.slide-nav', {
-        opacity: [0, 1],
-        translateY: [10, 0]
-      }, { duration: 400, delay: 600, ease: 'outCubic' });
-
-      // Animate data source badge
-      _animate('.data-source-badge', {
-        opacity: [0, 1]
-      }, { duration: 400, delay: 800, ease: 'outCubic' });
-    }
-
-    // 6. Pipeline flow in #built section
-    const builtObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const nodes = entry.target.querySelectorAll('[style*="border-radius:14px"]');
-          _animate(Array.from(nodes), { scale: [0.85, 1], opacity: [0, 1] }, {
-            duration: 500, delay: _stagger(100), ease: 'outBack'
-          });
-          builtObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.2 });
-
-    const builtSection = document.getElementById('built');
-    if (builtSection) builtObserver.observe(builtSection);
-
-    // ===== NARRATIVE SLIDESHOW =====
-    const slides = document.querySelectorAll('.narrative-slide');
-    const dots = document.querySelectorAll('.slide-dot');
-    let currentSlide = 1;
-    let autoplayInterval = null;
-
-    function goToSlide(n) {
-      currentSlide = n;
-      slides.forEach((slide, i) => {
-        slide.classList.toggle('slide-active', parseInt(slide.dataset.slide) === n);
-      });
-      dots.forEach((dot, i) => {
-        dot.classList.toggle('active', parseInt(dot.dataset.target) === n);
-      });
-    }
-
-    dots.forEach(dot => {
-      dot.addEventListener('click', () => {
-        goToSlide(parseInt(dot.dataset.target));
-        // Reset autoplay on manual interaction
-        if (autoplayInterval) {
-          clearInterval(autoplayInterval);
-          startAutoplay();
-        }
-      });
-    });
-
-    function startAutoplay() {
-      autoplayInterval = setInterval(() => {
-        currentSlide = currentSlide >= slides.length ? 1 : currentSlide + 1;
-        goToSlide(currentSlide);
-      }, 6000); // 6 seconds per slide
-    }
-
-    // Start autoplay after initial load
-    if (slides.length > 0 && !prefersReducedMotion) {
-      setTimeout(startAutoplay, 3000);
-    }
-
-    // ===== ACTION TABS =====
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    const tabPanels = document.querySelectorAll('.action-panel');
-
-    tabBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const targetId = btn.getAttribute('aria-controls');
-
-        // Update buttons
-        tabBtns.forEach(b => {
-          b.classList.remove('active');
-          b.setAttribute('aria-selected', 'false');
+      tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => activateTab(tab, false));
+        tab.addEventListener('keydown', (event) => {
+          let nextIndex = null;
+          if (event.key === 'ArrowRight') nextIndex = (index + 1) % tabs.length;
+          if (event.key === 'ArrowLeft') nextIndex = (index - 1 + tabs.length) % tabs.length;
+          if (event.key === 'Home') nextIndex = 0;
+          if (event.key === 'End') nextIndex = tabs.length - 1;
+          if (nextIndex === null) return;
+          event.preventDefault();
+          activateTab(tabs[nextIndex], true);
         });
-        btn.classList.add('active');
-        btn.setAttribute('aria-selected', 'true');
+      });
 
-        // Update panels
-        tabPanels.forEach(panel => {
-          if (panel.id === targetId) {
-            panel.classList.add('active');
-            panel.removeAttribute('hidden');
-          } else {
-            panel.classList.remove('active');
-            panel.setAttribute('hidden', '');
+      guide.querySelectorAll('[data-copy-target]').forEach((button) => {
+        button.addEventListener('click', async () => {
+          const target = guide.querySelector('#' + button.getAttribute('data-copy-target'));
+          if (!target) return;
+          try {
+            await navigator.clipboard.writeText(target.textContent);
+            const original = button.textContent;
+            button.textContent = 'Copied';
+            setTimeout(() => { button.textContent = original; }, 1200);
+          } catch (error) {
+            button.textContent = 'Select text manually';
+            setTimeout(() => { button.textContent = 'Copy'; }, 1500);
           }
         });
       });
-    });
-
-    // ===== METHODOLOGY ACCORDION with anime.js createLayout =====
-    // Pattern extracted from anime.js examples/auto-layout/accordion
-    const methodologyAccordion = document.querySelector('.methodology-accordion');
-    if (methodologyAccordion && !prefersReducedMotion) {
-      const accordion = createLayout('.methodology-accordion', {
-        properties: ['background-color'],
-        ease: spring({ bounce: 0.2, duration: 450 }),
-        added: { opacity: 0, filter: 'blur(5px)' },
-        removed: { opacity: 0, filter: 'blur(5px)' }
-      });
-
-      document.querySelectorAll('.accordion-trigger').forEach(btn => {
-        btn.addEventListener('click', () => {
-          accordion.update(() => {
-            const item = btn.parentElement;
-            const wasOpen = item.classList.contains('is-open');
-
-            // Close all other items first (single-open accordion behavior)
-            document.querySelectorAll('.accordion-item.is-open').forEach(openItem => {
-              if (openItem !== item) {
-                openItem.classList.remove('is-open');
-                openItem.querySelector('.accordion-trigger').setAttribute('aria-expanded', 'false');
-              }
-            });
-
-            // Toggle this item
-            item.classList.toggle('is-open');
-            btn.setAttribute('aria-expanded', !wasOpen);
-          });
-        });
-      });
-    } else if (methodologyAccordion) {
-      // Fallback for reduced motion - instant toggle without animation
-      document.querySelectorAll('.accordion-trigger').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const item = btn.parentElement;
-          const wasOpen = item.classList.contains('is-open');
-
-          document.querySelectorAll('.accordion-item.is-open').forEach(openItem => {
-            if (openItem !== item) {
-              openItem.classList.remove('is-open');
-              openItem.querySelector('.accordion-trigger').setAttribute('aria-expanded', 'false');
-            }
-          });
-
-          item.classList.toggle('is-open');
-          btn.setAttribute('aria-expanded', !wasOpen);
-        });
-      });
-    }
+    }());
   </script>
 </body>
 </html>
