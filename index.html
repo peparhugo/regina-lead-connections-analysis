@@ -1266,6 +1266,7 @@ Sincerely,
               <li>Exposure duration: cumulative since 2019 baseline</li>
             </ul>
             <p><strong style="color: var(--ink);">Literature basis:</strong> Lanphear et al. (2005) pooled analysis of 1,333 children showing 0.46-0.87 IQ points lost per μg/dL blood lead. Health Canada (2019) set the maximum acceptable concentration at 5 ppb, acknowledging no safe threshold exists.</p>
+            <p><a href="methodology/qaly-calculation.html" style="color: var(--accent); font-weight: 600;">View full QALY derivation →</a></p>
           </div>
         </details>
 
@@ -1280,6 +1281,7 @@ Sincerely,
               <li>Includes: developmental services, special education, healthcare utilization</li>
             </ul>
             <p><strong style="color: var(--ink);">Validation:</strong> Within range of US estimates ($10K-$21K USD) from Gould (2009) and Attina & Trasande (2013).</p>
+            <p><a href="methodology/healthcare-costs.html" style="color: var(--accent); font-weight: 600;">View full cost model →</a></p>
           </div>
         </details>
 
@@ -1293,6 +1295,7 @@ Sincerely,
               <li><strong>Governance:</strong> Regina City Council minutes, voting records (2019-2026)</li>
             </ul>
             <p><strong style="color: var(--ink);">Verification:</strong> All claims cross-referenced against PostGIS materialized views. Baseline reconciliation confirmed 2,743 active connections.</p>
+            <p><a href="methodology/data-sources.html" style="color: var(--accent); font-weight: 600;">View data dictionary →</a></p>
           </div>
         </details>
 
@@ -1310,6 +1313,7 @@ SELECT SUM(realized_healthcare_cost_base) AS total_cost
 FROM ct_child_healthcare_cost_20260324;
 -- Result: $39,588,518 (pre-scaling)</pre>
             <p style="margin-top: 1rem;"><strong style="color: var(--ink);">Scaling factor:</strong> 1.20x applied to account for baseline reconciliation (2,743 vs 1,089 address-matched).</p>
+            <p><a href="methodology/sql-queries.html" style="color: var(--accent); font-weight: 600;">View all SQL queries →</a></p>
           </div>
         </details>
 
