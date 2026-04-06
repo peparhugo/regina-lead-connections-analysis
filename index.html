@@ -1243,6 +1243,97 @@ Sincerely,
         </div>
       </div>
     </section>
+
+    <!-- ========== PhD-LEVEL METHODOLOGY ACCORDION ========== -->
+    <section id="methodology" style="width: var(--content-width); margin: 0 auto; padding: 4rem 1rem;">
+      <div class="section-heading">
+        <p class="eyebrow">Reproducible Research</p>
+        <h2 style="font-family: 'Fraunces', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); margin: 0;">Full Methodology & Claim Justification</h2>
+        <p style="color: var(--muted); margin-top: 0.5rem;">Every claim on this site is traceable to source data, reproducible queries, and peer-reviewed literature.</p>
+      </div>
+
+      <div style="margin-top: 2rem; display: grid; gap: 1rem;">
+        <details style="background: var(--paper); border: 1px solid var(--line); border-radius: 1rem; overflow: hidden;">
+          <summary style="padding: 1.25rem; cursor: pointer; font-weight: 600; display: flex; justify-content: space-between; align-items: center;">
+            QALY Calculation Methodology
+          </summary>
+          <div style="padding: 0 1.25rem 1.25rem; color: var(--muted); line-height: 1.7;">
+            <p><strong style="color: var(--ink);">Formula:</strong> QALY = Σ (Children × Exposure_Weight × QALY_per_Year)</p>
+            <p><strong style="color: var(--ink);">Parameters (base case):</strong></p>
+            <ul>
+              <li>QALY per child-exposure-year: 0.05 (range: 0.02-0.10)</li>
+              <li>Children per connection: 0.201 (range: 0.089-0.325)</li>
+              <li>Exposure duration: cumulative since 2019 baseline</li>
+            </ul>
+            <p><strong style="color: var(--ink);">Literature basis:</strong> Lanphear et al. (2005) pooled analysis of 1,333 children showing 0.46-0.87 IQ points lost per μg/dL blood lead. Health Canada (2019) set the maximum acceptable concentration at 5 ppb, acknowledging no safe threshold exists.</p>
+          </div>
+        </details>
+
+        <details style="background: var(--paper); border: 1px solid var(--line); border-radius: 1rem; overflow: hidden;">
+          <summary style="padding: 1.25rem; cursor: pointer; font-weight: 600;">Healthcare Cost Model</summary>
+          <div style="padding: 0 1.25rem 1.25rem; color: var(--muted); line-height: 1.7;">
+            <p><strong style="color: var(--ink);">Formula:</strong> Cost = QALY × Cost_per_QALY</p>
+            <p><strong style="color: var(--ink);">Parameters:</strong></p>
+            <ul>
+              <li>Cost per QALY (base): $13,290 CAD (range: $10,102-$21,281)</li>
+              <li>Source: CIHI Patient Cost Estimator (2024), CADTH Guidelines (2017)</li>
+              <li>Includes: developmental services, special education, healthcare utilization</li>
+            </ul>
+            <p><strong style="color: var(--ink);">Validation:</strong> Within range of US estimates ($10K-$21K USD) from Gould (2009) and Attina & Trasande (2013).</p>
+          </div>
+        </details>
+
+        <details style="background: var(--paper); border: 1px solid var(--line); border-radius: 1rem; overflow: hidden;">
+          <summary style="padding: 1.25rem; cursor: pointer; font-weight: 600;">Data Sources & Verification</summary>
+          <div style="padding: 0 1.25rem 1.25rem; color: var(--muted); line-height: 1.7;">
+            <p><strong style="color: var(--ink);">Primary sources:</strong></p>
+            <ul>
+              <li><strong>Lead connections:</strong> City of Regina ArcGIS LeadConnectionAreas service (verified April 6, 2026)</li>
+              <li><strong>Demographics:</strong> Statistics Canada 2021 Census, Census Tract profiles</li>
+              <li><strong>Governance:</strong> Regina City Council minutes, voting records (2019-2026)</li>
+            </ul>
+            <p><strong style="color: var(--ink);">Verification:</strong> All claims cross-referenced against PostGIS materialized views. Baseline reconciliation confirmed 2,743 active connections.</p>
+          </div>
+        </details>
+
+        <details style="background: var(--paper); border: 1px solid var(--line); border-radius: 1rem; overflow: hidden;">
+          <summary style="padding: 1.25rem; cursor: pointer; font-weight: 600;">Reproducibility & SQL Queries</summary>
+          <div style="padding: 0 1.25rem 1.25rem; color: var(--muted); line-height: 1.7;">
+            <p><strong style="color: var(--ink);">All calculations are reproducible via SQL:</strong></p>
+            <pre style="background: #112134; color: #f6f1e7; padding: 1rem; border-radius: 0.5rem; overflow-x: auto; font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem;">-- Verify total QALY burden
+SELECT SUM(realized_qaly_base) AS total_qaly
+FROM ct_child_qaly_20260324;
+-- Result: 148.94 (pre-scaling)
+
+-- Verify healthcare cost
+SELECT SUM(realized_healthcare_cost_base) AS total_cost
+FROM ct_child_healthcare_cost_20260324;
+-- Result: $39,588,518 (pre-scaling)</pre>
+            <p style="margin-top: 1rem;"><strong style="color: var(--ink);">Scaling factor:</strong> 1.20x applied to account for baseline reconciliation (2,743 vs 1,089 address-matched).</p>
+          </div>
+        </details>
+
+        <details style="background: var(--paper); border: 1px solid var(--line); border-radius: 1rem; overflow: hidden;">
+          <summary style="padding: 1.25rem; cursor: pointer; font-weight: 600;">Literature Citations</summary>
+          <div style="padding: 0 1.25rem 1.25rem; color: var(--muted); line-height: 1.7;">
+            <ol style="padding-left: 1.25rem;">
+              <li>Lanphear BP et al. (2005). Low-level environmental lead exposure and children's intellectual function. <em>Environ Health Perspect</em>. <a href="https://doi.org/10.1289/ehp.7688" style="color: var(--accent);">DOI:10.1289/ehp.7688</a></li>
+              <li>Gould E. (2009). Childhood lead poisoning: conservative estimates of the social and economic benefits. <em>Environ Health Perspect</em>. <a href="https://doi.org/10.1289/ehp.0800408" style="color: var(--accent);">DOI:10.1289/ehp.0800408</a></li>
+              <li>Health Canada. (2019). Guidelines for Canadian Drinking Water Quality: Lead. <a href="https://www.canada.ca/en/health-canada/services/publications/healthy-living/guidelines-canadian-drinking-water-quality-guideline-technical-document-lead.html" style="color: var(--accent);">Health Canada</a></li>
+              <li>CIHI. (2024). Patient Cost Estimator. Canadian Institute for Health Information.</li>
+              <li>CADTH. (2017). Guidelines for the Economic Evaluation of Health Technologies: Canada.</li>
+            </ol>
+          </div>
+        </details>
+      </div>
+
+      <div style="margin-top: 2rem; padding: 1.5rem; background: var(--paper); border: 1px solid var(--line); border-radius: 1rem; text-align: center;">
+        <p style="color: var(--muted); margin: 0; line-height: 1.7;">
+          Built by <strong style="color: var(--ink);">Thomas (Pepar) Hugo</strong> · April 2026 ·
+          <a href="https://www.linkedin.com/in/thomasjayhugo/" style="color: var(--accent); text-decoration: none;">LinkedIn</a>
+        </p>
+      </div>
+    </section>
   </div>
 
   <script src="https://unpkg.com/scrollama"></script>
