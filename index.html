@@ -761,8 +761,8 @@
         <aside class="hero__summary" aria-label="Summary">
           <strong>At a glance</strong>
           <p>
-            Regina still has <b>2,743</b> lead pipes. The modeled burden reaches <b>179 years</b> of
-            healthy life lost and <b>$47.6 million</b> in healthcare costs, concentrated in
+            Regina still has <b>2,743</b> lead pipes. The estimated burden reaches
+            <b>$127 million</b> in healthcare and educational costs, concentrated in
             renter-heavy neighborhoods while replacement remains politically delayed.
           </p>
         </aside>
@@ -791,14 +791,14 @@
           <div class="step__card">
             <div class="step__count">02</div>
             <span class="step__eyebrow">The harm</span>
-            <h2>179 years of healthy life lost. $47.6M healthcare costs.</h2>
+            <h2>$127M in healthcare and educational costs.</h2>
             <p>
-              Lead exposure steals cognitive development from children. The modeled cost: 179 years of diminished quality of life
-              and irreversible damage absorbed long before the last pipe is replaced.
+              Lead exposure steals cognitive development from children. The estimated cost: $127 million in healthcare
+              and special education services over 18 years, adjusted for the city's filter program.
             </p>
             <div class="step__details" aria-label="Health burden details">
-              <div class="step__statline"><span>Quality-adjusted life years lost</span><strong>179</strong></div>
-              <div class="step__statline"><span>Modeled healthcare burden</span><strong>$47.6M</strong></div>
+              <div class="step__statline"><span>Children exposed (filter-adjusted)</span><strong>1,270</strong></div>
+              <div class="step__statline"><span>Healthcare + education costs</span><strong>$127M</strong></div>
             </div>
           </div>
         </article>
@@ -1364,10 +1364,10 @@ FROM ct_child_healthcare_cost_20260324;
         },
         {
           title: "Children pay the price in lost potential.",
-          copy: "Lead exposure reduces IQ and cognitive development in children. These 179 lost years represent diminished quality of life. The $47.6M is the projected healthcare cost of that damage.",
+          copy: "Lead exposure reduces IQ and cognitive development in children. The $127M estimate covers healthcare and special education costs over 18 years, adjusted for 25% filter adoption.",
           metrics: [
-            { label: "Healthy life lost", value: 179, note: "Quality-adjusted life years lost.", formatter: "integer", suffix: " years" },
-            { label: "Healthcare costs", value: 47.6, note: "Modeled burden from lead exposure.", formatter: "currencyCompact", prefix: "$", suffix: "M" }
+            { label: "Children exposed", value: 1270, note: "Adjusted for 25% filter adoption.", formatter: "integer" },
+            { label: "Healthcare costs", value: 127, note: "CIHI cost-of-illness estimate (NPV 3%).", formatter: "currencyCompact", prefix: "$", suffix: "M" }
           ]
         },
         {

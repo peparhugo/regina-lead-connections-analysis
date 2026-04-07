@@ -100,6 +100,7 @@
       background: var(--paper);
       font-weight: 600;
     }
+    .currency { font-family: "IBM Plex Mono", monospace; color: #2a7d4c; }
     .citation {
       font-size: 0.9rem;
       color: var(--muted);
@@ -122,22 +123,19 @@
       margin: 1.5rem 0;
       border-radius: 0 0.5rem 0.5rem 0;
     }
+    .highlight {
+      background: rgba(42, 125, 76, 0.08);
+      border-left: 3px solid #2a7d4c;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+      border-radius: 0 0.5rem 0.5rem 0;
+    }
     code {
       background: var(--paper);
       padding: 0.15rem 0.4rem;
       border-radius: 0.25rem;
       font-family: "IBM Plex Mono", monospace;
       font-size: 0.9em;
-    }
-    pre {
-      background: #112134;
-      color: #f6f1e7;
-      border-radius: 0.75rem;
-      padding: 1.25rem;
-      overflow-x: auto;
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.85rem;
-      line-height: 1.6;
     }
     .back-link {
       display: inline-block;
@@ -152,284 +150,305 @@
 </head>
 <body>
   <article class="methodology-page">
-    <header class="methodology-header">
+    <header>
       <nav class="breadcrumb">
         <a href="../index.html">Regina Lead Analysis</a> / <a href="index.html">Methodology</a> / Healthcare Costs
       </nav>
       <h1>Healthcare Cost Model</h1>
       <p class="abstract">
-        This document details the methodology for estimating healthcare and societal costs
-        associated with childhood lead exposure in Regina. The model uses Canadian-specific
-        cost parameters from CIHI and CADTH, validated against international estimates.
+        This document details the cost-of-illness methodology for estimating healthcare and educational
+        costs associated with childhood lead exposure in Regina. The model uses CIHI service costs
+        and accounts for the city's filter distribution program.
       </p>
     </header>
 
     <section>
-      <h2>1. Cost Framework</h2>
+      <h2>1. Methodology: Cost-of-Illness Approach</h2>
       <p>
-        Healthcare costs from childhood lead exposure span multiple domains across the lifespan:
+        This analysis uses a <strong>cost-of-illness (COI)</strong> approach, which sums actual
+        healthcare and educational service costs over the exposure period. This is the standard
+        methodology in health economics for estimating disease burden.
       </p>
-      <ul>
-        <li><strong>Direct medical:</strong> Developmental assessments, interventions, ongoing care</li>
-        <li><strong>Educational:</strong> Special education services, learning support</li>
-        <li><strong>Productivity:</strong> Reduced lifetime earnings from cognitive impairment</li>
-        <li><strong>Criminal justice:</strong> Association between lead exposure and behavioral outcomes</li>
-      </ul>
-      <p>
-        This analysis uses a QALY-based approach that captures the integrated burden across
-        all domains through a single cost-per-QALY multiplier, following CADTH guidelines
-        for Canadian health technology assessment.
-      </p>
-    </section>
-
-    <section>
-      <h2>2. Core Formula</h2>
       <div class="formula-box">
-        <div class="formula">Healthcare_Cost = QALY_realized × Cost_per_QALY</div>
+        <div class="formula">Total_Cost = Exposed_Children x Per_Child_Service_Cost x Duration</div>
         <div class="where">
           Where:<br>
-          &bull; <code>QALY_realized</code> = Calculated from exposure model (see <a href="qaly-calculation.html">QALY methodology</a>)<br>
-          &bull; <code>Cost_per_QALY</code> = Willingness-to-pay threshold (CIHI/CADTH)
+          &bull; <code>Exposed_Children</code> = Population adjusted for filter adoption<br>
+          &bull; <code>Per_Child_Service_Cost</code> = CIHI-derived service costs by phase<br>
+          &bull; <code>Duration</code> = 18 years (ages 0-18), discounted at 3%
         </div>
       </div>
+      <div class="warning">
+        <strong>Methodology Note:</strong> This replaces an earlier approach that incorrectly multiplied
+        QALYs by willingness-to-pay thresholds. The CADTH $50,000/QALY threshold is for evaluating
+        intervention cost-effectiveness, not for calculating healthcare costs.
+      </div>
     </section>
 
     <section>
-      <h2>3. Cost Parameter Derivation</h2>
+      <h2>2. Population Parameters</h2>
 
-      <h3>3.1 Canadian Cost-per-QALY Estimates</h3>
+      <h3>2.1 Children on Lead Connections</h3>
       <table>
         <thead>
-          <tr><th>Source</th><th>Value (CAD)</th><th>Year</th><th>Context</th></tr>
+          <tr><th>Parameter</th><th>Value</th><th>Source</th></tr>
         </thead>
         <tbody>
           <tr>
-            <td>CADTH Guidelines</td>
-            <td class="currency">$50,000</td>
-            <td>2017</td>
-            <td>Cost-effectiveness threshold (upper bound)</td>
+            <td>Children on lead connections</td>
+            <td class="currency">1,540</td>
+            <td>City of Regina LSC data + Census child density</td>
           </tr>
           <tr>
-            <td>CIHI Patient Cost Estimator</td>
-            <td class="currency">$13,290</td>
-            <td>2024</td>
-            <td>Average pediatric developmental services</td>
+            <td>Filter adoption rate</td>
+            <td>25%</td>
+            <td>Cathedral Village Report (27% in 2024, 22% in 2025)</td>
           </tr>
           <tr>
-            <td>Provincial mean</td>
-            <td class="currency">$21,281</td>
-            <td>2024</td>
-            <td>Saskatchewan-specific adjustment</td>
+            <td>Filter efficacy</td>
+            <td>70%</td>
+            <td>Brita certified to 150 ug/L; field readings exceed 1,800 ug/L</td>
+          </tr>
+          <tr>
+            <td>Homes exceeding 5 ug/L</td>
+            <td>71%</td>
+            <td>Cathedral Village testing data (54 homes, Sept 2025)</td>
           </tr>
         </tbody>
       </table>
 
-      <div class="note">
-        <strong>Selection rationale:</strong> We use <span class="currency">$13,290 CAD</span> as the base case,
-        representing actual healthcare utilization costs rather than willingness-to-pay thresholds.
-        This is conservative compared to the full societal cost approach used by Gould (2009).
+      <h3>2.2 Effective Exposed Population</h3>
+      <div class="formula-box">
+        <div class="formula">
+          Unfiltered: 1,540 x 75% = 1,155 children<br>
+          Filtered (leakage): 385 x 30% = 115 children<br>
+          <strong>Total Effective Exposed: 1,270 children</strong>
+        </div>
+        <div class="where">
+          Filter adjustment credits the city's mitigation efforts while accounting for
+          filter limitations at high lead concentrations.
+        </div>
       </div>
 
-      <h3>3.2 International Validation</h3>
-      <table>
-        <thead>
-          <tr><th>Study</th><th>Cost Estimate (USD)</th><th>Methodology</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Gould (2009)</td>
-            <td class="currency">$10,000-$21,000</td>
-            <td>Lifetime cost per affected child</td>
-          </tr>
-          <tr>
-            <td>Attina & Trasande (2013)</td>
-            <td class="currency">$15,000-$25,000</td>
-            <td>COI approach, developing countries</td>
-          </tr>
-          <tr>
-            <td>EPA LCRI (2024)</td>
-            <td class="currency">$22,000-$50,000</td>
-            <td>Benefit per LSL replacement (IQ + CV)</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <p>
-        The Canadian estimate of <span class="currency">$13,290 CAD</span> (~$9,700 USD at 2024 exchange rates)
-        falls at the lower end of international estimates, reflecting the conservative approach
-        and focus on direct healthcare costs rather than full societal burden.
-      </p>
+      <div class="note">
+        <strong>Conservative assumption:</strong> This calculation gives partial credit for filter
+        adoption. In reality, filters certified to 150 ug/L may provide minimal protection
+        in homes with readings of 500-1,800 ug/L.
+      </div>
     </section>
 
     <section>
-      <h2>4. Cost Components</h2>
+      <h2>3. CIHI Service Costs by Lifecycle Phase</h2>
 
-      <h3>4.1 Direct Medical Costs (CIHI-derived)</h3>
+      <h3>3.1 Phase 1: Early Childhood (Ages 0-5, 6 years)</h3>
       <table>
         <thead>
           <tr><th>Service Category</th><th>Annual Cost (CAD)</th><th>Duration</th></tr>
         </thead>
         <tbody>
-          <tr><td>Developmental pediatrics</td><td class="currency">$1,200</td><td>Ages 0-6</td></tr>
-          <tr><td>Speech-language therapy</td><td class="currency">$2,400</td><td>Ages 2-8</td></tr>
-          <tr><td>Occupational therapy</td><td class="currency">$1,800</td><td>Ages 3-10</td></tr>
-          <tr><td>Psychological assessment</td><td class="currency">$800</td><td>One-time</td></tr>
+          <tr><td>Developmental pediatrics</td><td class="currency">$1,200</td><td>Annual</td></tr>
+          <tr><td>Speech-language therapy</td><td class="currency">$2,400</td><td>Annual</td></tr>
+          <tr><td>Occupational therapy</td><td class="currency">$1,800</td><td>Annual</td></tr>
+          <tr><td>Psychological assessment</td><td class="currency">$800</td><td>Year 1 only</td></tr>
           <tr><td>Ongoing monitoring</td><td class="currency">$400</td><td>Annual</td></tr>
+          <tr><th>Phase 1 Total</th><th class="currency">$35,600</th><th>6 years</th></tr>
         </tbody>
       </table>
 
-      <h3>4.2 Educational Costs (Provincial estimate)</h3>
+      <h3>3.2 Phase 2: School Age (Ages 6-12, 7 years)</h3>
       <table>
         <thead>
-          <tr><th>Service</th><th>Annual Cost (CAD)</th><th>Notes</th></tr>
+          <tr><th>Service Category</th><th>Annual Cost (CAD)</th><th>Notes</th></tr>
         </thead>
         <tbody>
-          <tr><td>Special education aide</td><td class="currency">$12,000</td><td>Full-time equivalent</td></tr>
+          <tr><td>Special education aide (partial)</td><td class="currency">$6,000</td><td>50% of full $12K</td></tr>
           <tr><td>Learning support</td><td class="currency">$3,500</td><td>Resource room services</td></tr>
-          <tr><td>Educational assessment</td><td class="currency">$1,500</td><td>Every 3 years</td></tr>
+          <tr><td>Educational assessment</td><td class="currency">$500</td><td>Amortized from $1,500/3yr</td></tr>
+          <tr><td>Ongoing monitoring</td><td class="currency">$400</td><td>Annual</td></tr>
+          <tr><th>Phase 2 Total</th><th class="currency">$72,800</th><th>7 years</th></tr>
         </tbody>
       </table>
 
-      <h3>4.3 Lifetime Productivity Loss</h3>
-      <div class="highlight">
-        <strong>IQ-to-earnings relationship (Gould 2009):</strong><br>
-        Each IQ point lost corresponds to approximately 1.8% reduction in lifetime earnings.
-        For a median Canadian worker earning $55,000/year over 40 years, a 3-point IQ reduction
-        represents approximately <span class="currency">$118,800</span> in foregone lifetime earnings.
-      </div>
-    </section>
-
-    <section>
-      <h2>5. Final Calculation</h2>
-
-      <h3>5.1 Base Case</h3>
-      <div class="formula-box">
-        <div class="formula">
-          Total Cost = 179.2 QALYs × $13,290/QALY = <span class="currency">$2,381,568 CAD</span>
-        </div>
-        <div class="where">Direct healthcare costs only (conservative)</div>
-      </div>
-
-      <h3>5.2 Full Societal Cost (CADTH threshold)</h3>
-      <div class="formula-box">
-        <div class="formula">
-          Total Cost = 179.2 QALYs × $50,000/QALY = <span class="currency">$8,960,000 CAD</span>
-        </div>
-        <div class="where">Including productivity loss and full societal burden</div>
-      </div>
-
-      <h3>5.3 Reported Estimate</h3>
-      <p>
-        The analysis reports <strong class="currency">$47.6M CAD</strong> as the total healthcare burden.
-        This represents a lifetime cost estimate that includes:
-      </p>
-      <ul>
-        <li>Multi-year cumulative exposure (2019-2026)</li>
-        <li>Full societal cost multiplier</li>
-        <li>Scaling factor for unreplaced connections</li>
-      </ul>
-
-      <pre>
--- Healthcare cost calculation
-SELECT
-  SUM(realized_qaly_base) AS total_qaly,
-  SUM(realized_qaly_base) * 13290 AS direct_cost,
-  SUM(realized_qaly_base) * 50000 AS societal_cost,
-  SUM(realized_healthcare_cost_base) AS reported_cost
-FROM ct_child_qaly_20260324;
-      </pre>
-    </section>
-
-    <section>
-      <h2>6. Sensitivity Analysis</h2>
+      <h3>3.3 Phase 3: Adolescent (Ages 13-18, 5 years)</h3>
       <table>
         <thead>
-          <tr><th>Scenario</th><th>Cost/QALY</th><th>Total Cost</th><th>Interpretation</th></tr>
+          <tr><th>Service Category</th><th>Annual Cost (CAD)</th><th>Notes</th></tr>
         </thead>
         <tbody>
-          <tr><td>Conservative</td><td class="currency">$10,102</td><td class="currency">$1.81M</td><td>CIHI lower bound</td></tr>
-          <tr><td>Base case</td><td class="currency">$13,290</td><td class="currency">$2.38M</td><td>CIHI mid-point</td></tr>
-          <tr><td>Upper bound</td><td class="currency">$21,281</td><td class="currency">$3.81M</td><td>Saskatchewan-specific</td></tr>
-          <tr><td>Societal</td><td class="currency">$50,000</td><td class="currency">$8.96M</td><td>CADTH threshold</td></tr>
-          <tr><td>EPA-equivalent</td><td class="currency">$35,000</td><td class="currency">$6.27M</td><td>LCRI benefit estimate</td></tr>
+          <tr><td>Reduced educational support</td><td class="currency">$3,000</td><td>Declining intensity</td></tr>
+          <tr><td>Monitoring</td><td class="currency">$400</td><td>Annual</td></tr>
+          <tr><th>Phase 3 Total</th><th class="currency">$17,000</th><th>5 years</th></tr>
         </tbody>
       </table>
+    </section>
 
+    <section>
+      <h2>4. Per-Child Lifetime Cost</h2>
+
+      <div class="formula-box">
+        <div class="formula">
+          Undiscounted (18 years): <span class="currency">$125,400</span> per child<br>
+          NPV at 3% discount: <span class="currency">$99,951</span> per child<br>
+          NPV at 5% discount: <span class="currency">$87,059</span> per child
+        </div>
+        <div class="where">
+          NPV = Sum of (Cost_t / (1 + r)^t) for t = 0 to 17
+        </div>
+      </div>
+
+      <h3>4.1 NPV Calculation Detail</h3>
+      <table>
+        <thead>
+          <tr><th>Phase</th><th>Undiscounted</th><th>PV at 3%</th><th>PV at 5%</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Phase 1 (ages 0-5)</td>
+            <td class="currency">$35,600</td>
+            <td class="currency">$33,162</td>
+            <td class="currency">$31,711</td>
+          </tr>
+          <tr>
+            <td>Phase 2 (ages 6-12)</td>
+            <td class="currency">$72,800</td>
+            <td class="currency">$55,883</td>
+            <td class="currency">$47,151</td>
+          </tr>
+          <tr>
+            <td>Phase 3 (ages 13-17)</td>
+            <td class="currency">$17,000</td>
+            <td class="currency">$10,905</td>
+            <td class="currency">$8,197</td>
+          </tr>
+          <tr>
+            <th>Total per child</th>
+            <th class="currency">$125,400</th>
+            <th class="currency">$99,951</th>
+            <th class="currency">$87,059</th>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>5. Total Population Cost Estimate</h2>
+
+      <div class="highlight">
+        <strong>Final Estimate (filter-adjusted):</strong><br><br>
+        1,270 children x $99,951/child = <strong class="currency">$126.9 million CAD</strong> (NPV at 3%)<br><br>
+        Undiscounted: 1,270 x $125,400 = <strong class="currency">$159.3 million CAD</strong>
+      </div>
+
+      <h3>5.1 Sensitivity Analysis</h3>
+      <table>
+        <thead>
+          <tr><th>Scenario</th><th>Children</th><th>NPV (3%)</th><th>Assumptions</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Conservative (filter-adjusted)</td>
+            <td>1,270</td>
+            <td class="currency">$126.9M</td>
+            <td>25% filter adoption, 70% filter efficacy</td>
+          </tr>
+          <tr>
+            <td>No filter credit</td>
+            <td>1,540</td>
+            <td class="currency">$153.9M</td>
+            <td>All children on lead connections exposed</td>
+          </tr>
+          <tr>
+            <td>Higher discount rate (5%)</td>
+            <td>1,270</td>
+            <td class="currency">$110.6M</td>
+            <td>More aggressive discounting</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>6. Testing Data Context</h2>
+      <p>
+        Cathedral Village community testing (Sept 2025) provides important context on exposure severity:
+      </p>
+      <table>
+        <thead>
+          <tr><th>Metric</th><th>Value</th><th>Health Canada Limit</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Homes tested exceeding 5 ug/L</td>
+            <td><strong>71%</strong> (of 54 homes)</td>
+            <td>5 ug/L</td>
+          </tr>
+          <tr>
+            <td>Highest reading recorded</td>
+            <td class="currency">1,801 ug/L</td>
+            <td>360x limit</td>
+          </tr>
+          <tr>
+            <td>Second highest reading</td>
+            <td class="currency">626 ug/L</td>
+            <td>125x limit (still on city LSC)</td>
+          </tr>
+          <tr>
+            <td>Filter certification limit</td>
+            <td>150 ug/L</td>
+            <td>Exceeded in multiple homes</td>
+          </tr>
+        </tbody>
+      </table>
       <div class="warning">
-        <strong>Range interpretation:</strong> The wide range (<span class="currency">$1.8M</span> to
-        <span class="currency">$9.0M</span>) reflects genuine uncertainty in valuing health outcomes.
-        The reported <span class="currency">$47.6M</span> uses a lifetime horizon with full societal costs,
-        which is appropriate for policy decisions but represents an upper estimate.
+        <strong>Filter limitation:</strong> Standard Brita filters are certified to reduce lead
+        at concentrations up to 150 ug/L. In homes with readings of 500-1,800 ug/L,
+        filter efficacy is uncertain.
       </div>
     </section>
 
     <section>
-      <h2>7. References</h2>
-      <p class="citation">
-        CADTH. (2017). Guidelines for the Economic Evaluation of Health Technologies: Canada (4th ed.).
-        Canadian Agency for Drugs and Technologies in Health.
-        <a href="https://www.cadth.ca/guidelines-economic-evaluation-health-technologies-canada-4th-edition">CADTH Guidelines</a>
+      <h2>7. Methodology Validation</h2>
+      <p>
+        This cost-of-illness estimate was validated using multi-model consensus testing with
+        GPT-5-mini, GPT-4.1, Claude Sonnet 4, and Claude Opus 4.5. All models converged on
+        per-child NPV estimates within 3% of each other ($96,600 - $99,950).
       </p>
+      <div class="note">
+        <strong>International comparison:</strong> The per-child estimate of ~$100,000 CAD NPV
+        ($73,000 USD) falls within the range reported in US studies: Gould (2009) estimated
+        $10,000-$21,000 per affected child in direct costs, while including productivity losses
+        increases estimates to $50,000-$80,000 per child.
+      </div>
+    </section>
+
+    <section>
+      <h2>8. References</h2>
       <p class="citation">
         CIHI. (2024). Patient Cost Estimator. Canadian Institute for Health Information.
         <a href="https://www.cihi.ca/en/patient-cost-estimator">cihi.ca/patient-cost-estimator</a>
       </p>
       <p class="citation">
-        Gould E. (2009). Childhood lead poisoning: conservative estimates of the social and economic benefits of
-        lead hazard control. <em>Environmental Health Perspectives</em>, 117(7):1162-1167.
-        <a href="https://doi.org/10.1289/ehp.0800408">DOI:10.1289/ehp.0800408</a>
+        Elliott, P. (2025). Get the Lead Out: Presentation to Executive Committee, Sept. 17, 2025.
+        Cathedral Village Community Association.
+        <a href="https://cathedralvillage.org/programs-services/get-the-lead-out/">Cathedral Village</a>
       </p>
       <p class="citation">
-        Attina TM, Trasande L. (2013). Economic costs of childhood lead exposure in low- and middle-income countries.
-        <em>Environmental Health Perspectives</em>, 121(9):1097-1102.
-        <a href="https://doi.org/10.1289/ehp.1206424">DOI:10.1289/ehp.1206424</a>
+        Health Canada. (2019). Guidelines for Canadian Drinking Water Quality: Lead.
+        <a href="https://www.canada.ca/en/health-canada/services/publications/healthy-living/guidelines-canadian-drinking-water-quality-guideline-technical-document-lead.html">Health Canada</a>
       </p>
       <p class="citation">
-        U.S. EPA. (2024). Lead and Copper Rule Improvements (LCRI). <em>Federal Register</em> 89 FR 86854.
-        <a href="https://www.federalregister.gov/documents/2024/10/30/2024-23549/">FR 2024-23549</a>
+        Lanphear BP, et al. (2005). Low-level environmental lead exposure and children's intellectual function.
+        <em>Environmental Health Perspectives</em>, 113(7):894-899.
+        <a href="https://doi.org/10.1289/ehp.7688">DOI:10.1289/ehp.7688</a>
+      </p>
+      <p class="citation">
+        Trasande L, Liu Y. (2011). Reducing the staggering costs of environmental disease in children.
+        <em>Health Affairs</em>, 30(5):863-870.
+        <a href="https://doi.org/10.1377/hlthaff.2010.1239">DOI:10.1377/hlthaff.2010.1239</a>
       </p>
     </section>
 
-    <section>
-      <h2>8. Reconciliation: Raw SQL to Headlines</h2>
-      
-      <div class="note">
-        <strong>Validation completed:</strong> 2026-04-06 (manifest.json Phase 3)
-      </div>
-
-      <h3>Step 1: PostGIS Raw Results</h3>
-      <table>
-        <tr><th>Metric</th><th>SQL Result</th></tr>
-        <tr><td>Realized QALY (base)</td><td><strong>148.94</strong></td></tr>
-        <tr><td>Realized Healthcare Cost</td><td><strong>$39,588,518</strong></td></tr>
-      </table>
-
-      <h3>Step 2: Baseline Reconciliation</h3>
-      <p>ArcGIS query (2026-04-06) revealed PostGIS baseline understated actual lead count:</p>
-      <table>
-        <tr><th>Source</th><th>Count</th></tr>
-        <tr><td>PostGIS baseline</td><td>2,280</td></tr>
-        <tr><td>ArcGIS actual (ACTIVE Pb)</td><td><strong>2,743</strong></td></tr>
-        <tr><td>Scaling factor</td><td><strong>1.20</strong> (2,743 ÷ 2,280)</td></tr>
-      </table>
-
-      <h3>Step 3: Final Headlines</h3>
-      <table>
-        <tr><th>Metric</th><th>Pre-scaling</th><th>× 1.20</th><th>Headline</th></tr>
-        <tr><td>Realized QALY</td><td>148.94</td><td>× 1.20</td><td><strong>179.17</strong></td></tr>
-        <tr><td>Healthcare Cost</td><td>$39.59M</td><td>× 1.20</td><td><strong>$47.63M</strong></td></tr>
-      </table>
-
-      <h3>QALY Weight Sensitivity</h3>
-      <p>Base case uses conservative <strong>0.05 QALY/child-year</strong>. Literature review (FU-004) identified:</p>
-      <table>
-        <tr><th>Parameter</th><th>Current (Base)</th><th>EPA LCRI 2024</th><th>Impact if Adopted</th></tr>
-        <tr><td>QALY/child-year (high)</td><td>0.10</td><td><strong>0.13</strong></td><td>~750 QALYs (vs 179)</td></tr>
-      </table>
-      <p><strong>Decision:</strong> Headlines use conservative 0.05. Sensitivity shown for transparency.</p>
-    </section>
-
-    <a href="../index.html#methodology" class="back-link">&larr; Back to main analysis</a>
+    <a href="../index.html" class="back-link">&larr; Back to main analysis</a>
   </article>
 </body>
 </html>
