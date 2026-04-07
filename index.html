@@ -761,8 +761,8 @@
         <aside class="hero__summary" aria-label="Summary">
           <strong>At a glance</strong>
           <p>
-            Regina still has <b>2,743</b> lead pipes. The estimated burden reaches
-            <b>$127 million</b> in healthcare and educational costs, concentrated in
+            Regina still has <b>2,743</b> lead pipes. The burden: <b>179 years</b> of healthy life
+            stolen from children and <b>$127 million</b> in healthcare costs, concentrated in
             renter-heavy neighborhoods while replacement remains politically delayed.
           </p>
         </aside>
@@ -791,13 +791,13 @@
           <div class="step__card">
             <div class="step__count">02</div>
             <span class="step__eyebrow">The harm</span>
-            <h2>$127M in healthcare and educational costs.</h2>
+            <h2>179 years of healthy life stolen. $127M in costs.</h2>
             <p>
-              Lead exposure steals cognitive development from children. The estimated cost: $127 million in healthcare
-              and special education services over 18 years, adjusted for the city's filter program.
+              Lead exposure steals cognitive development from children. That's 179 quality-adjusted life years
+              lost — real childhoods diminished. The healthcare and education bill: $127 million over 18 years.
             </p>
             <div class="step__details" aria-label="Health burden details">
-              <div class="step__statline"><span>Children exposed (filter-adjusted)</span><strong>1,270</strong></div>
+              <div class="step__statline"><span>Healthy life years lost</span><strong>179 QALYs</strong></div>
               <div class="step__statline"><span>Healthcare + education costs</span><strong>$127M</strong></div>
             </div>
           </div>
@@ -1368,10 +1368,10 @@ FROM ct_child_healthcare_cost_20260324;
           ]
         },
         {
-          title: "Children pay the price in lost potential.",
-          copy: "Lead exposure reduces IQ and cognitive development in children. The $127M estimate covers healthcare and special education costs over 18 years, adjusted for 25% filter adoption.",
+          title: "179 years of healthy life stolen from children.",
+          copy: "Lead exposure steals cognitive development. That's 179 quality-adjusted life years lost — real childhoods diminished. The healthcare and education bill: $127 million.",
           metrics: [
-            { label: "Children exposed", value: 1270, note: "Adjusted for 25% filter adoption.", formatter: "integer" },
+            { label: "Healthy life lost", value: 179, note: "Quality-adjusted life years stolen.", formatter: "integer", suffix: " QALYs" },
             { label: "Healthcare costs", value: 127, note: "CIHI cost-of-illness estimate (NPV 3%).", formatter: "currencyCompact", prefix: "$", suffix: "M" }
           ]
         },
