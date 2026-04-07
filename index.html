@@ -1271,14 +1271,15 @@ Sincerely,
         <details style="background: var(--paper); border: 1px solid var(--line); border-radius: 1rem; overflow: hidden;">
           <summary style="padding: 1.25rem; cursor: pointer; font-weight: 600;">Healthcare Cost Model</summary>
           <div style="padding: 0 1.25rem 1.25rem; color: var(--muted); line-height: 1.7;">
-            <p><strong style="color: var(--ink);">Formula:</strong> Cost = QALY × Cost_per_QALY</p>
+            <p><strong style="color: var(--ink);">Methodology:</strong> Cost-of-illness (CIHI service costs over 18 years)</p>
             <p><strong style="color: var(--ink);">Parameters:</strong></p>
             <ul>
-              <li>Cost per QALY (base): $13,290 CAD (range: $10,102-$21,281)</li>
-              <li>Source: CIHI Patient Cost Estimator (2024), CADTH Guidelines (2017)</li>
-              <li>Includes: developmental services, special education, healthcare utilization</li>
+              <li>Children on lead connections: 1,540</li>
+              <li>Filter-adjusted exposed: 1,270 (25% filter adoption at 70% efficacy)</li>
+              <li>Per-child NPV (3%): $99,951 CAD</li>
+              <li>Total estimate: <strong>$127M CAD</strong></li>
             </ul>
-            <p><strong style="color: var(--ink);">Validation:</strong> Within range of US estimates ($10K-$21K USD) from Gould (2009) and Attina & Trasande (2013).</p>
+            <p><strong style="color: var(--ink);">Data sources:</strong> CIHI Patient Cost Estimator (2024), Cathedral Village testing (Sept 2025: 71% of homes exceed 5 μg/L).</p>
             <p><a href="methodology/healthcare-costs.html" style="color: var(--accent); font-weight: 600;">View full cost model →</a></p>
           </div>
         </details>
