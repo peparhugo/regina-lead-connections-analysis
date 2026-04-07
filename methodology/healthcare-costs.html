@@ -391,28 +391,47 @@ FROM ct_child_qaly_20260324;
     </section>
 
     <a href="../index.html#methodology" class="back-link">&larr; Back to main analysis</a>
+
+    <section>
+      <h2>8. Reconciliation: Raw SQL to Headlines</h2>
+      
+      <div class="note">
+        <strong>Validation completed:</strong> 2026-04-06 (manifest.json Phase 3)
+      </div>
+
+      <h3>Step 1: PostGIS Raw Results</h3>
+      <table>
+        <tr><th>Metric</th><th>SQL Result</th></tr>
+        <tr><td>Realized QALY (base)</td><td><strong>148.94</strong></td></tr>
+        <tr><td>Realized Healthcare Cost</td><td><strong>$39,588,518</strong></td></tr>
+      </table>
+
+      <h3>Step 2: Baseline Reconciliation</h3>
+      <p>ArcGIS query (2026-04-06) revealed PostGIS baseline understated actual lead count:</p>
+      <table>
+        <tr><th>Source</th><th>Count</th></tr>
+        <tr><td>PostGIS baseline</td><td>2,280</td></tr>
+        <tr><td>ArcGIS actual (ACTIVE Pb)</td><td><strong>2,743</strong></td></tr>
+        <tr><td>Scaling factor</td><td><strong>1.20</strong> (2,743 ÷ 2,280)</td></tr>
+      </table>
+
+      <h3>Step 3: Final Headlines</h3>
+      <table>
+        <tr><th>Metric</th><th>Pre-scaling</th><th>× 1.20</th><th>Headline</th></tr>
+        <tr><td>Realized QALY</td><td>148.94</td><td>× 1.20</td><td><strong>179.17</strong></td></tr>
+        <tr><td>Healthcare Cost</td><td>$39.59M</td><td>× 1.20</td><td><strong>$47.63M</strong></td></tr>
+      </table>
+
+      <h3>QALY Weight Sensitivity</h3>
+      <p>Base case uses conservative <strong>0.05 QALY/child-year</strong>. Literature review (FU-004) identified:</p>
+      <table>
+        <tr><th>Parameter</th><th>Current (Base)</th><th>EPA LCRI 2024</th><th>Impact if Adopted</th></tr>
+        <tr><td>QALY/child-year (high)</td><td>0.10</td><td><strong>0.13</strong></td><td>~750 QALYs (vs 179)</td></tr>
+      </table>
+      <p><strong>Decision:</strong> Headlines use conservative 0.05. Sensitivity shown for transparency.</p>
+    </section>
+
+    <a href="../index.html#methodology" class="back-link">&larr; Back to main analysis</a>
   </article>
 </body>
 </html>
-
-    <section>
-      <h2>Reconciliation with Headline Figures</h2>
-      <div class="note">
-        <strong>Verified April 2026:</strong><br>
-        • Pre-scaling QALY: 148.94<br>
-        • Pre-scaling healthcare cost: $39.59M<br>
-        • Scaling factor: 1.20x (baseline reconciliation: 2,743 actual vs ~2,286 matched)<br>
-        • <strong>Final scaled QALY: 179.17</strong><br>
-        • <strong>Final scaled healthcare cost: $47.63M</strong>
-      </div>
-      <p>
-        The $47.6M figure uses lifetime projection with societal costs, not the simple 
-        QALY × $13,290 calculation. The higher multiplier accounts for:
-      </p>
-      <ul>
-        <li>Lifetime earnings loss from IQ reduction</li>
-        <li>Special education costs</li>
-        <li>Healthcare utilization over lifespan</li>
-        <li>Productivity impacts</li>
-      </ul>
-    </section>

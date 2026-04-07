@@ -681,8 +681,15 @@ DROP TABLE census_tracts_raw;
       </div>
 
       <div class="success">
-        <strong>Verification:</strong> 551.2 children × 7 years × 0.05 QALY/child-year = 148.94 QALYs<br>
-        Reported figure of 179.2 uses slightly different exposure weighting for partial years.
+        <strong>Verification:</strong> 551.2 children × 7 years × 0.05 QALY/child-year = 148.94 QALYs
+      </div>
+
+      <h4>7.4 Scaling to Headline Figure</h4>
+      <div class="note">
+        <strong>Baseline Reconciliation (Phase 3):</strong><br>
+        Fresh ArcGIS query (2026-04-06) revealed PostGIS baseline of 2,280 understated actual count of <strong>2,743</strong> city-maintained ACTIVE Pb lines.<br><br>
+        <strong>Scaling factor:</strong> 2,743 ÷ 2,280 = <strong>1.203 (rounded to 1.20)</strong><br><br>
+        <strong>Final headline:</strong> 148.94 × 1.20 = <strong>179.17 QALYs</strong>
       </div>
     </section>
 
@@ -721,9 +728,11 @@ DROP TABLE census_tracts_raw;
       </div>
 
       <div class="note">
-        <strong>Note on $47.6M figure:</strong> The headline $47.6M uses lifetime projection with discounting,
-        accounting for ongoing exposure of unreplaced connections. The point-in-time calculation above
-        shows the already-realized burden.
+        <strong>Reconciliation to $47.6M headline:</strong><br>
+        • Pre-scaling healthcare cost: $39,588,518<br>
+        • Scaling factor (baseline reconciliation): × 1.20<br>
+        • <strong>Final headline: $47.63M</strong><br><br>
+        The scaling accounts for 2,743 actual ACTIVE Pb lines vs 2,280 PostGIS baseline.
       </div>
     </section>
 
