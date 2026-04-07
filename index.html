@@ -1312,7 +1312,7 @@ FROM ct_child_qaly_20260324;
 SELECT SUM(realized_healthcare_cost_base) AS total_cost
 FROM ct_child_healthcare_cost_20260324;
 -- Result: $39,588,518 (pre-scaling)</pre>
-            <p style="margin-top: 1rem;"><strong style="color: var(--ink);">Scaling factor:</strong> 1.20x applied to account for baseline reconciliation (2,743 vs 1,089 address-matched).</p>
+            <p style="margin-top: 1rem;"><strong style="color: var(--ink);">Scaling factor:</strong> 1.20x applied (2,743 actual ACTIVE Pb connections ÷ 2,280 PostGIS baseline = 1.203, rounded to 1.20).</p>
             <p><a href="methodology/sql-queries.html" style="color: var(--accent); font-weight: 600;">View all SQL queries →</a></p>
           </div>
         </details>
@@ -1320,12 +1320,24 @@ FROM ct_child_healthcare_cost_20260324;
         <details style="background: var(--paper); border: 1px solid var(--line); border-radius: 1rem; overflow: hidden;">
           <summary style="padding: 1.25rem; cursor: pointer; font-weight: 600;">Literature Citations</summary>
           <div style="padding: 0 1.25rem 1.25rem; color: var(--muted); line-height: 1.7;">
-            <ol style="padding-left: 1.25rem;">
-              <li>Lanphear BP et al. (2005). Low-level environmental lead exposure and children's intellectual function. <em>Environ Health Perspect</em>. <a href="https://doi.org/10.1289/ehp.7688" style="color: var(--accent);">DOI:10.1289/ehp.7688</a></li>
-              <li>Gould E. (2009). Childhood lead poisoning: conservative estimates of the social and economic benefits. <em>Environ Health Perspect</em>. <a href="https://doi.org/10.1289/ehp.0800408" style="color: var(--accent);">DOI:10.1289/ehp.0800408</a></li>
+            <p style="margin-bottom: 1rem;"><strong style="color: var(--ink);">Health Effects & IQ Loss:</strong></p>
+            <ol style="padding-left: 1.25rem; margin-bottom: 1.5rem;">
+              <li>Lanphear BP et al. (2005). Low-level environmental lead exposure and children's intellectual function: pooled analysis of 1,333 children. <em>Environ Health Perspect</em> 113(7):894-899. <a href="https://doi.org/10.1289/ehp.7688" style="color: var(--accent);">DOI:10.1289/ehp.7688</a></li>
+              <li>Canfield RL et al. (2003). Intellectual impairment in children with blood lead concentrations below 10 μg/dL. <em>N Engl J Med</em> 348(16):1517-1526. <a href="https://doi.org/10.1056/NEJMoa022848" style="color: var(--accent);">DOI:10.1056/NEJMoa022848</a></li>
+              <li>Bellinger DC. (2008). Very low lead exposures and children's neurodevelopment. <em>Curr Opin Pediatr</em> 20(2):172-177. <a href="https://doi.org/10.1097/MOP.0b013e3282f4f97b" style="color: var(--accent);">DOI:10.1097/MOP.0b013e3282f4f97b</a></li>
+            </ol>
+            <p style="margin-bottom: 1rem;"><strong style="color: var(--ink);">Economic & Cost Analysis:</strong></p>
+            <ol style="padding-left: 1.25rem; margin-bottom: 1.5rem;" start="4">
+              <li>Gould E. (2009). Childhood lead poisoning: conservative estimates of the social and economic benefits of lead hazard control. <em>Environ Health Perspect</em> 117(7):1162-1167. <a href="https://doi.org/10.1289/ehp.0800408" style="color: var(--accent);">DOI:10.1289/ehp.0800408</a></li>
+              <li>Attina TM, Trasande L. (2013). Economic costs of childhood lead exposure in low- and middle-income countries. <em>Environ Health Perspect</em> 121(9):1097-1102. <a href="https://doi.org/10.1289/ehp.1206424" style="color: var(--accent);">DOI:10.1289/ehp.1206424</a></li>
+              <li>Trasande L, Liu Y. (2011). Reducing the staggering costs of environmental disease in children. <em>Health Affairs</em> 30(5):863-870. <a href="https://doi.org/10.1377/hlthaff.2010.1239" style="color: var(--accent);">DOI:10.1377/hlthaff.2010.1239</a></li>
+            </ol>
+            <p style="margin-bottom: 1rem;"><strong style="color: var(--ink);">Regulatory & Canadian Sources:</strong></p>
+            <ol style="padding-left: 1.25rem; margin-bottom: 1.5rem;" start="7">
               <li>Health Canada. (2019). Guidelines for Canadian Drinking Water Quality: Lead. <a href="https://www.canada.ca/en/health-canada/services/publications/healthy-living/guidelines-canadian-drinking-water-quality-guideline-technical-document-lead.html" style="color: var(--accent);">Health Canada</a></li>
-              <li>CIHI. (2024). Patient Cost Estimator. Canadian Institute for Health Information.</li>
-              <li>CADTH. (2017). Guidelines for the Economic Evaluation of Health Technologies: Canada.</li>
+              <li>U.S. EPA. (2024). Lead and Copper Rule Improvements (LCRI). <em>Federal Register</em> 89 FR 86854. <a href="https://www.federalregister.gov/documents/2024/10/30/2024-23549/" style="color: var(--accent);">FR 2024-23549</a></li>
+              <li>CIHI. (2024). Patient Cost Estimator. Canadian Institute for Health Information. <a href="https://www.cihi.ca/en/patient-cost-estimator" style="color: var(--accent);">CIHI</a></li>
+              <li>CADTH. (2017). Guidelines for the Economic Evaluation of Health Technologies: Canada (4th ed.). <a href="https://www.cadth.ca/guidelines-economic-evaluation-health-technologies-canada-4th-edition" style="color: var(--accent);">CADTH</a></li>
             </ol>
           </div>
         </details>
