@@ -3,6 +3,8 @@
    ScrollyTelling, Map, Tabs, Copy
    ============================================ */
 
+let leafletMap = null;
+
 document.addEventListener('DOMContentLoaded', () => {
   initScrollObserver();
   initMap();
@@ -19,13 +21,21 @@ function initScrollObserver() {
     return;
   }
 
+  // Make Beat 1 visible immediately (it's above the fold)
+  const beat1 = document.querySelector('[data-beat="1"]');
+  if (beat1) beat1.classList.add('in-view');
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('in-view');
+        // Leaflet needs a size recalc when its container becomes visible
+        if (leafletMap && entry.target.querySelector('#map')) {
+          setTimeout(() => leafletMap.invalidateSize(), 100);
+        }
       }
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
   beats.forEach(b => observer.observe(b));
 }
@@ -39,9 +49,10 @@ function initMap() {
     center: [50.445, -104.618],
     zoom: 12,
     scrollWheelZoom: false,
-    dragging: !L.Browser.mobile,
+    dragging: true,
     tap: true,
   });
+  leafletMap = map;
 
   L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
