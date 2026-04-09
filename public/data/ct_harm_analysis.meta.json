@@ -1,13 +1,11 @@
 {
   "created_at": "2026-04-09",
-  "cts_with_lead": 19,
-  "total_pb": 2760,
-  "total_children": 0.0,
-  "total_realized_qaly": 135.32,
-  "total_prevented_qaly": 296.87,
-  "total_atrisk_qaly": 334.64,
-  "total_realized_npv": 24092937,
-  "total_prevented_npv": 52852156,
-  "total_atrisk_npv": 59576679,
-  "total_delay_cost": 4105963
+  "census_year": 2021,
+  "model_version": "5.0",
+  "cts_with_lead": 16,
+  "total_pb": 2755,
+  "total_children_on_lead": 984,
+  "total_qaly": 293,
+  "total_burden": 77460540,
+  "total_prevented": 37380915
 }
