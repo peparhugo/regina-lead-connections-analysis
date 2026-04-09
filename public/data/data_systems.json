@@ -1,0 +1,69 @@
+{
+  "created_at": "2026-04-09",
+  "title": "Five Data Systems, Five Different Counts",
+  "description": "Regina tracks its lead service connections across at least five public data systems. None agree on the count. Nobody has reconciled them.",
+  "systems": [
+    {
+      "name": "CBMH WaterConnection",
+      "layer": "FeatureServer/8",
+      "url": "https://opengis.regina.ca/arcgis/rest/services/Collector/CBMH_Survey_Map/FeatureServer/8",
+      "total_records": 89328,
+      "pb_count": 6943,
+      "state": "frozen",
+      "last_update": "~2016",
+      "note": "Field survey ground truth — but frozen at 2016. Bulk import in 2009, minor updates through 2016, nothing after."
+    },
+    {
+      "name": "DomesticWaterNetworkTrace",
+      "layer": "MapServer/4",
+      "url": "https://opengis.regina.ca/arcgis/rest/services/CGISViewer/DomesticWaterNetworkTrace/MapServer/4",
+      "total_records": 99119,
+      "pb_count": 5405,
+      "state": "live",
+      "last_update": "2026-03",
+      "note": "Live administrative records updated through 2026. Has UPDATE_DATE and MAINTENANCEDATE fields."
+    },
+    {
+      "name": "SewerWaterCondition Lead+PolyB",
+      "layer": "MapServer/4",
+      "url": "https://opengis.regina.ca/arcgis/rest/services/CGISViewer/SewerWaterCondition/MapServer/4",
+      "total_records": 3692,
+      "pb_count": 2760,
+      "state": "filtered",
+      "last_update": "2026",
+      "note": "Filtered view showing only ACTIVE Pb and POLY B connections. The city's current operational tracking layer."
+    },
+    {
+      "name": "LeadConnectionAreas",
+      "layer": "MapServer/0",
+      "url": "https://opengis.regina.ca/arcgis/rest/services/CGISViewer/LeadConnectionAreas/MapServer/0",
+      "total_records": 14,
+      "pb_count": 3637,
+      "state": "stale",
+      "last_update": "unknown",
+      "note": "Community-level aggregate. No date stamp. The '3,637 baseline' cited on the city website. Includes connections already replaced."
+    },
+    {
+      "name": "GTLO Committee List",
+      "source": "City of Regina → Get The Lead Out Committee",
+      "url": "https://www.google.com/maps/d/viewer?mid=16-476b_7L1dS-PB1yAO9UtUY52FHKB4",
+      "total_records": 2000,
+      "pb_count": 2305,
+      "state": "independent",
+      "last_update": "2025-09",
+      "note": "Addresses provided by the City to the GTLO committee, Sept 2025. Google Maps capped export at 2,000. Our bridge matched 98.1%."
+    }
+  ],
+  "error_model": {
+    "coverage_rate": 0.841,
+    "coverage_stdev": 0.029,
+    "systematic_undercount_pct": 15.9,
+    "calibration_source": "https://www.regina.ca/home-property/water/water/lead-service-connections/",
+    "calibration_years": "2020-2023",
+    "method": "CBMH(Pb) cross Trace(Cu) crossover with MAINTENANCEDATE validation against city-reported LSC Replacements",
+    "entry_lag_median_days": 90,
+    "entry_lag_mean_days": 355,
+    "batch_entry_example": "January 23, 2024: 2,021 records entered in one day"
+  },
+  "key_finding": "The city's GIS records 84.1% of completed replacements. The remaining 16% are never entered. This is systematic — the same rate every year — proving an institutional data management gap, not random clerical error."
+}

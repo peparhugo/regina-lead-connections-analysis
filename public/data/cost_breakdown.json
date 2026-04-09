@@ -1,0 +1,38 @@
+{
+  "model_version": "3.1",
+  "created_at": "2026-04-09",
+  "burden_horizon_years": 30,
+  "discount_rate": 0.03,
+  "totals": {
+    "realized_npv": 24092937,
+    "prevented_npv": 52852156,
+    "atrisk_npv": 59576679,
+    "total_burden_npv": 83669620,
+    "total_qaly": 469.96,
+    "realized_qaly": 135.32,
+    "prevented_qaly": 296.87,
+    "atrisk_qaly": 334.64
+  },
+  "categories": [
+    {"name": "Lifetime earnings", "bearer": "Families", "share": 0.599, "realized": 14431669, "prevented": 31658441, "atrisk": 35686431, "total": 50118102, "description": "Reduced lifetime income from IQ loss — borne directly by affected families"},
+    {"name": "Healthcare system", "bearer": "Public health system", "share": 0.188, "realized": 4529472, "prevented": 9936205, "atrisk": 11200416, "total": 15729889, "description": "Developmental assessment, therapy, ADHD treatment, adult cardiovascular/kidney disease, mental health — 30-year tail"},
+    {"name": "Education system", "bearer": "Schools", "share": 0.120, "realized": 2891152, "prevented": 6342259, "atrisk": 7149201, "total": 10040354, "description": "Special education, remedial services — 20% of exposed children need additional support"},
+    {"name": "Tax revenue", "bearer": "Government", "share": 0.090, "realized": 2168364, "prevented": 4756694, "atrisk": 5361901, "total": 7530266, "description": "Reduced tax revenue from lower lifetime earnings"},
+    {"name": "Criminal justice", "bearer": "Justice system", "share": 0.003, "realized": 72279, "prevented": 158556, "atrisk": 178730, "total": 251009, "description": "Increased criminal justice system costs from lead-related behavioral effects"}
+  ],
+  "per_child": {
+    "total_30yr": 80112,
+    "healthcare": 15100,
+    "education": 9600,
+    "earnings_loss": 48000,
+    "tax_loss": 7200,
+    "justice": 212
+  },
+  "sources": [
+    "Gould (2009) DOI:10.1289/ehp.0800408 — $17,815/IQ point (2006 USD), inflation-adjusted to $24,000 CAD",
+    "Lanphear et al. (2005) DOI:10.1289/ehp.7688 — IQ loss per child",
+    "Reuben et al. (2017) DOI:10.1001/jama.2017.1712 — 38-year persistence of effects",
+    "CADTH (2017) — 3% discount rate",
+    "CIHI Patient Cost Estimator (2024) — acute episode reference only"
+  ]
+}

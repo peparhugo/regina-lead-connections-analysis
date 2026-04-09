@@ -1,0 +1,62 @@
+{
+  "motion": "CR21-90",
+  "date": "2021-05-26",
+  "meeting": "City Council Meeting",
+  "subject": "Lead Service Connection Management Program Report",
+  "amendment": {
+    "moved_by": "Andrew Stevens",
+    "seconded_by": "Dan LeBlanc",
+    "proposal": "Replacement Option 3 — 10-year completion timetable (2031)",
+    "result": "DEFEATED",
+    "vote_for": 4,
+    "vote_against": 7
+  },
+  "main_motion": {
+    "moved_by": "Bob Hawkins",
+    "seconded_by": "Andrew Stevens",
+    "proposal": "Replacement Option 2 — 15-year completion timetable (2036)",
+    "result": "CARRIED",
+    "vote_for": 11,
+    "vote_against": 0,
+    "provisions": [
+      "Approve fifteen-year lead service connection replacement program (target 2036)",
+      "Mandatory private-side replacement when City-owned side is replaced",
+      "Payment options up to ten years for qualifying property owners",
+      "Additional two per cent Utility rate increase in 2022",
+      "Water Bylaw amendments for approved program changes",
+      "Remove MN19-23 from Outstanding Items",
+      "100% water filter distribution goal for affected households",
+      "Annual reporting to Operations & Community Services Committee"
+    ]
+  },
+  "councillors": [
+    {"name": "Andrew Stevens", "vote": "for", "role": "Councillor"},
+    {"name": "Dan LeBlanc", "vote": "for", "role": "Councillor"},
+    {"name": "Shanon Zachidniak", "vote": "for", "role": "Councillor"},
+    {"name": "Cheryl Stadnichuk", "vote": "for", "role": "Councillor"},
+    {"name": "Lori Bresciani", "vote": "against", "role": "Councillor"},
+    {"name": "John Findura", "vote": "against", "role": "Councillor"},
+    {"name": "Terina Shaw", "vote": "against", "role": "Councillor"},
+    {"name": "Jason Mancinelli", "vote": "against", "role": "Councillor"},
+    {"name": "Landon Mohl", "vote": "against", "role": "Councillor"},
+    {"name": "Bob Hawkins", "vote": "against", "role": "Councillor"},
+    {"name": "Sandra Masters", "vote": "against", "role": "Mayor"}
+  ],
+  "delegations": [
+    {"id": "DE21-185", "name": "Kathleen Donovan", "org": "Cathedral Area Community Association"},
+    {"id": "DE21-186", "name": "Steve Wolfson", "city": "Regina, SK"}
+  ],
+  "delay_cost": {
+    "delay_years": 5,
+    "connections_in_delay_window": 772,
+    "additional_children_exposed": 107,
+    "additional_qaly_lost": 27.9,
+    "additional_economic_npv": 4105963
+  },
+  "source": {
+    "title": "City Council Minutes, Wednesday May 26, 2021",
+    "url": "https://reginask.iqm2.com/Citizens/FileOpen.aspx?Type=12&ID=2818&Inline=True",
+    "iqm2_id": 2818,
+    "note": "Draft rendering of official minutes"
+  }
+}
