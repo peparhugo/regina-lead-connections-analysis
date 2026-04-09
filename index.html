@@ -20,11 +20,11 @@
       <div class="wrap">
         <div class="dossier-stamp">CASE FILE: REGINA LEAD SERVICE CONNECTIONS</div>
         <p class="dossier-date">Compiled April 2026 from public records</p>
-        <h1 class="dossier-title">The city can't count its own pipes.</h1>
-        <p class="dossier-lede">Five public databases. Five different numbers. We downloaded them all, cross-referenced 99,119 records, and found the gap between what the city says and what the data shows. This is what we found.</p>
+        <h1 class="dossier-title">In one neighbourhood, 1,380 children share their water with 459 lead pipes.</h1>
+        <p class="dossier-lede">The city replaces them at the same rate as affluent areas with almost none. On May 26, 2021, council voted 7&ndash;4 to keep the pipes in the ground for five more years. We downloaded the city's own data to find out what that decision cost.</p>
         <div class="dossier-meta">
-          <span class="meta-chip">19 census tracts</span>
-          <span class="meta-chip">470 QALYs</span>
+          <span class="meta-chip">19 neighbourhoods</span>
+          <span class="meta-chip">470 years of healthy childhood lost</span>
           <span class="meta-chip">$83.7M burden</span>
           <span class="meta-chip">4&ndash;7 vote</span>
         </div>
@@ -32,106 +32,9 @@
     </header>
 
     <!-- ============ BEAT 1: THE BACKLOG ============ -->
-    <section class="beat" id="beat-1" data-beat="1">
+    <section class="beat beat--map" id="beat-1" data-beat="1">
       <div class="wrap">
-        <div class="beat-eyebrow"><span class="beat-num">01</span> The backlog</div>
-        <h2 class="beat-headline">One day. Three years.</h2>
-        <div class="beat-body">
-          <p>On <strong>January 23, 2024</strong>, someone at Regina City Hall entered <strong class="stat-inline" data-count="2021">2,021</strong> water infrastructure records into the GIS system in a single day.</p>
-          <p>Those records represented years of backlogged replacement work. This is how the city tracks its lead pipe crisis &mdash; off the side of someone's desk.</p>
-
-          <div class="evidence-card">
-            <div class="evidence-card-header">
-              <span class="evidence-label">Working fact</span>
-              <span class="evidence-source">Calibrated against city-reported LSC replacements, 2020&ndash;2023</span>
-            </div>
-            <div class="stat-row">
-              <div class="stat-block">
-                <span class="stat-value" data-count="84.1" data-suffix="%">84.1%</span>
-                <span class="stat-label">of completed replacements make it into the GIS</span>
-              </div>
-              <div class="stat-block stat-block--alert">
-                <span class="stat-value">16%</span>
-                <span class="stat-label">vanish into administrative gaps. Same rate every year.</span>
-              </div>
-            </div>
-            <p class="evidence-note">Source: <a href="https://www.regina.ca/home-property/water/water/lead-service-connections/" target="_blank" rel="noopener">City of Regina LSC Management Program</a> &mdash; validated against city-published replacement counts (2020: 118, 2021: 193, 2022: 210, 2023: 175).</p>
-          </div>
-
-          <div class="entry-lag-viz">
-            <div class="lag-bar">
-              <div class="lag-segment lag-segment--work" style="flex:1">
-                <span>Work completed</span>
-              </div>
-              <div class="lag-segment lag-segment--gap" style="flex:0.25">
-                <span>90-day median lag</span>
-              </div>
-              <div class="lag-segment lag-segment--entry" style="flex:0.15">
-                <span>GIS entry</span>
-              </div>
-            </div>
-            <p class="lag-caption">Median delay between pipe replacement and database entry: <strong>90 days</strong>. Some records take over a year.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ BEAT 2: FIVE SYSTEMS ============ -->
-    <section class="beat" id="beat-2" data-beat="2">
-      <div class="wrap">
-        <div class="beat-eyebrow"><span class="beat-num">02</span> The data</div>
-        <h2 class="beat-headline">Five public layers. One missing picture.</h2>
-        <div class="beat-body">
-          <p>We downloaded five public data layers from the City of Regina's OpenGIS portal. Each one claims to track lead service connections. <strong>None of them agree.</strong></p>
-
-          <div class="systems-grid" id="systems-viz">
-            <div class="system-card" data-system="cbmh">
-              <div class="system-count" data-count="6943">6,943</div>
-              <div class="system-name">CBMH Survey</div>
-              <div class="system-tag system-tag--frozen">Frozen ~2016</div>
-              <div class="system-note">Field survey. 89,328 total records. Last updated ~2016.</div>
-            </div>
-            <div class="system-card" data-system="trace">
-              <div class="system-count" data-count="5405">5,405</div>
-              <div class="system-name">Network Trace</div>
-              <div class="system-tag system-tag--live">Live</div>
-              <div class="system-note">Administrative records. 99,119 total. Updated to 2026.</div>
-            </div>
-            <div class="system-card" data-system="leadpolyb">
-              <div class="system-count" data-count="2760">2,760</div>
-              <div class="system-name">Lead+PolyB View</div>
-              <div class="system-tag system-tag--filtered">Filtered</div>
-              <div class="system-note">Active connections only. 3,692 total (incl. 932 PolyB).</div>
-            </div>
-            <div class="system-card" data-system="areas">
-              <div class="system-count" data-count="3637">3,637</div>
-              <div class="system-name">Lead Areas</div>
-              <div class="system-tag system-tag--stale">Stale</div>
-              <div class="system-note">Community aggregate. No date. Includes replaced.</div>
-            </div>
-            <div class="system-card" data-system="gtlo">
-              <div class="system-count" data-count="2305">~2,305</div>
-              <div class="system-name">GTLO List</div>
-              <div class="system-tag system-tag--independent">Independent</div>
-              <div class="system-note">City data provided to Get The Lead Out, Sept 2025.</div>
-            </div>
-          </div>
-
-          <div class="evidence-card">
-            <div class="evidence-card-header">
-              <span class="evidence-label">Key discrepancy</span>
-            </div>
-            <p>The city told the Get The Lead Out committee there are <strong>~2,305</strong> connections. Their own GIS shows <strong>2,760</strong> active Pb. The full network trace shows <strong>5,405</strong>. Which number is real?</p>
-            <p class="evidence-note">All five layers are publicly accessible via the <a href="https://opengis.regina.ca/arcgis/rest/services" target="_blank" rel="noopener">Regina OpenGIS REST API</a>.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ BEAT 3: THE MAP ============ -->
-    <section class="beat beat--map" id="beat-3" data-beat="3">
-      <div class="wrap">
-        <div class="beat-eyebrow"><span class="beat-num">03</span> The map</div>
+        <div class="beat-eyebrow"><span class="beat-num">01</span> The neighbourhood</div>
         <h2 class="beat-headline">The crisis is not evenly distributed.</h2>
         <div class="beat-body">
           <p>Lead pipes exist in <strong>19 census tracts</strong>. The rest of the city has none. The replacement rate across rich and poor tracts is flat &mdash; <strong>35&ndash;40%</strong> &mdash; regardless of how many children, how much poverty, or how high the Indigenous population.</p>
@@ -205,9 +108,9 @@
     </section>
 
     <!-- ============ BEAT 4: THE VOTE ============ -->
-    <section class="beat beat--vote" id="beat-4" data-beat="4">
+    <section class="beat beat--vote" id="beat-2" data-beat="2">
       <div class="wrap">
-        <div class="beat-eyebrow"><span class="beat-num">04</span> The vote</div>
+        <div class="beat-eyebrow"><span class="beat-num">02</span> The vote</div>
         <h2 class="beat-headline">The city chose 2036.</h2>
         <div class="beat-body">
           <p>On <strong>May 26, 2021</strong>, Regina City Council considered CR21-90 &mdash; the Lead Service Connection Management Program. Councillors Stevens and LeBlanc moved an amendment: complete all replacements by <strong>2031</strong> instead of 2036.</p>
@@ -259,9 +162,9 @@
     </section>
 
     <!-- ============ BEAT 5: THE COST ============ -->
-    <section class="beat" id="beat-5" data-beat="5">
+    <section class="beat" id="beat-3" data-beat="3">
       <div class="wrap">
-        <div class="beat-eyebrow"><span class="beat-num">05</span> The cost</div>
+        <div class="beat-eyebrow"><span class="beat-num">03</span> The cost</div>
         <h2 class="beat-headline">Delay has a price.</h2>
         <div class="beat-body">
           <div class="cost-hero">
@@ -355,9 +258,107 @@
     </section>
 
     <!-- ============ BEAT 6: THE ASK ============ -->
-    <section class="beat beat--ask" id="beat-6" data-beat="6">
+    <!-- ============ BEAT 4: THE DATA ============ -->
+    <section class="beat" id="beat-4" data-beat="4">
       <div class="wrap">
-        <div class="beat-eyebrow"><span class="beat-num">06</span> The ask</div>
+        <div class="beat-eyebrow"><span class="beat-num">04</span> The data</div>
+        <h2 class="beat-headline">How we know: five databases, one missing picture.</h2>
+        <div class="beat-body">
+          <p>We downloaded five public data layers from the City of Regina's OpenGIS portal. Each one claims to track lead service connections. <strong>None of them agree.</strong></p>
+
+
+          <div class="systems-grid" id="systems-viz">
+            <div class="system-card" data-system="cbmh">
+              <div class="system-count" data-count="6943">6,943</div>
+              <div class="system-name">CBMH Survey</div>
+              <div class="system-tag system-tag--frozen">Frozen ~2016</div>
+              <div class="system-note">Field survey. 89,328 total records. Last updated ~2016.</div>
+            </div>
+            <div class="system-card" data-system="trace">
+              <div class="system-count" data-count="5405">5,405</div>
+              <div class="system-name">Network Trace</div>
+              <div class="system-tag system-tag--live">Live</div>
+              <div class="system-note">Administrative records. 99,119 total. Updated to 2026.</div>
+            </div>
+            <div class="system-card" data-system="leadpolyb">
+              <div class="system-count" data-count="2760">2,760</div>
+              <div class="system-name">Lead+PolyB View</div>
+              <div class="system-tag system-tag--filtered">Filtered</div>
+              <div class="system-note">Active connections only. 3,692 total (incl. 932 PolyB).</div>
+            </div>
+            <div class="system-card" data-system="areas">
+              <div class="system-count" data-count="3637">3,637</div>
+              <div class="system-name">Lead Areas</div>
+              <div class="system-tag system-tag--stale">Stale</div>
+              <div class="system-note">Community aggregate. No date. Includes replaced.</div>
+            </div>
+            <div class="system-card" data-system="gtlo">
+              <div class="system-count" data-count="2305">~2,305</div>
+              <div class="system-name">GTLO List</div>
+              <div class="system-tag system-tag--independent">Independent</div>
+              <div class="system-note">City data provided to Get The Lead Out, Sept 2025.</div>
+            </div>
+          </div>
+
+          <div class="evidence-card">
+            <div class="evidence-card-header">
+              <span class="evidence-label">Key discrepancy</span>
+            </div>
+            <p>The city told the Get The Lead Out committee there are <strong>~2,305</strong> connections. Their own GIS shows <strong>2,760</strong> active Pb. The full network trace shows <strong>5,405</strong>. Which number is real?</p>
+            <p class="evidence-note">All five layers are publicly accessible via the <a href="https://opengis.regina.ca/arcgis/rest/services" target="_blank" rel="noopener">Regina OpenGIS REST API</a>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BEAT 3: THE MAP ============ -->
+
+          <h3 class="cost-section-title">The tracking gap</h3>
+          <p>On <strong>January 23, 2024</strong>, someone at City Hall entered <strong>2,021</strong> records into the GIS in a single day. Years of backlogged work, uploaded in one sweep. The city tracks this crisis off the side of someone's desk.</p>
+
+          <div class="evidence-card">
+            <div class="evidence-card-header">
+              <span class="evidence-label">Working fact</span>
+              <span class="evidence-source">Calibrated against city-reported LSC replacements, 2020&ndash;2023</span>
+            </div>
+            <div class="stat-row">
+              <div class="stat-block">
+                <span class="stat-value" data-count="84.1" data-suffix="%">84.1%</span>
+                <span class="stat-label">of completed replacements make it into the GIS</span>
+              </div>
+              <div class="stat-block stat-block--alert">
+                <span class="stat-value">16%</span>
+                <span class="stat-label">vanish into administrative gaps. Same rate every year.</span>
+              </div>
+            </div>
+            <p class="evidence-note">Source: <a href="https://www.regina.ca/home-property/water/water/lead-service-connections/" target="_blank" rel="noopener">City of Regina LSC Management Program</a> &mdash; validated against city-published replacement counts (2020: 118, 2021: 193, 2022: 210, 2023: 175).</p>
+          </div>
+
+          <div class="entry-lag-viz">
+            <div class="lag-bar">
+              <div class="lag-segment lag-segment--work" style="flex:1">
+                <span>Work completed</span>
+              </div>
+              <div class="lag-segment lag-segment--gap" style="flex:0.25">
+                <span>90-day median lag</span>
+              </div>
+              <div class="lag-segment lag-segment--entry" style="flex:0.15">
+                <span>GIS entry</span>
+              </div>
+            </div>
+            <p class="lag-caption">Median delay between pipe replacement and database entry: <strong>90 days</strong>. Some records take over a year.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BEAT 2: FIVE SYSTEMS ============ -->
+      </div>
+    </section>
+
+    <section class="beat beat--ask" id="beat-5" data-beat="5">
+      <div class="wrap">
+        <div class="beat-eyebrow"><span class="beat-num">05</span> The ask</div>
         <h2 class="beat-headline">Name the people. Set the dates.</h2>
         <div class="beat-body">
           <p>Every demand below is tied to a specific finding from this investigation. Not &ldquo;do better&rdquo; &mdash; <strong>do this specific thing because we found this specific problem.</strong></p>
