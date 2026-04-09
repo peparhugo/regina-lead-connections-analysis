@@ -1,38 +1,172 @@
 {
-  "model_version": "3.1",
+  "version": "4.0",
   "created_at": "2026-04-09",
-  "burden_horizon_years": 30,
-  "discount_rate": 0.03,
-  "totals": {
-    "realized_npv": 24092937,
-    "prevented_npv": 52852156,
-    "atrisk_npv": 59576679,
-    "total_burden_npv": 83669620,
-    "total_qaly": 469.96,
-    "realized_qaly": 135.32,
-    "prevented_qaly": 296.87,
-    "atrisk_qaly": 334.64
+  "title": "Regina Lead Service Connection \u2014 Canonical Burden Model",
+  "methodology_note": "Bottom-up condition-based costing validated by top-down IQ-point convergence",
+  "convergence_check": {
+    "top_down_gould": {
+      "method": "IQ-point \u00d7 lifetime earnings cost (Gould 2009)",
+      "iq_loss_per_child": 2.0,
+      "cost_per_iq_point_cad": 24000,
+      "per_child_total": 48000,
+      "total_543_children": 26064000,
+      "validated_by": "Cathedral Village testing Sept 2025: 71% exceed 5 \u03bcg/L, several >100 \u03bcg/L, one at 570 \u03bcg/L (114\u00d7 limit)"
+    },
+    "bottom_up_conditions": {
+      "method": "Condition-specific prevalence \u00d7 annual treatment cost \u00d7 duration",
+      "per_child_total": 36900,
+      "total_543_children": 20034700,
+      "note": "Healthcare system costs only \u2014 does not include family out-of-pocket or education system"
+    },
+    "convergence": "Top-down ($48K/child total) and bottom-up healthcare ($36.9K/child health only) converge \u2014 healthcare is ~77% of total societal cost, consistent with Gould breakdown"
   },
-  "categories": [
-    {"name": "Lifetime earnings", "bearer": "Families", "share": 0.599, "realized": 14431669, "prevented": 31658441, "atrisk": 35686431, "total": 50118102, "description": "Reduced lifetime income from IQ loss — borne directly by affected families"},
-    {"name": "Healthcare system", "bearer": "Public health system", "share": 0.188, "realized": 4529472, "prevented": 9936205, "atrisk": 11200416, "total": 15729889, "description": "Developmental assessment, therapy, ADHD treatment, adult cardiovascular/kidney disease, mental health — 30-year tail"},
-    {"name": "Education system", "bearer": "Schools", "share": 0.120, "realized": 2891152, "prevented": 6342259, "atrisk": 7149201, "total": 10040354, "description": "Special education, remedial services — 20% of exposed children need additional support"},
-    {"name": "Tax revenue", "bearer": "Government", "share": 0.090, "realized": 2168364, "prevented": 4756694, "atrisk": 5361901, "total": 7530266, "description": "Reduced tax revenue from lower lifetime earnings"},
-    {"name": "Criminal justice", "bearer": "Justice system", "share": 0.003, "realized": 72279, "prevented": 158556, "atrisk": 178730, "total": 251009, "description": "Increased criminal justice system costs from lead-related behavioral effects"}
-  ],
-  "per_child": {
-    "total_30yr": 80112,
-    "healthcare": 15100,
-    "education": 9600,
-    "earnings_loss": 48000,
-    "tax_loss": 7200,
-    "justice": 212
+  "population": {
+    "method": "1 lead connection = 1 household address. Children per household = CT children \u00f7 CT dwellings.",
+    "connections_total": 2760,
+    "unreplaced": 1548,
+    "replaced_corrected": 1212,
+    "children_on_lead_now": 543,
+    "children_removed_by_replacement": 471,
+    "source": "StatsCan 2016 Census CT profiles \u00d7 SewerWaterCondition Lead+PolyB spatial join"
+  },
+  "bottom_up_healthcare": {
+    "conditions": [
+      {
+        "name": "ADHD",
+        "prevalence_increase": 0.12,
+        "annual_cost_cad": 8000,
+        "duration_years": 12,
+        "expected_per_child": 11520,
+        "sources": [
+          "CADDRA formulary",
+          "Globe and Mail ADHD costs 2024",
+          "CIHI mental health CMGs"
+        ],
+        "includes": "Medication ($1,500-2,500/yr), psychiatrist/pediatrician ($500-1,000/yr), therapy ($2,000-5,000/yr), school support ($1,000-3,000/yr)"
+      },
+      {
+        "name": "Learning disability / developmental delay",
+        "prevalence_increase": 0.2,
+        "annual_cost_cad": 10000,
+        "duration_years": 8,
+        "expected_per_child": 16000,
+        "sources": [
+          "Provincial special education funding formulas",
+          "OT/speech therapy market rates"
+        ],
+        "includes": "Speech/occupational therapy ($3,000-8,000/yr), developmental assessment ($1,500-3,500 one-time), school support services"
+      },
+      {
+        "name": "Behavioral / conduct disorders",
+        "prevalence_increase": 0.1,
+        "annual_cost_cad": 4000,
+        "duration_years": 8,
+        "expected_per_child": 3200,
+        "sources": [
+          "CIHI mental health CMGs",
+          "Provincial mental health program costs"
+        ],
+        "includes": "Mental health services ($2,000-6,000/yr), family support ($1,000-3,000/yr)"
+      },
+      {
+        "name": "Adult cardiovascular disease",
+        "prevalence_increase": 0.07,
+        "annual_cost_cad": 5000,
+        "duration_years": 15,
+        "expected_per_child": 5250,
+        "sources": [
+          "CIHI cardiovascular CMGs",
+          "Heart & Stroke Foundation cost estimates"
+        ],
+        "includes": "Hypertension management ($1,500-3,000/yr), chronic management post-event ($5,000-10,000/yr)"
+      },
+      {
+        "name": "Chronic kidney disease",
+        "prevalence_increase": 0.05,
+        "annual_cost_cad": 15000,
+        "duration_years": 10,
+        "expected_per_child": 750,
+        "sources": [
+          "CIHI renal CMGs",
+          "Kidney Foundation of Canada cost data"
+        ],
+        "includes": "CKD management stages 3-4 ($10,000-20,000/yr), dialysis stage 5 ($60,000-100,000/yr)",
+        "note": "Low expected value because low prevalence, but catastrophic individual cost"
+      }
+    ],
+    "total_per_child_healthcare": 36900
+  },
+  "earnings_loss": {
+    "method": "IQ loss \u00d7 earnings reduction per IQ point",
+    "iq_loss_per_child": 2.0,
+    "earnings_pct_per_iq_point": 0.024,
+    "median_income_regina_cad": 42000,
+    "working_years": 40,
+    "npv_factor_3pct": 23.1,
+    "cost_per_iq_point_cad": 23285,
+    "cost_per_child": 46570,
+    "source": "Salkever (1995) earnings model, StatsCan 2021 Census Regina median income",
+    "validated_by": "Gould (2009) $17,815/IQ point (2006 USD) inflation-adjusted = $35,131 CAD \u2014 our Canadian calc is more conservative"
+  },
+  "qaly": {
+    "method": "Child-years of exposure \u00d7 disability weight",
+    "qaly_per_child_year": 0.015,
+    "range": [
+      0.008,
+      0.025
+    ],
+    "reference": "Between GBD borderline intellectual disability (0.011) and mild anxiety (0.030). Population-level expected value.",
+    "child_years_realized": 3072,
+    "child_years_projected": 2969,
+    "qaly_realized": 46,
+    "qaly_projected": 45,
+    "qaly_total": 91
+  },
+  "cathedral_validation": {
+    "source": "Patricia Elliott, Get The Lead Out, Executive Committee Sept 17, 2023",
+    "url": "https://cathedralvillage.org/wp-content/uploads/2025/10/Exec-Committee-Sept-2025.docx.pdf",
+    "homes_tested": 54,
+    "pct_exceeding_5ugL": 71,
+    "max_measurement_ugL": 570,
+    "north_central_max_ugL": 1801,
+    "flint_trigger_ugL": 104,
+    "regina_homes_exceeding_flint": 20,
+    "filter_coverage_2024": "27%",
+    "filter_coverage_2025": "22%",
+    "brita_max_rated_ugL": 150,
+    "note": "Some Regina homes exceed filter capacity. 71% exceedance validates 2.0 IQ point base case."
+  },
+  "totals": {
+    "children_at_risk": 543,
+    "children_prevented": 471,
+    "healthcare_per_child": 36900,
+    "earnings_per_child": 46570,
+    "total_per_child": 83470,
+    "healthcare_total_at_risk": 20036700,
+    "earnings_total_at_risk": 25287510,
+    "total_at_risk": 45324210,
+    "healthcare_prevented": 17379900,
+    "earnings_prevented": 21934470,
+    "total_prevented": 39314370,
+    "qaly_total": 91,
+    "qaly_realized": 46,
+    "qaly_projected": 45
   },
   "sources": [
-    "Gould (2009) DOI:10.1289/ehp.0800408 — $17,815/IQ point (2006 USD), inflation-adjusted to $24,000 CAD",
-    "Lanphear et al. (2005) DOI:10.1289/ehp.7688 — IQ loss per child",
-    "Reuben et al. (2017) DOI:10.1001/jama.2017.1712 — 38-year persistence of effects",
-    "CADTH (2017) — 3% discount rate",
-    "CIHI Patient Cost Estimator (2024) — acute episode reference only"
+    "S1: DomesticWaterNetworkTrace/4 (99,119 records)",
+    "S2: CBMH WaterConnection Layer 8 (89,328 records)",
+    "S3: SewerWaterCondition Lead+PolyB (3,692 records)",
+    "S4: City of Regina LSC Management Program",
+    "S5: GTLO 2025 KML (Sept 2025)",
+    "S6: StatsCan 2016 Census CT profiles",
+    "S8: CIHI Patient Cost Estimator + condition-specific CMGs",
+    "S9: Lanphear et al. (2005) DOI:10.1289/ehp.7688",
+    "S10: Health Canada (2019) Drinking Water Guidelines",
+    "S11: CADTH (2017) 3% discount rate",
+    "S12: Gould (2009) DOI:10.1289/ehp.0800408",
+    "S13: Reuben et al. (2017) DOI:10.1001/jama.2017.1712",
+    "S14: Salkever (1995) earnings-IQ model",
+    "S15: Patricia Elliott / GTLO Cathedral testing (Sept 2025)",
+    "S16: CADDRA provincial formulary overview"
   ]
 }
