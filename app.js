@@ -103,7 +103,8 @@ function initMap() {
             <div style="font-weight:700;font-size:14px;margin-bottom:4px">CT ${p.ct_name || p.ct_uid}</div>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 12px;font-size:12px">
               <span>Lead connections</span><strong>${fmt(p.pb_connections)}</strong>
-              <span>Children 0-14</span><strong>${fmt(p.children_0_14)}</strong>
+              <span>Children in area</span><strong>${fmt(p.children_0_14)}</strong>
+              <span>Children affected</span><strong>${fmt(p.impacted_children)}</strong>
               <span>Indigenous</span><strong>${(p.indigenous_pct||0).toFixed(1)}%</strong>
               <span>Low income</span><strong>${(p.low_income_pct||0).toFixed(1)}%</strong>
               <span>Renter</span><strong>${(p.renter_pct||0).toFixed(1)}%</strong>
