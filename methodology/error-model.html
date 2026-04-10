@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Error Model: 84.1% ± 2.9% — Regina Lead Investigation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <div class="dossier">
+    <header class="dossier-header" style="padding: 2rem 1rem 1.5rem">
+      <div class="wrap">
+        <p class="dossier-date"><a href="../index.html">&larr; Back to investigation</a></p>
+        <h1 class="dossier-title" style="font-size: clamp(1.4rem, 3vw, 2rem)">Error Model: 84.1% ± 2.9%</h1>
+        <p class="dossier-lede">Reproducible methodology. Every input, formula, and source documented for independent verification.</p>
+      </div>
+    </header>
+    <section class="beat" style="opacity:1;transform:none">
+      <div class="wrap">
+        <div class="beat-body">
+<h1>Error Model: 84.1% ± 2.9%</h1>
+<h2>Method</h2>
+<p>Confirmed replacements detected as CBMH(Pb) ∩ DomesticWaterNetworkTrace(Cu) crossover.</p>
+<p>Completion date: MAINTENANCEDATE from Trace.</p>
+<p>Validated against city-published LSC replacement counts.</p>
+<h2>Calibration data</h2>
+<table class="method-table"><thead><tr>
+<th>Year</th>
+<th>Our MAINT count</th>
+<th>City reported (LSC)</th>
+<th>Hydrovac confirms</th>
+<th>Coverage</th>
+</tr></thead><tbody>
+<tr>
+<td>2020</td>
+<td>96</td>
+<td>118</td>
+<td>0</td>
+<td>81.4%</td>
+</tr>
+<tr>
+<td>2021</td>
+<td>170</td>
+<td>193</td>
+<td>0</td>
+<td>88.1%</td>
+</tr>
+<tr>
+<td>2022</td>
+<td>175</td>
+<td>210</td>
+<td>23</td>
+<td>83.3%</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>146</td>
+<td>175</td>
+<td>107</td>
+<td>83.4%</td>
+</tr>
+</tbody></table>
+<p>Mean: **84.1%**. Stdev: **2.9%**. Correction factor: **×1.189**</p>
+<h2>Source</h2>
+<p>City replacement counts from: https://www.regina.ca/home-property/water/water/lead-service-connections/</p>
+<p>Note: 2022 and 2023 include hydrovac confirmations (dig up, confirm not lead) as "Total Removal".</p>
+<p>Our comparison uses LSC Replacements only, not Total Removal.</p>
+<h2>Interpretation</h2>
+<p>The 16% undercount is systematic — same data entry bottleneck every year.</p>
+<p>This is a data management capacity issue, not random error.</p>
+<p>The city does the work but does not always record it in GIS.</p>
+<h2>Five-system reconciliation</h2>
+<table class="method-table"><thead><tr>
+<th>System</th>
+<th>Pb count</th>
+<th>State</th>
+<th>Source URL</th>
+</tr></thead><tbody>
+<tr>
+<td>CBMH Layer 8</td>
+<td>6,943</td>
+<td>Frozen ~2016</td>
+<td>opengis.regina.ca/.../CBMH_Survey_Map/FeatureServer/8</td>
+</tr>
+<tr>
+<td>DomesticWaterNetworkTrace/4</td>
+<td>5,405</td>
+<td>Live (2026)</td>
+<td>opengis.regina.ca/.../DomesticWaterNetworkTrace/MapServer/4</td>
+</tr>
+<tr>
+<td>SewerWaterCondition Lead+PolyB</td>
+<td>2,760</td>
+<td>Filtered active</td>
+<td>opengis.regina.ca/.../SewerWaterCondition/MapServer/4</td>
+</tr>
+<tr>
+<td>LeadConnectionAreas</td>
+<td>3,637</td>
+<td>Stale aggregate</td>
+<td>opengis.regina.ca/.../LeadConnectionAreas/MapServer/0</td>
+</tr>
+<tr>
+<td>GTLO Committee list</td>
+<td>~2,305</td>
+<td>Independent (Sept 2025)</td>
+<td>Google My Maps KML</td>
+</tr>
+</tbody></table>
+<p>No official reconciliation of these systems exists.</p>
+        </div>
+      </div>
+    </section>
+    <footer class="site-footer">
+      <div class="wrap">
+        <p><a href="../index.html">&larr; Back to investigation</a> · <a href="https://github.com/peparhugo/regina-lead-connections-analysis" target="_blank">Source on GitHub</a></p>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

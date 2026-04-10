@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Burden Model Methodology (v5) — Regina Lead Investigation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <div class="dossier">
+    <header class="dossier-header" style="padding: 2rem 1rem 1.5rem">
+      <div class="wrap">
+        <p class="dossier-date"><a href="../index.html">&larr; Back to investigation</a></p>
+        <h1 class="dossier-title" style="font-size: clamp(1.4rem, 3vw, 2rem)">Burden Model Methodology (v5)</h1>
+        <p class="dossier-lede">Reproducible methodology. Every input, formula, and source documented for independent verification.</p>
+      </div>
+    </header>
+    <section class="beat" style="opacity:1;transform:none">
+      <div class="wrap">
+        <div class="beat-body">
+<h1>Burden Model Methodology (v5)</h1>
+<h2>Two-track model</h2>
+<h3>Track 1: Healthcare (bottom-up, condition-specific)</h3>
+<table class="method-table"><thead><tr>
+<th>Condition</th>
+<th>Prevalence increase</th>
+<th>Annual cost (CAD)</th>
+<th>Duration (years)</th>
+<th>Expected cost per exposed child</th>
+<th>Source</th>
+</tr></thead><tbody>
+<tr>
+<td>ADHD</td>
+<td>12%</td>
+<td>$8,000</td>
+<td>12</td>
+<td>$11,520</td>
+<td>Goodlad 2013, CADDRA formulary, Globe and Mail 2024</td>
+</tr>
+<tr>
+<td>Learning disability</td>
+<td>20%</td>
+<td>$10,000</td>
+<td>8</td>
+<td>$16,000</td>
+<td>Provincial special education funding, OT/speech therapy rates</td>
+</tr>
+<tr>
+<td>Behavioral/conduct</td>
+<td>10%</td>
+<td>$4,000</td>
+<td>8</td>
+<td>$3,200</td>
+<td>CIHI mental health CMGs, provincial program costs</td>
+</tr>
+<tr>
+<td>Adult cardiovascular</td>
+<td>7%</td>
+<td>$5,000</td>
+<td>15</td>
+<td>$5,250</td>
+<td>CIHI cardiovascular CMGs, Heart & Stroke Foundation</td>
+</tr>
+<tr>
+<td>Chronic kidney disease</td>
+<td>5%</td>
+<td>$15,000</td>
+<td>10</td>
+<td>$750</td>
+<td>CIHI renal CMGs, Kidney Foundation of Canada</td>
+</tr>
+<tr>
+<td>**Raw total**</td>
+<td></td>
+<td></td>
+<td></td>
+<td>**$36,720**</td>
+<td></td>
+</tr>
+<tr>
+<td>**After comorbidity (×0.85)**</td>
+<td></td>
+<td></td>
+<td></td>
+<td>**$31,212**</td>
+<td>ADHD/LD overlap ~30-50%</td>
+</tr>
+</tbody></table>
+<h3>Comorbidity correction</h3>
+<p>ADHD (12%) and learning disability (20%) have ~30-50% comorbidity.</p>
+<p>Correction factor: ×0.85 applied to total healthcare cost.</p>
+<p>Corrected healthcare per child: $31,212</p>
+<h3>Track 2: Earnings loss (IQ-point based)</h3>
+<table class="method-table"><thead><tr>
+<th>Parameter</th>
+<th>Value</th>
+<th>Source</th>
+</tr></thead><tbody>
+<tr>
+<td>IQ loss per child</td>
+<td>2.0 points</td>
+<td>Lanphear (2005) dose-response at measured Cathedral water levels</td>
+</tr>
+<tr>
+<td>Cost per IQ point</td>
+<td>$24,000 CAD</td>
+<td>Salkever (1995): 2.4% earnings/pt × Regina median $42K × 40yr NPV at 3%</td>
+</tr>
+<tr>
+<td>Earnings loss per child</td>
+<td>$48,000</td>
+<td>2.0 × $24,000</td>
+</tr>
+</tbody></table>
+<h3>IQ loss validation</h3>
+<p>Cathedral Village testing (Sept 2025): 71% of 54 homes exceeded 5 μg/L.</p>
+<p>Dose-response chain: water lead 15-30 μg/L (median exceedance) → BLL 1.5-6 μg/dL → IQ loss 0.7-2.8 points.</p>
+<p>2.0 points is mid-range. Validated by actual local measurements, not just literature.</p>
+<h3>Per-child total</h3>
+<p>Healthcare: $31,212</p>
+<p>Earnings: $48,000</p>
+<p>**Total: $79,212**</p>
+<h3>Convergence check</h3>
+<p>Top-down (Gould 2009): $17,815/IQ point (2006 USD) → $35,131 CAD (2026) → $70,262 per child at 2 IQ points.</p>
+<p>Bottom-up: $79,212 per child.</p>
+<p>The bottom-up is higher because it includes healthcare conditions beyond earnings loss.</p>
+<p>The earnings components converge within 3% ($48K bottom-up vs $46.6K Salkever Canadian calc).</p>
+<h3>Per-neighbourhood burden</h3>
+<table class="method-table"><thead><tr>
+<th>Neighbourhood</th>
+<th>Children at risk</th>
+<th>Children prevented</th>
+<th>At-risk burden</th>
+<th>Prevented burden</th>
+</tr></thead><tbody>
+<tr>
+<td>North Central</td>
+<td>95</td>
+<td>104</td>
+<td>$7,525,140</td>
+<td>$8,238,048</td>
+</tr>
+<tr>
+<td>Cathedral (east)</td>
+<td>57</td>
+<td>72</td>
+<td>$4,515,084</td>
+<td>$5,703,264</td>
+</tr>
+<tr>
+<td>Cathedral (west)</td>
+<td>70</td>
+<td>46</td>
+<td>$5,544,840</td>
+<td>$3,643,752</td>
+</tr>
+<tr>
+<td>Heritage</td>
+<td>61</td>
+<td>21</td>
+<td>$4,831,932</td>
+<td>$1,663,452</td>
+</tr>
+<tr>
+<td>North Central (south)</td>
+<td>46</td>
+<td>36</td>
+<td>$3,643,752</td>
+<td>$2,851,632</td>
+</tr>
+<tr>
+<td>Heritage (north)</td>
+<td>25</td>
+<td>21</td>
+<td>$1,980,300</td>
+<td>$1,663,452</td>
+</tr>
+<tr>
+<td>Old Lakeview</td>
+<td>35</td>
+<td>16</td>
+<td>$2,772,420</td>
+<td>$1,267,392</td>
+</tr>
+<tr>
+<td>Cathedral (south)</td>
+<td>27</td>
+<td>16</td>
+<td>$2,138,724</td>
+<td>$1,267,392</td>
+</tr>
+<tr>
+<td>Warehouse District</td>
+<td>17</td>
+<td>36</td>
+<td>$1,346,604</td>
+<td>$2,851,632</td>
+</tr>
+<tr>
+<td>Downtown</td>
+<td>3</td>
+<td>0</td>
+<td>$237,636</td>
+<td>$0</td>
+</tr>
+<tr>
+<td>McNab</td>
+<td>18</td>
+<td>4</td>
+<td>$1,425,816</td>
+<td>$316,848</td>
+</tr>
+<tr>
+<td>Eastview</td>
+<td>16</td>
+<td>8</td>
+<td>$1,267,392</td>
+<td>$633,696</td>
+</tr>
+<tr>
+<td>Ross Industrial</td>
+<td>2</td>
+<td>0</td>
+<td>$158,424</td>
+<td>$0</td>
+</tr>
+<tr>
+<td>Rosemont</td>
+<td>4</td>
+<td>2</td>
+<td>$316,848</td>
+<td>$158,424</td>
+</tr>
+<tr>
+<td>Centre Square</td>
+<td>4</td>
+<td>0</td>
+<td>$316,848</td>
+<td>$0</td>
+</tr>
+<tr>
+<td>**TOTAL**</td>
+<td>**480**</td>
+<td>**382**</td>
+<td>**$38,021,760**</td>
+<td>**$30,258,984**</td>
+</tr>
+</tbody></table>
+        </div>
+      </div>
+    </section>
+    <footer class="site-footer">
+      <div class="wrap">
+        <p><a href="../index.html">&larr; Back to investigation</a> · <a href="https://github.com/peparhugo/regina-lead-connections-analysis" target="_blank">Source on GitHub</a></p>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

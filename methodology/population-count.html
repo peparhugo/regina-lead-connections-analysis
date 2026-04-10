@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Population Count Methodology — Regina Lead Investigation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <div class="dossier">
+    <header class="dossier-header" style="padding: 2rem 1rem 1.5rem">
+      <div class="wrap">
+        <p class="dossier-date"><a href="../index.html">&larr; Back to investigation</a></p>
+        <h1 class="dossier-title" style="font-size: clamp(1.4rem, 3vw, 2rem)">Population Count Methodology</h1>
+        <p class="dossier-lede">Reproducible methodology. Every input, formula, and source documented for independent verification.</p>
+      </div>
+    </header>
+    <section class="beat" style="opacity:1;transform:none">
+      <div class="wrap">
+        <div class="beat-body">
+<h1>Population Count Methodology</h1>
+<h2>Claim: Children on lead service connections</h2>
+<h3>Method</h3>
+<p>1 lead service connection = 1 household address.</p>
+<p>Children per household = CT children (2021 Census) ÷ CT private dwellings.</p>
+<p>Exposed children = connections × children per dwelling.</p>
+<h3>Source</h3>
+<ul>
+<li>Statistics Canada, 2021 Census of Population, Catalogue 98-316-X2021001</li>
+<li>SewerWaterCondition Lead+PolyB layer (3,692 records), spatially joined to CT boundaries</li>
+</ul>
+<h3>Per-neighbourhood calculation</h3>
+<table class="method-table"><thead><tr>
+<th>Neighbourhood</th>
+<th>CT</th>
+<th>Pb connections</th>
+<th>Replaced</th>
+<th>Unreplaced</th>
+<th>Dwellings (2021)</th>
+<th>Children 0-14 (2021)</th>
+<th>Children/dwelling</th>
+<th>Children at risk</th>
+<th>Children prevented</th>
+</tr></thead><tbody>
+<tr>
+<td>North Central</td>
+<td>7050018.00</td>
+<td>459</td>
+<td>239</td>
+<td>220</td>
+<td>2722</td>
+<td>1180</td>
+<td>0.434</td>
+<td>95</td>
+<td>104</td>
+</tr>
+<tr>
+<td>Cathedral (east)</td>
+<td>7050012.00</td>
+<td>407</td>
+<td>227</td>
+<td>180</td>
+<td>2695</td>
+<td>855</td>
+<td>0.317</td>
+<td>57</td>
+<td>72</td>
+</tr>
+<tr>
+<td>Cathedral (west)</td>
+<td>7050009.01</td>
+<td>344</td>
+<td>136</td>
+<td>208</td>
+<td>2000</td>
+<td>675</td>
+<td>0.338</td>
+<td>70</td>
+<td>46</td>
+</tr>
+<tr>
+<td>Heritage</td>
+<td>7050014.00</td>
+<td>287</td>
+<td>74</td>
+<td>213</td>
+<td>822</td>
+<td>235</td>
+<td>0.286</td>
+<td>61</td>
+<td>21</td>
+</tr>
+<tr>
+<td>North Central (south)</td>
+<td>7050019.00</td>
+<td>204</td>
+<td>90</td>
+<td>114</td>
+<td>2065</td>
+<td>835</td>
+<td>0.404</td>
+<td>46</td>
+<td>36</td>
+</tr>
+<tr>
+<td>Heritage (north)</td>
+<td>7050010.00</td>
+<td>185</td>
+<td>84</td>
+<td>101</td>
+<td>1654</td>
+<td>415</td>
+<td>0.251</td>
+<td>25</td>
+<td>21</td>
+</tr>
+<tr>
+<td>Old Lakeview</td>
+<td>7050005.00</td>
+<td>140</td>
+<td>44</td>
+<td>96</td>
+<td>1927</td>
+<td>695</td>
+<td>0.361</td>
+<td>35</td>
+<td>16</td>
+</tr>
+<tr>
+<td>Cathedral (south)</td>
+<td>7050008.01</td>
+<td>137</td>
+<td>50</td>
+<td>87</td>
+<td>2709</td>
+<td>845</td>
+<td>0.312</td>
+<td>27</td>
+<td>16</td>
+</tr>
+<tr>
+<td>Warehouse District</td>
+<td>7050017.00</td>
+<td>112</td>
+<td>76</td>
+<td>36</td>
+<td>950</td>
+<td>455</td>
+<td>0.479</td>
+<td>17</td>
+<td>36</td>
+</tr>
+<tr>
+<td>Downtown</td>
+<td>7050011.00</td>
+<td>67</td>
+<td>7</td>
+<td>60</td>
+<td>3277</td>
+<td>180</td>
+<td>0.055</td>
+<td>3</td>
+<td>0</td>
+</tr>
+<tr>
+<td>McNab</td>
+<td>7050022.01</td>
+<td>56</td>
+<td>10</td>
+<td>46</td>
+<td>1204</td>
+<td>460</td>
+<td>0.382</td>
+<td>18</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Eastview</td>
+<td>7050020.00</td>
+<td>55</td>
+<td>18</td>
+<td>37</td>
+<td>1548</td>
+<td>685</td>
+<td>0.443</td>
+<td>16</td>
+<td>8</td>
+</tr>
+<tr>
+<td>Ross Industrial</td>
+<td>7050013.00</td>
+<td>41</td>
+<td>1</td>
+<td>40</td>
+<td>487</td>
+<td>30</td>
+<td>0.062</td>
+<td>2</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Rosemont</td>
+<td>7050003.00</td>
+<td>15</td>
+<td>5</td>
+<td>10</td>
+<td>2384</td>
+<td>935</td>
+<td>0.392</td>
+<td>4</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Centre Square</td>
+<td>7050015.00</td>
+<td>9</td>
+<td>0</td>
+<td>9</td>
+<td>931</td>
+<td>385</td>
+<td>0.414</td>
+<td>4</td>
+<td>0</td>
+</tr>
+<tr>
+<td>**TOTAL**</td>
+<td></td>
+<td>**2,760**</td>
+<td>**1,212**</td>
+<td>**1,548**</td>
+<td></td>
+<td></td>
+<td></td>
+<td>**480**</td>
+<td>**382**</td>
+</tr>
+</tbody></table>
+<h3>Verification</h3>
+<pre><code class="lang-python">
+# Reproduce: children_at_risk = sum(unreplaced × children_per_dwelling) across CTs
+# Result: 480 at risk, 382 prevented
+</code></pre>
+<h3>Limitations</h3>
+<ul>
+<li>2021 Census demographics applied uniformly across all dwellings in a CT. Lead-connected homes (pre-1960) may have different household composition.</li>
+<li>CT 0004.00 (Al Ritchie) was split into three CTs in 2021. Demographics were merged back, which includes newer suburban development.</li>
+<li>1 connection may serve multiple units in duplexes/fourplexes — this would undercount exposed children.</li>
+</ul>
+        </div>
+      </div>
+    </section>
+    <footer class="site-footer">
+      <div class="wrap">
+        <p><a href="../index.html">&larr; Back to investigation</a> · <a href="https://github.com/peparhugo/regina-lead-connections-analysis" target="_blank">Source on GitHub</a></p>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

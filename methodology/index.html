@@ -1,337 +1,56 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Methodology Index | Regina Lead Analysis</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Methodology — Regina Lead Investigation</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #f5efe2;
-      --paper: rgba(255, 249, 239, 0.72);
-      --ink: #112134;
-      --muted: #516074;
-      --accent: #d1492e;
-      --line: rgba(17, 33, 52, 0.14);
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      background: linear-gradient(180deg, #f7f1e7 0%, #f4ecdd 48%, #efe5d1 100%);
-      color: var(--ink);
-      font-family: "IBM Plex Sans", sans-serif;
-      line-height: 1.7;
-    }
-    .methodology-page {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 3rem 1.5rem 4rem;
-    }
-    .breadcrumb {
-      font-size: 0.85rem;
-      color: var(--muted);
-      margin-bottom: 1rem;
-    }
-    .breadcrumb a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-    .breadcrumb a:hover { text-decoration: underline; }
-    h1 {
-      font-family: "Fraunces", serif;
-      font-size: clamp(2rem, 5vw, 2.8rem);
-      line-height: 1.1;
-      margin: 0 0 1rem;
-    }
-    .abstract {
-      font-size: 1.05rem;
-      color: var(--muted);
-      font-style: italic;
-      border-bottom: 1px solid var(--line);
-      padding-bottom: 2rem;
-      margin-bottom: 2rem;
-    }
-    h2 {
-      font-family: "Fraunces", serif;
-      font-size: 1.5rem;
-      margin: 2.5rem 0 1rem;
-      padding-left: 1rem;
-      border-left: 3px solid var(--accent);
-    }
-    h3 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin: 1.5rem 0 0.75rem;
-    }
-    p { margin: 0 0 1rem; }
-    ul, ol { margin: 0 0 1rem; padding-left: 1.5rem; }
-    li { margin-bottom: 0.5rem; }
-    .formula-box {
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: 1rem;
-      padding: 1.5rem;
-      margin: 1.5rem 0;
-    }
-    .formula-box .formula {
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 1.1rem;
-      color: var(--accent);
-      margin-bottom: 0.75rem;
-    }
-    .formula-box .where {
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 1.5rem 0;
-      font-size: 0.9rem;
-    }
-    th, td {
-      padding: 0.75rem 1rem;
-      text-align: left;
-      border-bottom: 1px solid var(--line);
-    }
-    th {
-      background: var(--paper);
-      font-weight: 600;
-    }
-    .citation {
-      font-size: 0.9rem;
-      color: var(--muted);
-      padding-left: 1.5rem;
-      margin: 0.5rem 0;
-      text-indent: -1.5rem;
-    }
-    .citation a { color: var(--accent); }
-    .note {
-      background: rgba(209, 73, 46, 0.08);
-      border-left: 3px solid var(--accent);
-      padding: 1rem 1.25rem;
-      margin: 1.5rem 0;
-      border-radius: 0 0.5rem 0.5rem 0;
-    }
-    .warning {
-      background: rgba(200, 50, 50, 0.08);
-      border-left: 3px solid #c83232;
-      padding: 1rem 1.25rem;
-      margin: 1.5rem 0;
-      border-radius: 0 0.5rem 0.5rem 0;
-    }
-    code {
-      background: var(--paper);
-      padding: 0.15rem 0.4rem;
-      border-radius: 0.25rem;
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.9em;
-    }
-    pre {
-      background: #112134;
-      color: #f6f1e7;
-      border-radius: 0.75rem;
-      padding: 1.25rem;
-      overflow-x: auto;
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.85rem;
-      line-height: 1.6;
-    }
-    .back-link {
-      display: inline-block;
-      margin-top: 2rem;
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 600;
-    }
-    .back-link:hover { text-decoration: underline; }
-    a { color: var(--accent); }
-
-    /* Card Grid */
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-      margin: 2rem 0;
-    }
-    .method-card {
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: 1rem;
-      padding: 1.5rem;
-      transition: box-shadow 0.2s ease, transform 0.2s ease;
-    }
-    .method-card:hover {
-      box-shadow: 0 8px 24px rgba(17, 33, 52, 0.12);
-      transform: translateY(-2px);
-    }
-    .method-card .icon {
-      font-size: 2rem;
-      margin-bottom: 0.75rem;
-    }
-    .method-card h3 {
-      font-family: "Fraunces", serif;
-      font-size: 1.25rem;
-      margin: 0 0 0.75rem;
-      color: var(--ink);
-    }
-    .method-card p {
-      color: var(--muted);
-      font-size: 0.95rem;
-      margin: 0 0 1rem;
-    }
-    .method-card a {
-      color: var(--accent);
-      font-weight: 600;
-      text-decoration: none;
-    }
-    .method-card a:hover {
-      text-decoration: underline;
-    }
-
-    /* Principles Section */
-    .principles {
-      margin-top: 3rem;
-    }
-    .principles ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    .principles li {
-      display: flex;
-      gap: 1rem;
-      align-items: flex-start;
-      padding: 1rem 0;
-      border-bottom: 1px solid var(--line);
-    }
-    .principles li:last-child {
-      border-bottom: none;
-    }
-    .principles .check {
-      flex-shrink: 0;
-      width: 1.5rem;
-      height: 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(209, 73, 46, 0.12);
-      color: var(--accent);
-      border-radius: 50%;
-      font-size: 0.85rem;
-      font-weight: 600;
-    }
-    .principles .text {
-      flex: 1;
-      color: var(--muted);
-    }
-    .principles .text strong {
-      color: var(--ink);
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
-  <article class="methodology-page">
-    <header class="methodology-header">
-      <nav class="breadcrumb">
-        <a href="../index.html">Regina Lead Analysis</a> / Methodology
-      </nav>
-      <h1>Methodology & Documentation</h1>
-      <p>
-        This analysis follows PhD-level standards for transparency and reproducibility.
-        Every claim is grounded in peer-reviewed literature, documented data sources,
-        and reproducible SQL queries that can be independently verified.
-      </p>
+  <div class="dossier">
+    <header class="dossier-header" style="padding: 2rem 1rem 1.5rem">
+      <div class="wrap">
+        <p class="dossier-date"><a href="../index.html">&larr; Back to investigation</a></p>
+        <h1 class="dossier-title" style="font-size: clamp(1.4rem, 3vw, 2rem)">Methodology</h1>
+        <p class="dossier-lede">Reproducible methodology. Every input, formula, and source documented for independent verification.</p>
+      </div>
     </header>
+    <section class="beat" style="opacity:1;transform:none">
+      <div class="wrap">
+        <div class="beat-body">
 
-    <div class="card-grid">
-      <div class="method-card">
-        <div class="icon">📊</div>
-        <h3>QALY Calculation</h3>
-        <p>
-          Complete derivation of Quality-Adjusted Life Year estimates from childhood lead exposure,
-          including parameter sources and sensitivity analysis.
-        </p>
-        <a href="qaly-calculation.html">View full derivation →</a>
-      </div>
-
-      <div class="method-card">
-        <div class="icon">💰</div>
-        <h3>Healthcare Costs</h3>
-        <p>
-          Cost model using Canadian-specific parameters from CIHI and CADTH,
-          validated against international estimates.
-        </p>
-        <a href="healthcare-costs.html">View cost model →</a>
-      </div>
-
-      <div class="method-card">
-        <div class="icon">📁</div>
-        <h3>Data Sources</h3>
-        <p>
-          Complete data dictionary, source documentation, and verification procedures
-          for all primary data used in this analysis.
-        </p>
-        <a href="data-sources.html">View data dictionary →</a>
-      </div>
-
-      <div class="method-card">
-        <div class="icon">🔧</div>
-        <h3>SQL Queries</h3>
-        <p>
-          Reproducible PostgreSQL/PostGIS queries for independent verification
-          of all statistics presented in this analysis.
-        </p>
-        <a href="sql-queries.html">View SQL queries →</a>
-      </div>
+<h2>Methodology pages</h2>
+<p>Every calculated number on the investigation site is documented below. Each page shows inputs, formula, per-neighbourhood detail, sources, and limitations.</p>
+<div class="demands-grid">
+  <div class="demand-card">
+    <div class="demand-level">Core model</div>
+    <div class="demand-items">
+      <div class="demand-item"><div class="demand-ask"><a href="population-count.html">Population count</a> — 481 children at risk, derivation from 2021 Census per neighbourhood</div></div>
+      <div class="demand-item"><div class="demand-ask"><a href="burden-model.html">Burden model</a> — 5 conditions with prevalence, cost, duration, comorbidity correction</div></div>
+      <div class="demand-item"><div class="demand-ask"><a href="qaly-derivation.html">QALY derivation</a> — disability weight, 30-year NPV, per neighbourhood</div></div>
     </div>
+  </div>
+  <div class="demand-card">
+    <div class="demand-level">Validation</div>
+    <div class="demand-items">
+      <div class="demand-item"><div class="demand-ask"><a href="error-model.html">Error model</a> — 84.1% coverage calibration, 5-system reconciliation</div></div>
+      <div class="demand-item"><div class="demand-ask"><a href="fix-cost.html">Fix cost</a> — $34.4M derivation, inflation adjustment, comparators</div></div>
+      <div class="demand-item"><div class="demand-ask"><a href="delay-cost.html">Delay cost</a> — CR21-90 vote, Option 2 vs 3, per-CT impact</div></div>
+    </div>
+  </div>
+</div>
 
-    <section class="principles">
-      <h2>Research Principles</h2>
-      <ul>
-        <li>
-          <span class="check">✓</span>
-          <span class="text"><strong>Transparency:</strong> All data sources are publicly accessible. No proprietary or restricted datasets.</span>
-        </li>
-        <li>
-          <span class="check">✓</span>
-          <span class="text"><strong>Reproducibility:</strong> Complete SQL queries provided. Results can be independently verified.</span>
-        </li>
-        <li>
-          <span class="check">✓</span>
-          <span class="text"><strong>Conservative estimates:</strong> Parameters chosen to produce lower-bound estimates where uncertainty exists.</span>
-        </li>
-        <li>
-          <span class="check">✓</span>
-          <span class="text"><strong>Peer-reviewed basis:</strong> Health burden calculations grounded in established literature (Lanphear, Gould, EPA LCRI).</span>
-        </li>
-        <li>
-          <span class="check">✓</span>
-          <span class="text"><strong>Canadian-specific costs:</strong> Healthcare costs use CIHI and CADTH guidelines, not US estimates.</span>
-        </li>
-        <li>
-          <span class="check">✓</span>
-          <span class="text"><strong>Sensitivity analysis:</strong> Results presented with ranges reflecting parameter uncertainty.</span>
-        </li>
-        <li>
-          <span class="check">✓</span>
-          <span class="text"><strong>Limitations acknowledged:</strong> Known data quality issues and assumptions explicitly documented.</span>
-        </li>
-      </ul>
+        </div>
+      </div>
     </section>
-
-    <section style="margin-top: 48px; padding: 24px; background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border);">
-      <h3 style="color: var(--text-bright); margin: 0 0 12px;">Questions or Concerns?</h3>
-      <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0;">
-        This analysis is open to scrutiny. If you identify errors, have questions about methodology,
-        or wish to replicate the analysis, please contact the author via
-        <a href="https://www.linkedin.com/in/thomasjayhugo/" style="color: var(--accent);">LinkedIn</a>.
-      </p>
-    </section>
-
-    <a href="../index.html" class="back-link">← Back to main analysis</a>
-  </article>
+    <footer class="site-footer">
+      <div class="wrap">
+        <p><a href="../index.html">&larr; Back to investigation</a> · <a href="https://github.com/peparhugo/regina-lead-connections-analysis" target="_blank">Source on GitHub</a></p>
+      </div>
+    </footer>
+  </div>
 </body>
 </html>

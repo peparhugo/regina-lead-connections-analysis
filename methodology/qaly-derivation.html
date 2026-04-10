@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QALY Derivation — Regina Lead Investigation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <div class="dossier">
+    <header class="dossier-header" style="padding: 2rem 1rem 1.5rem">
+      <div class="wrap">
+        <p class="dossier-date"><a href="../index.html">&larr; Back to investigation</a></p>
+        <h1 class="dossier-title" style="font-size: clamp(1.4rem, 3vw, 2rem)">QALY Derivation</h1>
+        <p class="dossier-lede">Reproducible methodology. Every input, formula, and source documented for independent verification.</p>
+      </div>
+    </header>
+    <section class="beat" style="opacity:1;transform:none">
+      <div class="wrap">
+        <div class="beat-body">
+<h1>QALY Derivation</h1>
+<h2>Claim</h2>
+<p>At-risk: 480 children × 0.30 QALY/child = 144 QALYs</p>
+<h2>Disability weight: 0.015 per year</h2>
+<table class="method-table"><thead><tr>
+<th>Reference condition</th>
+<th>GBD disability weight</th>
+<th>Comparison</th>
+</tr></thead><tbody>
+<tr>
+<td>Borderline intellectual disability</td>
+<td>0.011</td>
+<td>Below our estimate</td>
+</tr>
+<tr>
+<td>**Subclinical lead-related cognitive deficit**</td>
+<td>**0.015**</td>
+<td>**Our estimate**</td>
+</tr>
+<tr>
+<td>Mild anxiety</td>
+<td>0.030</td>
+<td>Above our estimate</td>
+</tr>
+<tr>
+<td>ADHD</td>
+<td>0.045</td>
+<td>Above our estimate</td>
+</tr>
+<tr>
+<td>Mild intellectual disability</td>
+<td>0.043</td>
+<td>Above our estimate</td>
+</tr>
+</tbody></table>
+<h2>30-year NPV</h2>
+<p>IQ loss is permanent (Reuben et al. 2017, 38-year Dunedin cohort follow-up).</p>
+<p>NPV factor at 3% discount rate for 30 years: 20.19</p>
+<p>QALY per child: 0.015 × 20.19 = 0.30</p>
+<p>= 111 days of full health lost per child over 30 years.</p>
+<h2>Per neighbourhood</h2>
+<table class="method-table"><thead><tr>
+<th>Neighbourhood</th>
+<th>At risk</th>
+<th>QALYs at risk</th>
+<th>Prevented</th>
+<th>QALYs prevented</th>
+</tr></thead><tbody>
+<tr>
+<td>North Central</td>
+<td>95</td>
+<td>28.5</td>
+<td>104</td>
+<td>31.2</td>
+</tr>
+<tr>
+<td>Cathedral (east)</td>
+<td>57</td>
+<td>17.1</td>
+<td>72</td>
+<td>21.6</td>
+</tr>
+<tr>
+<td>Cathedral (west)</td>
+<td>70</td>
+<td>21.0</td>
+<td>46</td>
+<td>13.8</td>
+</tr>
+<tr>
+<td>Heritage</td>
+<td>61</td>
+<td>18.3</td>
+<td>21</td>
+<td>6.3</td>
+</tr>
+<tr>
+<td>North Central (south)</td>
+<td>46</td>
+<td>13.8</td>
+<td>36</td>
+<td>10.8</td>
+</tr>
+<tr>
+<td>Heritage (north)</td>
+<td>25</td>
+<td>7.5</td>
+<td>21</td>
+<td>6.3</td>
+</tr>
+<tr>
+<td>Old Lakeview</td>
+<td>35</td>
+<td>10.5</td>
+<td>16</td>
+<td>4.8</td>
+</tr>
+<tr>
+<td>Cathedral (south)</td>
+<td>27</td>
+<td>8.1</td>
+<td>16</td>
+<td>4.8</td>
+</tr>
+<tr>
+<td>Warehouse District</td>
+<td>17</td>
+<td>5.1</td>
+<td>36</td>
+<td>10.8</td>
+</tr>
+<tr>
+<td>Downtown</td>
+<td>3</td>
+<td>0.9</td>
+<td>0</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>McNab</td>
+<td>18</td>
+<td>5.4</td>
+<td>4</td>
+<td>1.2</td>
+</tr>
+<tr>
+<td>Eastview</td>
+<td>16</td>
+<td>4.8</td>
+<td>8</td>
+<td>2.4</td>
+</tr>
+<tr>
+<td>Ross Industrial</td>
+<td>2</td>
+<td>0.6</td>
+<td>0</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>Rosemont</td>
+<td>4</td>
+<td>1.2</td>
+<td>2</td>
+<td>0.6</td>
+</tr>
+<tr>
+<td>Centre Square</td>
+<td>4</td>
+<td>1.2</td>
+<td>0</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>**TOTAL**</td>
+<td>**480**</td>
+<td>**144**</td>
+<td>**382**</td>
+<td>**115**</td>
+</tr>
+</tbody></table>
+<h2>Limitation</h2>
+<p>The 0.015 disability weight is interpolated from GBD reference conditions, not from a published lead-specific disability weight. It should be labeled as an illustrative population-level estimate.</p>
+        </div>
+      </div>
+    </section>
+    <footer class="site-footer">
+      <div class="wrap">
+        <p><a href="../index.html">&larr; Back to investigation</a> · <a href="https://github.com/peparhugo/regina-lead-connections-analysis" target="_blank">Source on GitHub</a></p>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
