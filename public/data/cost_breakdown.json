@@ -1,61 +1,50 @@
 {
-  "version": "5.0",
-  "created_at": "2026-04-09",
-  "title": "Regina Lead \u2014 Canonical Burden Model (2021 Census + Comorbidity)",
+  "version": "5.1",
+  "created_at": "2026-04-10",
+  "title": "Regina Lead — Canonical Burden Model (2021 Census + Comorbidity + CKD fix)",
   "census_year": 2021,
   "comorbidity_factor": 0.85,
   "population": {
-    "children_on_lead": 976,
-    "children_prevented": 471,
+    "children_at_risk": 481,
+    "children_prevented": 382,
+    "children_total_ever_exposed": 864,
     "connections_total": 2760,
     "unreplaced": 1548,
-    "replaced_corrected": 1212
+    "replaced_corrected": 1212,
+    "method": "1 connection = 1 household. children per dwelling from 2021 Census."
   },
   "per_child": {
-    "healthcare_corrected": 31365,
+    "healthcare_corrected": 36950,
     "earnings_loss": 48000,
-    "total": 79365,
-    "qaly_30yr": 0.3
+    "total": 84950,
+    "qaly_30yr": 0.30,
+    "note": "CKD corrected from $750 to $7,500 in v5.1"
   },
+  "conditions": [
+    {"name": "ADHD", "prevalence": 0.12, "annual_cost": 8000, "duration": 12, "expected": 11520},
+    {"name": "Learning disability", "prevalence": 0.20, "annual_cost": 10000, "duration": 8, "expected": 16000},
+    {"name": "Behavioral", "prevalence": 0.10, "annual_cost": 4000, "duration": 8, "expected": 3200},
+    {"name": "Adult CVD", "prevalence": 0.07, "annual_cost": 5000, "duration": 15, "expected": 5250},
+    {"name": "Adult CKD", "prevalence": 0.05, "annual_cost": 15000, "duration": 10, "expected": 7500}
+  ],
   "aggregate": {
-    "healthcare_at_risk": 30612540,
-    "earnings_at_risk": 46848000,
-    "total_at_risk": 77460540,
-    "total_prevented": 37380915,
-    "qaly_at_risk": 293,
-    "qaly_prevented": 143
+    "burden_at_risk": 40860950,
+    "burden_prevented": 32450900,
+    "qaly_at_risk": 144,
+    "qaly_prevented": 115
   },
-  "waterfall": {
-    "families_earnings": {
-      "amount": 46800000,
-      "pct": 60
-    },
-    "learning_support": {
-      "amount": 13300000,
-      "pct": 17
-    },
-    "adhd_treatment": {
-      "amount": 9600000,
-      "pct": 12
-    },
-    "adult_chronic": {
-      "amount": 5000000,
-      "pct": 6
-    },
-    "behavioral_health": {
-      "amount": 2600000,
-      "pct": 3
-    }
+  "dynamic_2019_2036": {
+    "realized_children": 997,
+    "future_at_risk_children": 802,
+    "future_prevented_children": 637,
+    "realized_burden": 84700000,
+    "future_at_risk_burden": 68100000,
+    "future_prevented_burden": 54100000,
+    "note": "All children 0-14, cohort turnover over 15-year cycle"
   },
-  "north_central_2021": {
-    "population": 4940,
-    "dwellings": 2722,
-    "children_0_14": 1180,
-    "children_0_4": 385,
-    "indigenous_pct": 42.6,
-    "low_income_lim_at_pct": 30.0,
-    "renter_pct": 60.3,
-    "pb_connections": 459,
-    "children_on_lead": 199
+  "fix_cost": {
+    "total": 34400000,
+    "snapshot_ratio": 1.19,
+    "dynamic_ratio": 1.98
   }
 }
