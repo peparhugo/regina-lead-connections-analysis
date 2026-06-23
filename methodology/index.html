@@ -1,56 +1,160 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Methodology — Regina Lead Investigation</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../styles.css" />
+  <style>
+    .method-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+    .method-card { background: var(--bg-elevated, #1a1a2e); border-radius: 8px; padding: 1.5rem; border: 1px solid var(--border, #333); }
+    .method-card h3 { margin-top: 0; color: var(--accent, #f59e0b); }
+    .method-card a { color: var(--link, #60a5fa); }
+    .source-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+    .source-table th, .source-table td { padding: 0.75rem; text-align: left; border-bottom: 1px solid var(--border, #333); }
+    .source-table th { background: var(--bg-elevated, #1a1a2e); }
+    .back-link { display: inline-block; margin-bottom: 1rem; color: var(--link, #60a5fa); }
+    code { background: #0d1117; padding: 0.2em 0.4em; border-radius: 3px; font-size: 0.9em; }
+  </style>
 </head>
 <body>
-  <div class="dossier">
-    <header class="dossier-header" style="padding: 2rem 1rem 1.5rem">
-      <div class="wrap">
-        <p class="dossier-date"><a href="../index.html">&larr; Back to investigation</a></p>
-        <h1 class="dossier-title" style="font-size: clamp(1.4rem, 3vw, 2rem)">Methodology</h1>
-        <p class="dossier-lede">Reproducible methodology. Every input, formula, and source documented for independent verification.</p>
-      </div>
+  <div class="site-shell">
+    <header class="topbar">
+      <a class="brand" href="../">REGINA LEAD INVESTIGATION</a>
+      <nav class="site-nav">
+        <a href="../#map-section">Map</a>
+        <a href="../#harm">The Harm</a>
+        <a href="./">Methodology</a>
+      </nav>
     </header>
-    <section class="beat" style="opacity:1;transform:none">
-      <div class="wrap">
-        <div class="beat-body">
 
-<h2>Methodology pages</h2>
-<p>Every calculated number on the investigation site is documented below. Each page shows inputs, formula, per-neighbourhood detail, sources, and limitations.</p>
-<div class="demands-grid">
-  <div class="demand-card">
-    <div class="demand-level">Core model</div>
-    <div class="demand-items">
-      <div class="demand-item"><div class="demand-ask"><a href="population-count.html">Population count</a> — 481 children at risk, derivation from 2021 Census per neighbourhood</div></div>
-      <div class="demand-item"><div class="demand-ask"><a href="burden-model.html">Burden model</a> — 5 conditions with prevalence, cost, duration, comorbidity correction</div></div>
-      <div class="demand-item"><div class="demand-ask"><a href="qaly-derivation.html">QALY derivation</a> — disability weight, 30-year NPV, per neighbourhood</div></div>
-    </div>
-  </div>
-  <div class="demand-card">
-    <div class="demand-level">Validation</div>
-    <div class="demand-items">
-      <div class="demand-item"><div class="demand-ask"><a href="error-model.html">Error model</a> — 84.1% coverage calibration, 5-system reconciliation</div></div>
-      <div class="demand-item"><div class="demand-ask"><a href="fix-cost.html">Fix cost</a> — $34.4M derivation, inflation adjustment, comparators</div></div>
-      <div class="demand-item"><div class="demand-ask"><a href="delay-cost.html">Delay cost</a> — CR21-90 vote, Option 2 vs 3, per-CT impact</div></div>
-    </div>
-  </div>
-</div>
+    <main style="max-width: 900px; margin: 0 auto; padding: 2rem;">
+      <a href="../" class="back-link">&larr; Back to main site</a>
 
+      <h1>Methodology & Data Sources</h1>
+      <p class="lead">Every claim on this site is backed by verifiable data sources. This page documents our methodology, assumptions, and provides instructions to reproduce any calculation.</p>
+
+      <section>
+        <h2>Principles</h2>
+        <ul>
+          <li><strong>Transparency:</strong> All data sources are public and cited with access dates</li>
+          <li><strong>Reproducibility:</strong> Any calculation can be reproduced with the provided scripts</li>
+          <li><strong>Conservative estimates:</strong> Where uncertainty exists, we use the more conservative assumption</li>
+          <li><strong>Versioned data:</strong> Snapshots preserve the state at time of analysis</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Methodology Pages</h2>
+        <div class="method-grid">
+          <article class="method-card">
+            <h3>Lead Connection Count</h3>
+            <p>How we count remaining city-owned lead service connections using ArcGIS data.</p>
+            <p><strong>Key figure:</strong> 1,089 geo-intersected active lead connections</p>
+            <a href="lead-count.html">View methodology &rarr;</a>
+          </article>
+
+          <article class="method-card">
+            <h3>Replacement Tracking</h3>
+            <p>How we derive monthly replacement counts by comparing current vs snapshot data.</p>
+            <p><strong>Key figure:</strong> 696 city-verified replacements (2020–2023)</p>
+            <a href="replacement-tracking.html">View methodology &rarr;</a>
+          </article>
+
+          <article class="method-card">
+            <h3>Child Exposure Model</h3>
+            <p>How we estimate the number of children affected by lead exposure.</p>
+            <p><strong>Key figure:</strong> ~1,540 children in affected CTs</p>
+            <a href="child-exposure.html">View methodology &rarr;</a>
+          </article>
+
+          <article class="method-card">
+            <h3>Health Burden (QALY/Cost)</h3>
+            <p>How we estimate quality-adjusted life years lost and healthcare costs.</p>
+            <p><strong>Key figures:</strong> 148.9 QALYs, $39.59M</p>
+            <a href="health-burden.html">View methodology &rarr;</a>
+          </article>
+
+          <article class="method-card">
+            <h3>Equity Analysis</h3>
+            <p>How we analyze demographic patterns in lead exposure burden.</p>
+            <p><strong>Key finding:</strong> Renter-heavy, low-income CTs disproportionately affected</p>
+            <a href="equity-analysis.html">View methodology &rarr;</a>
+          </article>
         </div>
-      </div>
-    </section>
-    <footer class="site-footer">
-      <div class="wrap">
-        <p><a href="../index.html">&larr; Back to investigation</a> · <a href="https://github.com/peparhugo/regina-lead-connections-analysis" target="_blank">Source on GitHub</a></p>
-      </div>
-    </footer>
+      </section>
+
+      <section>
+        <h2>Primary Data Sources</h2>
+        <table class="source-table">
+          <thead>
+            <tr>
+              <th>Source</th>
+              <th>URL</th>
+              <th>Last Verified</th>
+              <th>Used For</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>City of Regina ArcGIS — Water Line Connections</td>
+              <td><code>opengis.regina.ca/.../DomesticWaterNetworkTrace/MapServer/4</code></td>
+              <td>2026-04-06</td>
+              <td>Current lead counts, material, status</td>
+            </tr>
+            <tr>
+              <td>City of Regina ArcGIS — Survey Snapshot</td>
+              <td><code>opengis.regina.ca/.../CBMH_Survey_Map/MapServer/12</code></td>
+              <td>2026-04-06</td>
+              <td>Historical baseline for replacement diff</td>
+            </tr>
+            <tr>
+              <td>City of Regina ArcGIS — Lead Connection Areas</td>
+              <td><code>opengis.regina.ca/.../LeadConnectionAreas/MapServer/0</code></td>
+              <td>2026-04-06</td>
+              <td>Area boundaries and percentages</td>
+            </tr>
+            <tr>
+              <td>Statistics Canada — 2016 Census</td>
+              <td><code>www12.statcan.gc.ca/census-recensement/2016</code></td>
+              <td>2026-03-06</td>
+              <td>CT demographics, tenure, income</td>
+            </tr>
+            <tr>
+              <td>CIHI — Pediatric Cost Data</td>
+              <td><code>cihi.ca/en/patient-cost-estimator</code></td>
+              <td>2026-03-16</td>
+              <td>Healthcare cost proxies</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Reproduce Our Analysis</h2>
+        <p>All analysis scripts are available in the repository:</p>
+        <pre><code>git clone https://github.com/peparhugo/regina-lead-connections-analysis
+cd regina-lead-connections-analysis/scripts
+python3 build_replacement_diff.py  # Derive replacements
+python3 build_ct_kepler_dataset.py # Build CT synthesis</code></pre>
+        <p>PostGIS materialized view definitions are exported to <code>data/derived/matview_definitions_20260401.sql</code></p>
+      </section>
+
+      <section>
+        <h2>Validation</h2>
+        <p>Claims were validated using the Dream Lab experiment framework on 2026-04-06:</p>
+        <ul>
+          <li><strong>Experiment ID:</strong> <code>regina_claim_validation_20260406_162046</code></li>
+          <li><strong>Hypotheses tested:</strong> 4</li>
+          <li><strong>Quality score:</strong> 0.89</li>
+        </ul>
+        <p>See <a href="https://github.com/peparhugo/regina-lead-connections-analysis/tree/main/experiments">experiments/</a> for full results.</p>
+      </section>
+
+      <footer style="margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border, #333); color: #888;">
+        <p>Last updated: 2026-04-06 | <a href="../">Return to main site</a></p>
+      </footer>
+    </main>
   </div>
 </body>
 </html>

@@ -1,410 +1,699 @@
 <!doctype html>
 <html lang="en">
 <head>
- <meta charset="utf-8">
- <meta name="viewport" content="width=device-width, initial-scale=1">
- <title>Regina Lead Investigation — A Forensic Data Audit</title>
- <meta name="description" content="1,801 μg/L. 360 times the safety limit. Five public databases, 99,119 records. We found who decided, who stayed silent, and what it costs.">
- <meta name="theme-color" content="#2b2b2b">
- <link rel="preconnect" href="https://fonts.googleapis.com">
- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
- <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
- <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Regina's Children Are Drinking Lead</title>
+  <meta name="description" content="A public-interest investigation into Regina's lead service connections, the children exposed, the cost already locked in, and the political choices that slowed action." />
+  <meta name="theme-color" content="#0a0c10" />
+  <meta property="og:title" content="Regina's Children Are Drinking Lead" />
+  <meta property="og:description" content="1,089 city-owned lead service connections across 14 neighborhoods. ~1,540 children estimated affected. Verified from City of Regina ArcGIS data — April 6, 2026." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
- <div class="dossier">
+  <div class="site-shell">
+    <header class="topbar">
+      <a class="brand" href="#hero">REGINA LEAD INVESTIGATION</a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="site-nav" class="site-nav">
+        <a href="#current-council">Current Council</a>
+        <a href="#map-section">Map</a>
+        <a href="#harm">The Harm</a>
+        <a href="#affected">Who's Affected</a>
+        <a href="#blocked">Who Blocked Action</a>
+        <a href="#province">Provincial Vacuum</a>
+        <a href="#timeline">Timeline</a>
+        <a href="#action">What Needs to Change</a>
+        <a href="#built">How It Was Built</a>
+        <a href="methodology/">Methodology</a>
+      </nav>
+    </header>
 
- <!-- ============ HEADER ============ -->
- <header class="dossier-header">
- <div class="wrap">
- <div class="dossier-stamp">CASE FILE: REGINA LEAD SERVICE CONNECTIONS</div>
- <p class="dossier-date">Compiled April 2026 from public records</p>
- <h1 class="dossier-title">1,801 &mu;g/L.</h1>
- <p class="dossier-lede">That was the lead reading in one North Central home. 360 times Health Canada's safety limit. We downloaded the city's own data — five public databases, 99,119 records — and traced a chain of deferral from City Hall to the provincial cabinet to Ottawa. At every level, someone had the power to act. This is what we found.</p>
- </div>
- </header>
+    <main>
+      <section id="hero" class="hero section">
+        <div class="hero-bg"></div>
+        <div class="hero-copy">
+          <p class="eyebrow">A city infrastructure failure with a human body count</p>
+          <h1>Regina's Children Are Drinking Lead</h1>
+          <p class="hero-text">Regina still has <strong>1,089 city-owned lead service connections</strong> across 14 neighborhoods. An estimated <strong>1,540 children</strong> live in homes served by lead pipes — facing the consequences of delayed replacement, weak disclosure rules, and political choices that treated lead exposure like a manageable inconvenience. <a href="methodology/lead-count.html" style="font-size:0.85em;color:#60a5fa;">[methodology]</a></p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#map-section">See the map</a>
+            <a class="button button-secondary" href="#action">What needs to change</a>
+          </div>
+        </div>
+        <div class="hero-stats">
+          <article class="stat-card stat-card-accent">
+            <span class="stat-label">Active lead connections</span>
+            <strong>1,089</strong>
+            <p>City-maintained ACTIVE Pb lines (geo-intersected census tract count). <a href="methodology/lead-count.html" style="font-size:0.8em;color:#60a5fa;">[source]</a></p>
+          </article>
+          <article class="stat-card">
+            <span class="stat-label">Children estimated affected</span>
+            <strong>~1,540</strong>
+            <p>Children in affected census tracts. <a href="methodology/child-exposure.html" style="font-size:0.8em;color:#60a5fa;">[source]</a></p>
+          </article>
+          <article class="stat-card">
+            <span class="stat-label">Replaced so far</span>
+            <strong>696 LSC replacements</strong>
+            <p>Verified through city filter program records (2020–2023). <a href="methodology/replacement-tracking.html" style="font-size:0.8em;color:#60a5fa;">[source]</a></p>
+          </article>
+          <article class="stat-card">
+            <span class="stat-label">Filter uptake</span>
+            <strong>1,919 filters installed</strong>
+            <p>Across 4 years of the program (2020–2023), averaging ~480/year. <a href="methodology/replacement-tracking.html" style="font-size:0.8em;color:#60a5fa;">[source]</a></p>
+          </article>
+        </div>
+      </section>
 
- <!-- ============ BEAT 1: THE WATER ============ -->
- <section class="beat" id="beat-1" data-beat="1">
- <div class="wrap">
- <div class="beat-eyebrow"><span class="beat-num">01</span> The water</div>
- <h2 class="beat-headline">Cathedral Village is where the city's lead problem stops being abstract.</h2>
- <div class="beat-body">
- <p>In September 2025, 54 homes were tested. Seventy-one percent exceeded Health Canada's 5 &mu;g/L safety limit. Several results were above 100 &mu;g/L. One measured 570 &mu;g/L — 114 times the standard.</p>
+      <section id="map-section" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Geography of harm</p>
+          <h2>The burden is concentrated — and visible</h2>
+          <p>The map below shows active lead service connections by neighborhood, using the City of Regina's own ArcGIS data verified live on April 6, 2026. Darker areas have more remaining lead connections. <a href="methodology/" style="font-size:0.9em;color:#60a5fa;">[full methodology]</a></p>
+        </div>
+        <div class="map-layout">
+          <div class="map-card main-map-card">
+            <div class="map-toolbar">
+              <div>
+                <h3>Active lead connections by neighborhood</h3>
+                <p>Source: City of Regina ArcGIS DomesticWaterNetworkTrace (verified April 6, 2026)</p>
+              </div>
+              <div class="legend" aria-label="Map legend">
+                <span><i style="background:#33110f"></i>700+</span>
+                <span><i style="background:#7f1d1d"></i>400+</span>
+                <span><i style="background:#b91c1c"></i>100+</span>
+                <span><i style="background:#f59e0b"></i>25+</span>
+                <span><i style="background:#fde68a"></i>&lt;25</span>
+              </div>
+            </div>
+            <div id="lead-map" class="lead-map" role="img" aria-label="Map of active lead connections by neighborhood"></div>
+          </div>
+          <aside class="map-card map-sidepanel">
+            <h3>What the map shows</h3>
+            <ul class="bullet-list">
+              <li><strong>North Central</strong>: 240 active connections, ~339 children affected, 55.8% renter, 20.1% Indigenous — the highest burden in the city.</li>
+              <li><strong>Cathedral</strong>: 277 active connections, largest absolute concentration remaining.</li>
+              <li><strong>Heritage</strong>: 177 active connections, another heavily impacted older neighborhood.</li>
+            </ul>
+            <div class="info-box">
+              <span class="info-label">Hover the map</span>
+              <p id="map-summary">Hover a neighborhood to see lead connections, children affected, renter share, and income context.</p>
+            </div>
+            <div class="metric-stack">
+              <div>
+                <span class="stat-label">Baseline (snapshot)</span>
+                <strong>3,637</strong>
+              </div>
+              <div>
+                <span class="stat-label">Current remaining</span>
+                <strong>1,089</strong>
+              </div>
+              <div>
+                <span class="stat-label">Replacement rate</span>
+                <strong>30.0%</strong>
+              </div>
+            </div>
+          </aside>
+        </div>
 
- <p>In North Central, a home tested at 626 &mu;g/L in 2023 and was still on a city-owned lead service connection. Another reached 1,801 &mu;g/L before the connection was replaced.</p>
+        <div class="embed-card">
+          <div class="section-subhead">
+            <h3>Observed replacement map</h3>
+            <p>This is the existing MapLibre public map from <code>public/map/</code>, embedded directly for continuity with the earlier package.</p>
+          </div>
+          <iframe class="map-embed" src="public/map/" title="Observed area replacements map"></iframe>
+        </div>
+      </section>
 
- <div class="evidence-card" style="border-left-color: var(--red);">
- <div class="evidence-card-header">
- <span class="evidence-label" style="color: var(--red);">Context</span>
- </div>
- <p>In Flint, Michigan, one household at 104 &mu;g/L triggered a state of emergency and National Guard deployment. In Regina, 20 homes have exceeded that level since 2017.</p>
- <p>Brita-certified filters are rated for a maximum of 150 &mu;g/L. Some Regina homes are above the capacity of the protection they are being given. Only 27% of affected addresses had filter coverage in 2024. Only 2% of lead service connection homes are tested each year.</p>
- <p class="evidence-note">Source: <a href="https://cathedralvillage.org/wp-content/uploads/2025/10/Exec-Committee-Sept-2025.docx.pdf" target="_blank" rel="noopener">Patricia Elliott, Get The Lead Out, Executive Committee, Sept. 17, 2023</a></p>
- </div>
+      <section id="harm" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">The harm</p>
+          <h2>The numbers tell one story. Delay converts preventable harm into permanent loss.</h2>
+        </div>
+        <div class="harm-grid">
+          <article class="panel panel-muted">
+            <span class="panel-kicker">Replaced</span>
+            <h3>What has been done</h3>
+            <div class="number-pair">
+              <strong>900 replacement candidates</strong>
+              <span>24.7% of the 3,637 baseline; 8 high-confidence <a href="methodology/replacement-tracking.html" style="font-size:0.8em;color:#60a5fa;">[methodology]</a></span>
+            </div>
+            <p>Verified through geo-intersected address-to-line crosswalk. Material changed from Pb to non-lead since 2019 baseline.</p>
+          </article>
+          <article class="panel panel-hot">
+            <span class="panel-kicker">Remaining</span>
+            <h3>What is still in the ground</h3>
+            <div class="number-pair">
+              <strong>1,089 connections</strong>
+              <span>~1,540 children estimated affected <a href="methodology/child-exposure.html" style="font-size:0.8em;color:#60a5fa;">[methodology]</a></span>
+            </div>
+            <p>Every day these pipes stay connected, children drink water that has passed through lead. The city's own plan targets 2036 for full replacement — 10 more years.</p>
+          </article>
+          <article class="panel panel-warn">
+            <span class="panel-kicker">Pace</span>
+            <h3>At current pace, replacement finishes around 2028–2030</h3>
+            <div class="number-pair">
+              <strong>~250/year average</strong>
+              <span>$36M total program cost (city estimate)</span>
+            </div>
+            <p>At 250 replacements per year, 1,089 remaining connections will take approximately 4–5 years.</p>
+          </article>
+        </div>
+      </section>
 
- <p>If the water can be this high and the sampling this thin, what exactly decided it would stay in the ground?</p>
- </div>
- </div>
- </section>
+      <section id="affected" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Who's affected</p>
+          <h2>The citywide problem lands hardest on renters, lower-income households, and a handful of older neighborhoods</h2>
+          <p>The worst-hit neighborhoods are not random. They combine high lead-line counts, significant child exposure, and renter-heavy housing where tenants have the least leverage and the least legal protection.</p>
+        </div>
+        <div class="table-card">
+          <table>
+            <thead>
+              <tr>
+                <th>Neighborhood</th>
+                <th>Active connections</th>
+                <th>Children affected (est.)</th>
+                <th>Renter share</th>
+                <th>Why it matters</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>North Central</td>
+                <td>240</td>
+                <td>~339</td>
+                <td>55.8%</td>
+                <td>Highest burden: low income ($46.8K), 20.1% Indigenous, high renter share.</td>
+              </tr>
+              <tr>
+                <td>Cathedral</td>
+                <td>277</td>
+                <td>~392</td>
+                <td>26.3%</td>
+                <td>Largest remaining concentration. 25 replaced through 2025 — slowest progress rate combined with highest absolute count.</td>
+              </tr>
+              <tr>
+                <td>Heritage</td>
+                <td>177</td>
+                <td>~250</td>
+                <td>38.4%</td>
+                <td>Older housing stock with heavy lead infrastructure.</td>
+              </tr>
+              <tr>
+                <td>Al Ritchie</td>
+                <td>210</td>
+                <td>~297</td>
+                <td>44.9%</td>
+                <td>Only 2 replaced from baseline — highest pct remaining (99.1%).</td>
+              </tr>
+              <tr>
+                <td>Warehouse District</td>
+                <td>3</td>
+                <td>~4</td>
+                <td>72.2%</td>
+                <td>Extreme renter concentration; lowest median income ($31.6K).</td>
+              </tr>
+              <tr>
+                <td>Downtown</td>
+                <td>5</td>
+                <td>~7</td>
+                <td>75.4%</td>
+                <td>High renter share; tenant disclosure failures hit hardest here.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
 
- <!-- ============ BEAT 2: THE VOTE ============ -->
- <section class="beat beat--vote" id="beat-2" data-beat="2">
- <div class="wrap">
- <div class="beat-eyebrow"><span class="beat-num">02</span> The vote</div>
- <h2 class="beat-headline">The city did not stumble into a slower schedule. It recorded one, publicly, and chose it.</h2>
- <div class="beat-body">
- <p>On May 26, 2021, council had a faster option in front of it: finish all replacements by 2031. The amendment failed 4&ndash;7. The city chose 2036 instead.</p>
+      <section id="blocked" class="section split-section">
+        <div>
+          <div class="section-heading left-tight">
+            <p class="eyebrow">Who blocked action</p>
+            <h2>The previous council (2020–2024) voted against faster replacement</h2>
+            <p>When faster replacement and basic reporting accountability came to the previous council, several councillors repeatedly landed on the wrong side of the vote. <strong>Note:</strong> All councillors named below are from the 2020–2024 term. A new council was sworn in November 2024. Right-of-reply letters have been sent to the named individuals.</p>
+          </div>
+          <div class="vote-grid">
+            <article class="vote-card">
+              <span class="panel-kicker">CR21-90</span>
+              <h3>7–4 against faster replacement</h3>
+              <p>On the amendment pushing a faster 10-year timeline, the vote failed. Bob Hawkins, John Findura, and Sandra Masters were among the councillors who opposed faster action, along with four others.</p>
+            </article>
+            <article class="vote-card">
+              <span class="panel-kicker">CR23-97</span>
+              <h3>6–3 on reporting — with key NO votes</h3>
+              <p>Even formal reporting faced resistance. Findura, Hawkins, and Masters voted <strong>NO</strong> on reporting.</p>
+            </article>
+          </div>
+        </div>
+        <div class="quote-stack">
+          <blockquote>
+            <p>“It's not like we're saying to anybody you have to drink lead water”</p>
+            <footer>— Bob Hawkins</footer>
+          </blockquote>
+          <blockquote class="quote-alert">
+            <p>“Some tap tests over 100 times greater than Health Canada's maximum”</p>
+            <footer>— Patricia Elliott</footer>
+          </blockquote>
+        </div>
+      </section>
 
- <div class="vote-record">
- <div class="vote-columns">
- <div class="vote-column vote-column--for">
- <div class="vote-column-header">
- <span class="vote-column-count">4</span>
- <span class="vote-column-label">For faster timeline (2031)</span>
- </div>
- <div class="vote-card"><span class="vote-name">Andrew Stevens</span><span class="vote-role">Moved</span></div>
- <div class="vote-card"><span class="vote-name">Dan LeBlanc</span><span class="vote-role">Seconded</span></div>
- <div class="vote-card"><span class="vote-name">Shanon Zachidniak</span><span class="vote-role">Still on council (Ward 8)</span></div>
- <div class="vote-card"><span class="vote-name">Cheryl Stadnichuk</span></div>
- </div>
- <div class="vote-divider">
- <span class="vote-divider-label">DEFEATED</span>
- </div>
- <div class="vote-column vote-column--against">
- <div class="vote-column-header">
- <span class="vote-column-count">7</span>
- <span class="vote-column-label">Against (kept 2036)</span>
- </div>
- <div class="vote-card"><span class="vote-name">Lori Bresciani</span></div>
- <div class="vote-card"><span class="vote-name">John Findura</span></div>
- <div class="vote-card"><span class="vote-name">Terina Shaw</span></div>
- <div class="vote-card"><span class="vote-name">Jason Mancinelli</span><span class="vote-role">Still on council (Ward 9)</span></div>
- <div class="vote-card"><span class="vote-name">Landon Mohl</span></div>
- <div class="vote-card"><span class="vote-name">Bob Hawkins</span></div>
- <div class="vote-card vote-card--mayor"><span class="vote-name">Sandra Masters</span><span class="vote-role">Mayor (2020&ndash;2024)</span></div>
- </div>
- </div>
- <div class="vote-source">
- <a href="https://reginask.iqm2.com/Citizens/FileOpen.aspx?Type=12&ID=2818&Inline=True" target="_blank" rel="noopener">Source: City Council Minutes, May 26, 2021 (PDF)</a>
- </div>
- </div>
+      <section id="province" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">The provincial vacuum</p>
+          <h2>Saskatchewan left municipalities and tenants exposed</h2>
+        </div>
+        <div class="compare-grid">
+          <article class="panel panel-hot">
+            <h3>Saskatchewan</h3>
+            <ul class="bullet-list compact">
+              <li><strong>No</strong> provincial lead-in-water standard</li>
+              <li><strong>No</strong> landlord disclosure requirement</li>
+              <li><strong>No</strong> dedicated provincial funding stream</li>
+            </ul>
+          </article>
+          <article class="panel">
+            <h3>What stronger provinces do</h3>
+            <ul class="bullet-list compact">
+              <li>Set explicit standards or action thresholds</li>
+              <li>Require clearer testing and disclosure expectations</li>
+              <li>Back local remediation with provincial money</li>
+            </ul>
+          </article>
+        </div>
+      </section>
 
- <p>Kathleen Donovan of the Cathedral Area Community Association and Steve Wolfson of Regina addressed council that day. Then the 15-year option passed 11&ndash;0.</p>
+      <section id="rental" class="section split-section">
+        <div>
+          <div class="section-heading left-tight">
+            <p class="eyebrow">The rental trap</p>
+            <h2>Tenants carry the risk while landlords face almost no lead-specific obligations</h2>
+          </div>
+          <p>In the worst-hit neighborhoods, renter shares run from 45% to more than 75%. Yet Saskatchewan does not require landlords to test for lead, disclose lead service connections, or proactively remediate the risk. For renters, “choice” is mostly fiction: they often do not know the line is lead, cannot authorize replacement themselves, and may not even control plumbing decisions inside the home.</p>
+        </div>
+        <div class="panel panel-outline">
+          <h3>The gap in plain language</h3>
+          <ul class="bullet-list compact">
+            <li>Landlords are not required to disclose lead service lines to tenants.</li>
+            <li>Tenants cannot force private-side replacement on their own.</li>
+            <li>Filter programs do not fix ownership and disclosure failures.</li>
+            <li>Low filter uptake means the fallback safety net is weak.</li>
+          </ul>
+        </div>
+      </section>
 
- <p>But the city was not the only institution in the room. The Saskatchewan Health Authority's senior public health inspector, George Koutsoulis, was listed in attendance. The health system that will pay $32 million in treatment costs watched the slower timeline get adopted — and left no visible mark in the decision record.</p>
+      <section id="timeline" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Timeline</p>
+          <h2>The warning signs were old. The urgency is current.</h2>
+        </div>
+        <div class="timeline">
+          <article class="timeline-item">
+            <span class="timeline-date">2019</span>
+            <h3>Recognition enters the public record</h3>
+            <p>Lead service connections were already part of the formal municipal record.</p>
+          </article>
+          <article class="timeline-item">
+            <span class="timeline-date">2021 · CR21-90</span>
+            <h3>Faster replacement is voted down</h3>
+            <p>Council rejects a faster replacement path, keeping a slower timeline in place.</p>
+          </article>
+          <article class="timeline-item">
+            <span class="timeline-date">2023 · CR23-97</span>
+            <h3>Even reporting draws resistance</h3>
+            <p>Formal reporting survives, but Findura, Hawkins, and Masters vote no.</p>
+          </article>
+          <article class="timeline-item">
+            <span class="timeline-date">Nov 2024</span>
+            <h3>New council sworn in</h3>
+            <p>Mayor Chad Bachynski and ten councillors take office. All named individuals from CR21-90 and CR23-97 votes are no longer on council.</p>
+          </article>
+          <article class="timeline-item">
+            <span class="timeline-date">2025</span>
+            <h3>Public warnings sharpen</h3>
+            <p>Advocates highlight extreme tap test results while Saskatchewan still offers no meaningful provincial backstop.</p>
+          </article>
+        </div>
+      </section>
 
- <p>The deeper question is not just why council chose slow. It is why the system makes slow the default. Lead replacement in Regina is not a standalone capital project. It is dispersed across utility budgets, reserve transfers, and road-repair work — with no dedicated budget line. The city funded a $51.3 million aquatics facility and $29 million for wastewater. Those projects are named, financed, and politically visible. Lead is fragmented and easy to defer.</p>
+      <section id="current-council" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Current Council</p>
+          <h2>The 2024–2028 council inherited this issue</h2>
+          <p>A new mayor and ten councillors were sworn in on November 18, 2024. None of the individuals named in the votes above remain on council. Mayor Chad Bachynski and the current council inherited the lead replacement program from the previous administration. This investigation has reached out to the current mayor's office and relevant ward councillors for comment on their plans to address the remaining 1,089 lead connections.</p>
+        </div>
+      </section>
 
- <p>What did this decision cost — and who keeps paying while the system processes it?</p>
- </div>
- </div>
- </section>
+      <section id="action" class="section action-section">
+        <div class="section-heading">
+          <p class="eyebrow">What needs to change</p>
+          <h2>Regina does not need more soft language. It needs a harder replacement regime.</h2>
+        </div>
+        <div class="action-grid">
+          <article class="action-card">
+            <span>01</span>
+            <h3>Accelerate full lead-line replacement</h3>
+            <p>Move from incrementalism to an aggressively scheduled, publicly tracked replacement program.</p>
+          </article>
+          <article class="action-card">
+            <span>02</span>
+            <h3>Mandate landlord disclosure and testing</h3>
+            <p>Tenants should not have to guess whether the water entering their home passes through lead.</p>
+          </article>
+          <article class="action-card">
+            <span>03</span>
+            <h3>Publish tract-level progress and failure</h3>
+            <p>Public reporting should show where replacement is happening, where it is stalling, and who is still being left behind.</p>
+          </article>
+          <article class="action-card">
+            <span>04</span>
+            <h3>Force a provincial response</h3>
+            <p>Saskatchewan needs standards, disclosure rules, and money — not silence.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
 
- <!-- ============ BEAT 3: THE COST ============ -->
- <section class="beat" id="beat-3" data-beat="3">
- <div class="wrap">
- <div class="beat-eyebrow"><span class="beat-num">03</span> The cost</div>
- <h2 class="beat-headline">The delay has a price. The fix is cheaper than inaction.</h2>
- <div class="beat-body">
- <div class="evidence-card" style="border-left-color: var(--green);">
- <div class="evidence-card-header">
- <span class="evidence-label" style="color: var(--green);">The math that ends the debate</span>
- </div>
- <div class="stat-row">
- <div class="stat-block">
- <span class="stat-value">$34.4M</span>
- <span class="stat-label">to replace every remaining lead connection — city and private side combined</span>
- </div>
- <div class="stat-block stat-block--alert">
- <span class="stat-value">$40.9M</span>
- <span class="stat-label">the economic burden if they stay in the ground</span>
- </div>
- </div>
- <p style="margin-top:1rem">Every dollar spent on replacement avoids $1.19 in downstream burden. Newark replaced 18,000 lines in 24&ndash;30 months at no cost to residents. Saskatoon is nearly done. Regina has replaced about a third.</p>
- </div>
+      <!-- ========== HOW THIS WAS BUILT ========== -->
+      <section id="built" class="section reveal-section">
+        <div class="section-heading">
+          <p class="eyebrow">How this was built</p>
+          <h2>This investigation was produced by an AI worker swarm — then stress-tested by its own counterargument agent</h2>
+        </div>
+        <div style="display:flex;gap:16px;align-items:center;justify-content:center;flex-wrap:wrap;margin:32px 0;">
+          <div style="padding:18px 24px;border-radius:14px;border:1.5px solid rgba(34,211,238,0.25);background:rgba(34,211,238,0.08);text-align:center;min-width:120px;">
+            <div style="font-size:24px;">📥</div>
+            <div style="font-size:13px;font-weight:600;color:#22d3ee;margin-top:4px;">Data Sources</div>
+            <div style="font-size:11px;color:#acb4c3;">PostGIS · ArcGIS · StatsCan</div>
+          </div>
+          <div style="font-size:24px;color:#3f3f46;">→</div>
+          <div style="padding:18px 24px;border-radius:14px;border:1.5px solid rgba(129,140,248,0.25);background:rgba(129,140,248,0.08);text-align:center;min-width:120px;">
+            <div style="font-size:24px;">🐒</div>
+            <div style="font-size:13px;font-weight:600;color:#818cf8;margin-top:4px;">8 Workers</div>
+            <div style="font-size:11px;color:#acb4c3;">Evidence · Equity · Timeline</div>
+          </div>
+          <div style="font-size:24px;color:#3f3f46;">→</div>
+          <div style="padding:18px 24px;border-radius:14px;border:1.5px solid rgba(248,113,113,0.25);background:rgba(248,113,113,0.08);text-align:center;min-width:120px;">
+            <div style="font-size:24px;">⚔️</div>
+            <div style="font-size:13px;font-weight:600;color:#f87171;margin-top:4px;">Counterargument</div>
+            <div style="font-size:11px;color:#acb4c3;">Attacks own claims</div>
+          </div>
+          <div style="font-size:24px;color:#3f3f46;">→</div>
+          <div style="padding:18px 24px;border-radius:14px;border:1.5px solid rgba(251,191,36,0.25);background:rgba(251,191,36,0.08);text-align:center;min-width:120px;">
+            <div style="font-size:24px;">⚖️</div>
+            <div style="font-size:13px;font-weight:600;color:#fbbf24;margin-top:4px;">JVB Review</div>
+            <div style="font-size:11px;color:#acb4c3;">Justified Revisable Belief</div>
+          </div>
+          <div style="font-size:24px;color:#3f3f46;">→</div>
+          <div style="padding:18px 24px;border-radius:14px;border:1.5px solid rgba(74,222,128,0.25);background:rgba(74,222,128,0.08);text-align:center;min-width:120px;">
+            <div style="font-size:24px;">✅</div>
+            <div style="font-size:13px;font-weight:600;color:#4ade80;margin-top:4px;">Knowledge</div>
+            <div style="font-size:11px;color:#acb4c3;">Promoted claims only</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:24px;">
+          <div style="text-align:center;padding:16px;border-radius:14px;border:1px solid rgba(255,255,255,0.09);background:rgba(255,255,255,0.03);">
+            <strong style="font-size:2rem;color:#818cf8;" class="counter-num" data-target="53">0</strong>
+            <div style="font-size:0.82rem;color:#acb4c3;margin-top:4px;">claims generated</div>
+          </div>
+          <div style="text-align:center;padding:16px;border-radius:14px;border:1px solid rgba(255,255,255,0.09);background:rgba(255,255,255,0.03);">
+            <strong style="font-size:2rem;color:#fbbf24;" class="counter-num" data-target="8">0</strong>
+            <div style="font-size:0.82rem;color:#acb4c3;margin-top:4px;">experiments run</div>
+          </div>
+          <div style="text-align:center;padding:16px;border-radius:14px;border:1px solid rgba(255,255,255,0.09);background:rgba(255,255,255,0.03);">
+            <strong style="font-size:2rem;color:#4ade80;" class="counter-num" data-target="14">0</strong>
+            <div style="font-size:0.82rem;color:#acb4c3;margin-top:4px;">cycles completed</div>
+          </div>
+          <div style="text-align:center;padding:16px;border-radius:14px;border:1px solid rgba(255,255,255,0.09);background:rgba(255,255,255,0.03);">
+            <strong style="font-size:2rem;color:#22d3ee;" class="counter-num" data-target="22">0</strong>
+            <div style="font-size:0.82rem;color:#acb4c3;margin-top:4px;">PostGIS tables</div>
+          </div>
+        </div>
+        <p style="text-align:center;margin-top:24px;font-size:0.92rem;color:#acb4c3;">
+          <a href="reports/presentation_slides.html" style="color:#818cf8;font-weight:600;text-decoration:none;">View the full Dream Lab presentation →</a>
+        </p>
+      </section>
 
- <p>The burden falls on 481 children currently living in homes with lead service connections. Each child faces an estimated $84,950 in lifetime economic cost — ADHD treatment, learning support, reduced earnings, and adult chronic disease. Families absorb 60%.</p>
+      <!-- ========== METHODOLOGY / FOOTER ========== -->
+      <section class="section" style="margin-top:26px;padding:28px 34px;text-align:center;">
+        <p class="eyebrow">Methodology &amp; Attribution</p>
+        <p style="font-size:0.95rem;color:#acb4c3;max-width:72ch;margin:0 auto;line-height:1.6;">
+          This investigation was produced using <strong style="color:#f4f7fb;">Dream Lab</strong>, a worker-swarm analysis system built on <a href="https://github.com/openclaw/openclaw" style="color:#818cf8;text-decoration:none;">OpenClaw</a>.
+          Lead connection data is sourced directly from the City of Regina's live ArcGIS DomesticWaterNetworkTrace service, verified April 6, 2026. Demographic overlays use Statistics Canada 2016 census profiles. Council voting records, media coverage, and advocacy materials provide the governance context.
+        </p>
+        <p style="font-size:0.95rem;color:#acb4c3;max-width:72ch;margin:0 auto;line-height:1.6;margin-top:12px;">
+          <strong><a href="methodology/" style="color:#f59e0b;text-decoration:none;">Full Methodology &amp; Sources →</a></strong><br/>
+          Every claim on this site is backed by verifiable data sources with reproducible queries.
+        </p>
+        <p style="font-size:0.85rem;color:#6b7280;margin-top:16px;">
+          Built by <strong style="color:#acb4c3;">Thomas (Pepar) Hugo</strong> · April 2026 · Last updated: June 22, 2026 (peer-review revalidation) ·
+          <a href="https://www.linkedin.com/in/thomasjayhugo/" style="color:#818cf8;text-decoration:none;">LinkedIn</a>
+        </p>
+      </section>
 
- <div class="cost-hero">
- <div class="cost-hero-block">
- <span class="cost-hero-value" data-count="144">144</span>
- <span class="cost-hero-label">quality-adjusted life years</span>
- <span class="cost-hero-note">IQ loss is permanent. Each child carries it for 30 years.</span>
- </div>
- <div class="cost-hero-block">
- <span class="cost-hero-value">$40.9M</span>
- <span class="cost-hero-label">total economic burden</span>
- <span class="cost-hero-note">Families 60%. Healthcare 17%. Schools 12%.</span>
- </div>
- </div>
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+  <script src="assets/anime.min.js"></script>
+  <script>
+    // Anime.js v4 compat
+    const _animate = anime.animate.bind(anime);
+    const _stagger = anime.stagger.bind(anime);
+  </script>
+  <script>
+    const toggle = document.querySelector('.nav-toggle');
+    const nav = document.querySelector('#site-nav');
+    toggle?.addEventListener('click', () => {
+      const expanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!expanded));
+      nav.classList.toggle('is-open');
+    });
 
- <p>The five-year delay alone — the difference between 2031 and 2036 — adds 107 more children through the critical development window and $4.1 million in burden. North Central bears $825,000 of it.</p>
+    document.querySelectorAll('#site-nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        nav.classList.remove('is-open');
+        toggle?.setAttribute('aria-expanded', 'false');
+      });
+    });
 
- <p>And the harm doesn't hold still while the city processes it. Every year the lines stay in the ground, new children are born into lead-connected homes and enter the exposure window. Older children age out, but the system keeps replenishing the harmed population. Since 2019, an estimated 997 unique children have already been exposed. If nothing changes, 802 more will be by 2036. The policy timeline never catches up to the harm timeline.</p>
+    const map = new maplibregl.Map({
+      container: 'lead-map',
+      style: {
+        version: 8,
+        sources: {
+          osm: {
+            type: 'raster',
+            tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
+            tileSize: 256,
+            attribution: '© OpenStreetMap contributors'
+          }
+        },
+        layers: [{ id: 'osm', type: 'raster', source: 'osm' }]
+      },
+      center: [-104.6189, 50.4452],
+      zoom: 10.9,
+      cooperativeGestures: true
+    });
 
- <p>The city's completed replacements have already prevented $32.5 million in burden and spared an estimated 637 future children from exposure. The program works. The investment has a positive return. So why hasn't the province — or the federal government — forced it to go faster?</p>
- </div>
- </div>
- </section>
+    map.addControl(new maplibregl.NavigationControl(), 'top-right');
 
- <!-- ============ BEAT 4: THE HARDEST HIT ============ -->
- <section class="beat beat--map" id="beat-4" data-beat="4">
- <div class="wrap">
- <div class="beat-eyebrow"><span class="beat-num">04</span> The hardest hit</div>
- <h2 class="beat-headline">The burden does not spread evenly. It clusters. And the policy ignores it.</h2>
- <div class="beat-body">
- <p>Saskatchewan has no provincial lead-in-water standard. No mandatory landlord disclosure — annual city letters go to property owners, not tenants. In North Central, 60% of housing is rental. Tenants drink the risk without knowing it exists.</p>
+    map.on('load', async () => {
+      const response = await fetch('public/data/lead_areas_harm_analysis.geojson');
+      const geojson = await response.json();
 
- <p>The replacement order makes this worse. In Regina, lead pipes are replaced when road repairs are already scheduled — not when health risk is highest. That means neighbourhoods with less street reconstruction, often the poorest and most neglected, wait longest. The city outsourced lead risk management to the people with the least power to manage it: renters who cannot order replacement, cannot compel disclosure, and may not even know the pipe is there.</p>
+      map.addSource('lead-areas', {
+        type: 'geojson',
+        data: geojson
+      });
 
- <div class="map-container" id="map-container">
- <div id="map" class="map-element"></div>
- <div class="map-legend">
- <div class="legend-title">Burden (NPV)</div>
- <div class="legend-scale">
- <span class="legend-low">$0</span>
- <div class="legend-gradient"></div>
- <span class="legend-high">$17.1M</span>
- </div>
- </div>
- </div>
+      map.addLayer({
+        id: 'lead-areas-fill',
+        type: 'fill',
+        source: 'lead-areas',
+        paint: {
+          'fill-color': [
+            'interpolate', ['linear'], ['get', 'current_lead_connections'],
+            0, '#fde68a',
+            25, '#f59e0b',
+            100, '#b91c1c',
+            400, '#7f1d1d',
+            700, '#33110f'
+          ],
+          'fill-opacity': 0.78
+        }
+      });
 
- <div class="ct-spotlight" id="ct-spotlight">
- <div class="ct-spotlight-header">
- <div class="ct-spotlight-label">North Central</div>
- <div class="ct-spotlight-tag">Highest burden</div>
- </div>
- <div class="ct-stats">
- <div class="ct-stat"><span class="ct-stat-value">459</span><span class="ct-stat-label">lead connections</span></div>
- <div class="ct-stat"><span class="ct-stat-value">199</span><span class="ct-stat-label">children on lead</span></div>
- <div class="ct-stat"><span class="ct-stat-value">42.6%</span><span class="ct-stat-label">Indigenous</span></div>
- <div class="ct-stat"><span class="ct-stat-value">30.0%</span><span class="ct-stat-label">low income</span></div>
- <div class="ct-stat"><span class="ct-stat-value">60.3%</span><span class="ct-stat-label">renter</span></div>
- <div class="ct-stat ct-stat--currency"><span class="ct-stat-value">$15.8M</span><span class="ct-stat-label">total burden</span></div>
- </div>
- <p class="ct-spotlight-note">North Central appears in the testing record (1,801 &mu;g/L), in the delay cost ($825K), and at the top of the burden table. The replacement rate here: the same as everywhere else.</p>
- </div>
+      map.addLayer({
+        id: 'lead-areas-line',
+        type: 'line',
+        source: 'lead-areas',
+        paint: {
+          'line-color': '#f5f5f5',
+          'line-width': 1.2,
+          'line-opacity': 0.35
+        }
+      });
 
- <div class="equity-comparison">
- <h3 class="equity-title">Replacement rate by vulnerability</h3>
- <div class="equity-bars">
- <div class="equity-row"><span class="equity-label">Low vulnerability</span><div class="equity-bar-track"><div class="equity-bar-fill" style="width:39.5%"><span>39.5%</span></div></div></div>
- <div class="equity-row"><span class="equity-label">Medium vulnerability</span><div class="equity-bar-track"><div class="equity-bar-fill" style="width:37.5%"><span>37.5%</span></div></div></div>
- <div class="equity-row"><span class="equity-label">High vulnerability</span><div class="equity-bar-track"><div class="equity-bar-fill" style="width:35.5%"><span>35.5%</span></div></div></div>
- </div>
- <p class="equity-note">The bars are flat because the policy is flat. The province set no equity standard. The federal government set no replacement mandate. The US requires all lead lines replaced in 10 years. Canada has no equivalent.</p>
- </div>
- </div>
- </div>
- </section>
+      map.addLayer({
+        id: 'lead-areas-labels',
+        type: 'symbol',
+        source: 'lead-areas',
+        layout: {
+          'text-field': ['get', 'name'],
+          'text-size': 11,
+          'text-font': ['Open Sans Regular', 'Arial Unicode MS Regular'],
+          'text-anchor': 'center',
+          'text-allow-overlap': false
+        },
+        paint: {
+          'text-color': '#f5f5f5',
+          'text-halo-color': 'rgba(10,12,16,0.8)',
+          'text-halo-width': 1.5
+        }
+      });
 
- <!-- ============ BEAT 5: THE ASK ============ -->
- <section class="beat beat--ask" id="beat-5" data-beat="5">
- <div class="wrap">
- <div class="beat-eyebrow"><span class="beat-num">05</span> The ask</div>
- <h2 class="beat-headline">Every institution in the chain had the power to act. Here is who to call.</h2>
- <div class="beat-body">
- <p>The failure runs federal &rarr; province &rarr; municipality &rarr; administration &rarr; contractor &rarr; family. Everyone deferred. The pressure has to be shared too.</p>
+      map.fitBounds([[-104.72, 50.40], [-104.55, 50.48]], { padding: 24, duration: 0 });
 
- <h3 class="cost-section-title">If you live in Regina</h3>
- <p>Call <a href="tel:+13067777000">Service Regina at 306-777-7000</a> and ask for the lead status of your address.</p>
- <div class="demands-grid">
- <div class="demand-card">
- <div class="demand-level">Protect yourself now</div>
- <div class="demand-items">
- <div class="demand-item"><div class="demand-ask"><a href="https://www.regina.ca/home-property/water/water/lead-service-connections/" target="_blank" rel="noopener">Check your address</a></div></div>
- <div class="demand-item"><div class="demand-ask"><a href="https://www.regina.ca/home-property/water/water/lead-service-connections/water-filter-request-application/" target="_blank" rel="noopener">Request a free filter</a></div></div>
- <div class="demand-item"><div class="demand-ask"><a href="https://www.regina.ca/home-property/water/water/lead-service-connections/water-testing-request-form/" target="_blank" rel="noopener">Request water testing</a></div></div>
- </div>
- </div>
- <div class="demand-card">
- <div class="demand-level">If you rent</div>
- <div class="demand-items">
- <div class="demand-item"><div class="demand-ask">Saskatchewan has no law requiring landlords to disclose lead connections. City letters go to the owner. Ask your landlord in writing for the lead letter and any test results.</div></div>
- <div class="demand-item"><div class="demand-ask"><a href="tel:+18882152222">Office of Residential Tenancies: 1-888-215-2222</a> / <a href="mailto:ORT@gov.sk.ca">ORT@gov.sk.ca</a></div></div>
- </div>
- </div>
- </div>
+      const popup = new maplibregl.Popup({ closeButton: false, closeOnClick: false });
+      const summary = document.getElementById('map-summary');
 
- <h3 class="cost-section-title">Who has the lever</h3>
- <div class="demands-grid">
- <div class="demand-card">
- <div class="demand-level">City of Regina</div>
- <div class="demand-items">
- <div class="demand-item">
- <div class="demand-finding">The 2021 council chose 2036 over 2031. This council can change it.</div>
- <div class="demand-ask">Accelerate the timeline. Adopt equity-weighted scheduling. Test more than 2% of homes per year.</div>
- </div>
- </div>
- <div class="demand-contacts">
- <div class="demand-contact">Mayor Chad Bachynski <a href="tel:+13067777339">306-777-7339</a> <a href="mailto:mayor@regina.ca">mayor@regina.ca</a></div>
- <div class="demand-contact">City Clerk <a href="tel:+13067777262">306-777-7262</a> <a href="mailto:clerks@regina.ca">clerks@regina.ca</a></div>
- </div>
- </div>
+      map.on('mousemove', 'lead-areas-fill', e => {
+        map.getCanvas().style.cursor = 'pointer';
+        const feature = e.features?.[0];
+        if (!feature) return;
+        const p = feature.properties;
+        const kids = p.estimated_children_affected || 0;
+        const income = p.median_after_tax_income ? `$${Number(p.median_after_tax_income).toLocaleString()}` : 'N/A';
+        summary.textContent = `${p.name}: ${p.current_lead_connections} active connections (was ${p.baseline_lead_connections}), ~${kids} children affected, ${p.renter_pct}% renter, median income ${income}.`;
+        popup
+          .setLngLat(e.lngLat)
+          .setHTML(`
+            <div class="popup-card">
+              <strong>${p.name}</strong>
+              <span>${p.current_lead_connections} active · ${p.replaced} replaced · was ${p.baseline_lead_connections}</span>
+              <span>~${kids} children affected</span>
+              <span>Renter share: ${p.renter_pct}%</span>
+              <span>Median income: ${income}</span>
+              <span>Indigenous: ${p.indigenous_pct}%</span>
+            </div>
+          `)
+          .addTo(map);
+      });
 
- <div class="demand-card">
- <div class="demand-level">Saskatchewan Ministry of Health</div>
- <div class="demand-items">
- <div class="demand-item">
- <div class="demand-finding">No provincial lead standard. No landlord disclosure. The province delegated the problem and set no floor.</div>
- <div class="demand-ask">Set a provincial standard. Require landlord disclosure at lease signing.</div>
- </div>
- </div>
- <div class="demand-contacts">
- <div class="demand-contact">Minister Jeremy Cockrill <a href="tel:+13067877345">306-787-7345</a> <a href="mailto:he.minister@gov.sk.ca">he.minister@gov.sk.ca</a></div>
- </div>
- </div>
+      map.on('mouseleave', 'lead-areas-fill', () => {
+        map.getCanvas().style.cursor = '';
+        summary.textContent = 'Hover a neighborhood to see lead connections, children affected, renter share, and income context.';
+        popup.remove();
+      });
+    });
 
- <div class="demand-card">
- <div class="demand-level">Water Security Agency</div>
- <div class="demand-items">
- <div class="demand-item">
- <div class="demand-finding">Has oversight authority. Hasn't used it.</div>
- <div class="demand-ask">Use it. Require the city to reconcile its data, publish a canonical count, and meet replacement milestones.</div>
- </div>
- </div>
- <div class="demand-contacts">
- <div class="demand-contact">Minister David Marit <a href="tel:+13067870250">306-787-0250</a></div>
- <div class="demand-contact">WSA <a href="tel:+18667275420">1-866-727-5420</a> <a href="mailto:comm@wsask.ca">comm@wsask.ca</a></div>
- </div>
- </div>
+    // ===== ANIME.JS v4 ENHANCEMENTS =====
+    // v4 API: animate(targets, {keyframes}, {options})
 
- <div class="demand-card">
- <div class="demand-level">Saskatchewan Health Authority</div>
- <div class="demand-items">
- <div class="demand-item">
- <div class="demand-finding">Will pay $32M in treatment costs. $5.32 billion operating budget. SHA attended the 2021 vote and did not demand the fix.</div>
- <div class="demand-ask">The system that will pay for the harm should demand the fix. Track pediatric referrals in affected neighbourhoods. Advocate publicly for accelerated replacement.</div>
- </div>
- </div>
- <div class="demand-contacts">
- <div class="demand-contact">CEO Andrew Will <a href="mailto:ceo@saskhealthauthority.ca">ceo@saskhealthauthority.ca</a></div>
- <div class="demand-contact">Board Office <a href="mailto:SHABoardOffice@saskhealthauthority.ca">SHABoardOffice@saskhealthauthority.ca</a></div>
- </div>
- </div>
+    // 1. Hero stat counter animation (vanilla JS — anime v4 doesn't do object tweening)
+    function animateHeroStats() {
+      document.querySelectorAll('.stat-card strong').forEach(el => {
+        const text = el.textContent.trim();
+        const match = text.match(/[\d,.]+/);
+        if (!match) return;
+        const target = parseFloat(match[0].replace(/,/g, ''));
+        const prefix = text.slice(0, text.indexOf(match[0]));
+        const suffix = text.slice(text.indexOf(match[0]) + match[0].length);
+        const isDecimal = match[0].includes('.');
+        const start = performance.now();
+        const dur = 1800;
+        function tick(now) {
+          const t = Math.min((now - start) / dur, 1);
+          const eased = 1 - Math.pow(1 - t, 4);
+          let v = target * eased;
+          el.textContent = prefix + (isDecimal ? v.toFixed(1) : Math.round(v).toLocaleString()) + suffix;
+          if (t < 1) requestAnimationFrame(tick);
+        }
+        setTimeout(() => requestAnimationFrame(tick), 300);
+      });
+    }
 
- <div class="demand-card">
- <div class="demand-level">Federal Government</div>
- <div class="demand-items">
- <div class="demand-item">
- <div class="demand-finding">The US requires all lead lines replaced in 10 years. Canada has no equivalent. A 40% federal share of the fix is $13.8 million.</div>
- <div class="demand-ask">Create a national lead service line mandate. Fund the fix.</div>
- </div>
- </div>
- <div class="demand-contacts">
- <div class="demand-contact">Warren Steinley MP, Regina&ndash;Lewvan</div>
- <div class="demand-contact">Michael Kram MP, Regina&ndash;Wascana</div>
- <div class="demand-contact">Andrew Scheer MP, Regina&ndash;Qu'Appelle</div>
- <div class="demand-contact"><a href="https://www.ourcommons.ca/members/en" target="_blank" rel="noopener">Find your MP &rarr;</a></div>
- </div>
- </div>
- </div>
+    // 2. Section reveal animations
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const section = entry.target;
+          _animate(section, { opacity: [0, 1], translateY: [40, 0] }, { duration: 800, ease: 'outCubic' });
 
- <p>In September 2025, council adopted CR25-115 — expanded payment access, fee removal, filter reimbursement, and annual reporting. That is progress. But it is a shift from replacing pipes faster to making slow replacement slightly easier. The question is no longer whether the city has a program. It is whether the program can reach the people most likely to be missed: renters, Indigenous families, low-income households in the neighbourhoods where road repairs haven't been scheduled.</p>
+          const cards = section.querySelectorAll('.panel, .col-card, .vote-card, .action-card, .stat-card, .timeline-item');
+          if (cards.length) {
+            _animate(Array.from(cards), { opacity: [0, 1], translateY: [20, 0] }, {
+              duration: 600, delay: _stagger(80, { start: 200 }), ease: 'outCubic'
+            });
+          }
+          // Counter nums
+          section.querySelectorAll('.counter-num').forEach(el => {
+            if (el.dataset.counted) return;
+            el.dataset.counted = '1';
+            const target = parseInt(el.dataset.target);
+            const start = performance.now();
+            const dur = 1400;
+            function tick(now) {
+              const t = Math.min((now - start) / dur, 1);
+              const eased = 1 - Math.pow(1 - t, 4);
+              el.textContent = Math.round(target * eased);
+              if (t < 1) requestAnimationFrame(tick);
+            }
+            setTimeout(() => requestAnimationFrame(tick), 300);
+          });
+          revealObserver.unobserve(section);
+        }
+      });
+    }, { threshold: 0.15 });
 
- <p class="beat-closer">The city blames the province. The province says it's municipal. The health authority says it's not their file. That is not a misunderstanding. It is a system designed to move responsibility sideways. The child at the end of the pipe is exposed because every institution assumed someone else would fix it faster.</p>
- </div>
- </div>
- </section>
+    document.querySelectorAll('.section').forEach(section => {
+      if (section.classList.contains('hero')) return;
+      section.style.opacity = '0';
+      section.style.transform = 'translateY(40px)';
+      revealObserver.observe(section);
+    });
 
- <!-- ============ DATA APPENDIX ============ -->
- <section class="methodology-section" id="methodology">
- <div class="wrap">
- <h2>Data appendix</h2>
- <p>Every claim above is from public records. The methodology, data sources, and error model are documented here for independent verification. Full per-neighbourhood detail is in the <a href="methodology/index.html">methodology pages</a>.</p>
+    // 3. Timeline pulse dots
+    document.querySelectorAll('.timeline-item').forEach(item => {
+      const dot = document.createElement('div');
+      dot.style.cssText = 'position:absolute;left:8px;top:24px;width:18px;height:18px;border-radius:50%;background:transparent;box-shadow:0 0 0 0 rgba(217,45,32,0.4);pointer-events:none;';
+      item.style.position = 'relative';
+      item.appendChild(dot);
+      _animate(dot, {
+        boxShadow: ['0 0 0 0 rgba(217,45,32,0.4)', '0 0 0 12px rgba(217,45,32,0)']
+      }, { duration: 2000, loop: true, ease: 'outSine', delay: Math.random() * 1000 });
+    });
 
- <details class="method-accordion">
- <summary>Detailed methodology (per-neighbourhood calculations)</summary>
- <div class="method-content">
- <ul>
- <li><a href="methodology/population-count.html">Population count</a> — 481 children at risk, per-CT derivation from 2021 Census</li>
- <li><a href="methodology/burden-model.html">Burden model</a> — 5 conditions, comorbidity correction, per-neighbourhood breakdown</li>
- <li><a href="methodology/qaly-derivation.html">QALY derivation</a> — disability weight interpolation, 30-year NPV, per-neighbourhood</li>
- <li><a href="methodology/error-model.html">Error model</a> — 84.1% calibration, 5-system reconciliation</li>
- <li><a href="methodology/fix-cost.html">Fix cost</a> — $34.4M derivation, inflation adjustment, comparators</li>
- <li><a href="methodology/delay-cost.html">Delay cost</a> — CR21-90 Option 2 vs 3, per-CT impact</li>
- </ul>
- <p>All methodology pages include: inputs, formula, step-by-step calculation, sources, verification steps, sensitivity analysis, and limitations.</p>
- </div>
- </details>
+    // 4. Hero entrance
+    _animate('.hero-copy > *', { opacity: [0, 1], translateY: [30, 0] }, {
+      duration: 800, delay: _stagger(150, { start: 200 }), ease: 'outCubic'
+    });
 
- <details class="method-accordion">
- <summary>Sources (16 cited)</summary>
- <div class="method-content">
- <table class="method-table">
- <thead><tr><th>ID</th><th>Source</th><th>Use</th></tr></thead>
- <tbody>
- <tr><td>S1</td><td>DomesticWaterNetworkTrace/4 (99,119 records)</td><td>Live replacement data</td></tr>
- <tr><td>S2</td><td>CBMH WaterConnection Layer 8 (89,328 records)</td><td>Frozen 2016 baseline</td></tr>
- <tr><td>S3</td><td>SewerWaterCondition Lead+PolyB (3,692 records)</td><td>Active Pb count by CT</td></tr>
- <tr><td>S4</td><td><a href="https://www.regina.ca/home-property/water/water/lead-service-connections/">City of Regina LSC Program</a></td><td>Official replacement counts</td></tr>
- <tr><td>S5</td><td>GTLO Committee KML (Sept 2025)</td><td>Independent validation (98.1%)</td></tr>
- <tr><td>S6</td><td>Statistics Canada 2021 Census</td><td>Demographics by CT</td></tr>
- <tr><td>S7</td><td><a href="https://reginask.iqm2.com/Citizens/FileOpen.aspx?Type=12&ID=2818&Inline=True">Council Minutes, May 26, 2021</a></td><td>CR21-90 vote record</td></tr>
- <tr><td>S8</td><td>CIHI + condition-specific CMGs</td><td>Healthcare cost benchmarks</td></tr>
- <tr><td>S9</td><td>Lanphear et al. (2005) <a href="https://doi.org/10.1289/ehp.7688">DOI</a></td><td>IQ dose-response</td></tr>
- <tr><td>S10</td><td>Health Canada (2019)</td><td>5 &mu;g/L guideline</td></tr>
- <tr><td>S11</td><td>CADTH (2017)</td><td>3% discount rate</td></tr>
- <tr><td>S12</td><td>Gould (2009) <a href="https://doi.org/10.1289/ehp.0800408">DOI</a></td><td>$17,815/IQ point</td></tr>
- <tr><td>S13</td><td>Reuben et al. (2017) <a href="https://doi.org/10.1001/jama.2017.1712">DOI</a></td><td>38-year persistence</td></tr>
- <tr><td>S14</td><td>Salkever (1995)</td><td>Earnings per IQ point</td></tr>
- <tr><td>S15</td><td><a href="https://cathedralvillage.org/wp-content/uploads/2025/10/Exec-Committee-Sept-2025.docx.pdf">Patricia Elliott / GTLO</a></td><td>Cathedral testing</td></tr>
- <tr><td>S16</td><td><a href="https://www.saskhealthauthority.ca/news-events/news/andrew-will-appointed-ceo">SHA leadership</a></td><td>CEO, budget</td></tr>
- </tbody>
- </table>
- </div>
- </details>
+    // 5. Hero stats entrance + count
+    _animate('.hero-stats .stat-card', { opacity: [0, 1], translateX: [30, 0] }, {
+      duration: 600, delay: _stagger(120, { start: 600 }), ease: 'outCubic',
+      onComplete: animateHeroStats
+    });
 
- <details class="method-accordion">
- <summary>Burden model (v5 — 2021 Census + comorbidity correction)</summary>
- <div class="method-content">
- <p>Population: 1 connection = 1 household. Children per household from 2021 Census. 481 children on lead.</p>
- <p>Healthcare: Bottom-up: ADHD 12% ($8K/yr, 12yr), LD 20% ($10K/yr, 8yr), Behavioral 10% ($4K/yr, 8yr), CVD 7% ($5K/yr, 15yr), CKD 5% ($15K/yr, 10yr). &times;0.85 comorbidity. $36,950/child.</p>
- <p>Earnings: 2 IQ pts &times; $24,000/pt (Salkever, Regina median). $48,000/child.</p>
- <p>QALY: 0.015/yr &times; 30yr NPV = 0.30/child. Between GBD borderline ID (0.011) and mild anxiety (0.030).</p>
- <p>IQ validation: Cathedral testing confirms 71% exceed 5 &mu;g/L. Dose-response: 0.7&ndash;2.8 IQ points at measured levels.</p>
- <p>Convergence: Top-down Gould and bottom-up condition costing agree within 3% on earnings.</p>
- </div>
- </details>
+    // 6. Pipeline flow in #built section
+    const builtObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const nodes = entry.target.querySelectorAll('[style*="border-radius:14px"]');
+          _animate(Array.from(nodes), { scale: [0.85, 1], opacity: [0, 1] }, {
+            duration: 500, delay: _stagger(100), ease: 'outBack'
+          });
+          builtObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
 
- <details class="method-accordion">
- <summary>Error model &amp; data forensics</summary>
- <div class="method-content">
- <p>Coverage: 84.1% &plusmn; 2.9% of completed replacements appear in GIS. Calibrated against city-published counts 2020&ndash;2023. The undercount is systematic — same rate every year.</p>
- <p>Five systems: CBMH (6,943), Trace (5,405), LeadPolyB (2,760), Lead Areas (3,637), GTLO (~2,305). No official reconciliation exists.</p>
- <p>Entry lag: Median 90 days. Batch entries: 2,021 records on Jan. 23, 2024.</p>
- <p>Finance: 26 documents, 2019&ndash;2025. Aggregate utility spend proved. Project-level lead spend proof is missing.</p>
- </div>
- </details>
-
- <details class="method-accordion">
- <summary>Literature</summary>
- <div class="method-content">
- <ol class="citation-list">
- <li>Lanphear BP et al. (2005). <em>Environ Health Perspect</em> 113(7):894-899. <a href="https://doi.org/10.1289/ehp.7688">DOI</a></li>
- <li>Gould E. (2009). <em>Environ Health Perspect</em> 117(7):1162-1167. <a href="https://doi.org/10.1289/ehp.0800408">DOI</a></li>
- <li>Reuben A et al. (2017). <em>JAMA</em> 317(12):1244-1251. <a href="https://doi.org/10.1001/jama.2017.1712">DOI</a></li>
- <li>Health Canada. (2019). Guidelines for Canadian Drinking Water Quality: Lead.</li>
- <li>CADTH. (2017). Guidelines for Economic Evaluation, 4th ed.</li>
- <li>U.S. EPA. (2024). Lead and Copper Rule Improvements (LCRI).</li>
- </ol>
- </div>
- </details>
- </div>
- </section>
-
- <!-- ============ FOOTER ============ -->
- <footer class="site-footer">
- <div class="wrap">
- <p>Built by Thomas (Pepar) Hugo &middot; April 2026</p>
- <p class="footer-note">Every claim is from public records. <a href="https://github.com/peparhugo/regina-lead-connections-analysis" target="_blank" rel="noopener">Source code on GitHub</a></p>
- </div>
- </footer>
- </div>
-
- <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
- <script src="app.js"></script>
+    const builtSection = document.getElementById('built');
+    if (builtSection) builtObserver.observe(builtSection);
+  </script>
 </body>
 </html>

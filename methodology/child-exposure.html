@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Child Exposure Model — Regina Lead Investigation</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <style>
+    .back-link { display: inline-block; margin-bottom: 1rem; color: var(--link, #60a5fa); }
+    code { background: #0d1117; padding: 0.2em 0.4em; border-radius: 3px; font-size: 0.9em; }
+    pre { background: #0d1117; padding: 1rem; border-radius: 8px; overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+    th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid var(--border, #333); }
+    th { background: var(--bg-elevated, #1a1a2e); }
+    .highlight { background: rgba(245, 158, 11, 0.1); padding: 1rem; border-left: 4px solid var(--accent, #f59e0b); margin: 1.5rem 0; }
+    .formula { background: #0d1117; padding: 1rem; border-radius: 8px; font-family: monospace; margin: 1rem 0; }
+  </style>
+</head>
+<body>
+  <div class="site-shell">
+    <header class="topbar">
+      <a class="brand" href="../">REGINA LEAD INVESTIGATION</a>
+    </header>
+
+    <main style="max-width: 900px; margin: 0 auto; padding: 2rem;">
+      <a href="./" class="back-link">&larr; Back to Methodology</a>
+
+      <h1>Child Exposure Model</h1>
+
+      <div class="highlight">
+        <strong>Key Figure:</strong> ~1,540 children (ages 0-14) in affected census tracts<br>
+        <strong>Method:</strong> CT-level spatial join of lead connections to StatsCan demographics<br>
+        <strong>Last Calculated:</strong> 2026-04-06
+      </div>
+
+      <section>
+        <h2>Model Overview</h2>
+        <p>We estimate child exposure by:</p>
+        <ol>
+          <li>Spatially joining lead service connections to census tract (CT) boundaries</li>
+          <li>Applying StatsCan demographic data (children 0-14) at CT level</li>
+          <li>Weighting by lead connection density within each CT</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>Formula</h2>
+        <div class="formula">
+          Impacted_Children_CT = Children_0_14_CT × (Lead_Connections_CT / Total_Connections_CT) × Exposure_Weight
+        </div>
+        <p>Where:</p>
+        <ul>
+          <li><strong>Children_0_14_CT:</strong> StatsCan 2016 count of children aged 0-14 in the census tract</li>
+          <li><strong>Lead_Connections_CT:</strong> Count of city-owned ACTIVE Pb lines in the CT (from spatial join)</li>
+          <li><strong>Total_Connections_CT:</strong> Total water connections in the CT</li>
+          <li><strong>Exposure_Weight:</strong> Conservative factor (0.8) assuming not all children in lead-connected homes are equally exposed</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Data Sources</h2>
+        <table>
+          <tr>
+            <th>Data</th>
+            <th>Source</th>
+            <th>Reference</th>
+          </tr>
+          <tr>
+            <td>Children 0-14 by CT</td>
+            <td>Statistics Canada 2016 Census</td>
+            <td>Table 98-401-X2016044</td>
+          </tr>
+          <tr>
+            <td>CT Boundaries</td>
+            <td>Statistics Canada</td>
+            <td>2016 Census Tract Boundary File</td>
+          </tr>
+          <tr>
+            <td>Lead Connections</td>
+            <td>City of Regina ArcGIS</td>
+            <td>DomesticWaterNetworkTrace/MapServer/4</td>
+          </tr>
+        </table>
+      </section>
+
+      <section>
+        <h2>Top 10 Census Tracts by Impacted Children</h2>
+        <table>
+          <tr>
+            <th>Census Tract</th>
+            <th>Lead Count</th>
+            <th>Impacted Children</th>
+            <th>Renter %</th>
+          </tr>
+          <tr><td>CT 0004.00</td><td>123</td><td>344</td><td>27%</td></tr>
+          <tr><td>CT 0018.00</td><td>152</td><td>278</td><td>60%</td></tr>
+          <tr><td>CT 0012.00</td><td>154</td><td>213</td><td>53%</td></tr>
+          <tr><td>CT 0008.01</td><td>75</td><td>195</td><td>27%</td></tr>
+          <tr><td>CT 0019.00</td><td>88</td><td>188</td><td>41%</td></tr>
+          <tr><td>CT 0009.01</td><td>186</td><td>163</td><td>35%</td></tr>
+          <tr><td>CT 0005.00</td><td>69</td><td>143</td><td>17%</td></tr>
+          <tr><td>CT 0020.00</td><td>30</td><td>124</td><td>32%</td></tr>
+          <tr><td>CT 0010.00</td><td>56</td><td>121</td><td>69%</td></tr>
+          <tr><td>CT 0014.00</td><td>70</td><td>83</td><td>72%</td></tr>
+        </table>
+        <p><strong>Total across 54 CTs:</strong> ~1,540 impacted children</p>
+      </section>
+
+      <section>
+        <h2>Spatial Join Method</h2>
+        <p>The household-to-CT spatial join is performed in PostGIS:</p>
+        <pre><code>-- Materialized view: ct_direct_lead_synthesis_20260324
+SELECT
+  ct.ctuid,
+  ct.ctname,
+  count(DISTINCT addr.gisid) as lead_connections,
+  sum(ct.children_0_14 * exposure_weight) as impacted_children
+FROM census_tracts ct
+JOIN address_points_crosswalk addr
+  ON ST_Contains(ct.geom, addr.geom)
+JOIN water_lines wl
+  ON addr.gisid = wl.gisid
+WHERE wl.material = 'Pb'
+  AND wl.maintainedby = 'C'
+  AND wl.status = 'ACTIVE'
+GROUP BY ct.ctuid, ct.ctname;</code></pre>
+      </section>
+
+      <section>
+        <h2>Assumptions & Limitations</h2>
+        <ol>
+          <li><strong>Census data age:</strong> 2016 Census is the most recent with CT-level child counts; actual 2026 demographics may differ</li>
+          <li><strong>Household occupancy:</strong> Assumes households with lead connections have similar child density to CT average</li>
+          <li><strong>Exposure uniformity:</strong> Does not account for filter usage, water consumption patterns, or building age</li>
+          <li><strong>Conservative estimate:</strong> The 0.8 exposure weight intentionally underestimates to avoid overclaiming</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>Reproduce This Analysis</h2>
+        <pre><code># Connect to PostGIS
+docker exec -it regina-postgis-20260324 psql -U regina -d regina
+
+# Query the CT synthesis view
+SELECT ct_name, current_city_owned_lead_count,
+       impacted_children_0_14_est
+FROM regina.ct_direct_lead_synthesis_20260324
+ORDER BY impacted_children_0_14_est DESC;</code></pre>
+      </section>
+
+      <footer style="margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border, #333); color: #888;">
+        <p>Last updated: 2026-04-06 | <a href="./">Back to Methodology</a> | <a href="../">Main Site</a></p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

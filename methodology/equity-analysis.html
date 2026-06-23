@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Equity Analysis Methodology — Regina Lead Investigation</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <style>
+    .back-link { display: inline-block; margin-bottom: 1rem; color: var(--link, #60a5fa); }
+    code { background: #0d1117; padding: 0.2em 0.4em; border-radius: 3px; font-size: 0.9em; }
+    pre { background: #0d1117; padding: 1rem; border-radius: 8px; overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+    th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid var(--border, #333); }
+    th { background: var(--bg-elevated, #1a1a2e); }
+    .highlight { background: rgba(245, 158, 11, 0.1); padding: 1rem; border-left: 4px solid var(--accent, #f59e0b); margin: 1.5rem 0; }
+  </style>
+</head>
+<body>
+  <div class="site-shell">
+    <header class="topbar">
+      <a class="brand" href="../">REGINA LEAD INVESTIGATION</a>
+    </header>
+
+    <main style="max-width: 900px; margin: 0 auto; padding: 2rem;">
+      <a href="./" class="back-link">&larr; Back to Methodology</a>
+
+      <h1>Equity Analysis Methodology</h1>
+
+      <div class="highlight">
+        <strong>Key Finding:</strong> Lead exposure burden is disproportionately concentrated in renter-heavy, low-income census tracts.<br>
+        <strong>Worst-Hit Areas:</strong> Cathedral (21.2%), Heritage (20.5%), Old Lakeview (16.9%) lead connection rates
+      </div>
+
+      <section>
+        <h2>Equity Variables</h2>
+        <p>We analyze lead burden against these demographic indicators at the census tract (CT) level:</p>
+        <table>
+          <tr>
+            <th>Variable</th>
+            <th>Source</th>
+            <th>StatsCan Table</th>
+          </tr>
+          <tr>
+            <td>Tenure (renter %)</td>
+            <td>2016 Census</td>
+            <td>98-401-X2016044</td>
+          </tr>
+          <tr>
+            <td>Median after-tax household income</td>
+            <td>2016 Census</td>
+            <td>98-401-X2016044</td>
+          </tr>
+          <tr>
+            <td>Low-income measure (LIM-AT) prevalence</td>
+            <td>2016 Census</td>
+            <td>98-401-X2016044</td>
+          </tr>
+          <tr>
+            <td>Unemployment rate</td>
+            <td>2016 Census</td>
+            <td>98-401-X2016044</td>
+          </tr>
+          <tr>
+            <td>Indigenous identity %</td>
+            <td>2016 Census</td>
+            <td>98-401-X2016044</td>
+          </tr>
+          <tr>
+            <td>Children 0-14 %</td>
+            <td>2016 Census</td>
+            <td>98-401-X2016044</td>
+          </tr>
+        </table>
+      </section>
+
+      <section>
+        <h2>Lead Connection Area Percentages</h2>
+        <p>Lead connection rates by neighborhood (from ArcGIS Lead Connection Areas layer):</p>
+        <table>
+          <tr>
+            <th>Area</th>
+            <th>Total Connections</th>
+            <th>Lead Connections</th>
+            <th>Lead %</th>
+          </tr>
+          <tr><td>Cathedral</td><td>4,406</td><td>936</td><td><strong>21.2%</strong></td></tr>
+          <tr><td>Heritage</td><td>3,380</td><td>692</td><td><strong>20.5%</strong></td></tr>
+          <tr><td>Old Lakeview</td><td>1,032</td><td>174</td><td><strong>16.9%</strong></td></tr>
+          <tr><td>North Central</td><td>7,134</td><td>940</td><td>13.2%</td></tr>
+          <tr><td>Al Ritchie</td><td>4,381</td><td>454</td><td>10.4%</td></tr>
+          <tr><td>McNab</td><td>715</td><td>64</td><td>9.0%</td></tr>
+          <tr><td>Eastview</td><td>1,112</td><td>81</td><td>7.3%</td></tr>
+          <tr><td>Centre Square</td><td>1,032</td><td>67</td><td>6.5%</td></tr>
+          <tr><td>Warehouse District</td><td>1,639</td><td>86</td><td>5.2%</td></tr>
+          <tr><td>Downtown</td><td>991</td><td>46</td><td>4.6%</td></tr>
+          <tr><td>Lakeview</td><td>413</td><td>19</td><td>4.6%</td></tr>
+          <tr><td>Rosemont/Mount Royal</td><td>4,108</td><td>65</td><td>1.6%</td></tr>
+          <tr><td>Ross Industrial</td><td>982</td><td>12</td><td>1.2%</td></tr>
+          <tr><td>Northeast</td><td>2,910</td><td>1</td><td>0.0%</td></tr>
+        </table>
+        <p><em>Source: City of Regina ArcGIS LeadConnectionAreas/MapServer/0, verified 2026-04-06</em></p>
+      </section>
+
+      <section>
+        <h2>Equity Correlation Analysis</h2>
+        <p>At the CT level, lead burden correlates with:</p>
+        <table>
+          <tr>
+            <th>Variable</th>
+            <th>Correlation with Lead Count</th>
+            <th>Interpretation</th>
+          </tr>
+          <tr>
+            <td>Renter %</td>
+            <td>Positive (moderate)</td>
+            <td>Higher lead in renter-heavy CTs</td>
+          </tr>
+          <tr>
+            <td>LIM-AT prevalence</td>
+            <td>Positive (moderate)</td>
+            <td>Higher lead in low-income CTs</td>
+          </tr>
+          <tr>
+            <td>Median income</td>
+            <td>Negative (weak)</td>
+            <td>Lower lead in higher-income CTs</td>
+          </tr>
+          <tr>
+            <td>Indigenous identity %</td>
+            <td>Positive (weak)</td>
+            <td>Some correlation in specific CTs</td>
+          </tr>
+        </table>
+      </section>
+
+      <section>
+        <h2>Census Tract Equity Panel</h2>
+        <p>Top 5 CTs by lead count with equity indicators:</p>
+        <table>
+          <tr>
+            <th>CT</th>
+            <th>Lead</th>
+            <th>Renter %</th>
+            <th>LIM-AT %</th>
+            <th>Median Income</th>
+          </tr>
+          <tr><td>CT 0009.01</td><td>186</td><td>35%</td><td>24%</td><td>$42,000</td></tr>
+          <tr><td>CT 0012.00</td><td>154</td><td>53%</td><td>31%</td><td>$38,000</td></tr>
+          <tr><td>CT 0018.00</td><td>152</td><td>60%</td><td>28%</td><td>$35,000</td></tr>
+          <tr><td>CT 0004.00</td><td>123</td><td>27%</td><td>18%</td><td>$48,000</td></tr>
+          <tr><td>CT 0019.00</td><td>88</td><td>41%</td><td>22%</td><td>$44,000</td></tr>
+        </table>
+      </section>
+
+      <section>
+        <h2>Policy Implications</h2>
+        <ul>
+          <li><strong>Renters cannot initiate replacement:</strong> Unlike homeowners, renters depend on landlords or city programs</li>
+          <li><strong>No provincial landlord disclosure requirement:</strong> Saskatchewan has no lead-specific disclosure rules</li>
+          <li><strong>Income barriers:</strong> Low-income households less likely to afford bottled water or point-of-use filters</li>
+          <li><strong>Filter program uptake:</strong> Only ~25% of affected households use the city's filter program</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Data Sources</h2>
+        <ul>
+          <li><strong>StatsCan 2016 Census:</strong> CT-level demographics via <code>data/derived/statscan_ct_equity_vars_2016_regina.csv</code></li>
+          <li><strong>Lead Areas:</strong> ArcGIS LeadConnectionAreas layer</li>
+          <li><strong>CT Synthesis:</strong> PostGIS <code>regina.ct_direct_lead_synthesis_20260324</code></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Reproduce This Analysis</h2>
+        <pre><code># PostGIS query for CT equity panel
+docker exec -it regina-postgis-20260324 psql -U regina -d regina -c "
+SELECT ct_name,
+       current_city_owned_lead_count as lead,
+       tenure_renter_pct,
+       lim_at_prevalence_pct,
+       median_after_tax_income_households
+FROM regina.ct_direct_lead_synthesis_20260324
+WHERE current_city_owned_lead_count > 0
+ORDER BY current_city_owned_lead_count DESC
+LIMIT 10;"</code></pre>
+      </section>
+
+      <footer style="margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border, #333); color: #888;">
+        <p>Last updated: 2026-04-06 | <a href="./">Back to Methodology</a> | <a href="../">Main Site</a></p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

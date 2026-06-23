@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Health Burden (QALY/Cost) Methodology — Regina Lead Investigation</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <style>
+    .back-link { display: inline-block; margin-bottom: 1rem; color: var(--link, #60a5fa); }
+    code { background: #0d1117; padding: 0.2em 0.4em; border-radius: 3px; font-size: 0.9em; }
+    pre { background: #0d1117; padding: 1rem; border-radius: 8px; overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+    th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid var(--border, #333); }
+    th { background: var(--bg-elevated, #1a1a2e); }
+    .highlight { background: rgba(245, 158, 11, 0.1); padding: 1rem; border-left: 4px solid var(--accent, #f59e0b); margin: 1.5rem 0; }
+    .formula { background: #0d1117; padding: 1rem; border-radius: 8px; font-family: monospace; margin: 1rem 0; }
+    .warning { background: rgba(239, 68, 68, 0.1); padding: 1rem; border-left: 4px solid #ef4444; margin: 1.5rem 0; }
+  </style>
+</head>
+<body>
+  <div class="site-shell">
+    <header class="topbar">
+      <a class="brand" href="../">REGINA LEAD INVESTIGATION</a>
+    </header>
+
+    <main style="max-width: 900px; margin: 0 auto; padding: 2rem;">
+      <a href="./" class="back-link">&larr; Back to Methodology</a>
+
+      <h1>Health Burden Methodology</h1>
+      <p class="lead">Quality-Adjusted Life Years (QALY) and Healthcare Cost Estimation</p>
+
+      <div class="highlight">
+        <strong>Key Figures:</strong><br>
+        QALY Realized (harm locked in): <strong>148.9</strong><br>
+        QALY Avoided (from replacements): <strong>117.6</strong><br>
+        QALY Projected (future if no action): <strong>252.1</strong><br>
+        Healthcare Cost Realized: <strong>$39.59 million</strong>
+      </div>
+
+      <div class="warning">
+        <strong>Important:</strong> These are modeled estimates based on epidemiological literature and census data. They are not clinical measurements. The model uses conservative assumptions and should be interpreted as order-of-magnitude estimates for policy analysis, not precise predictions.
+      </div>
+
+      <section>
+        <h2>Model Overview</h2>
+        <p>The health burden model estimates harm from childhood lead exposure using:</p>
+        <ol>
+          <li><strong>Exposure model:</strong> Child-exposure-years based on time living with lead service connection</li>
+          <li><strong>Harm model:</strong> QALY loss per exposure-year from epidemiological literature</li>
+          <li><strong>Cost model:</strong> Healthcare costs derived from CIHI pediatric cost proxies</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>QALY Calculation</h2>
+        <div class="formula">
+          QALY_Loss_CT = Exposure_Years_CT × QALY_per_Exposure_Year
+        </div>
+        <p>Where:</p>
+        <ul>
+          <li><strong>Exposure_Years_CT:</strong> Impacted children × average years of exposure (assumed 5 years for realized, based on program timeline)</li>
+          <li><strong>QALY_per_Exposure_Year:</strong> 0.015 - 0.025 range from literature (we use 0.02 base case)</li>
+        </ul>
+
+        <h3>Parameter Sources</h3>
+        <table>
+          <tr>
+            <th>Parameter</th>
+            <th>Low</th>
+            <th>Base</th>
+            <th>High</th>
+            <th>Source</th>
+          </tr>
+          <tr>
+            <td>QALY per exposure-year</td>
+            <td>0.015</td>
+            <td>0.020</td>
+            <td>0.025</td>
+            <td>Lanphear et al. (2005), Gould (2009)</td>
+          </tr>
+          <tr>
+            <td>Exposure duration (realized)</td>
+            <td>3 years</td>
+            <td>5 years</td>
+            <td>7 years</td>
+            <td>Program timeline analysis</td>
+          </tr>
+          <tr>
+            <td>Filter effectiveness</td>
+            <td>70%</td>
+            <td>80%</td>
+            <td>90%</td>
+            <td>NSF/ANSI 53 standards</td>
+          </tr>
+        </table>
+      </section>
+
+      <section>
+        <h2>Healthcare Cost Calculation</h2>
+        <div class="formula">
+          Cost_CT = QALY_Loss_CT × Cost_per_QALY
+        </div>
+        <p>We use CIHI (Canadian Institute for Health Information) pediatric cost proxies:</p>
+        <table>
+          <tr>
+            <th>Cost Component</th>
+            <th>Value</th>
+            <th>Source</th>
+          </tr>
+          <tr>
+            <td>Cost per QALY (pediatric)</td>
+            <td>$266,000 CAD</td>
+            <td>CIHI Patient Cost Estimator, adjusted for pediatric CMGs</td>
+          </tr>
+          <tr>
+            <td>Includes</td>
+            <td colspan="2">Developmental assessments, special education, behavioral interventions, long-term cognitive support</td>
+          </tr>
+        </table>
+      </section>
+
+      <section>
+        <h2>Results Summary</h2>
+        <table>
+          <tr>
+            <th>Category</th>
+            <th>Low</th>
+            <th>Base</th>
+            <th>High</th>
+          </tr>
+          <tr>
+            <td><strong>Realized QALY Loss</strong></td>
+            <td>111.7</td>
+            <td>148.9</td>
+            <td>186.1</td>
+          </tr>
+          <tr>
+            <td><strong>Avoided QALY (replacements)</strong></td>
+            <td>88.2</td>
+            <td>117.6</td>
+            <td>147.0</td>
+          </tr>
+          <tr>
+            <td><strong>Projected QALY (if no action)</strong></td>
+            <td>189.1</td>
+            <td>252.1</td>
+            <td>315.1</td>
+          </tr>
+          <tr>
+            <td><strong>Realized Healthcare Cost</strong></td>
+            <td>$29.7M</td>
+            <td>$39.59M</td>
+            <td>$49.5M</td>
+          </tr>
+        </table>
+      </section>
+
+      <section>
+        <h2>Literature References</h2>
+        <ol>
+          <li>Lanphear BP, et al. (2005). "Low-level environmental lead exposure and children's intellectual function." <em>Environmental Health Perspectives</em> 113(7):894-899.</li>
+          <li>Gould E. (2009). "Childhood Lead Poisoning: Conservative Estimates of the Social and Economic Benefits of Lead Hazard Control." <em>Environmental Health Perspectives</em> 117(7):1162-1167.</li>
+          <li>Trasande L, Liu Y. (2011). "Reducing the staggering costs of environmental disease in children." <em>Health Affairs</em> 30(5):863-870.</li>
+          <li>Attina TM, Trasande L. (2013). "Economic costs of childhood lead exposure in low- and middle-income countries." <em>Environmental Health Perspectives</em> 121(9):1097-1102.</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>PostGIS Implementation</h2>
+        <pre><code>-- Materialized view: ct_child_qaly_20260324
+SELECT
+  ct_uid_code,
+  ct_name,
+  impacted_children_0_14_est,
+  realized_child_exposure_years_base * 0.02 as realized_qaly_base,
+  avoided_child_exposure_years_base * 0.02 as avoided_qaly_base,
+  projected_child_exposure_years_base * 0.02 as projected_qaly_base
+FROM regina.ct_child_harm_exposure_20260324;</code></pre>
+      </section>
+
+      <section>
+        <h2>Assumptions & Limitations</h2>
+        <ol>
+          <li><strong>Population-level model:</strong> Individual outcomes vary; this is an aggregate policy analysis tool</li>
+          <li><strong>Linear dose-response:</strong> Assumes harm is proportional to exposure duration (may underestimate non-linear effects)</li>
+          <li><strong>2016 demographics:</strong> Child counts from 2016 Census; actual 2026 population may differ</li>
+          <li><strong>Filter adjustment:</strong> Assumes 25% filter program uptake reduces exposure proportionally</li>
+          <li><strong>Cost stability:</strong> Healthcare costs assumed constant; actual costs may vary with inflation and care patterns</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>Reproduce This Analysis</h2>
+        <pre><code># Connect to PostGIS
+docker exec -it regina-postgis-20260324 psql -U regina -d regina
+
+# Query QALY totals
+SELECT
+  round(sum(realized_qaly_base)::numeric, 1) as realized,
+  round(sum(avoided_qaly_base)::numeric, 1) as avoided,
+  round(sum(projected_qaly_base)::numeric, 1) as projected
+FROM regina.ct_child_qaly_20260324;
+
+# Query healthcare costs
+SELECT
+  round(sum(realized_healthcare_cost_base)::numeric / 1000000, 2) as cost_millions
+FROM regina.ct_child_healthcare_cost_20260324;</code></pre>
+      </section>
+
+      <footer style="margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border, #333); color: #888;">
+        <p>Last updated: 2026-04-06 | <a href="./">Back to Methodology</a> | <a href="../">Main Site</a></p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
