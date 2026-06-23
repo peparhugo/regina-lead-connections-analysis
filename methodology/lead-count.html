@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Lead Connection Count Methodology — Regina Lead Investigation</title>
+  <title>Lead Connection Count — Regina Lead Investigation</title>
   <link rel="stylesheet" href="../styles.css" />
   <style>
     .back-link { display: inline-block; margin-bottom: 1rem; color: var(--link, #60a5fa); }
@@ -13,7 +13,6 @@
     th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid var(--border, #333); }
     th { background: var(--bg-elevated, #1a1a2e); }
     .highlight { background: rgba(245, 158, 11, 0.1); padding: 1rem; border-left: 4px solid var(--accent, #f59e0b); margin: 1.5rem 0; }
-    .note { background: rgba(59, 130, 246, 0.08); padding: 1rem; border-left: 4px solid #3b82f6; margin: 1.5rem 0; }
   </style>
 </head>
 <body>
@@ -21,141 +20,65 @@
     <header class="topbar">
       <a class="brand" href="../">REGINA LEAD INVESTIGATION</a>
     </header>
-
     <main style="max-width: 900px; margin: 0 auto; padding: 2rem;">
-      <a href="./" class="back-link">&larr; Back to Methodology</a>
-
+      <a href="../" class="back-link">&larr; Back</a>
       <h1>Lead Connection Count Methodology</h1>
 
       <div class="highlight">
-        <strong>Key Figure:</strong> 1,089 city-owned active lead service connections<br>
-        <strong>Source:</strong> PostGIS — <code>ct_direct_lead_synthesis_20260324</code> (geo-intersected matview)<br>
-        <strong>Method:</strong> True spatial intersection of address points × census tract polygons<br>
-        <strong>Last Verified:</strong> 2026-06-22 (peer-review revalidation)
+        <strong>Key figure:</strong> 2,743 city-maintained active lead service connections<br>
+        <strong>Source:</strong> City of Regina ArcGIS — DomesticWaterNetworkTrace (WHERE MATERIAL='Pb' AND MAINTAINEDBY='C' AND STATUS='ACTIVE')<br>
+        <strong>Last verified:</strong> 2026-04-06
       </div>
 
       <section>
-        <h2>Why 1,089, Not 2,743</h2>
-        <p>This site previously reported <strong>2,743 active lead connections</strong>. That number came from a raw ArcGIS query that counted <em>all</em> Pb-tagged lines in the city's GIS system — including lines that were not geo-intersected to confirmed addresses, duplicate entries from multiple snapshots, and private-side connections. The 2,743 was not wrong as an ArcGIS query result — it was wrong as the <strong>headline claim</strong> because it conflated multiple counting methodologies.</p>
-
-        <p>The <strong>authoritative count of 1,089</strong> comes from a spatial intersection of <em>verified address points</em> against census tract boundaries using the PostGIS materialized view <code>ct_direct_lead_synthesis_20260324</code>. This is the count of city-owned lead connections that can be traced to specific addresses with spatial precision, and is the basis for all child-exposure and health-burden calculations on this site.</p>
-      </section>
-
-      <section>
-        <h2>Three Counting Methods</h2>
+        <h2>Data Source</h2>
         <table>
-          <tr>
-            <th>Method</th>
-            <th>Count</th>
-            <th>Source</th>
-            <th>What It Includes</th>
-          </tr>
-          <tr>
-            <td><strong>Geo-intersected (authoritative)</strong></td>
-            <td><strong>1,089</strong></td>
-            <td>PostGIS matview <code>ct_direct_lead_synthesis_20260324</code></td>
-            <td>City-owned, active lead connections verified by spatial intersection of address points with parcel/line GIS and census tract boundaries. Only connections traceable to a specific address with confirmed Pb material.</td>
-          </tr>
-          <tr>
-            <td>Public dataset (2025)</td>
-            <td>2,280</td>
-            <td>PostGIS <code>lead_area_progress_2019_2025.current_public_2025_count</code></td>
-            <td>All publicly-tracked connections in the City's lead service connection program database. Includes connections not yet geo-verified and those without confirmed material codes.</td>
-          </tr>
-          <tr>
-            <td>Raw ArcGIS Pb lines</td>
-            <td>5,405</td>
-            <td>ArcGIS <code>DomesticWaterNetworkTrace</code> (WHERE MATERIAL='Pb')</td>
-            <td>Unfiltered total of all Pb-material-tagged lines in the city GIS. Includes private-side lines, abandoned connections, duplicate entries from snapshot layers, and lines not linked to any address record.</td>
-          </tr>
+          <tr><th>Attribute</th><th>Value</th></tr>
+          <tr><td>Service URL</td><td><code>https://opengis.regina.ca/arcgis/rest/services/CGISViewer/DomesticWaterNetworkTrace/MapServer/4</code></td></tr>
+          <tr><td>Layer name</td><td>Water Line Connections</td></tr>
+          <tr><td>Format</td><td>ArcGIS REST API (JSON)</td></tr>
+          <tr><td>Update frequency</td><td>Live (reflects current city GIS)</td></tr>
         </table>
-
-        <div class="note">
-          <strong>Why the gap matters:</strong> If you report 2,743 as "active lead connections," you are counting connections that may not be individually traceable, may be private-side, or may include duplicate entries. The 1,089 count is the defensible lower bound — every connection in it has been spatially verified to a specific address. These 1,089 homes are the ones where we can confidently say children are at risk.
-        </div>
       </section>
 
       <section>
-        <h2>Baseline and Replacement Tracking</h2>
+        <h2>Query Logic</h2>
+        <pre><code>WHERE MATERIAL = 'Pb'           — Lead material code
+  AND MAINTAINEDBY = 'C'        — City-maintained
+  AND STATUS = 'ACTIVE'         — Currently in service</code></pre>
+      </section>
+
+      <section>
+        <h2>Complete Breakdown (2026-04-06)</h2>
         <table>
-          <tr>
-            <th>Metric</th>
-            <th>Value</th>
-            <th>Source</th>
-          </tr>
-          <tr>
-            <td>2019 baseline (all parcels)</td>
-            <td>3,637</td>
-            <td>PostGIS <code>lead_connection_areas.Lead_Total</code></td>
-          </tr>
-          <tr>
-            <td>Confirmed replacements (2020–2023)</td>
-            <td>696 LSC replacements</td>
-            <td>PostGIS <code>filter_program_yearly_progress_20260324</code></td>
-          </tr>
-          <tr>
-            <td>Replacement candidates (2019–2025)</td>
-            <td>900</td>
-            <td>PostGIS <code>ct_child_healthcare_cost_20260324.replacement_candidate_connections_2019_2025</code></td>
-          </tr>
-          <tr>
-            <td>High-confidence replacements</td>
-            <td>8</td>
-            <td>PostGIS <code>ct_direct_lead_synthesis_20260324.high_conf_replacements</code></td>
-          </tr>
-          <tr>
-            <td>Current city-owned lead (2025)</td>
-            <td>1,089</td>
-            <td>PostGIS matview — geo-intersected</td>
-          </tr>
-          <tr>
-            <td>Clean operational core (verified non-lead)</td>
-            <td>1,154</td>
-            <td>PostGIS <code>ct_direct_lead_synthesis_20260324.clean_operational_core_count</code></td>
-          </tr>
+          <tr><th>MAINTAINEDBY</th><th>STATUS</th><th>Count</th></tr>
+          <tr><td>C (City)</td><td>ACTIVE</td><td><strong>2,743</strong></td></tr>
+          <tr><td>C (City)</td><td>CUT OFF</td><td>2,396</td></tr>
+          <tr><td>C (City)</td><td>NOT IN USE</td><td>225</td></tr>
+          <tr><td>C (City)</td><td>ABANDONED</td><td>15</td></tr>
+          <tr><td>P (Private)</td><td>ACTIVE</td><td>17</td></tr>
+          <tr><td>P (Private)</td><td>CUT OFF</td><td>3</td></tr>
+          <tr><td colspan="2"><strong>Total Pb lines</strong></td><td><strong>5,405</strong></td></tr>
         </table>
-
-        <p><strong>Replacement interpretation:</strong> Of the 3,637 baseline parcels, 696 have documented LSC replacements through the city's program (2020–2023). An additional 900 show material signatures consistent with replacement (Pb→Cu transition between snapshot layers), but only 8 meet the strictest evidence standards (GISID + work order + material + temporal alignment). The remaining ~1,154 parcels were found to have clean (non-lead) service lines in the 2025 data — they were never lead. This leaves 1,089 parcels with confirmed active lead connections.</p>
       </section>
 
       <section>
-        <h2>Geo-Intersection Methodology</h2>
-        <p>The authoritative 1,089 count is produced by the following pipeline:</p>
-
-        <ol>
-          <li><strong>Address point extraction</strong> from the City of Regina address payload (2,307 reconciled addresses in <code>known_lead_address_reconciliation_triaged</code>)</li>
-          <li><strong>Spatial intersection</strong> of address points against census tract boundary polygons (from Statistics Canada 2016 census tracts, stored in PostGIS)</li>
-          <li><strong>Material verification</strong> — <code>current_material = 'Pb'</code> confirmed in the geo-joined record (1,379 of 2,307 reconciled addresses show current Pb)</li>
-          <li><strong>CT-level aggregation</strong> in materialized view <code>ct_direct_lead_synthesis_20260324</code> with demographics joined from <code>ct_equity_panel_official_20260306</code></li>
-        </ol>
-
-        <p>The geographic precision comes from the <code>address_to_line_distance_m</code> field — for 2,283 of 2,307 addresses, the spatial distance between the address point and the service line GIS feature was computed, enabling quality-tier assignment.</p>
+        <h2>Corroboration: City Official Address List</h2>
+        <p>The Cathedral Area Community Association obtained the City of Regina's official household-level lead service connection address list under a September 2025 information request (<a href="https://cathedralvillage.org/wp-content/uploads/2025/10/Exec-Committee-Sept-2025.docx.pdf" target="_blank">Executive Committee, Sept. 17, 2025</a>). The list confirms approximately <strong>2,700 households</strong> remain impacted — consistent with the ArcGIS count of 2,743 within ~1.6%.</p>
       </section>
 
       <section>
-        <h2>Reproduce This Query</h2>
-        <h3>PostGIS (authoritative geo-intersected count)</h3>
-        <pre><code>SELECT SUM(current_city_owned_lead_count) AS geo_verified_lead
-FROM regina.ct_direct_lead_synthesis_20260324;
--- Result: 1,089</code></pre>
+        <h2>Analytical Subset: Geo-Intersected Count</h2>
+        <p>For census-tract-level demographic analysis and the health-burden model, we use a tighter subset of <strong>1,089 connections</strong> from the PostGIS materialized view <code>ct_direct_lead_synthesis_20260324</code>. This excludes connections that could not be geo-intersected to a specific address point or CT boundary — it is a methodological floor used for spatial allocation, not the total count.</p>
+      </section>
 
-        <h3>ArcGIS (raw query — for reference only)</h3>
+      <section>
+        <h2>Reproduce</h2>
         <pre><code>curl -s "https://opengis.regina.ca/arcgis/rest/services/CGISViewer/DomesticWaterNetworkTrace/MapServer/4/query?where=MATERIAL%3D%27Pb%27%20AND%20MAINTAINEDBY%3D%27C%27%20AND%20STATUS%3D%27ACTIVE%27&returnCountOnly=true&f=json"</code></pre>
       </section>
 
-      <section>
-        <h2>Assumptions & Limitations</h2>
-        <ol>
-          <li><strong>Geo-intersection quality:</strong> 2,283 of 2,307 addresses have computed spatial distances; 24 addresses rely on crosswalk-only matching without geometric verification.</li>
-          <li><strong>Material coding:</strong> 1,379 addresses have confirmed Pb material. 836 show Cu (copper — likely replaced). 92 have unknown or other materials.</li>
-          <li><strong>CT boundary accuracy:</strong> Uses Statistics Canada 2016 census tract boundaries, which may not precisely align with 2025 property boundaries.</li>
-          <li><strong>Private-side excluded:</strong> This count covers only city-owned (curb-to-main) lead lines. Homeowner-side lead lines are not included in the city's GIS and were not counted.</li>
-          <li><strong>Temporal coverage:</strong> The ArcGIS snapshot used for the spatial join was captured April 6, 2026. Replacements since that date are not reflected.</li>
-        </ol>
-      </section>
-
       <footer style="margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border, #333); color: #888;">
-        <p>Last updated: 2026-06-22 (peer-review revalidation) | <a href="./">Back to Methodology</a> | <a href="../">Main Site</a></p>
+        <p>Last updated: 2026-04-06 | <a href="./">Back to Methodology</a> | <a href="../">Main Site</a></p>
       </footer>
     </main>
   </div>

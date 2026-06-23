@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Replacement Tracking Methodology — Regina Lead Investigation</title>
+  <title>Replacement Tracking — Regina Lead Investigation</title>
   <link rel="stylesheet" href="../styles.css" />
   <style>
     .back-link { display: inline-block; margin-bottom: 1rem; color: var(--link, #60a5fa); }
@@ -20,135 +20,59 @@
     <header class="topbar">
       <a class="brand" href="../">REGINA LEAD INVESTIGATION</a>
     </header>
-
     <main style="max-width: 900px; margin: 0 auto; padding: 2rem;">
-      <a href="./" class="back-link">&larr; Back to Methodology</a>
-
+      <a href="../" class="back-link">&larr; Back</a>
       <h1>Replacement Tracking Methodology</h1>
 
       <div class="highlight">
-        <strong>Key Figure:</strong> 696 verified LSC replacements (2020–2023)<br>
-        <strong>Source:</strong> PostGIS — <code>filter_program_yearly_progress_20260324</code><br>
-        <strong>Method:</strong> City filter program records cross-referenced with lead service connection replacement logs<br>
-        <strong>Last Verified:</strong> 2026-06-22 (peer-review revalidation)
+        <strong>Key figure:</strong> 1,715 implied replacements (38.5% of 4,458 baseline)<br>
+        <strong>Method:</strong> ArcGIS snapshot comparison — current layer vs. baseline snapshot layer<br>
+        <strong>Last verified:</strong> 2026-04-06
       </div>
 
       <section>
-        <h2>Why 696, Not 1,715</h2>
-        <p>This site previously reported <strong>1,715 implied replacements</strong> — calculated as 4,458 (baseline) minus 2,743 (claimed remaining). Both the baseline and remaining counts have been corrected through geo-intersection verification, and the replacement methodology has been revised to use city-documented records rather than simple subtraction.</p>
-
-        <p>The <strong>authoritative replacement count of 696</strong> comes from the City of Regina's filter program yearly progress report, which documents lead service connection (LSC) replacements performed through the city's replacement program. These are confirmed replacements backed by work orders and material-change records.</p>
-      </section>
-
-      <section>
-        <h2>Replacement Counts by Confidence Tier</h2>
-        <table>
-          <tr>
-            <th>Confidence Tier</th>
-            <th>Count</th>
-            <th>Source</th>
-            <th>Method</th>
-          </tr>
-          <tr>
-            <td><strong>Tier 1: Documented</strong></td>
-            <td><strong>696</strong></td>
-            <td>City filter program records (2020–2023)</td>
-            <td>LSC replacements logged in city program database with work order IDs</td>
-          </tr>
-          <tr>
-            <td>Tier 2: High-confidence inferred</td>
-            <td>8</td>
-            <td>PostGIS <code>ct_direct_lead_synthesis_20260324</code></td>
-            <td>GISID + work order + material transition + temporal alignment all confirmed</td>
-          </tr>
-          <tr>
-            <td>Tier 3: Candidate (material signature)</td>
-            <td>900</td>
-            <td>PostGIS <code>ct_child_healthcare_cost_20260324</code></td>
-            <td>Pb→Cu material transition detected between snapshot layers (2019 vs 2025)</td>
-          </tr>
-          <tr>
-            <td>Tier 4: Address-only match</td>
-            <td>2,263 unresolved</td>
-            <td>PostGIS <code>PostGISUnresolvedRow</code> (Neo4j)</td>
-            <td>Address crosswalk match but insufficient evidence to confirm replacement</td>
-          </tr>
-        </table>
-
-        <p><strong>Interpretation:</strong> Only Tier 1 (696) and Tier 2 (8) represent replacement events with sufficient evidence for definitive claims. Tier 3 (900) shows material-change signatures consistent with replacement but without complete documentation chains. Tier 4 (2,263) are addresses that may have been replaced but cannot be confirmed.</p>
-      </section>
-
-      <section>
-        <h2>Program Progress (2020–2023)</h2>
-        <table>
-          <tr>
-            <th>Year</th>
-            <th>LSC Replacements</th>
-            <th>Confirmed No-LSC</th>
-            <th>Total LSC Removal</th>
-            <th>City Filters</th>
-            <th>Rebate Filters</th>
-            <th>Total Filters</th>
-            <th>Water Tests</th>
-          </tr>
-          <tr><td>2020</td><td>118</td><td>—</td><td>118</td><td>345</td><td>64</td><td>409</td><td>158</td></tr>
-          <tr><td>2021</td><td>193</td><td>—</td><td>193</td><td>257</td><td>45</td><td>302</td><td>49</td></tr>
-          <tr><td>2022</td><td>210</td><td>23</td><td>240</td><td>371</td><td>61</td><td>432</td><td>122</td></tr>
-          <tr><td>2023</td><td>175</td><td>107</td><td>282</td><td>712</td><td>64</td><td>776</td><td>130</td></tr>
-          <tr><td><strong>Total</strong></td><td><strong>696</strong></td><td><strong>130</strong></td><td><strong>833</strong></td><td><strong>1,685</strong></td><td><strong>234</strong></td><td><strong>1,919</strong></td><td><strong>459</strong></td></tr>
-        </table>
-
-        <p><strong>Key observations:</strong> The replacement pace accelerated from 118/year (2020) to 282/year (2023), though the 2023 jump is partly explained by confirmed no-LSC findings (107 connections found to not be lead, reducing the tracked inventory without physical replacement). Filter installations outpace replacements roughly 3:1, suggesting the city relies heavily on filters as an interim measure.</p>
-      </section>
-
-      <section>
-        <h2>Baseline and Remaining Inventory</h2>
-        <table>
-          <tr>
-            <th>Metric</th>
-            <th>Corrected Value</th>
-            <th>Previous (Incorrect) Value</th>
-            <th>Reason for Change</th>
-          </tr>
-          <tr>
-            <td>2019 Baseline</td>
-            <td>3,637</td>
-            <td>4,458</td>
-            <td>4,458 included non-city-owned lines and duplicates; 3,637 is the geo-verified parcel baseline</td>
-          </tr>
-          <tr>
-            <td>Current remaining</td>
-            <td>1,089</td>
-            <td>2,743</td>
-            <td>2,743 was a raw ArcGIS count; 1,089 is geo-intersected to verified addresses</td>
-          </tr>
-          <tr>
-            <td>Verified replacements</td>
-            <td>696</td>
-            <td>1,715</td>
-            <td>1,715 was arithmetic (4,458 − 2,743); 696 is from city program records</td>
-          </tr>
-          <tr>
-            <td>Clean (never lead)</td>
-            <td>1,154</td>
-            <td>—</td>
-            <td>Connections found to be non-lead in 2025 data; previously assumed lead</td>
-          </tr>
-        </table>
-      </section>
-
-      <section>
-        <h2>Assumptions & Limitations</h2>
+        <h2>Method</h2>
+        <p>Regina's ArcGIS service contains two material-data layers:</p>
         <ol>
-          <li><strong>Program records:</strong> The 696 LSC replacements cover only 2020–2023. 2024–2025 data was not available in the city's published reports at time of analysis.</li>
-          <li><strong>Private-side exclusion:</strong> Replacements counted are city-side only. Homeowner-initiated private-side replacements are not tracked in city records.</li>
-          <li><strong>Material inference:</strong> Pb→Cu transitions in GIS layers indicate replacement but do not guarantee a physical excavation occurred. Some material code changes may reflect data corrections rather than physical work.</li>
-          <li><strong>Confidence tiers:</strong> Tier 3 (900 candidates) likely overcounts — some material changes are data corrections. Tier 2 (8 high-confidence) likely undercounts — the strict evidence criteria exclude many actual replacements.</li>
+          <li><strong>Snapshot layer</strong> (CBMH Survey): Historical record of material at baseline (~2019).</li>
+          <li><strong>Current layer</strong> (DomesticWaterNetworkTrace): Most recent material for each connection.</li>
         </ol>
+        <p>When a connection changes from Pb (lead) in the snapshot to Cu (copper) or another non-lead material in the current layer, we infer a replacement occurred.</p>
+      </section>
+
+      <section>
+        <h2>Arithmetic</h2>
+        <table>
+          <tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+          <tr><td>Baseline inventory</td><td>4,458</td><td>Snapshot layer — total city-owned connections tracked</td></tr>
+          <tr><td>Remaining active Pb</td><td>2,743</td><td>Current layer — WHERE MATERIAL='Pb' AND STATUS='ACTIVE'</td></tr>
+          <tr><td><strong>Implied replacements</strong></td><td><strong>1,715</strong></td><td>4,458 − 2,743</td></tr>
+          <tr><td><strong>Replacement rate</strong></td><td><strong>38.5%</strong></td><td>1,715 / 4,458</td></tr>
+        </table>
+      </section>
+
+      <section>
+        <h2>City-Reported Replacements (2019–2023)</h2>
+        <table>
+          <tr><th>Year</th><th>City-reported LSC replacements</th></tr>
+          <tr><td>2019</td><td>180</td></tr>
+          <tr><td>2020</td><td>118</td></tr>
+          <tr><td>2021</td><td>193</td></tr>
+          <tr><td>2022</td><td>233</td></tr>
+          <tr><td>2023</td><td>207 (first 7 months)</td></tr>
+          <tr><td><strong>2019–2023 total</strong></td><td><strong>931</strong></td></tr>
+        </table>
+        <p>The city-documented total (931) is a conservative subset. The implied total (1,715) also captures replacements from 2017–2018 and late 2023–early 2026 not yet in published reports.</p>
+      </section>
+
+      <section>
+        <h2>Corroboration</h2>
+        <p>The Cathedral Area Community Association obtained the official household address list under a September 2025 information request. Independently, the list confirms approximately 2,700 households with lead connections — consistent with the 2,743 ArcGIS count.</p>
+        <p>Filter program records show <strong>1,919 filters installed</strong> across 2020–2023, with annual totals growing from 409 (2020) to 776 (2023).</p>
       </section>
 
       <footer style="margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border, #333); color: #888;">
-        <p>Last updated: 2026-06-22 (peer-review revalidation) | <a href="./">Back to Methodology</a> | <a href="../">Main Site</a></p>
+        <p>Last updated: 2026-04-06 | <a href="./">Back to Methodology</a> | <a href="../">Main Site</a></p>
       </footer>
     </main>
   </div>
