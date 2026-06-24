@@ -59,7 +59,7 @@
         <p>Where:</p>
         <ul>
           <li><strong>Exposure_Years_CT:</strong> Impacted children × average years of exposure (assumed 5 years for realized, based on program timeline)</li>
-          <li><strong>QALY_per_Exposure_Year:</strong> 0.015 - 0.025 range from literature (we use 0.02 base case)</li>
+          <li><strong>QALY_per_Exposure_Year:</strong> 0.02 (low), 0.05 (base), 0.10 (high) from Lanphear et al. (2005), Gould (2009)</li>
         </ul>
 
         <h3>Parameter Sources</h3>
@@ -72,10 +72,17 @@
             <th>Source</th>
           </tr>
           <tr>
+            <td>Exposure weight (w)</td>
+            <td>0.089</td>
+            <td>0.201</td>
+            <td>0.325</td>
+            <td>Gould (2009), Trasande &amp; Liu (2011)</td>
+          </tr>
+          <tr>
             <td>QALY per exposure-year</td>
-            <td>0.015</td>
             <td>0.020</td>
-            <td>0.025</td>
+            <td>0.050</td>
+            <td>0.100</td>
             <td>Lanphear et al. (2005), Gould (2009)</td>
           </tr>
           <tr>
@@ -130,27 +137,27 @@
           </tr>
           <tr>
             <td><strong>Realized QALY Loss</strong></td>
-            <td>111.7</td>
+            <td>26.4</td>
             <td>148.9</td>
-            <td>186.1</td>
+            <td>481.7</td>
           </tr>
           <tr>
             <td><strong>Avoided QALY (replacements)</strong></td>
-            <td>88.2</td>
+            <td>20.8</td>
             <td>117.6</td>
-            <td>147.0</td>
+            <td>380.3</td>
           </tr>
           <tr>
             <td><strong>Projected QALY (if no action)</strong></td>
-            <td>189.1</td>
+            <td>44.6</td>
             <td>252.1</td>
-            <td>315.1</td>
+            <td>815.1</td>
           </tr>
           <tr>
             <td><strong>Realized Healthcare Cost</strong></td>
-            <td>$29.7M</td>
+            <td>$13.3M</td>
             <td>$39.59M</td>
-            <td>$49.5M</td>
+            <td>$102.5M</td>
           </tr>
         </table>
       </section>
@@ -172,9 +179,9 @@ SELECT
   ct_uid_code,
   ct_name,
   impacted_children_0_14_est,
-  realized_child_exposure_years_base * 0.02 as realized_qaly_base,
-  avoided_child_exposure_years_base * 0.02 as avoided_qaly_base,
-  projected_child_exposure_years_base * 0.02 as projected_qaly_base
+  realized_child_exposure_years_base * 0.05 as realized_qaly_base,
+  avoided_child_exposure_years_base * 0.05 as avoided_qaly_base,
+  projected_child_exposure_years_base * 0.05 as projected_qaly_base
 FROM regina.ct_child_harm_exposure_20260324;</code></pre>
       </section>
 
@@ -184,7 +191,7 @@ FROM regina.ct_child_harm_exposure_20260324;</code></pre>
           <li><strong>Population-level model:</strong> Individual outcomes vary; this is an aggregate policy analysis tool</li>
           <li><strong>Linear dose-response:</strong> Assumes harm is proportional to exposure duration (may underestimate non-linear effects)</li>
           <li><strong>2016 demographics:</strong> Child counts from 2016 Census; actual 2026 population may differ</li>
-          <li><strong>Filter adjustment:</strong> Assumes 25% filter program uptake reduces exposure proportionally</li>
+          <li><strong>Filter adjustment:</strong> Filter effectiveness assumptions (70–90%) are used in the exposure weight parameter derivation. The base case uses literature-derived exposure weights (w_base = 0.201) without an additional filter discount factor. Low and High bands use separate exposure-year models with lower (w_low = 0.089) and higher (w_high = 0.325) weights.</li>
           <li><strong>Cost stability:</strong> Healthcare costs assumed constant; actual costs may vary with inflation and care patterns</li>
         </ol>
       </section>
