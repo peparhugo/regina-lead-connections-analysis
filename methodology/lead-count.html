@@ -63,8 +63,16 @@
       </section>
 
       <section>
-        <h2>Corroboration: City Official Address List</h2>
-        <p>The Cathedral Area Community Association obtained the City of Regina's official household-level lead service connection address list under a September 2025 information request (<a href="https://cathedralvillage.org/wp-content/uploads/2025/10/Exec-Committee-Sept-2025.docx.pdf" target="_blank">Executive Committee, Sept. 17, 2025</a>). The list confirms approximately <strong>2,700 households</strong> remain impacted — consistent with the ArcGIS count of 2,743 within ~1.6%.</p>
+        <h2>Corroboration: Sept 2025 City Address List</h2>
+        <p>The Cathedral Area Community Association obtained the City of Regina's official lead service connection address list and published it as an interactive Google Map (<a href="https://www.google.com/maps/d/viewer?mid=16-476b_7L1dS-PB1yAO9UtUY52FHKB4" target="_blank">September 2025</a>), presented to the Executive Committee on September 17, 2025 (<a href="https://cathedralvillage.org/wp-content/uploads/2025/10/Exec-Committee-Sept-2025.docx.pdf" target="_blank">PDF</a>).</p>
+        <p>The map contains <strong>2,000 addresses</strong> (limited by Google Maps export cap). Cross-referencing against the PostGIS <code>known_lead_address_reconciliation_triaged</code> table (2,307 reconciled addresses) shows a <strong>99.95% match rate</strong>, validating the data pipeline. The reconciled address database breaks down as:</p>
+        <table>
+          <tr><th>Material</th><th>Count</th><th>Pct</th></tr>
+          <tr><td>Pb (lead — still active)</td><td>1,379</td><td>59.8%</td></tr>
+          <tr><td>Cu (copper — likely replaced)</td><td>836</td><td>36.2%</td></tr>
+          <tr><td>Unknown / other</td><td>92</td><td>4.0%</td></tr>
+        </table>
+        <p>Note that the city's FOI dataset reflects the <strong>2021 baseline</strong> — the Cathedral Village page states the map "does not reflect replacements that might have occurred after August 2021." The <strong>2,743</strong> ArcGIS active count represents a real-time query that incorporates post-2021 replacements, while the <strong>1,379 Pb</strong> address count is from the reconciliation table at address granularity (some addresses have multiple service lines).</p>
       </section>
 
       <section>
