@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f8f6f2"/>
+  <rect x="40" y="40" width="1120" height="550" fill="none" stroke="#b91c1c" stroke-width="2"/>
+  <rect x="48" y="48" width="1104" height="534" fill="none" stroke="rgba(43,43,43,0.12)" stroke-width="1"/>
+  <text x="80" y="140" font-family="Georgia,serif" font-size="20" fill="#b91c1c" letter-spacing="3" text-transform="uppercase">REGINA LEAD INVESTIGATION</text>
+  <text x="80" y="260" font-family="Georgia,serif" font-size="56" font-weight="700" fill="#2b2b2b" letter-spacing="-1">Regina's Children</text>
+  <text x="80" y="330" font-family="Georgia,serif" font-size="56" font-weight="700" fill="#2b2b2b" letter-spacing="-1">Are Drinking Lead</text>
+  <text x="80" y="420" font-family="system-ui,sans-serif" font-size="24" fill="#555" line-height="1.5">
+    <tspan x="80" dy="0">2,743 active lead service connections · ~1,540 children affected</tspan>
+    <tspan x="80" dy="36">570 µg/L — 114× Health Canada's maximum · $39.6M in realized healthcare costs</tspan>
+  </text>
+  <line x1="80" y1="480" x2="1120" y2="480" stroke="rgba(43,43,43,0.15)" stroke-width="1"/>
+  <text x="80" y="530" font-family="monospace" font-size="14" fill="#888">peparhugo.github.io/regina-lead-connections-analysis · Peer-reviewed June 2026</text>
+</svg>
